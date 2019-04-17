@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tree>
+  <TreeNode id="8IDKGJE2-09B1-4607-BC6D-865CE48F0002" Text="单位设置" NavigateUrl="SysManage/Unit.aspx" Icon="Layers">
+  </TreeNode>
+<TreeNode id="D9F1F0BD-D48F-4C5B-AF26-7F4C561D1352" Text="部门信息" NavigateUrl="BaseInfo/Depart.aspx" Icon="StatusBeRightBack"></TreeNode>
+<TreeNode id="81D18BC5-8D19-487B-A5DD-7554DCC896C5" Text="装置/科室" NavigateUrl="BaseInfo/Installation.aspx" Icon="Box"></TreeNode>
+<TreeNode id="D4FC3583-31A7-49B3-8F32-007E9756D678" Text="岗位信息" NavigateUrl="BaseInfo/WorkPost.aspx" Icon="Vcard"></TreeNode>
+<TreeNode id="EBAD373C-8EB4-49A1-91F6-6794FFCAF9B6" Text="角色管理" NavigateUrl="SysManage/RoleList.aspx" Icon="GroupGear"></TreeNode>
+<TreeNode id="E6F0167E-B0FD-4A32-9C47-25FB9E0FDC4E" Text="用户信息" NavigateUrl="SysManage/UserList.aspx" Icon="User"></TreeNode>
+<TreeNode id="BAB254FA-C879-4463-B9DE-387C241A8623" Text="修改密码" NavigateUrl="SysManage/UpdatePassword.aspx" Icon="PageKey"></TreeNode>
+<TreeNode id="2231022B-3519-42FC-A2E6-1DB9A98039DD" Text="角色授权" NavigateUrl="SysManage/RolePower.aspx" Icon="UserKey"></TreeNode>
+<TreeNode id="0C67F4A8-1BE7-40BE-9621-B02A28FD13ED" Text="报表设计" NavigateUrl="ReportPrint/PrintDesigner.aspx" Icon="PageWhiteExcel"></TreeNode>
+<TreeNode id="E4BFDCFD-2B1F-49C5-B02B-1C91BFFAAC6E" Text="环境设置" NavigateUrl="SysManage/SysConstSet.aspx" Icon="Cog"></TreeNode>
+</Tree>

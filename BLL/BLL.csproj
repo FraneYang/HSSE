@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BBC7282A-9E2B-4BD6-9C6D-333CEFC6F332}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BLL</RootNamespace>
+    <AssemblyName>BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FineUIPro, Version=3.1.0.2, Culture=neutral, PublicKeyToken=9cbe753c029f291a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\FineUIPro\FineUIPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SQLServer.ManagedDTS, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Microsoft.SQLServer.ManagedDTS.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\FineUIPro\Net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseInfo\CertificateService.cs" />
+    <Compile Include="BaseInfo\DepartService.cs" />
+    <Compile Include="BaseInfo\SCLInfoService.cs" />
+    <Compile Include="BaseInfo\PositionService.cs" />
+    <Compile Include="BaseInfo\PostTitleService.cs" />
+    <Compile Include="BaseInfo\TeamGroupService.cs" />
+    <Compile Include="BaseInfo\InstallationService.cs" />
+    <Compile Include="BaseInfo\HAZIDService.cs" />
+    <Compile Include="BaseInfo\HiddenHazardTypeService.cs" />
+    <Compile Include="BaseInfo\SafetyMeasuresService.cs" />
+    <Compile Include="BaseInfo\RiskLevelValueService.cs" />
+    <Compile Include="DynamicTHeaderHepler.cs" />
+    <Compile Include="Emergency\RescueInfoService.cs" />
+    <Compile Include="Hazard\HiddenHazardService.cs" />
+    <Compile Include="Hazard\HiddenHazardDelayService.cs" />
+    <Compile Include="Hazard\LECService.cs" />
+    <Compile Include="Hazard\LECItemService.cs" />
+    <Compile Include="Hazard\JHAItemService.cs" />
+    <Compile Include="Hazard\JHAService.cs" />
+    <Compile Include="Hazard\SCLItemService.cs" />
+    <Compile Include="Hazard\SCLService.cs" />
+    <Compile Include="License\OverhaulService.cs" />
+    <Compile Include="License\ElectricityService.cs" />
+    <Compile Include="License\BlindPlateService.cs" />
+    <Compile Include="License\FireWorkService.cs" />
+    <Compile Include="License\HeightWorkService.cs" />
+    <Compile Include="License\LimitedSpaceService.cs" />
+    <Compile Include="License\OpenCircuitService.cs" />
+    <Compile Include="License\BreakGroundService.cs" />
+    <Compile Include="License\LiftingWorkService.cs" />
+    <Compile Include="License\InterlockingService.cs" />
+    <Compile Include="Personal\PersonalFolderService.cs" />
+    <Compile Include="Personal\PersonalFolderItemService.cs" />
+    <Compile Include="BaseInfo\WorkPostService.cs" />
+    <Compile Include="Common\TimeDataInService.cs" />
+    <Compile Include="Common\ChartControlService.cs" />
+    <Compile Include="Common\ConstValue.cs" />
+    <Compile Include="Common\UploadAttachmentService.cs" />
+    <Compile Include="Common\CreateMenuXML.cs" />
+    <Compile Include="OpenFileService\FileInsertService.cs" />
+    <Compile Include="OpenFileService\FileStructService.cs" />
+    <Compile Include="BaseInfo\WorkAreaService.cs" />
+    <Compile Include="Lock\SmartLockService.cs" />
+    <Compile Include="Lock\SmartLockItemService.cs" />
+    <Compile Include="SysManage\MenuFlowOperateService.cs" />
+    <Compile Include="SysManage\ButtonToMenuService.cs" />
+    <Compile Include="SysManage\UnitService.cs" />
+    <Compile Include="BaseInfo\UnitTypeService.cs" />
+    <Compile Include="Common\CommonService.cs" />
+    <Compile Include="Common\Const.cs" />
+    <Compile Include="ErrLogInfo.cs" />
+    <Compile Include="FriendlyException.cs" />
+    <Compile Include="Common\Funs.cs" />
+    <Compile Include="MethodRefelect.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionName.cs" />
+    <Compile Include="SoftRegeditService.cs" />
+    <Compile Include="SQLHelper.cs" />
+    <Compile Include="SysManage\ButtonPowerService.cs" />
+    <Compile Include="SysManage\LogService.cs" />
+    <Compile Include="SysManage\RolePowerService.cs" />
+    <Compile Include="SysManage\RoleService.cs" />
+    <Compile Include="SysManage\SysMenuService.cs" />
+    <Compile Include="SysManage\UserService.cs" />
+    <Compile Include="Common\UploadFileService.cs" />
+    <Compile Include="LoginService.cs" />
+    <Compile Include="SysManage\MenuAppraisalService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{FD1E1931-1688-4B4A-BCD6-335A81465343}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Scripts\jquery-3.1.0.min.map" />
+    <None Include="Scripts\jquery-3.1.0.slim.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-3.1.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.1.0.js" />
+    <Content Include="Scripts\jquery-3.1.0.min.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.min.js" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

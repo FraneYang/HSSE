@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tree>
+  <TreeNode id="685F1E0D-987E-491C-9DC7-014098DEE0C3" Text="单位类别" NavigateUrl="BaseInfo/UnitType.aspx" Icon="PageHeaderFooter">
+  </TreeNode>
+<TreeNode id="1E81DF97-809E-479F-1111-508F2043BA69" Text="职务信息" NavigateUrl="BaseInfo/Position.aspx" Icon="GroupEdit"></TreeNode>
+<TreeNode id="2E424093-81B8-421A-963F-D85D17B1E82A" Text="职称信息" NavigateUrl="BaseInfo/PostTitle.aspx" Icon="PagePortrait"></TreeNode>
+<TreeNode id="3A40AF0B-C9B8-4AF9-A683-FEADD8CC3A1C" Text="特岗证书" NavigateUrl="BaseInfo/Certificate.aspx" Icon="BookOpenMark"></TreeNode>
+<TreeNode id="9016BB7D-4306-46E9-B3A7-4902E7B82BF6" Text="危害辨识" NavigateUrl="BaseInfo/HAZID.aspx" Icon="Creditcards"></TreeNode>
+<TreeNode id="D2E5854B-97D0-44EE-A6E3-E15AFF1C951E" Text="隐患类别" NavigateUrl="BaseInfo/HiddenHazardType.aspx" Icon="TextRuler"></TreeNode>
+<TreeNode id="1AC5BEBD-BA17-4EED-8F3B-E260FF3495C1" Text="安全措施" NavigateUrl="BaseInfo/SafetyMeasures.aspx" Icon="VcardEdit"></TreeNode>
+<TreeNode id="732182BD-35CA-4F47-8970-FFBE070445F1" Text="风险等级对应值" NavigateUrl="BaseInfo/RiskLevelValue.aspx" Icon="TableKey"></TreeNode>
+<TreeNode id="22F3B0D5-BFDF-4766-B473-9664B2568229" Text="SCL评价" NavigateUrl="BaseInfo/SCLInfo.aspx" Icon="ChartBar"></TreeNode>
+</Tree>

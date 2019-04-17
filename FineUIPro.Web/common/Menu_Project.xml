@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tree>
+  <TreeNode id="E2722E83-1376-4210-8DD3-D8F2F2BB508E" Text="隐患排查治理" NavigateUrl="" Icon="LorryGo">
+    <TreeNode id="F38CA739-CC67-4D9F-8293-77291AE7F056" Text="隐患巡检" NavigateUrl="Hazard/HiddenHazard.aspx" Icon="PageHeaderFooter">
+    </TreeNode>
+<TreeNode id="45ED2862-36B3-4F13-8670-31DFA7D5A174" Text="隐患记录" NavigateUrl="Hazard/HiddenHazardRecord.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="167E9508-3539-4CE8-827A-A1B35BDC6A0F" Text="延期申请单" NavigateUrl="Hazard/HiddenHazardDelay.aspx" Icon="PageHeaderFooter"></TreeNode>
+</TreeNode>
+<TreeNode id="2B523627-FB88-436B-92E0-EF088918AD50" Text="风险分级动态管控" NavigateUrl="" Icon="LayoutContent"><TreeNode id="E2EA8AAC-D63B-4763-A44C-D94CFB03716B" Text="风险评估" NavigateUrl="" Icon="PageHeaderFooter"><TreeNode id="0D8DC662-E052-4282-9FAE-3135320B65C9" Text="LEC评价" NavigateUrl="Hazard/LEC.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="F3BCA935-3552-4307-AD14-A29C0CBA3AE2" Text="SCL评价" NavigateUrl="Hazard/SCL.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="13C30DD1-740B-4D39-A889-B83E81CB6EDC" Text="JHA评价" NavigateUrl="Hazard/JHA.aspx" Icon="PageHeaderFooter"></TreeNode>
+</TreeNode>
+<TreeNode id="5B0C3726-4D02-4576-B1F3-2EC9025DB72F" Text="风险信息库" NavigateUrl="Hazard/RiskList.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="BF36020D-4A34-450A-AEAF-B78EBD51091F" Text="风险分布图" NavigateUrl="Hazard/RiskMap.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="302FF7DB-25AF-4D32-BC00-F6E617F13D76" Text="分级管控预警" NavigateUrl="Hazard/Classification.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="936B6704-B271-417F-B179-A3C7D0158864" Text="风险巡检记录" NavigateUrl="Hazard/RoutingInspection.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="F0174702-9351-48F4-B195-38C5EDA5633A" Text="风险管控台账" NavigateUrl="Hazard/RiskControlLedger.aspx" Icon="PageHeaderFooter"></TreeNode>
+</TreeNode>
+<TreeNode id="2EAB7911-5788-4514-B95C-E1134315451D" Text="特殊作业票管理" NavigateUrl="" Icon="Report"><TreeNode id="656C760C-27A8-402C-B875-E2B80CC6E577" Text="检修工作票" NavigateUrl="License/Overhaul.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="68E502C6-3993-4669-8E4C-64E820AD5100" Text="临时用电安全作业证" NavigateUrl="License/Electricity.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="6A583619-B499-48A1-8BA1-6BC140741C06" Text="盲板抽堵安全作业票" NavigateUrl="License/BlindPlate.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="27147897-4091-4EC5-96D3-2914ECDE0384" Text="动火安全作业证" NavigateUrl="License/FireWork.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="45A92A2E-0AD7-400F-A309-F70BBEF01617" Text="高处安全作业证" NavigateUrl="License/HeightWork.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="E8B4B410-74A3-45D7-8A73-9088FCB56959" Text="受限空间安全作业证" NavigateUrl="License/LimitedSpace.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="20DFBC0F-2D53-4A3F-800F-CC4383A0B328" Text="断路安全作业证" NavigateUrl="License/OpenCircuit.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="94D5A962-CB10-4392-84ED-E62DF7D1778D" Text="动土安全作业证" NavigateUrl="License/BreakGround.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="D04F5626-7646-430F-9DBA-811B78401982" Text="吊装安全作业证" NavigateUrl="License/LiftingWork.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="F12FD53C-FE7F-4145-B138-EC641B138D5E" Text="A级联锁变更审批单" NavigateUrl="License/AInterlocking.aspx" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="EA045753-CD5C-4E4E-8FB6-80F556341885" Text="B级联锁变更审批单" NavigateUrl="License/BInterlocking.aspx" Icon="PageHeaderFooter"></TreeNode>
+</TreeNode>
+<TreeNode id="C7CCD53C-992F-4772-BDE0-AF7AE4583515" Text="核心部位禁动管理" NavigateUrl="" Icon="Overlays"><TreeNode id="F4B542CB-F53C-446D-BF8A-D9A3F8E23869" Text="电子锁分布台账" NavigateUrl="Lock/SmartLock.aspx" Icon="PageHeaderFooter"></TreeNode>
+</TreeNode>
+<TreeNode id="C5567BAD-A14D-49F1-B395-333B62F15E43" Text="应急救援管理" NavigateUrl="" Icon="SmartphoneDisk"><TreeNode id="05C8A05A-F7A1-4FEE-BB5B-3459E254C8F9" Text="应急信息" NavigateUrl="Emergency/RescueInfo.aspx" Icon="PageHeaderFooter"></TreeNode>
+</TreeNode>
+<TreeNode id="79349904-F70F-45E6-94F5-F65ADFA966F5" Text="人员及资质管理" NavigateUrl="" Icon="UserB"><TreeNode id="BF4A3C5E-2249-400E-AD6B-949BF32F2BEF" Text="信息采集" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="D217B3D2-9DC6-4EBE-859F-288E78572FA0" Text="人员培训" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="0F699545-F014-4EF0-8AD9-4D70FEA6D4C5" Text="人员建档" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="A87DDA30-3667-4FBC-B3B5-94398299F93C" Text="进出场管理" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="19F1A7DD-29DE-42DD-888C-528FF766B89F" Text="特岗人员资质" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="D31F5ADF-E120-4F91-A823-A3FEB56111D9" Text="特种设备资质" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="70642242-A068-490C-B000-B03BA3A20C00" Text="外委单位资质" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+</TreeNode>
+<TreeNode id="9B52990C-DE72-43E5-A85E-C2AD8CDFC924" Text="培训与考试管理" NavigateUrl="" Icon="ReportUser"><TreeNode id="B782A26B-D85C-4F84-8B45-F7AA47B3159E" Text="岗位培训任务" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="E108F75D-89D0-4DCA-8356-A156C328805C" Text="特殊作业指导培训" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="6C314522-AF62-4476-893E-5F42C09C3077" Text="考试记录" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="FAF7F4A4-A4BC-4D94-9E88-0CF5A380DB34" Text="培训记录台账" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+</TreeNode>
+<TreeNode id="71DCA0AE-DF1C-4E42-8029-441153C8E400" Text="综合测评管理" NavigateUrl="" Icon="FolderFind"><TreeNode id="ED48AC4A-8917-407C-B142-0165BAF3520F" Text="岗位运行人员测评" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="A6512C7F-E253-4876-A354-2A4297229A69" Text="装置管理人员测评" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="F56851FF-386F-4D12-AE5D-8CDBDBE88220" Text="安全管理人员测评" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="7345488A-C82B-446B-B3D9-1FB93D60C335" Text="公司领导测评" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+<TreeNode id="33209F6E-C8B3-4E8E-B90D-CF6F0C0B2494" Text="季度测评排名" NavigateUrl="" Icon="PageHeaderFooter"></TreeNode>
+</TreeNode>
+</Tree>
