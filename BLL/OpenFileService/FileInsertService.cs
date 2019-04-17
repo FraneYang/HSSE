@@ -96,11 +96,13 @@ namespace BLL
             var attachFile = Funs.DB.AttachFile.FirstOrDefault(x => x.ToKeyId == dataId);
             if (attachFile == null && !string.IsNullOrEmpty(attachSource))
             {
-                Model.AttachFile newAttachFile = new Model.AttachFile();
-                newAttachFile.AttachFileId = attachFileId;
-                newAttachFile.ToKeyId = dataId;
-                newAttachFile.AttachSource = attachSource;
-                newAttachFile.AttachUrl = attachUrl;
+                Model.AttachFile newAttachFile = new Model.AttachFile
+                {
+                    AttachFileId = attachFileId,
+                    ToKeyId = dataId,
+                    AttachSource = attachSource,
+                    AttachUrl = attachUrl
+                };
                 Funs.DB.AttachFile.InsertOnSubmit(newAttachFile);
                 Funs.DB.SubmitChanges();
 

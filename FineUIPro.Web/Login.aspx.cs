@@ -3,6 +3,7 @@
     using System;
     using BLL;
     using System.Configuration;
+    using System.Web;
 
     public partial class Login : PageBase
     {
@@ -21,15 +22,19 @@
                 {
                     if (Request.Cookies["UserInfo"]["username"] != null)
                     {
-                        this.tbxUserName.Text = Request.Cookies["UserInfo"]["username"].ToString();
+                        this.tbxUserName.Text = HttpUtility.UrlDecode(Request.Cookies["UserInfo"]["username"].ToString());
                     }
                     if (Request.Cookies["UserInfo"]["password"] != null)
                     {
                         this.tbxPassword.Text = Request.Cookies["UserInfo"]["password"].ToString();
                     }
+
+                    this.ckRememberMe.Checked = true;
                 }
 
-                this.lbVevion.Text = "请使用IE10以上版本浏览器 系统版本号：" + ConfigurationManager.AppSettings["SystemVersion"];
+                this.lbVevion.Text = "请使用IE10以上版本浏览器 系统版本:" + ConfigurationManager.AppSettings["SystemVersion"];
+                this.Image1.ImageUrl = "~/" + BLL.Const.APPImageUrl;                
+                this.HyperLink3.NavigateUrl = Funs.APPUrl;
             }
         }
 
@@ -88,7 +93,7 @@
                 ShowNotify("验证码错误！", MessageBoxIcon.Error);
                 return;
             }
-            if (BLL.LoginService.UserLogOn(tbxUserName.Text, this.tbxPassword.Text, true, this.Page))
+            if (BLL.LoginService.UserLogOn(tbxUserName.Text, this.tbxPassword.Text, this.ckRememberMe.Checked, this.Page))
             {                
                 BLL.LogService.AddLog(this.CurrUser.UserId, "登录成功！");
                 PageContext.Redirect("~/default.aspx");                
@@ -97,6 +102,16 @@
             {
                 ShowNotify("用户名或密码错误！", MessageBoxIcon.Error);
             }
+        }
+
+        /// <summary>
+        /// 厂区图
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void lbWelderRead_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Hazard/RiskMap.aspx");
         }
     }
 }

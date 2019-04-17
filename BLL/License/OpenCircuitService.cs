@@ -19,6 +19,16 @@ namespace BLL
             return Funs.DB.License_OpenCircuit.FirstOrDefault(e => e.OpenCircuitId == OpenCircuitId);
         }
 
+       /// <summary>
+       /// 根据主键获取视图信息
+       /// </summary>
+       /// <param name="OpenCircuitId"></param>
+       /// <returns></returns>
+        public static Model.View_License_OpenCircuit GetViewOpenCircuitById(string OpenCircuitId)
+        {
+            return Funs.DB.View_License_OpenCircuit.FirstOrDefault(e => e.OpenCircuitId == OpenCircuitId);
+        }
+
         /// <summary>
         /// 根据主键删除信息
         /// </summary>

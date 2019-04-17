@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>编辑作业区域</title>
+    <title>编辑作业单元</title>
     <base target="_self" />
     <link href="../res/css/common.css" rel="stylesheet" type="text/css" />
 </head>
@@ -16,22 +16,22 @@
         <Rows>
             <f:FormRow>
                 <Items>
-                    <f:TextBox ID="txtWorkAreaCode" runat="server" Label="区域编号"  Readonly="true">
+                    <f:TextBox ID="txtWorkAreaCode" runat="server" Label="单元编号"  Readonly="true">
                     </f:TextBox>
                 </Items>
             </f:FormRow>
             <f:FormRow>
                 <Items>
-                    <f:TextBox ID="txtWorkAreaName" runat="server" Label="区域名称"  Readonly="true">
+                    <f:TextBox ID="txtWorkAreaName" runat="server" Label="单元名称"  Readonly="true">
                     </f:TextBox>
                 </Items>
             </f:FormRow>
-         <%--   <f:FormRow>
+            <f:FormRow>
                 <Items>
-                    <f:TextBox ID="drpUnitId" runat="server" Label="单位名称" Readonly="true">
+                    <f:TextBox ID="drpInstallationId" runat="server" Label="装置" Readonly="true">
                     </f:TextBox>
                 </Items>
-            </f:FormRow>--%>
+            </f:FormRow>
             <f:FormRow>
                 <Items>
                     <f:TextArea ID="txtRemark" runat="server" Label="备注"  Readonly="true">

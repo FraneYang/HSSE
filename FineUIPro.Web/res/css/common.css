@@ -51,3 +51,9 @@ table.result {
     font-weight: bold;
     background-color: #FF0000;
 }
+
+ .formtitle .f-field-body {
+            text-align: center;
+            font-size: 12px;
+            font-weight:bold;
+        }

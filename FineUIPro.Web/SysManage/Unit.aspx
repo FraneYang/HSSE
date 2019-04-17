@@ -21,7 +21,7 @@
             <f:Grid ID="Grid1" ShowBorder="true"  EnableCollapse="true" ShowHeader="false"
                 runat="server" BoxFlex="1" DataKeyNames="UnitId" AllowCellEditing="true" EnableColumnLines="true"
                 ClicksToEdit="2" DataIDField="UnitId" AllowSorting="true" SortField="IsThisUnit"
-                SortDirection="DESC" OnSort="Grid1_Sort"  AllowPaging="true" IsDatabasePaging="true" PageSize="10" OnPageIndexChange="Grid1_PageIndexChange"
+                SortDirection="DESC" OnSort="Grid1_Sort"  AllowPaging="true" IsDatabasePaging="true" PageSize="15" OnPageIndexChange="Grid1_PageIndexChange"
                 EnableRowDoubleClickEvent="true" OnRowDoubleClick="Grid1_RowDoubleClick" EnableTextSelection="True">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar2" Position="Top" runat="server">
@@ -39,25 +39,25 @@
                     <f:RenderField Width="95px" ColumnID="UnitCode" DataField="UnitCode" SortField="UnitCode"
                         FieldType="String" HeaderText="单位代码" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                    <f:RenderField Width="220px" ColumnID="UnitName" DataField="UnitName" TextAlign="Left"
+                    <f:RenderField Width="300px" ColumnID="UnitName" DataField="UnitName" TextAlign="Left"
                         SortField="UnitName" FieldType="String" HeaderText="单位名称" HeaderTextAlign="Center">                       
                     </f:RenderField>
-                    <f:RenderField Width="115px" ColumnID="UnitTypeName" DataField="UnitTypeName" SortField="UnitTypeName"
+                    <f:RenderField Width="130px" ColumnID="UnitTypeName" DataField="UnitTypeName" SortField="UnitTypeName"
                         FieldType="String" HeaderText="单位类型" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>                    
-                    <f:RenderField Width="250px" ColumnID="Address" DataField="Address" ExpandUnusedSpace="true"
+                    <f:RenderField Width="200px" ColumnID="Address" DataField="Address" ExpandUnusedSpace="true"
                         FieldType="String" HeaderText="联系地址" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
                     <f:RenderField Width="150px" ColumnID="Telephone" DataField="Telephone"  Hidden="true"
                         FieldType="String" HeaderText="联系电话" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                     <f:RenderField Width="160px" ColumnID="ManagerNames" DataField="ManagerNames" 
+                     <f:RenderField Width="120px" ColumnID="ManagerNames" DataField="ManagerNames" 
                         FieldType="String" HeaderText="负责人" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
                     <f:RenderField Width="160px" ColumnID="EMail" DataField="EMail"   Hidden="true"
                         FieldType="String" HeaderText="邮箱" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                    <f:CheckBoxField Width="75px" RenderAsStaticField="true" TextAlign="Center"  DataField="IsThisUnit" HeaderText="本单位" />                   
+                    
                     <f:WindowField ColumnID="SubUnit" Width="80px" WindowID="WindowSubUnit" HeaderText="资质"
                                 Text="详细" ToolTip="资质详细信息" DataTextFormatString="{0}" DataIFrameUrlFields="UnitId"
                                 DataIFrameUrlFormatString="../QualityAudit/SubUnitQualityEdit.aspx?UnitId={0}"/>             
@@ -83,7 +83,7 @@
     </f:Panel>
     <f:Window ID="Window1" Title="单位设置" Hidden="true" EnableIFrame="true" EnableMaximize="true"
         Target="Self" EnableResize="true" runat="server"  IsModal="true"
-        Width="1000px" Height="400px">
+        Width="1000px" Height="460px">
     </f:Window>
     <f:Window ID="WindowSubUnit" Title="分包商资质详细信息" Hidden="true" EnableIFrame="true" EnableMaximize="true"
         Target="Parent" EnableResize="true" runat="server" IsModal="true"

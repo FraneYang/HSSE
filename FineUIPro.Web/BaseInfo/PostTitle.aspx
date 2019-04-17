@@ -19,7 +19,7 @@
     <f:Panel ID="Panel1" runat="server" Margin="5px" BodyPadding="5px" Title="职称信息"  ShowHeader="false"
         Layout="HBox">
         <Items>
-            <f:Grid ID="Grid1" Title="职称信息" ShowHeader="false" EnableCollapse="true" PageSize="10"  EnableColumnLines="true"
+            <f:Grid ID="Grid1" Title="职称信息" ShowHeader="false" EnableCollapse="true" PageSize="15"  EnableColumnLines="true"
                 ShowBorder="true" AllowPaging="true" IsDatabasePaging="true" runat="server" Width="760px"
                 DataKeyNames="PostTitleId" DataIDField="PostTitleId" OnPageIndexChange="Grid1_PageIndexChange"  AllowFilters="true" OnFilterChange="Grid1_FilterChange" EnableTextSelection="True">
                 <Columns>

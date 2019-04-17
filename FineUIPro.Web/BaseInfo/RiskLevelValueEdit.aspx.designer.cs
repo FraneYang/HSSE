@@ -2,8 +2,8 @@
 // <自动生成>
 //     此代码由工具生成。
 //
-//     对此文件的更改可能会导致不正确的行为，并且如果
-//     重新生成代码，这些更改将会丢失。 
+//     对此文件的更改可能导致不正确的行为，如果
+//     重新生成代码，则所做更改将丢失。
 // </自动生成>
 //------------------------------------------------------------------------------
 
@@ -49,6 +49,15 @@ namespace FineUIPro.Web.BaseInfo {
         protected global::FineUIPro.DropDownList drpRiskLevelId;
         
         /// <summary>
+        /// txtIdentification 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.TextBox txtIdentification;
+        
+        /// <summary>
         /// txtMinValue 控件。
         /// </summary>
         /// <remarks>
@@ -67,13 +76,31 @@ namespace FineUIPro.Web.BaseInfo {
         protected global::FineUIPro.NumberBox txtMaxValue;
         
         /// <summary>
+        /// txtControlMeasures 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.TextArea txtControlMeasures;
+        
+        /// <summary>
+        /// txtLimitTime 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.TextBox txtLimitTime;
+        
+        /// <summary>
         /// txtRemark 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::FineUIPro.TextBox txtRemark;
+        protected global::FineUIPro.TextArea txtRemark;
         
         /// <summary>
         /// Toolbar1 控件。

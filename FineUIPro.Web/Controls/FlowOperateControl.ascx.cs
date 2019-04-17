@@ -256,14 +256,16 @@ namespace FineUIPro.Web.Controls
         /// <param name="url">路径</param>
         public void btnSaveData(string projectId, string menuId, string dataId, bool isClosed, string content, string url)
         {
-            Model.Sys_FlowOperate newFlowOperate = new Model.Sys_FlowOperate();
-            newFlowOperate.MenuId = this.getMenuId;
-            newFlowOperate.DataId = dataId;
-            newFlowOperate.OperaterId = ((Model.Sys_User)Session["CurrUser"]).UserId;
-            newFlowOperate.State = this.rblFlowOperate.SelectedValue;
-            newFlowOperate.IsClosed = isClosed;
-            newFlowOperate.Opinion = this.txtOpinions.Text.Trim();
-            newFlowOperate.Url = url;
+            Model.Sys_FlowOperate newFlowOperate = new Model.Sys_FlowOperate
+            {
+                MenuId = this.getMenuId,
+                DataId = dataId,
+                OperaterId = ((Model.Sys_User)Session["CurrUser"]).UserId,
+                State = this.rblFlowOperate.SelectedValue,
+                IsClosed = isClosed,
+                Opinion = this.txtOpinions.Text.Trim(),
+                Url = url
+            };
             var user = BLL.UserService.GetUserByUserId(newFlowOperate.OperaterId);
             if (user != null)
             {
@@ -332,12 +334,14 @@ namespace FineUIPro.Web.Controls
                         maxSortIndex = sortIndex.Value + 1;
                     }
 
-                    Model.Sys_FlowOperate newNextFlowOperate = new Model.Sys_FlowOperate();
-                    newNextFlowOperate.FlowOperateId = SQLHelper.GetNewID(typeof(Model.Sys_FlowOperate));
-                    newNextFlowOperate.MenuId = newFlowOperate.MenuId;
-                    newNextFlowOperate.DataId = newFlowOperate.DataId;
-                    newNextFlowOperate.Url = newFlowOperate.Url;
-                    newNextFlowOperate.SortIndex = maxSortIndex;
+                    Model.Sys_FlowOperate newNextFlowOperate = new Model.Sys_FlowOperate
+                    {
+                        FlowOperateId = SQLHelper.GetNewID(typeof(Model.Sys_FlowOperate)),
+                        MenuId = newFlowOperate.MenuId,
+                        DataId = newFlowOperate.DataId,
+                        Url = newFlowOperate.Url,
+                        SortIndex = maxSortIndex
+                    };
                     if (this.drpPerson.SelectedValue != BLL.Const._Null)
                     {
                         newNextFlowOperate.OperaterId = this.drpPerson.SelectedValue;

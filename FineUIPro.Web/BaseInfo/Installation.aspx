@@ -16,17 +16,14 @@
                 runat="server" BoxFlex="1" DataKeyNames="InstallationId" AllowCellEditing="true" EnableColumnLines="true"
                 ClicksToEdit="2" DataIDField="InstallationId" AllowSorting="true" SortField="DepartCode,InstallationCode"
                 SortDirection="ASC" OnSort="Grid1_Sort" AllowPaging="true" IsDatabasePaging="true"
-                PageSize="10" OnPageIndexChange="Grid1_PageIndexChange" EnableRowDoubleClickEvent="true"
+                PageSize="15" OnPageIndexChange="Grid1_PageIndexChange" EnableRowDoubleClickEvent="true"
                 OnRowDoubleClick="Grid1_RowDoubleClick" EnableTextSelection="True">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar1" Position="Top" runat="server">
                          <Items>
-                              <f:TextBox runat="server" Label="装置/科室" ID="txtInstallationName" EmptyText="输入查询条件" AutoPostBack="true"
+                              <f:TextBox runat="server" Label="查询" ID="txtName" EmptyText="输入查询条件" AutoPostBack="true"
                                 OnTextChanged="TextBox_TextChanged" Width="250px" LabelWidth="80px" LabelAlign="Right">
-                            </f:TextBox>                       
-                            <f:TextBox runat="server" Label="部门(中心)" ID="txtDepartName" EmptyText="输入查询条件" AutoPostBack="true"
-                                OnTextChanged="TextBox_TextChanged" Width="250px" LabelWidth="80px" LabelAlign="Right">
-                            </f:TextBox>
+                            </f:TextBox>          
                              <f:ToolbarFill ID="ToolbarFill1" runat="server">
                             </f:ToolbarFill>
                             <f:Button ID="btnNew" ToolTip="新增" Icon="Add" EnablePostBack="false" runat="server"
@@ -47,8 +44,11 @@
                     <f:RenderField Width="200px" ColumnID="DepartName" DataField="DepartName" SortField="DepartName"
                         FieldType="String" HeaderText="部门(中心)" HeaderTextAlign="Center" TextAlign="Left" >
                     </f:RenderField>
-                     <f:RenderField Width="160px" ColumnID="ManagerNames" DataField="ManagerNames" 
+                    <f:RenderField Width="160px" ColumnID="ManagerNames" DataField="ManagerNames" 
                         FieldType="String" HeaderText="负责人" HeaderTextAlign="Center" TextAlign="Left">
+                    </f:RenderField>
+                     <f:RenderField Width="80px" ColumnID="InstallTypeName" DataField="InstallTypeName" 
+                        FieldType="String" HeaderText="类型" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
                     <f:RenderField Width="100px" ColumnID="Def" DataField="Def" SortField="Def"
                         FieldType="String" HeaderText="备注" HeaderTextAlign="Center" TextAlign="Left" ExpandUnusedSpace="true">

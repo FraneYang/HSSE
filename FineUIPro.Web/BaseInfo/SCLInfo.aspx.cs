@@ -23,6 +23,7 @@
             { 
                 ////权限按钮方法
                 this.GetButtonPower();
+                BLL.EuipmentTypeService.InitEuipmentTypeDropDownList(this.drpEuipmentTypeId, true);
                 this.btnNew.OnClientClick = Window1.GetShowReference("SCLInfoEdit.aspx") + "return false;";               
                 this.ddlPageSize.SelectedValue = Grid1.PageSize.ToString();
                 // 绑定表格
@@ -35,24 +36,29 @@
         /// </summary>
         private void BindGrid()
         {
-            string strSql = @"SELECT SCL.SCLId,SCL.SortIndex,SCL.CheckItem,SCL.Standard,SCL.Consequence,SCL.NowControlMeasures,SCL.HazardJudge_L,"
+            string strSql = @"SELECT SCL.SCLId,SCL.SortIndex,SCL.CheckItem,SCL.Standard,SCL.Consequence,SCL.NowControlMeasures,SCL.HazardJudge_L,EuipmentType.EuipmentTypeName,EuipmentType.EuipmentTypeCode,"
                             + @" SCL.HazardJudge_S,SCL.HazardJudge_R,SCL.RiskLevel,Const.ConstText AS RiskLevelName,SCL.ControlMeasures"
                             + @" FROM Base_SCL AS SCL"
                             + @" LEFT JOIN Sys_Const AS Const ON SCL.RiskLevel=Const.ConstValue AND GroupId='" + BLL.ConstValue.Group_RiskLevel + "'"
+                            + @" LEFT JOIN DBO.Base_EuipmentType AS EuipmentType ON SCL.EuipmentTypeId =EuipmentType.EuipmentTypeId"
                             + @" WHERE 1 = 1";
             List<SqlParameter> listStr = new List<SqlParameter>();
-
-            if (!string.IsNullOrEmpty(this.txtCheckItem.Text.Trim()))
+            if (this.drpEuipmentTypeId.SelectedValue != BLL.Const._Null)
             {
-                strSql += " AND CheckItem LIKE @CheckItem";
-                listStr.Add(new SqlParameter("@CheckItem", "%" + this.txtCheckItem.Text.Trim() + "%"));
+                strSql += " AND SCL.EuipmentTypeId=@EuipmentTypeId ";
+                listStr.Add(new SqlParameter("@EuipmentTypeId", this.drpEuipmentTypeId.SelectedValue));
+            }
+            if (!string.IsNullOrEmpty(this.txtName.Text.Trim()))
+            {
+                strSql += " AND (CheckItem LIKE @Name OR Standard LIKE @Name OR Consequence LIKE @Name OR NowControlMeasures LIKE @Name OR Const.ConstText LIKE @Name OR ControlMeasures LIKE @Name)";
+                listStr.Add(new SqlParameter("@Name", "%" + this.txtName.Text.Trim() + "%"));
             }      
            
             SqlParameter[] parameter = listStr.ToArray();
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();           

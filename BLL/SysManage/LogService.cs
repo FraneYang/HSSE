@@ -22,9 +22,11 @@ namespace BLL
             if (user != null)
             {
                 Model.HSSEDB_ENN db = Funs.DB;
-                Model.Sys_Log syslog = new Model.Sys_Log();
-                syslog.LogId = SQLHelper.GetNewID(typeof(Model.Sys_Log));
-                syslog.HostName = Dns.GetHostName();
+                Model.Sys_Log syslog = new Model.Sys_Log
+                {
+                    LogId = SQLHelper.GetNewID(typeof(Model.Sys_Log)),
+                    HostName = Dns.GetHostName()
+                };
                 IPAddress[] ips = Dns.GetHostAddresses(syslog.HostName);
                 if (ips.Length > 0)
                 {
@@ -38,7 +40,8 @@ namespace BLL
                 }
                 syslog.OperationTime = DateTime.Now;
                 syslog.OperationLog = opLog;
-                syslog.UserId = userId;                
+                syslog.UserId = userId;
+                syslog.LogSource = 1;
                 db.Sys_Log.InsertOnSubmit(syslog);
                 db.SubmitChanges();
             }

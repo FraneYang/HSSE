@@ -315,7 +315,7 @@
         </member>
         <member name="P:FineUIPro.ControlBase.EnableViewState">
             <summary>
-            不支持此属性（禁用控件默认的ViewState）
+            不支持此属性
             </summary>
         </member>
         <member name="P:FineUIPro.ControlBase.ClientID">
@@ -577,6 +577,36 @@
             控制子控件的尺寸（当父容器的Layout=VBox或者HBox时有效）
             </summary>
         </member>
+        <member name="P:FineUIPro.BoxComponent.BlockConfigSpace">
+            <summary>
+            块间距（当本容器的Layout=Block时有效）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.BoxComponent.BlockConfigBlockCount">
+            <summary>
+            自定义总块数（当本容器的Layout=Block时有效）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.BoxComponent.Block">
+            <summary>
+            块大小，超小屏幕（当父容器的Layout=Block时有效）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.BoxComponent.BlockSM">
+            <summary>
+            块大小，小屏幕（当父容器的Layout=Block时有效）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.BoxComponent.BlockMD">
+            <summary>
+            块大小，中等屏幕（当父容器的Layout=Block时有效）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.BoxComponent.BlockLG">
+            <summary>
+            块大小，大屏幕（当父容器的Layout=Block时有效）
+            </summary>
+        </member>
         <member name="P:FineUIPro.BoxComponent.RegionSplit">
             <summary>
             是否启用区域分隔条
@@ -595,6 +625,16 @@
         <member name="P:FineUIPro.BoxComponent.RegionSplitWidth">
             <summary>
             区域分隔条的宽度
+            </summary>
+        </member>
+        <member name="P:FineUIPro.BoxComponent.RegionSplitTransparent">
+            <summary>
+            区域分隔条是否透明
+            </summary>
+        </member>
+        <member name="P:FineUIPro.BoxComponent.RegionPercent">
+            <summary>
+            区域的百分比尺寸（当父容器的Layout=Region时有效）
             </summary>
         </member>
         <member name="P:FineUIPro.BoxComponent.RegionSplitHeaderClass">
@@ -737,6 +777,11 @@
             启用自定义的圆角边框
             </summary>
         </member>
+        <member name="P:FineUIPro.PanelBase.BodyClass">
+            <summary>
+            内容区域的样式类名
+            </summary>
+        </member>
         <member name="P:FineUIPro.PanelBase.BodyStyle">
             <summary>
             内容区域的样式
@@ -754,7 +799,12 @@
         </member>
         <member name="P:FineUIPro.PanelBase.IsViewPort">
             <summary>
-            是否全屏视图（占据整个屏幕）
+            是否全屏视图（占据整个屏幕，仅适用于最外层控件）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.PanelBase.IsFluid">
+            <summary>
+            是否流式面板（占据整个宽度，仅适用于最外层控件）
             </summary>
         </member>
         <member name="P:FineUIPro.PanelBase.CustomToolAhead">
@@ -906,6 +956,11 @@
         <member name="P:FineUIPro.CollapsablePanel.IconFont">
             <summary>
             [AJAX属性]预定义图标字体
+            </summary>
+        </member>
+        <member name="P:FineUIPro.CollapsablePanel.IconFontClass">
+            <summary>
+            [AJAX属性]自定义图标字体的样式类
             </summary>
         </member>
         <member name="E:FineUIPro.CollapsablePanel.Collapse">
@@ -1219,9 +1274,34 @@
             渲染 HTML 之前调用（页面第一次加载或者普通回发）
             </summary>
         </member>
+        <member name="P:FineUIPro.TextField.EnablePrefix">
+            <summary>
+            启用前缀文本
+            </summary>
+        </member>
+        <member name="P:FineUIPro.TextField.Prefix">
+            <summary>
+            前缀文本
+            </summary>
+        </member>
+        <member name="P:FineUIPro.TextField.EnableSuffix">
+            <summary>
+            启用后缀文本
+            </summary>
+        </member>
+        <member name="P:FineUIPro.TextField.Suffix">
+            <summary>
+            后缀文本
+            </summary>
+        </member>
+        <member name="P:FineUIPro.TextField.ValidateForValue">
+            <summary>
+            对值进行验证（MinLength, MaxLength, Required, Regex, RegexPattern）
+            </summary>
+        </member>
         <member name="P:FineUIPro.TextField.Required">
             <summary>
-            是否必填项
+            是否必填项（对显示文本进行验证）
             </summary>
         </member>
         <member name="P:FineUIPro.TextField.RequiredMessage">
@@ -1231,7 +1311,7 @@
         </member>
         <member name="P:FineUIPro.TextField.MaxLength">
             <summary>
-            最大长度
+            最大长度（对显示文本进行验证）
             </summary>
         </member>
         <member name="P:FineUIPro.TextField.MaxLengthMessage">
@@ -1241,7 +1321,7 @@
         </member>
         <member name="P:FineUIPro.TextField.MinLength">
             <summary>
-            最小长度
+            最小长度（对显示文本进行验证）
             </summary>
         </member>
         <member name="P:FineUIPro.TextField.MinLengthMessage">
@@ -1251,12 +1331,12 @@
         </member>
         <member name="P:FineUIPro.TextField.RegexPattern">
             <summary>
-            RegexPattern
+            正则表达式常用类型（对显示文本进行验证）
             </summary>
         </member>
         <member name="P:FineUIPro.TextField.Regex">
             <summary>
-            正则表达式
+            正则表达式（对显示文本进行验证）
             </summary>
         </member>
         <member name="P:FineUIPro.TextField.RegexMessage">
@@ -1271,12 +1351,12 @@
         </member>
         <member name="P:FineUIPro.TextField.CompareControl">
             <summary>
-            需要比较的控件ID
+            需要比较的控件（对值进行验证）
             </summary>
         </member>
         <member name="P:FineUIPro.TextField.CompareValue">
             <summary>
-            需要比较的值
+            需要比较的值（对值进行验证）
             </summary>
         </member>
         <member name="P:FineUIPro.TextField.CompareOperator">
@@ -1361,26 +1441,6 @@
             触发失去焦点事件
             </summary>
             <param name="e">事件参数</param>
-        </member>
-        <member name="P:FineUIPro.RealTextField.EnablePrefix">
-            <summary>
-            启用前缀文本
-            </summary>
-        </member>
-        <member name="P:FineUIPro.RealTextField.Prefix">
-            <summary>
-            前缀文本
-            </summary>
-        </member>
-        <member name="P:FineUIPro.RealTextField.EnableSuffix">
-            <summary>
-            启用后缀文本
-            </summary>
-        </member>
-        <member name="P:FineUIPro.RealTextField.Suffix">
-            <summary>
-            后缀文本
-            </summary>
         </member>
         <member name="P:FineUIPro.RealTextField.EmptyText">
             <summary>
@@ -1535,6 +1595,71 @@
         <member name="T:FineUIPro.ButtonTypeName">
             <summary>
             按钮类型名称
+            </summary>
+        </member>
+        <member name="T:FineUIPro.CalendarDisplayType">
+            <summary>
+            日期控件的显示类型
+            </summary>
+        </member>
+        <member name="F:FineUIPro.CalendarDisplayType.Day">
+            <summary>
+            显示年月日（默认值）
+            </summary>
+        </member>
+        <member name="F:FineUIPro.CalendarDisplayType.Year">
+            <summary>
+            只显示年份
+            </summary>
+        </member>
+        <member name="F:FineUIPro.CalendarDisplayType.Month">
+            <summary>
+            只显示年月
+            </summary>
+        </member>
+        <member name="F:FineUIPro.CalendarDisplayType.Time">
+            <summary>
+            只显示时间
+            </summary>
+        </member>
+        <member name="T:FineUIPro.CalendarDisplayTypeHelper">
+            <summary>
+            日期控件显示类型名称
+            </summary>
+        </member>
+        <member name="T:FineUIPro.PagingType">
+            <summary>
+            分页工具栏的显示类型
+            </summary>
+        </member>
+        <member name="F:FineUIPro.PagingType.Arrow">
+            <summary>
+            箭头
+            </summary>
+        </member>
+        <member name="F:FineUIPro.PagingType.NumberBox">
+            <summary>
+            数字输入框
+            </summary>
+        </member>
+        <member name="F:FineUIPro.PagingType.ArrowNumberBox">
+            <summary>
+            箭头和数字输入框（默认值）
+            </summary>
+        </member>
+        <member name="F:FineUIPro.PagingType.NumberButton">
+            <summary>
+            数字按钮
+            </summary>
+        </member>
+        <member name="F:FineUIPro.PagingType.ArrowNumberButton">
+            <summary>
+            箭头和数字按钮
+            </summary>
+        </member>
+        <member name="T:FineUIPro.PagingTypeHelper">
+            <summary>
+            分页工具栏的显示类型
             </summary>
         </member>
         <member name="T:FineUIPro.FieldType">
@@ -1734,6 +1859,41 @@
             表格合计行的位置名称
             </summary>
         </member>
+        <member name="T:FineUIPro.DisplayMode">
+            <summary>
+            显示模式
+            </summary>
+        </member>
+        <member name="F:FineUIPro.DisplayMode.Normal">
+            <summary>
+            普通模式（默认值）
+            </summary>
+        </member>
+        <member name="F:FineUIPro.DisplayMode.Compact">
+            <summary>
+            紧凑模式
+            </summary>
+        </member>
+        <member name="F:FineUIPro.DisplayMode.Small">
+            <summary>
+            小字体模式
+            </summary>
+        </member>
+        <member name="F:FineUIPro.DisplayMode.Large">
+            <summary>
+            大字体模式
+            </summary>
+        </member>
+        <member name="F:FineUIPro.DisplayMode.LargeSpace">
+            <summary>
+            大间距模式
+            </summary>
+        </member>
+        <member name="T:FineUIPro.DisplayModeHelper">
+            <summary>
+            显示模式名称
+            </summary>
+        </member>
         <member name="T:FineUIPro.ToolbarAlign">
             <summary>
             工具栏的排列位置
@@ -1816,12 +1976,17 @@
         </member>
         <member name="F:FineUIPro.JSLibrary.All">
             <summary>
-            引入 jQuery 库
+            引入 jQuery v3.x
+            </summary>
+        </member>
+        <member name="F:FineUIPro.JSLibrary.JQv1">
+            <summary>
+            引入 jQuery v1.x
             </summary>
         </member>
         <member name="F:FineUIPro.JSLibrary.NoJQ">
             <summary>
-            不引入 jQuery 库，需自行手工引入
+            不引入 jQuery，需自行手工引入
             </summary>
         </member>
         <member name="T:FineUIPro.IconFont">
@@ -2642,6 +2807,11 @@
         <member name="F:FineUIPro.IconFont.CreditCard">
             <summary>
             CreditCard
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Feed">
+            <summary>
+            Feed
             </summary>
         </member>
         <member name="F:FineUIPro.IconFont.Rss">
@@ -4014,9 +4184,9 @@
             Digg
             </summary>
         </member>
-        <member name="F:FineUIPro.IconFont.PiedPiper">
+        <member name="F:FineUIPro.IconFont.PiedPiperPp">
             <summary>
-            PiedPiper
+            PiedPiperPp
             </summary>
         </member>
         <member name="F:FineUIPro.IconFont.PiedPiperAlt">
@@ -4264,6 +4434,11 @@
             Ra
             </summary>
         </member>
+        <member name="F:FineUIPro.IconFont.Resistance">
+            <summary>
+            Resistance
+            </summary>
+        </member>
         <member name="F:FineUIPro.IconFont.Rebel">
             <summary>
             Rebel
@@ -4287,6 +4462,16 @@
         <member name="F:FineUIPro.IconFont.Git">
             <summary>
             Git
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.YCombinatorSquare">
+            <summary>
+            YCombinatorSquare
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.YcSquare">
+            <summary>
+            YcSquare
             </summary>
         </member>
         <member name="F:FineUIPro.IconFont.HackerNews">
@@ -4337,11 +4522,6 @@
         <member name="F:FineUIPro.IconFont.History">
             <summary>
             History
-            </summary>
-        </member>
-        <member name="F:FineUIPro.IconFont.Genderless">
-            <summary>
-            Genderless
             </summary>
         </member>
         <member name="F:FineUIPro.IconFont.CircleThin">
@@ -4694,6 +4874,11 @@
             Mercury
             </summary>
         </member>
+        <member name="F:FineUIPro.IconFont.Intersex">
+            <summary>
+            Intersex
+            </summary>
+        </member>
         <member name="F:FineUIPro.IconFont.Transgender">
             <summary>
             Transgender
@@ -4737,6 +4922,11 @@
         <member name="F:FineUIPro.IconFont.Neuter">
             <summary>
             Neuter
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Genderless">
+            <summary>
+            Genderless
             </summary>
         </member>
         <member name="F:FineUIPro.IconFont.FacebookOfficial">
@@ -4797,6 +4987,1581 @@
         <member name="F:FineUIPro.IconFont.Medium">
             <summary>
             Medium
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Yc">
+            <summary>
+            Yc
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.YCombinator">
+            <summary>
+            YCombinator
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.OptinMonster">
+            <summary>
+            OptinMonster
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Opencart">
+            <summary>
+            Opencart
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Expeditedssl">
+            <summary>
+            Expeditedssl
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Battery4">
+            <summary>
+            Battery4
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Battery">
+            <summary>
+            Battery
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.BatteryFull">
+            <summary>
+            BatteryFull
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Battery3">
+            <summary>
+            Battery3
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.BatteryThreeQuarters">
+            <summary>
+            BatteryThreeQuarters
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Battery2">
+            <summary>
+            Battery2
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.BatteryHalf">
+            <summary>
+            BatteryHalf
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Battery1">
+            <summary>
+            Battery1
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.BatteryQuarter">
+            <summary>
+            BatteryQuarter
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Battery0">
+            <summary>
+            Battery0
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.BatteryEmpty">
+            <summary>
+            BatteryEmpty
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.MousePointer">
+            <summary>
+            MousePointer
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.ICursor">
+            <summary>
+            ICursor
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.ObjectGroup">
+            <summary>
+            ObjectGroup
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.ObjectUngroup">
+            <summary>
+            ObjectUngroup
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.StickyNote">
+            <summary>
+            StickyNote
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.StickyNoteO">
+            <summary>
+            StickyNoteO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.CcJcb">
+            <summary>
+            CcJcb
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.CcDinersClub">
+            <summary>
+            CcDinersClub
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Clone">
+            <summary>
+            Clone
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.BalanceScale">
+            <summary>
+            BalanceScale
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HourglassO">
+            <summary>
+            HourglassO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Hourglass1">
+            <summary>
+            Hourglass1
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HourglassStart">
+            <summary>
+            HourglassStart
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Hourglass2">
+            <summary>
+            Hourglass2
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HourglassHalf">
+            <summary>
+            HourglassHalf
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Hourglass3">
+            <summary>
+            Hourglass3
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HourglassEnd">
+            <summary>
+            HourglassEnd
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Hourglass">
+            <summary>
+            Hourglass
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HandGrabO">
+            <summary>
+            HandGrabO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HandRockO">
+            <summary>
+            HandRockO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HandStopO">
+            <summary>
+            HandStopO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HandPaperO">
+            <summary>
+            HandPaperO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HandScissorsO">
+            <summary>
+            HandScissorsO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HandLizardO">
+            <summary>
+            HandLizardO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HandSpockO">
+            <summary>
+            HandSpockO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HandPointerO">
+            <summary>
+            HandPointerO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HandPeaceO">
+            <summary>
+            HandPeaceO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Trademark">
+            <summary>
+            Trademark
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Registered">
+            <summary>
+            Registered
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.CreativeCommons">
+            <summary>
+            CreativeCommons
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Gg">
+            <summary>
+            Gg
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.GgCircle">
+            <summary>
+            GgCircle
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Tripadvisor">
+            <summary>
+            Tripadvisor
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Odnoklassniki">
+            <summary>
+            Odnoklassniki
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.OdnoklassnikiSquare">
+            <summary>
+            OdnoklassnikiSquare
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.GetPocket">
+            <summary>
+            GetPocket
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.WikipediaW">
+            <summary>
+            WikipediaW
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Safari">
+            <summary>
+            Safari
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Chrome">
+            <summary>
+            Chrome
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Firefox">
+            <summary>
+            Firefox
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Opera">
+            <summary>
+            Opera
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.InternetExplorer">
+            <summary>
+            InternetExplorer
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Tv">
+            <summary>
+            Tv
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Television">
+            <summary>
+            Television
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Contao">
+            <summary>
+            Contao
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Amazon">
+            <summary>
+            Amazon
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.CalendarPlusO">
+            <summary>
+            CalendarPlusO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.CalendarMinusO">
+            <summary>
+            CalendarMinusO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.CalendarTimesO">
+            <summary>
+            CalendarTimesO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.CalendarCheckO">
+            <summary>
+            CalendarCheckO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Industry">
+            <summary>
+            Industry
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.MapPin">
+            <summary>
+            MapPin
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.MapSigns">
+            <summary>
+            MapSigns
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.MapO">
+            <summary>
+            MapO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Map">
+            <summary>
+            Map
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Commenting">
+            <summary>
+            Commenting
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.CommentingO">
+            <summary>
+            CommentingO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Houzz">
+            <summary>
+            Houzz
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Vimeo">
+            <summary>
+            Vimeo
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.BlackTie">
+            <summary>
+            BlackTie
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Fonticons">
+            <summary>
+            Fonticons
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.RedditAlien">
+            <summary>
+            RedditAlien
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Edge">
+            <summary>
+            Edge
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.CreditCardAlt">
+            <summary>
+            CreditCardAlt
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Codiepie">
+            <summary>
+            Codiepie
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Modx">
+            <summary>
+            Modx
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.FortAwesome">
+            <summary>
+            FortAwesome
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Usb">
+            <summary>
+            Usb
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.ProductHunt">
+            <summary>
+            ProductHunt
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Mixcloud">
+            <summary>
+            Mixcloud
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Scribd">
+            <summary>
+            Scribd
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.PauseCircle">
+            <summary>
+            PauseCircle
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.PauseCircleO">
+            <summary>
+            PauseCircleO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.StopCircle">
+            <summary>
+            StopCircle
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.StopCircleO">
+            <summary>
+            StopCircleO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.ShoppingBag">
+            <summary>
+            ShoppingBag
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.ShoppingBasket">
+            <summary>
+            ShoppingBasket
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Hashtag">
+            <summary>
+            Hashtag
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Bluetooth">
+            <summary>
+            Bluetooth
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.BluetoothB">
+            <summary>
+            BluetoothB
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Percent">
+            <summary>
+            Percent
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Gitlab">
+            <summary>
+            Gitlab
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Wpbeginner">
+            <summary>
+            Wpbeginner
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Wpforms">
+            <summary>
+            Wpforms
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Envira">
+            <summary>
+            Envira
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.UniversalAccess">
+            <summary>
+            UniversalAccess
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.WheelchairAlt">
+            <summary>
+            WheelchairAlt
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.QuestionCircleO">
+            <summary>
+            QuestionCircleO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Blind">
+            <summary>
+            Blind
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.AudioDescription">
+            <summary>
+            AudioDescription
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.VolumeControlPhone">
+            <summary>
+            VolumeControlPhone
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Braille">
+            <summary>
+            Braille
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.AssistiveListeningSystems">
+            <summary>
+            AssistiveListeningSystems
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.AslInterpreting">
+            <summary>
+            AslInterpreting
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.AmericanSignLanguageInterpreting">
+            <summary>
+            AmericanSignLanguageInterpreting
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Deafness">
+            <summary>
+            Deafness
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HardOfHearing">
+            <summary>
+            HardOfHearing
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Deaf">
+            <summary>
+            Deaf
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Glide">
+            <summary>
+            Glide
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.GlideG">
+            <summary>
+            GlideG
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Signing">
+            <summary>
+            Signing
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.SignLanguage">
+            <summary>
+            SignLanguage
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.LowVision">
+            <summary>
+            LowVision
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Viadeo">
+            <summary>
+            Viadeo
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.ViadeoSquare">
+            <summary>
+            ViadeoSquare
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Snapchat">
+            <summary>
+            Snapchat
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.SnapchatGhost">
+            <summary>
+            SnapchatGhost
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.SnapchatSquare">
+            <summary>
+            SnapchatSquare
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.PiedPiper">
+            <summary>
+            PiedPiper
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.FirstOrder">
+            <summary>
+            FirstOrder
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Yoast">
+            <summary>
+            Yoast
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Themeisle">
+            <summary>
+            Themeisle
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.GooglePlusCircle">
+            <summary>
+            GooglePlusCircle
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.GooglePlusOfficial">
+            <summary>
+            GooglePlusOfficial
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Fa">
+            <summary>
+            Fa
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.FontAwesome">
+            <summary>
+            FontAwesome
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.HandshakeO">
+            <summary>
+            HandshakeO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.EnvelopeOpen">
+            <summary>
+            EnvelopeOpen
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.EnvelopeOpenO">
+            <summary>
+            EnvelopeOpenO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Linode">
+            <summary>
+            Linode
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.AddressBook">
+            <summary>
+            AddressBook
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.AddressBookO">
+            <summary>
+            AddressBookO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Vcard">
+            <summary>
+            Vcard
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.AddressCard">
+            <summary>
+            AddressCard
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.VcardO">
+            <summary>
+            VcardO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.AddressCardO">
+            <summary>
+            AddressCardO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.UserCircle">
+            <summary>
+            UserCircle
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.UserCircleO">
+            <summary>
+            UserCircleO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.UserO">
+            <summary>
+            UserO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.IdBadge">
+            <summary>
+            IdBadge
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.DriversLicense">
+            <summary>
+            DriversLicense
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.IdCard">
+            <summary>
+            IdCard
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.DriversLicenseO">
+            <summary>
+            DriversLicenseO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.IdCardO">
+            <summary>
+            IdCardO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Quora">
+            <summary>
+            Quora
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.FreeCodeCamp">
+            <summary>
+            FreeCodeCamp
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Telegram">
+            <summary>
+            Telegram
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Thermometer4">
+            <summary>
+            Thermometer4
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Thermometer">
+            <summary>
+            Thermometer
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.ThermometerFull">
+            <summary>
+            ThermometerFull
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Thermometer3">
+            <summary>
+            Thermometer3
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.ThermometerThreeQuarters">
+            <summary>
+            ThermometerThreeQuarters
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Thermometer2">
+            <summary>
+            Thermometer2
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.ThermometerHalf">
+            <summary>
+            ThermometerHalf
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Thermometer1">
+            <summary>
+            Thermometer1
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.ThermometerQuarter">
+            <summary>
+            ThermometerQuarter
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Thermometer0">
+            <summary>
+            Thermometer0
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.ThermometerEmpty">
+            <summary>
+            ThermometerEmpty
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Shower">
+            <summary>
+            Shower
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Bathtub">
+            <summary>
+            Bathtub
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.S15">
+            <summary>
+            S15
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Bath">
+            <summary>
+            Bath
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Podcast">
+            <summary>
+            Podcast
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.WindowMaximize">
+            <summary>
+            WindowMaximize
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.WindowMinimize">
+            <summary>
+            WindowMinimize
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.WindowRestore">
+            <summary>
+            WindowRestore
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.TimesRectangle">
+            <summary>
+            TimesRectangle
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.WindowClose">
+            <summary>
+            WindowClose
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.TimesRectangleO">
+            <summary>
+            TimesRectangleO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.WindowCloseO">
+            <summary>
+            WindowCloseO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Bandcamp">
+            <summary>
+            Bandcamp
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Grav">
+            <summary>
+            Grav
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Etsy">
+            <summary>
+            Etsy
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Imdb">
+            <summary>
+            Imdb
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Ravelry">
+            <summary>
+            Ravelry
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Eercast">
+            <summary>
+            Eercast
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Microchip">
+            <summary>
+            Microchip
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.SnowflakeO">
+            <summary>
+            SnowflakeO
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Superpowers">
+            <summary>
+            Superpowers
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Wpexplorer">
+            <summary>
+            Wpexplorer
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont.Meetup">
+            <summary>
+            Meetup
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._AddressBook">
+            <summary>
+            _AddressBook
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Android">
+            <summary>
+            _Android
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Apple">
+            <summary>
+            _Apple
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Book">
+            <summary>
+            _Book
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Calendar">
+            <summary>
+            _Calendar
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Download">
+            <summary>
+            _Download
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Filter">
+            <summary>
+            _Filter
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Flag">
+            <summary>
+            _Flag
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Gear">
+            <summary>
+            _Gear
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Globe">
+            <summary>
+            _Globe
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Google">
+            <summary>
+            _Google
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Group">
+            <summary>
+            _Group
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Layout">
+            <summary>
+            _Layout
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Lock">
+            <summary>
+            _Lock
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Mail">
+            <summary>
+            _Mail
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Mobile">
+            <summary>
+            _Mobile
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._PowerOff">
+            <summary>
+            _PowerOff
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Print">
+            <summary>
+            _Print
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Search">
+            <summary>
+            _Search
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Send">
+            <summary>
+            _Send
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._SignIn">
+            <summary>
+            _SignIn
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._SignOut">
+            <summary>
+            _SignOut
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Tag">
+            <summary>
+            _Tag
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Trash">
+            <summary>
+            _Trash
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Unlock">
+            <summary>
+            _Unlock
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._User">
+            <summary>
+            _User
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._VolumeDown">
+            <summary>
+            _VolumeDown
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._VolumeOff">
+            <summary>
+            _VolumeOff
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._VolumeUp">
+            <summary>
+            _VolumeUp
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Wifi">
+            <summary>
+            _Wifi
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Windows">
+            <summary>
+            _Windows
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Wrench">
+            <summary>
+            _Wrench
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Anchor">
+            <summary>
+            _Anchor
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._ArrowDown">
+            <summary>
+            _ArrowDown
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._ArrowLeft">
+            <summary>
+            _ArrowLeft
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._ArrowRight">
+            <summary>
+            _ArrowRight
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._ArrowUp">
+            <summary>
+            _ArrowUp
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Ascend">
+            <summary>
+            _Ascend
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Back">
+            <summary>
+            _Back
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Ban">
+            <summary>
+            _Ban
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Bank">
+            <summary>
+            _Bank
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Bell">
+            <summary>
+            _Bell
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Bicycle">
+            <summary>
+            _Bicycle
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Bookmark">
+            <summary>
+            _Bookmark
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Camera">
+            <summary>
+            _Camera
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Car">
+            <summary>
+            _Car
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Card">
+            <summary>
+            _Card
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Check">
+            <summary>
+            _Check
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._CheckBox">
+            <summary>
+            _CheckBox
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._CheckBoxChecked">
+            <summary>
+            _CheckBoxChecked
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._CheckBoxIndeterminate">
+            <summary>
+            _CheckBoxIndeterminate
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Close">
+            <summary>
+            _Close
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Code">
+            <summary>
+            _Code
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Collapse">
+            <summary>
+            _Collapse
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Columns">
+            <summary>
+            _Columns
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Correct">
+            <summary>
+            _Correct
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Descend">
+            <summary>
+            _Descend
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._DoubleDown">
+            <summary>
+            _DoubleDown
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._DoubleLeft">
+            <summary>
+            _DoubleLeft
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._DoubleRight">
+            <summary>
+            _DoubleRight
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._DoubleUp">
+            <summary>
+            _DoubleUp
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Down">
+            <summary>
+            _Down
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Edit">
+            <summary>
+            _Edit
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Enterprise">
+            <summary>
+            _Enterprise
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Error">
+            <summary>
+            _Error
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Exclamation">
+            <summary>
+            _Exclamation
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Expand">
+            <summary>
+            _Expand
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._File">
+            <summary>
+            _File
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Fold">
+            <summary>
+            _Fold
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Folder">
+            <summary>
+            _Folder
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._FolderOpen">
+            <summary>
+            _FolderOpen
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Forward">
+            <summary>
+            _Forward
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Gallery">
+            <summary>
+            _Gallery
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Home">
+            <summary>
+            _Home
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Incorrect">
+            <summary>
+            _Incorrect
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Info">
+            <summary>
+            _Info
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Key">
+            <summary>
+            _Key
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Keyboard">
+            <summary>
+            _Keyboard
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Left">
+            <summary>
+            _Left
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Link">
+            <summary>
+            _Link
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._List">
+            <summary>
+            _List
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Loading">
+            <summary>
+            _Loading
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._LongArrowDown">
+            <summary>
+            _LongArrowDown
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._LongArrowLeft">
+            <summary>
+            _LongArrowLeft
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._LongArrowRight">
+            <summary>
+            _LongArrowRight
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._LongArrowUp">
+            <summary>
+            _LongArrowUp
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Maximize">
+            <summary>
+            _Maximize
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Minus">
+            <summary>
+            _Minus
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._More">
+            <summary>
+            _More
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._MoreVertical">
+            <summary>
+            _MoreVertical
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._NewTab">
+            <summary>
+            _NewTab
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Pencil">
+            <summary>
+            _Pencil
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Phone">
+            <summary>
+            _Phone
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Pic">
+            <summary>
+            _Pic
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Plane">
+            <summary>
+            _Plane
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Plus">
+            <summary>
+            _Plus
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._PullDown">
+            <summary>
+            _PullDown
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._PullLeft">
+            <summary>
+            _PullLeft
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._PullRight">
+            <summary>
+            _PullRight
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._PullUp">
+            <summary>
+            _PullUp
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Question">
+            <summary>
+            _Question
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._RadioButton">
+            <summary>
+            _RadioButton
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._RadioButtonChecked">
+            <summary>
+            _RadioButtonChecked
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Refresh">
+            <summary>
+            _Refresh
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Responsive">
+            <summary>
+            _Responsive
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Restore">
+            <summary>
+            _Restore
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Right">
+            <summary>
+            _Right
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Round">
+            <summary>
+            _Round
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._RoundDown">
+            <summary>
+            _RoundDown
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._RoundMinus">
+            <summary>
+            _RoundMinus
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._RoundPlus">
+            <summary>
+            _RoundPlus
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._RoundRight">
+            <summary>
+            _RoundRight
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Save">
+            <summary>
+            _Save
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Skin">
+            <summary>
+            _Skin
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Sort">
+            <summary>
+            _Sort
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Success">
+            <summary>
+            _Success
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Table">
+            <summary>
+            _Table
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Time">
+            <summary>
+            _Time
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Train">
+            <summary>
+            _Train
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._TriangleDown">
+            <summary>
+            _TriangleDown
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._TriangleLeft">
+            <summary>
+            _TriangleLeft
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._TriangleRight">
+            <summary>
+            _TriangleRight
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._TriangleUp">
+            <summary>
+            _TriangleUp
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Unfold">
+            <summary>
+            _Unfold
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Up">
+            <summary>
+            _Up
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Upload">
+            <summary>
+            _Upload
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Warn">
+            <summary>
+            _Warn
+            </summary>
+        </member>
+        <member name="F:FineUIPro.IconFont._Window">
+            <summary>
+            _Window
             </summary>
         </member>
         <member name="T:FineUIPro.IconFontHelper">
@@ -5987,6 +7752,11 @@
             预定义图标字体
             </summary>
         </member>
+        <member name="P:FineUIPro.Prompt.IconFontClass">
+            <summary>
+            自定义图标字体的样式类
+            </summary>
+        </member>
         <member name="P:FineUIPro.Prompt.MultiLine">
             <summary>
             是否多行输入框
@@ -6126,6 +7896,11 @@
         <member name="P:FineUIPro.Notify.IconFont">
             <summary>
             预定义图标字体
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Notify.IconFontClass">
+            <summary>
+            自定义图标字体的样式类
             </summary>
         </member>
         <member name="P:FineUIPro.Notify.Width">
@@ -6705,6 +8480,11 @@
         <member name="M:FineUIPro.GlobalConfig.GetJSLibrary">
             <summary>
             包含的JS库
+            </summary>
+        </member>
+        <member name="M:FineUIPro.GlobalConfig.GetDisplayMode">
+            <summary>
+            显示模式
             </summary>
         </member>
         <member name="P:FineUIPro.GlobalConfig.ProductName">
@@ -19039,6 +20819,11 @@
             [AJAX属性]预定义图标字体
             </summary>
         </member>
+        <member name="P:FineUIPro.MenuItem.IconFontClass">
+            <summary>
+            [AJAX属性]自定义图标字体的样式类
+            </summary>
+        </member>
         <member name="P:FineUIPro.MenuItem.Text">
             <summary>
             文本
@@ -19730,6 +21515,11 @@
             预定义图标字体
             </summary>
         </member>
+        <member name="P:FineUIPro.Confirm.IconFontClass">
+            <summary>
+            自定义图标字体的样式类
+            </summary>
+        </member>
         <member name="P:FineUIPro.Confirm.Width">
             <summary>
             对话框的宽度
@@ -19992,241 +21782,6 @@
             </summary>
             <param name="parent">父控件实例</param>
         </member>
-        <member name="T:FineUIPro.SplitButton">
-            <summary>
-            带下拉列表的按钮
-            </summary>
-        </member>
-        <member name="T:FineUIPro.Button">
-            <summary>
-            按钮控件
-            </summary>
-        </member>
-        <member name="M:FineUIPro.Button.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:FineUIPro.Button.OnAjaxPreRender">
-            <summary>
-            渲染 HTML 之前调用（AJAX回发）
-            </summary>
-        </member>
-        <member name="M:FineUIPro.Button.OnFirstPreRender">
-            <summary>
-            渲染 HTML 之前调用（页面第一次加载或者普通回发）
-            </summary>
-        </member>
-        <member name="M:FineUIPro.Button.ResolveClientScript(System.Web.UI.Control,System.String[],FineUIPro.Target,System.Boolean,System.Boolean,System.Boolean,System.String,System.String,System.String,FineUIPro.MessageBoxIcon,FineUIPro.Target,System.String,System.String)">
-            <summary>
-            获取按钮客户端点击事件的脚本
-            </summary>
-            <param name="ctrl">当前控件</param>
-            <param name="validateForms">验证表单列表</param>
-            <param name="validateTarget">表单验证提示消息目标页面</param>
-            <param name="validateMessageBox">是否显示表单验证提示对话框</param>
-            <param name="validateMessageBoxPlain">是否简单提示对话框</param>
-            <param name="enablePostBack">启用回发</param>
-            <param name="postBackEventReference">回发脚本</param>
-            <param name="confirmText">确认对话框消息</param>
-            <param name="confirmTitle">确认对话框标题</param>
-            <param name="confirmIcon">确认对话框图标</param>
-            <param name="confirmTarget">确认对话框目标页面</param>
-            <param name="onClientClick">自定义客户端点击脚本</param>
-            <param name="disableControlJavascriptID">需要禁用的控件客户端ID</param>
-            <returns>客户端脚本</returns>
-        </member>
-        <member name="M:FineUIPro.Button.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)">
-            <summary>
-            处理回发数据
-            </summary>
-            <param name="postDataKey">回发数据键</param>
-            <param name="postCollection">回发数据集</param>
-            <returns>回发数据是否改变</returns>
-        </member>
-        <member name="M:FineUIPro.Button.RaisePostDataChangedEvent">
-            <summary>
-            触发回发数据改变事件
-            </summary>
-        </member>
-        <member name="M:FineUIPro.Button.RaisePostBackEvent(System.String)">
-            <summary>
-            处理回发事件
-            </summary>
-            <param name="eventArgument">事件参数</param>
-        </member>
-        <member name="M:FineUIPro.Button.OnClick(System.EventArgs)">
-            <summary>
-            触发按钮点击事件
-            </summary>
-            <param name="e">事件参数</param>
-        </member>
-        <member name="M:FineUIPro.Button.Focus">
-            <summary>
-            使控件获得焦点
-            </summary>
-        </member>
-        <member name="M:FineUIPro.Button.GetFocusReference">
-            <summary>
-            获得使控件获得焦点的脚本
-            </summary>
-            <returns>JS脚本</returns>
-        </member>
-        <member name="P:FineUIPro.Button.EnableDefaultState">
-            <summary>
-            是否默认添加CSS类ui-state-default
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.EnableDefaultCorner">
-            <summary>
-            是否默认添加CSS类（ui-corner-all）
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.DisableControlBeforePostBack">
-            <summary>
-            回发之前禁用按钮（防止重复提交）
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.EnablePostBack">
-            <summary>
-            是否可以回发
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.Pressed">
-            <summary>
-            [AJAX属性]是否被按下
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.EnablePress">
-            <summary>
-            是否可以按下
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.OnClientClick">
-            <summary>
-            [AJAX属性]点击按钮时需要执行的客户端脚本
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.IconFont">
-            <summary>
-            [AJAX属性]预定义图标字体
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.Icon">
-            <summary>
-            [AJAX属性]预定义图标
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.Size">
-            <summary>
-            按钮的大小
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.IconUrl">
-            <summary>
-            [AJAX属性]图标地址
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.IconAlign">
-            <summary>
-            图标摆放位置
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.Text">
-            <summary>
-            [AJAX属性]按钮文本
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.ToolTip">
-            <summary>
-            [AJAX属性]提示文本
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.ToolTipType">
-            <summary>
-            提示文本类型
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.TabIndex">
-            <summary>
-            Tab键索引
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.Type">
-            <summary>
-            按钮类型
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.ValidateForms">
-            <summary>
-            需要验证的表单名称列表（逗号分隔）
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.ValidateTarget">
-            <summary>
-            验证失败时提示对话框弹出位置
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.ValidateMessageBox">
-            <summary>
-            验证失败时是否出现提示对话框
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.ValidateMessageBoxPlain">
-            <summary>
-            是否简单提示对话框
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.ShowMenuIcon">
-            <summary>
-            是否显示标识菜单的箭头图标
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.ConfirmTitle">
-            <summary>
-            [AJAX属性]确认对话框标题
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.ConfirmText">
-            <summary>
-            [AJAX属性]确认对话框内容
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.ConfirmIcon">
-            <summary>
-            [AJAX属性]确认对话框提示图标
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.ConfirmTarget">
-            <summary>
-            [AJAX属性]确认对话框弹出位置
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.MenuID">
-            <summary>
-            按钮的上下文菜单
-            </summary>
-        </member>
-        <member name="P:FineUIPro.Button.Menu">
-            <summary>
-            按钮的上下文菜单
-            </summary>
-        </member>
-        <member name="E:FineUIPro.Button.Click">
-            <summary>
-            按钮点击事件
-            </summary>
-        </member>
-        <member name="M:FineUIPro.SplitButton.OnAjaxPreRender">
-            <summary>
-            渲染 HTML 之前调用（AJAX回发）
-            </summary>
-        </member>
-        <member name="M:FineUIPro.SplitButton.OnFirstPreRender">
-            <summary>
-            渲染 HTML 之前调用（页面第一次加载或者普通回发）
-            </summary>
-        </member>
         <member name="T:FineUIPro.Menu">
             <summary>
             菜单控件
@@ -20401,6 +21956,11 @@
             不支持此属性
             </summary>
         </member>
+        <member name="P:FineUIPro.PageManager.DisplayMode">
+            <summary>
+            显示模式
+            </summary>
+        </member>
         <member name="P:FineUIPro.PageManager.LoadingImageUrl">
             <summary>
             自定义页面加载图片
@@ -20518,7 +22078,7 @@
         </member>
         <member name="P:FineUIPro.PageManager.LoadingImageNumber">
             <summary>
-            加载图片的数字编码
+            加载图片的数字编码（从1开始）
             </summary>
         </member>
         <member name="P:FineUIPro.PageManager.AjaxLoadingText">
@@ -20812,6 +22372,11 @@
             按钮图标字体
             </summary>
         </member>
+        <member name="P:FineUIPro.FileUpload.ButtonIconFontClass">
+            <summary>
+            自定义按钮图标字体的样式类
+            </summary>
+        </member>
         <member name="P:FineUIPro.FileUpload.ButtonIcon">
             <summary>
             按钮图标
@@ -20820,6 +22385,26 @@
         <member name="P:FineUIPro.FileUpload.ButtonIconUrl">
             <summary>
             按钮图标地址
+            </summary>
+        </member>
+        <member name="P:FineUIPro.FileUpload.ButtonIconAlign">
+            <summary>
+            按钮图标的显示位置
+            </summary>
+        </member>
+        <member name="P:FineUIPro.FileUpload.ButtonSize">
+            <summary>
+            按钮的大小
+            </summary>
+        </member>
+        <member name="P:FineUIPro.FileUpload.ButtonDefaultState">
+            <summary>
+            向按钮添加CSS类（f-state-default）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.FileUpload.ButtonDefaultCorner">
+            <summary>
+            向按钮添加CSS类（f-corner-all）
             </summary>
         </member>
         <member name="P:FineUIPro.FileUpload.PostedFile">
@@ -20899,6 +22484,11 @@
             触发第二个触发按钮点击事件
             </summary>
             <param name="e">事件参数</param>
+        </member>
+        <member name="P:FineUIPro.TwinTriggerBox.EnableClickAction">
+            <summary>
+            点击输入框是否触发默认行为
+            </summary>
         </member>
         <member name="P:FineUIPro.TwinTriggerBox.EnableEdit">
             <summary>
@@ -21312,6 +22902,11 @@
             </summary>
             <param name="eventArgument">事件参数</param>
         </member>
+        <member name="P:FineUIPro.TriggerBox.EnableClickAction">
+            <summary>
+            点击输入框是否触发默认行为
+            </summary>
+        </member>
         <member name="P:FineUIPro.TriggerBox.EnableEdit">
             <summary>
             是否允许编辑
@@ -21594,6 +23189,11 @@
         <member name="P:FineUIPro.GridColumn.MinWidth">
             <summary>
             最小列宽度
+            </summary>
+        </member>
+        <member name="P:FineUIPro.GridColumn.MaxWidth">
+            <summary>
+            最大列宽度
             </summary>
         </member>
         <member name="P:FineUIPro.GridColumn.BoxFlex">
@@ -21931,6 +23531,11 @@
             不支持此属性
             </summary>
         </member>
+        <member name="P:FineUIPro.RegionPanel.AutoScroll">
+            <summary>
+            不支持此属性
+            </summary>
+        </member>
         <member name="P:FineUIPro.RegionPanel.Layout">
             <summary>
             布局类型
@@ -22002,6 +23607,11 @@
             </summary>
         </member>
         <member name="P:FineUIPro.Accordion.IFrameName">
+            <summary>
+            不支持此属性
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Accordion.AutoScroll">
             <summary>
             不支持此属性
             </summary>
@@ -22239,6 +23849,11 @@
             HTML标签属性
             </summary>
         </member>
+        <member name="P:FineUIPro.TreeNode.AttributeDataTag">
+            <summary>
+            HTML标签属性（data-tag）
+            </summary>
+        </member>
         <member name="P:FineUIPro.TreeNode.Text">
             <summary>
             文本
@@ -22297,6 +23912,11 @@
         <member name="P:FineUIPro.TreeNode.IconFont">
             <summary>
             预定义图标字体
+            </summary>
+        </member>
+        <member name="P:FineUIPro.TreeNode.IconFontClass">
+            <summary>
+            自定义图标字体的样式类
             </summary>
         </member>
         <member name="P:FineUIPro.TreeNode.ToolTip">
@@ -22562,6 +24182,11 @@
             预定义图标字体（仅适用于树表格）
             </summary>
         </member>
+        <member name="P:FineUIPro.GridRowEventArgs.TreeNodeIconFontClass">
+            <summary>
+            自定义图标字体的样式类（仅适用于树表格）
+            </summary>
+        </member>
         <member name="T:FineUIPro.GridRowClickEventArgs">
             <summary>
             表格行点击事件参数
@@ -22813,7 +24438,12 @@
         </member>
         <member name="P:FineUIPro.Calendar.SelectedDate">
             <summary>
-            [AJAX属性]选择的日期
+            选择的日期
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Calendar.Text">
+            <summary>
+            [AJAX属性]文本
             </summary>
         </member>
         <member name="P:FineUIPro.Calendar.DateFormatString">
@@ -22834,6 +24464,11 @@
         <member name="P:FineUIPro.Calendar.EnableDateSelectEvent">
             <summary>
             选择日期是否自动回发
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Calendar.DisplayType">
+            <summary>
+            显示类型
             </summary>
         </member>
         <member name="P:FineUIPro.Calendar.ShowTime">
@@ -23069,7 +24704,27 @@
             </summary>
             <param name="key">键</param>
             <param name="scriptContent">客户端脚本</param>
-            <param name="addScriptTag">是否自动添加脚本标签</param>
+            <param name="addScriptTag">是否添加脚本标签</param>
+        </member>
+        <member name="M:FineUIPro.PageContext.RegisterStartupScript(System.String,System.String)">
+            <summary>
+            注册页面脚本（在自动生成的脚本之后注册）
+            </summary>
+            <param name="key">键</param>
+            <param name="scriptContent">客户端脚本</param>
+        </member>
+        <member name="M:FineUIPro.PageContext.RegisterStartupScript(System.String,System.String,System.Boolean)">
+            <summary>
+            注册页面脚本（在自动生成的脚本之后注册）
+            </summary>
+            <param name="key">键</param>
+            <param name="scriptContent">客户端脚本</param>
+            <param name="addScriptTag">是否添加脚本标签</param>
+        </member>
+        <member name="M:FineUIPro.PageContext.IsFineUIAjaxPostBack">
+            <summary>
+            是否处于FineUI的AJAX回发过程
+            </summary>
         </member>
         <member name="T:FineUIPro.Tree">
             <summary>
@@ -23322,6 +24977,21 @@
             布局类型
             </summary>
         </member>
+        <member name="P:FineUIPro.Tree.EnableCheckBox">
+            <summary>
+            是否启用复选框
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Tree.OnlyLeafCheck">
+            <summary>
+            是否只显示叶子节点复选框
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Tree.CascadeCheck">
+            <summary>
+            是否启用级联选择
+            </summary>
+        </member>
         <member name="P:FineUIPro.Tree.ExpandOnDblClick">
             <summary>
             双击展开树节点
@@ -23382,6 +25052,11 @@
             是否隐藏水平滚动条
             </summary>
         </member>
+        <member name="P:FineUIPro.Tree.HideVScrollbar">
+            <summary>
+            是否隐藏垂直滚动条
+            </summary>
+        </member>
         <member name="P:FineUIPro.Tree.ExpanderToRight">
             <summary>
             是否将展开折叠图标移到文字右侧
@@ -23389,7 +25064,12 @@
         </member>
         <member name="P:FineUIPro.Tree.HeaderStyle">
             <summary>
-            是否启用一级树节点标题栏样式
+            是否启用一级树节点的标题栏样式
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Tree.AllHeaderStyle">
+            <summary>
+            是否启用全部树节点的标题栏样式
             </summary>
         </member>
         <member name="P:FineUIPro.Tree.MiniMode">
@@ -23929,7 +25609,7 @@
         </member>
         <member name="P:FineUIPro.Window.EnableDefaultCorner">
             <summary>
-            是否默认添加CSS类（ui-corner-all）
+            是否默认添加CSS类（f-corner-all）
             </summary>
         </member>
         <member name="P:FineUIPro.Window.PercentWidth">
@@ -23955,6 +25635,11 @@
         <member name="P:FineUIPro.Window.ConstrainInitialSize">
             <summary>
             是否将初始大小限制在当前页面内
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Window.ConstrainSize">
+            <summary>
+            是否将窗体大小限制在当前页面内
             </summary>
         </member>
         <member name="P:FineUIPro.Window.WindowPosition">
@@ -24761,9 +26446,19 @@
             不支持此属性
             </summary>
         </member>
+        <member name="P:FineUIPro.Grid.AutoScroll">
+            <summary>
+            不支持此属性
+            </summary>
+        </member>
         <member name="P:FineUIPro.Grid.Layout">
             <summary>
             布局类型
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Grid.IncludeMergedData">
+            <summary>
+            是否在回发参数中包含修改后的合并数据（仅在启用单元格编辑时有效）
             </summary>
         </member>
         <member name="P:FineUIPro.Grid.AllowCellEditing">
@@ -24824,6 +26519,16 @@
         <member name="P:FineUIPro.Grid.PageSize">
             <summary>
             每页显示项数
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Grid.PagingType">
+            <summary>
+            分页工具栏的显示类型
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Grid.MaxPagingNumberButton">
+            <summary>
+            最多显示数字分页按钮的个数（默认值：5）
             </summary>
         </member>
         <member name="P:FineUIPro.Grid.PageIndex">
@@ -25009,6 +26714,16 @@
         <member name="P:FineUIPro.Grid.EnableHeaderMenu">
             <summary>
             启用表头菜单
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Grid.EnableHeaderMenuSort">
+            <summary>
+            启用排序菜单项
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Grid.EnableHeaderMenuColumns">
+            <summary>
+            启用隐藏列菜单项
             </summary>
         </member>
         <member name="P:FineUIPro.Grid.EnableColumnLines">
@@ -25914,6 +27629,11 @@
             预定义图标字体（仅适用于树表格）
             </summary>
         </member>
+        <member name="P:FineUIPro.GridRow.TreeNodeIconFontClass">
+            <summary>
+            自定义图标字体的样式类（仅适用于树表格）
+            </summary>
+        </member>
         <member name="P:FineUIPro.GridRow.TemplateContainers">
             <summary>
             表格行中模板列控件列表，一个典型的例子为：[GridRowControl, null, null, GridRowControl, null, null, null, null, null]
@@ -26160,6 +27880,21 @@
         <member name="P:FineUIPro.DropDownList.SelectedItemArray">
             <summary>
             选中项
+            </summary>
+        </member>
+        <member name="P:FineUIPro.DropDownList.EnableClickAction">
+            <summary>
+            点击输入框是否触发默认行为
+            </summary>
+        </member>
+        <member name="P:FineUIPro.DropDownList.ChangeOnDblClick">
+            <summary>
+            双击改变选中项（配合参数EnableClickAction=false使用）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.DropDownList.TopSpaceFirst">
+            <summary>
+            优先使用上部空间显示弹出框
             </summary>
         </member>
         <member name="P:FineUIPro.DropDownList.MatchFieldWidth">
@@ -26443,6 +28178,13 @@
             </summary>
             <returns>客户端脚本</returns>
         </member>
+        <member name="M:FineUIPro.Tab.GetShowReference(System.Boolean)">
+            <summary>
+            获取显示选项卡的客户端脚本
+            </summary>
+            <param name="moveToEnd">将选项卡移到尾部</param>
+            <returns>客户端脚本</returns>
+        </member>
         <member name="M:FineUIPro.Tab.GetHideReference">
             <summary>
             获取隐藏选项卡的客户端脚本
@@ -26453,6 +28195,13 @@
             <summary>
             获取激活选项卡的客户端脚本
             </summary>
+            <returns>客户端脚本</returns>
+        </member>
+        <member name="M:FineUIPro.Tab.GetActiveReference(System.Boolean)">
+            <summary>
+            获取激活选项卡的客户端脚本
+            </summary>
+            <param name="moveToEnd">将选项卡移到尾部</param>
             <returns>客户端脚本</returns>
         </member>
         <member name="P:FineUIPro.Tab.ShowHeader">
@@ -26546,9 +28295,27 @@
             <param name="enableClose">是否可以关闭</param>
             <returns>客户端脚本</returns>
         </member>
+        <member name="M:FineUIPro.TabStrip.GetAddTabReference(System.String,System.String,System.String,FineUIPro.IconFont,System.Boolean)">
+            <summary>
+            获取添加选项卡的脚本
+            </summary>
+            <param name="tabID">选项卡ID</param>
+            <param name="iframeUrl">IFrame地址</param>
+            <param name="tabTitle">选项卡标题</param>
+            <param name="iconFont">选项卡图标字体</param>
+            <param name="enableClose">是否可以关闭</param>
+            <returns>客户端脚本</returns>
+        </member>
         <member name="M:FineUIPro.TabStrip.GetRemoveTabReference(System.String)">
             <summary>
             获取移除选项卡的脚本
+            </summary>
+            <param name="tabID">选项卡ID</param>
+            <returns>客户端脚本</returns>
+        </member>
+        <member name="M:FineUIPro.TabStrip.GetHideTabReference(System.String)">
+            <summary>
+            获取隐藏选项卡的脚本
             </summary>
             <param name="tabID">选项卡ID</param>
             <returns>客户端脚本</returns>
@@ -26585,9 +28352,19 @@
             不支持此属性
             </summary>
         </member>
+        <member name="P:FineUIPro.TabStrip.AutoScroll">
+            <summary>
+            不支持此属性
+            </summary>
+        </member>
         <member name="P:FineUIPro.TabStrip.Layout">
             <summary>
             布局类型
+            </summary>
+        </member>
+        <member name="P:FineUIPro.TabStrip.ShowInkBar">
+            <summary>
+            是否显示标题栏墨水条
             </summary>
         </member>
         <member name="P:FineUIPro.TabStrip.ShowTabHeader">
@@ -26799,6 +28576,16 @@
             </summary>
             <param name="e">事件参数</param>
         </member>
+        <member name="P:FineUIPro.DatePicker.DisplayType">
+            <summary>
+            显示类型
+            </summary>
+        </member>
+        <member name="P:FineUIPro.DatePicker.EnableClickAction">
+            <summary>
+            点击输入框是否触发默认行为
+            </summary>
+        </member>
         <member name="P:FineUIPro.DatePicker.AutoShowClearIcon">
             <summary>
             自动显示清空图标
@@ -26900,64 +28687,69 @@
             脚本
             </summary>
         </member>
-        <member name="T:FineUIPro.Layout">
+        <member name="T:FineUIPro.LayoutType">
             <summary>
             布局类型
             </summary>
         </member>
-        <member name="F:FineUIPro.Layout.Container">
+        <member name="F:FineUIPro.LayoutType.Container">
             <summary>
             容器布局（默认值）
             </summary>
         </member>
-        <member name="F:FineUIPro.Layout.Anchor">
+        <member name="F:FineUIPro.LayoutType.Anchor">
             <summary>
             锚点布局
             </summary>
         </member>
-        <member name="F:FineUIPro.Layout.Region">
+        <member name="F:FineUIPro.LayoutType.Region">
             <summary>
             区域布局
             </summary>
         </member>
-        <member name="F:FineUIPro.Layout.Fit">
+        <member name="F:FineUIPro.LayoutType.Fit">
             <summary>
             自适应布局（用于只有一个子控件的情况）
             </summary>
         </member>
-        <member name="F:FineUIPro.Layout.Accordion">
+        <member name="F:FineUIPro.LayoutType.Accordion">
             <summary>
             手风琴布局（只用于Accordion控件）
             </summary>
         </member>
-        <member name="F:FineUIPro.Layout.Card">
+        <member name="F:FineUIPro.LayoutType.Card">
             <summary>
             卡片布局（只用于TabStrip控件）
             </summary>
         </member>
-        <member name="F:FineUIPro.Layout.Column">
+        <member name="F:FineUIPro.LayoutType.Column">
             <summary>
             列布局
             </summary>
         </member>
-        <member name="F:FineUIPro.Layout.Absolute">
+        <member name="F:FineUIPro.LayoutType.Absolute">
             <summary>
             绝对定位布局
             </summary>
         </member>
-        <member name="F:FineUIPro.Layout.Table">
+        <member name="F:FineUIPro.LayoutType.Table">
             <summary>
             表格布局
             </summary>
         </member>
-        <member name="F:FineUIPro.Layout.VBox">
+        <member name="F:FineUIPro.LayoutType.VBox">
             <summary>
             垂直盒子布局
             </summary>
         </member>
-        <member name="F:FineUIPro.Layout.HBox">
+        <member name="F:FineUIPro.LayoutType.HBox">
             <summary>
             水平盒子布局
+            </summary>
+        </member>
+        <member name="F:FineUIPro.LayoutType.Block">
+            <summary>
+            响应式块布局
             </summary>
         </member>
         <member name="T:FineUIPro.LayoutHelper">
@@ -26976,6 +28768,21 @@
             </summary>
             <param name="date">日期对象</param>
             <returns>日期的客户端脚本形式</returns>
+        </member>
+        <member name="M:FineUIPro.DateUtil.ToDateTime(System.String)">
+            <summary>
+            将字符串转换为日期对象
+            </summary>
+            <param name="text">日期字符串</param>
+            <returns>日期对象</returns>
+        </member>
+        <member name="M:FineUIPro.DateUtil.ToDateTime(System.String,System.String)">
+            <summary>
+            将字符串转换为日期对象
+            </summary>
+            <param name="text">日期字符串</param>
+            <param name="dateFormatString">日期格式化字符串</param>
+            <returns>日期对象</returns>
         </member>
         <member name="T:FineUIPro.NumberBox">
             <summary>
@@ -27563,6 +29370,11 @@
             预定义图标字体
             </summary>
         </member>
+        <member name="P:FineUIPro.Alert.IconFontClass">
+            <summary>
+            自定义图标字体的样式类
+            </summary>
+        </member>
         <member name="P:FineUIPro.Alert.Width">
             <summary>
             对话框的宽度
@@ -27656,6 +29468,231 @@
         <member name="T:FineUIPro.MessageBoxIconHelper">
             <summary>
             消息框图标类型名称
+            </summary>
+        </member>
+        <member name="T:FineUIPro.Button">
+            <summary>
+            按钮控件
+            </summary>
+        </member>
+        <member name="M:FineUIPro.Button.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:FineUIPro.Button.OnAjaxPreRender">
+            <summary>
+            渲染 HTML 之前调用（AJAX回发）
+            </summary>
+        </member>
+        <member name="M:FineUIPro.Button.OnFirstPreRender">
+            <summary>
+            渲染 HTML 之前调用（页面第一次加载或者普通回发）
+            </summary>
+        </member>
+        <member name="M:FineUIPro.Button.ResolveClientScript(System.Web.UI.Control,System.String[],FineUIPro.Target,System.Boolean,System.Boolean,System.Boolean,System.String,System.String,System.String,FineUIPro.MessageBoxIcon,FineUIPro.Target,System.String,System.String)">
+            <summary>
+            获取按钮客户端点击事件的脚本
+            </summary>
+            <param name="ctrl">当前控件</param>
+            <param name="validateForms">验证表单列表</param>
+            <param name="validateTarget">表单验证提示消息目标页面</param>
+            <param name="validateMessageBox">是否显示表单验证提示对话框</param>
+            <param name="validateMessageBoxPlain">是否简单提示对话框</param>
+            <param name="enablePostBack">启用回发</param>
+            <param name="postBackEventReference">回发脚本</param>
+            <param name="confirmText">确认对话框消息</param>
+            <param name="confirmTitle">确认对话框标题</param>
+            <param name="confirmIcon">确认对话框图标</param>
+            <param name="confirmTarget">确认对话框目标页面</param>
+            <param name="onClientClick">自定义客户端点击脚本</param>
+            <param name="disableControlJavascriptID">需要禁用的控件客户端ID</param>
+            <returns>客户端脚本</returns>
+        </member>
+        <member name="M:FineUIPro.Button.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            处理回发数据
+            </summary>
+            <param name="postDataKey">回发数据键</param>
+            <param name="postCollection">回发数据集</param>
+            <returns>回发数据是否改变</returns>
+        </member>
+        <member name="M:FineUIPro.Button.RaisePostDataChangedEvent">
+            <summary>
+            触发回发数据改变事件
+            </summary>
+        </member>
+        <member name="M:FineUIPro.Button.RaisePostBackEvent(System.String)">
+            <summary>
+            处理回发事件
+            </summary>
+            <param name="eventArgument">事件参数</param>
+        </member>
+        <member name="M:FineUIPro.Button.OnClick(System.EventArgs)">
+            <summary>
+            触发按钮点击事件
+            </summary>
+            <param name="e">事件参数</param>
+        </member>
+        <member name="M:FineUIPro.Button.Focus">
+            <summary>
+            使控件获得焦点
+            </summary>
+        </member>
+        <member name="M:FineUIPro.Button.GetFocusReference">
+            <summary>
+            获得使控件获得焦点的脚本
+            </summary>
+            <returns>JS脚本</returns>
+        </member>
+        <member name="P:FineUIPro.Button.EnableDefaultState">
+            <summary>
+            是否默认添加CSS类（f-state-default）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.EnableDefaultCorner">
+            <summary>
+            是否默认添加CSS类（f-corner-all）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.DisableControlBeforePostBack">
+            <summary>
+            回发之前禁用按钮（防止重复提交）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.EnablePostBack">
+            <summary>
+            是否可以回发
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.Pressed">
+            <summary>
+            [AJAX属性]是否被按下
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.EnablePress">
+            <summary>
+            是否可以按下
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.OnClientClick">
+            <summary>
+            [AJAX属性]点击按钮时需要执行的客户端脚本
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.IconFont">
+            <summary>
+            [AJAX属性]预定义图标字体
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.IconFontClass">
+            <summary>
+            [AJAX属性]自定义图标字体的样式类
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.Icon">
+            <summary>
+            [AJAX属性]预定义图标
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.Size">
+            <summary>
+            按钮的大小
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.IconUrl">
+            <summary>
+            [AJAX属性]图标地址
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.IconAlign">
+            <summary>
+            图标的显示位置
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.Text">
+            <summary>
+            [AJAX属性]按钮文本
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.ToolTip">
+            <summary>
+            [AJAX属性]提示文本
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.ToolTipType">
+            <summary>
+            提示文本类型
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.TabIndex">
+            <summary>
+            Tab键索引
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.Type">
+            <summary>
+            按钮类型
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.ValidateForms">
+            <summary>
+            需要验证的表单名称列表（逗号分隔）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.ValidateTarget">
+            <summary>
+            验证失败时提示对话框弹出位置
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.ValidateMessageBox">
+            <summary>
+            验证失败时是否出现提示对话框
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.ValidateMessageBoxPlain">
+            <summary>
+            是否简单提示对话框
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.ShowMenuIcon">
+            <summary>
+            是否显示标识菜单的箭头图标
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.ConfirmTitle">
+            <summary>
+            [AJAX属性]确认对话框标题
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.ConfirmText">
+            <summary>
+            [AJAX属性]确认对话框内容
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.ConfirmIcon">
+            <summary>
+            [AJAX属性]确认对话框提示图标
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.ConfirmTarget">
+            <summary>
+            [AJAX属性]确认对话框弹出位置
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.MenuID">
+            <summary>
+            按钮的上下文菜单
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Button.Menu">
+            <summary>
+            按钮的上下文菜单
+            </summary>
+        </member>
+        <member name="E:FineUIPro.Button.Click">
+            <summary>
+            按钮点击事件
             </summary>
         </member>
         <member name="T:FineUIPro.JsObjectBuilder">
@@ -27800,6 +29837,11 @@
         <member name="T:FineUIPro.Constants">
             <summary>
             常量
+            </summary>
+        </member>
+        <member name="F:FineUIPro.Constants.IS_BASE">
+            <summary>
+            是否基础版
             </summary>
         </member>
         <member name="F:FineUIPro.Constants.BUILD_DATE">
@@ -28164,12 +30206,22 @@
         </member>
         <member name="P:FineUIPro.ConfigSection.EnableFStateValidation">
             <summary>
-            是否启用FState验证（默认为true）
+            是否启用FState验证（默认为false）
+            </summary>
+        </member>
+        <member name="P:FineUIPro.ConfigSection.DisplayMode">
+            <summary>
+            显示模式
             </summary>
         </member>
         <member name="T:FineUIPro.ResourceManager">
             <summary>
             存在 Page.Items 上下文中，向页面注册资源
+            </summary>
+        </member>
+        <member name="F:FineUIPro.ResourceManager._corpFeatureList">
+            <summary>
+            用来记录基础版中用到的企业版特性列表
             </summary>
         </member>
         <member name="F:FineUIPro.ResourceManager._startupCssDic">
@@ -28180,6 +30232,11 @@
         <member name="F:FineUIPro.ResourceManager._preStartupJSDic">
             <summary>
             需要向页面注册的脚本列表（放到页面生成的脚本之前）
+            </summary>
+        </member>
+        <member name="F:FineUIPro.ResourceManager._postStartupJSDic">
+            <summary>
+            需要向页面注册的脚本列表（放到页面生成的脚本之后）
             </summary>
         </member>
         <member name="M:FineUIPro.ResourceManager.EnsureResourceManagerInstance(System.Web.UI.Page)">
@@ -28537,6 +30594,11 @@
             </summary>
             <param name="e">事件参数</param>
         </member>
+        <member name="P:FineUIPro.TimePicker.EnableClickAction">
+            <summary>
+            点击输入框是否触发默认行为
+            </summary>
+        </member>
         <member name="P:FineUIPro.TimePicker.AutoShowClearIcon">
             <summary>
             自动显示清空图标
@@ -28661,6 +30723,11 @@
             </summary>
             <param name="e">事件参数</param>
         </member>
+        <member name="P:FineUIPro.Tool.TabIndex">
+            <summary>
+            Tab键索引（默认为-1）
+            </summary>
+        </member>
         <member name="P:FineUIPro.Tool.OnClientClick">
             <summary>
             [AJAX属性]点击按钮时需要执行的客户端脚本
@@ -28684,6 +30751,11 @@
         <member name="P:FineUIPro.Tool.IconFont">
             <summary>
             [AJAX属性]预定义图标字体
+            </summary>
+        </member>
+        <member name="P:FineUIPro.Tool.IconFontClass">
+            <summary>
+            [AJAX属性]自定义图标字体的样式类
             </summary>
         </member>
         <member name="P:FineUIPro.Tool.ToolTip">
@@ -28852,6 +30924,16 @@
         <member name="P:FineUIPro.DropDownBox.AlwaysDisplayPopPanel">
             <summary>
             总是显示弹出面板
+            </summary>
+        </member>
+        <member name="P:FineUIPro.DropDownBox.EnableClickAction">
+            <summary>
+            点击输入框是否触发默认行为
+            </summary>
+        </member>
+        <member name="P:FineUIPro.DropDownBox.TopSpaceFirst">
+            <summary>
+            优先使用上部空间显示弹出框
             </summary>
         </member>
         <member name="P:FineUIPro.DropDownBox.EmptyText">
@@ -29031,11 +31113,6 @@
         <member name="P:FineUIPro.DataList.SelectedItemArray">
             <summary>
             选中项
-            </summary>
-        </member>
-        <member name="P:FineUIPro.DataList.EnableCheckBoxSelect">
-            <summary>
-            启用多选框
             </summary>
         </member>
         <member name="P:FineUIPro.DataList.EnableMultiSelect">

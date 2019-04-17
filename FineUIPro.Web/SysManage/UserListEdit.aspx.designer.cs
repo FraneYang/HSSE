@@ -2,8 +2,8 @@
 // <自动生成>
 //     此代码由工具生成。
 //
-//     对此文件的更改可能会导致不正确的行为，并且如果
-//     重新生成代码，这些更改将会丢失。 
+//     对此文件的更改可能导致不正确的行为，如果
+//     重新生成代码，则所做更改将丢失。
 // </自动生成>
 //------------------------------------------------------------------------------
 
@@ -40,13 +40,13 @@ namespace FineUIPro.Web.SysManage {
         protected global::FineUIPro.Form SimpleForm1;
         
         /// <summary>
-        /// txtUserCode 控件。
+        /// txtSortIndex 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::FineUIPro.TextBox txtUserCode;
+        protected global::FineUIPro.TextBox txtSortIndex;
         
         /// <summary>
         /// txtUserName 控件。
@@ -58,6 +58,15 @@ namespace FineUIPro.Web.SysManage {
         protected global::FineUIPro.TextBox txtUserName;
         
         /// <summary>
+        /// txtUserCode 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.TextBox txtUserCode;
+        
+        /// <summary>
         /// txtAccount 控件。
         /// </summary>
         /// <remarks>
@@ -67,15 +76,6 @@ namespace FineUIPro.Web.SysManage {
         protected global::FineUIPro.TextBox txtAccount;
         
         /// <summary>
-        /// txtTelephone 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::FineUIPro.TextBox txtTelephone;
-        
-        /// <summary>
         /// drpUnit 控件。
         /// </summary>
         /// <remarks>
@@ -83,6 +83,15 @@ namespace FineUIPro.Web.SysManage {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::FineUIPro.DropDownList drpUnit;
+        
+        /// <summary>
+        /// txtTelephone 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.TextBox txtTelephone;
         
         /// <summary>
         /// drpDepart 控件。
@@ -130,6 +139,15 @@ namespace FineUIPro.Web.SysManage {
         protected global::FineUIPro.TextBox txtIdentityCard;
         
         /// <summary>
+        /// txtEntryTime 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.DatePicker txtEntryTime;
+        
+        /// <summary>
         /// drpIsPost 控件。
         /// </summary>
         /// <remarks>
@@ -137,6 +155,33 @@ namespace FineUIPro.Web.SysManage {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::FineUIPro.DropDownList drpIsPost;
+        
+        /// <summary>
+        /// drpIsEmergency 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.DropDownList drpIsEmergency;
+        
+        /// <summary>
+        /// drpIsTemp 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.DropDownList drpIsTemp;
+        
+        /// <summary>
+        /// drpDealInstallation 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.DropDownList drpDealInstallation;
         
         /// <summary>
         /// Toolbar1 控件。

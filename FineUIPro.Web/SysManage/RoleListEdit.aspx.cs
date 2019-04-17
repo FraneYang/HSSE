@@ -100,10 +100,12 @@ namespace FineUIPro.Web.SysManage
             }
             else
             {
-                Model.Sys_Role newRole = new Model.Sys_Role();
-                newRole.RoleCode = this.txtRoleCode.Text.Trim();
-                newRole.RoleName = this.txtRoleName.Text.Trim();
-                newRole.Def = this.txtDef.Text.Trim();
+                Model.Sys_Role newRole = new Model.Sys_Role
+                {
+                    RoleCode = this.txtRoleCode.Text.Trim(),
+                    RoleName = this.txtRoleName.Text.Trim(),
+                    Def = this.txtDef.Text.Trim()
+                };
                 ///授权角色
                 string authorizedRoleIds = string.Empty;
                 string authorizedRoleNames = string.Empty;

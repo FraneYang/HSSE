@@ -1,4 +1,4 @@
-﻿namespace FineUIPro.Web.SysManage
+﻿namespace FineUIPro.Web.Hazard
 {
     using System;
     using System.Collections.Generic;
@@ -31,25 +31,26 @@
         /// </summary>
         private void BindGrid()
         {
-            string strSql = @"SELECT HiddenHazardId,HiddenHazardCode,HiddenHazardName,FindTime,Description,LimitTime, IsMajor,FindManUser.UserName AS FindManName,CorrectManUser.UserName AS CorrectManName"
-                            + @" ,(CASE WHEN Installation.InstallationName IS NULL THEN HiddenHazardPlace ELSE Installation.InstallationName+':' + HiddenHazardPlace END) AS HiddenHazardPalce,BePohotoUrl,AfPohotoUrl "
+            string strSql = @"SELECT HiddenHazardId,HiddenHazardCode,HiddenHazardName,FindTime,Description,LimitTime, IsMajor,FindManUser.UserName AS FindManName,CorrectManUser.UserName AS CorrectManName,CorrectMeasures,HiddenHazardType.HiddenHazardTypeName,ReasonAnalysis"
+                            + @" ,(CASE WHEN Installation.InstallationName IS NULL THEN HiddenHazardPlace ELSE Installation.InstallationName+':' + HiddenHazardPlace END) AS HiddenHazardPalce,BePohotoUrl,AfPohotoUrl,HiddenHazard.OperateManNames "
                             + @" ,(CASE WHEN States =1 THEN '审核中' WHEN  States =2 THEN '待整改' WHEN  States =3 THEN '待复查验收' WHEN  States =4 THEN '已完成' WHEN  States =-1 THEN '已作废' ELSE '待提交' END )  AS StatesName "
                             + @" FROM Hazard_HiddenHazard AS HiddenHazard "
                             + @" LEFT JOIN Base_Installation AS Installation ON HiddenHazard.InstallationId =Installation.InstallationId "
+                            + @" LEFT JOIN Base_HiddenHazardType AS HiddenHazardType ON HiddenHazard.HiddenHazardTypeId=HiddenHazardType.HiddenHazardTypeId   "
                             + @" LEFT JOIN Sys_User AS FindManUser ON HiddenHazard.FindManId =FindManUser.UserId  "
                             + @" LEFT JOIN Sys_User AS CorrectManUser ON HiddenHazard.CorrectManId =CorrectManUser.UserId "                                                        
-                            + @" WHERE 1=1 ";
+                            + @" WHERE  (isFiled IS NULL OR isFiled = 0)";
             List<SqlParameter> listStr = new List<SqlParameter>();
-            if (!string.IsNullOrEmpty(this.txtHiddenHazardCode.Text.Trim()))
+            if (!string.IsNullOrEmpty(this.txtName.Text.Trim()))
             {
-                strSql += " AND HiddenHazardCode LIKE @HiddenHazardCode";
-                listStr.Add(new SqlParameter("@HiddenHazardCode", "%" + this.txtHiddenHazardCode.Text.Trim() + "%"));
+                strSql += " AND (HiddenHazardName LIKE @Name OR HiddenHazardCode LIKE @Name OR CorrectMeasures LIKE @Name OR HiddenHazardType.HiddenHazardTypeName LIKE @Name OR Description LIKE @Name OR ReasonAnalysis LIKE @Name)";
+                listStr.Add(new SqlParameter("@Name", "%" + this.txtName.Text.Trim() + "%"));
             }           
             SqlParameter[] parameter = listStr.ToArray();
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();
@@ -131,14 +132,14 @@
         /// <returns></returns>
         private void GetButtonPower()
         {
-            //var buttonList = BLL.CommonService.GetAllButtonList(this.CurrUser.UserId, BLL.Const.HiddenHazardMenuId);
-            //if (buttonList.Count() > 0)
-            //{
-            //    if (buttonList.Contains(BLL.Const.BtnDelete))
-            //    {
-            //        this.btnMenuDelete.Hidden = false;
-            //    }
-            //}
+            var buttonList = BLL.CommonService.GetAllButtonList(this.CurrUser.UserId, BLL.Const.HiddenHazardMenuId);
+            if (buttonList.Count() > 0)
+            {
+                if (buttonList.Contains(BLL.Const.BtnDelete))
+                {
+                    this.btnFile.Hidden = false;
+                }
+            }
             if (this.CurrUser.UserId == BLL.Const.sysglyId)
             {
                 this.btnMenuDelete.Hidden = false;
@@ -171,6 +172,70 @@
         {
             this.BindGrid();
         }
-        #endregion 
+        #endregion
+
+        #region 查看详细信息
+        /// <summary>
+        /// Grid行双击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Grid1_RowDoubleClick(object sender, GridRowClickEventArgs e)
+        {
+            this.ViewData();
+        }
+
+        /// <summary>
+        /// 右键编辑事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnMenuView_Click(object sender, EventArgs e)
+        {
+            this.ViewData();
+        }
+
+        private void ViewData()
+        {
+            if (Grid1.SelectedRowIndexArray.Length == 0)
+            {
+                Alert.ShowInParent("请至少选择一条记录！", MessageBoxIcon.Warning);
+                return;
+            }
+            string Id = Grid1.SelectedRowID;
+            PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("HiddenHazardView.aspx?HiddenHazardId={0}", Id, "查看 - ")));
+        }
+        #endregion
+
+        #region 归档         
+        /// <summary>
+        /// 右键编辑事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnMenuFile_Click(object sender, EventArgs e)
+        {
+            if (Grid1.SelectedRowIndexArray.Length > 0)
+            {
+                string values = string.Empty;
+                foreach (int rowIndex in Grid1.SelectedRowIndexArray)
+                {
+                    string rowID = Grid1.DataKeys[rowIndex][0].ToString();
+                    values += rowID + "|";
+                }
+
+                if (!string.IsNullOrEmpty(values) && values.Length <= 1850)
+                {
+                    PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("../InformationProject/FileCabinetAChange.aspx?values={0}&menuId={1}", values, BLL.Const.HiddenHazardMenuId , "查看 - "), "归档", 600, 540));
+                }
+                else
+                {
+                    Alert.ShowInTop("请一次至少一条，最多50条记录归档！", MessageBoxIcon.Warning);
+                }
+
+                BindGrid();
+            }
+        }
+        #endregion
     }
 }

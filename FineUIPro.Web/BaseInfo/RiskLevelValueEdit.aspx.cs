@@ -41,18 +41,19 @@ namespace FineUIPro.Web.BaseInfo
                 this.GetButtonPower();
                 this.RiskLevelValueId = Request.Params["RiskLevelValueId"];
                
-                BLL.ConstValue.InitConstValueDropDownList(this.drpRiskLevelId, ConstValue.Group_RiskLevel, false);            
-                
+                BLL.ConstValue.InitConstValueDropDownList(this.drpRiskLevelId, ConstValue.Group_RiskLevel, false);                
                 if (!string.IsNullOrEmpty(this.RiskLevelValueId))
                 {
-                    var RiskLevelValue = BLL.RiskLevelValueService.GetRiskLevelValueById(this.RiskLevelValueId);
-                    if (RiskLevelValue != null)
+                    var riskLevelValue = BLL.RiskLevelValueService.GetRiskLevelValueById(this.RiskLevelValueId);
+                    if (riskLevelValue != null)
                     {
-                        this.txtMinValue.Text = RiskLevelValue.MinValue.ToString();
-                        this.txtMaxValue.Text = RiskLevelValue.MaxValue.ToString();
-                        this.txtRemark.Text = RiskLevelValue.Remark;
-                        this.drpRiskLevelId.SelectedValue = RiskLevelValue.RiskLevelId;
-                        
+                        this.txtMinValue.Text = riskLevelValue.MinValue.ToString();
+                        this.txtMaxValue.Text = riskLevelValue.MaxValue.ToString();
+                        this.txtRemark.Text = riskLevelValue.Remark;
+                        this.drpRiskLevelId.SelectedValue = riskLevelValue.RiskLevelId;
+                        this.txtControlMeasures.Text = riskLevelValue.ControlMeasures;
+                        this.txtLimitTime.Text = riskLevelValue.LimitTime;
+                        this.txtIdentification.Text = riskLevelValue.Identification;
                     }
                 }
             }
@@ -65,12 +66,17 @@ namespace FineUIPro.Web.BaseInfo
         /// <param name="e"></param>
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            Model.Base_RiskLevelValue newRiskLevelValue = new Model.Base_RiskLevelValue();
-            newRiskLevelValue.RiskLevelId = this.drpRiskLevelId.SelectedValue;
-            newRiskLevelValue.MinValue = Funs.GetNewInt(this.txtMinValue.Text);
-            newRiskLevelValue.MaxValue = Funs.GetNewInt(this.txtMaxValue.Text);
-            newRiskLevelValue.Remark = this.txtRemark.Text.Trim();
-           
+            Model.Base_RiskLevelValue newRiskLevelValue = new Model.Base_RiskLevelValue
+            {
+                RiskLevelId = this.drpRiskLevelId.SelectedValue,
+                Identification=this.txtIdentification.Text,
+                MinValue = Funs.GetNewInt(this.txtMinValue.Text),
+                MaxValue = Funs.GetNewInt(this.txtMaxValue.Text),
+                Remark = this.txtRemark.Text.Trim(),
+                ControlMeasures = this.txtControlMeasures.Text.Trim(),
+                LimitTime = this.txtLimitTime.Text.Trim(),
+            };
+
             if (string.IsNullOrEmpty(this.RiskLevelValueId))
             {
                 newRiskLevelValue.RiskLevelValueId = SQLHelper.GetNewID(typeof(Model.Base_RiskLevelValue));
@@ -83,6 +89,7 @@ namespace FineUIPro.Web.BaseInfo
                 BLL.RiskLevelValueService.UpdateRiskLevelValue(newRiskLevelValue);
                 BLL.LogService.AddLog( this.CurrUser.UserId, "修改风险等级对应值");
             }
+
             PageContext.RegisterStartupScript(ActiveWindow.GetHideRefreshReference());
         }
 

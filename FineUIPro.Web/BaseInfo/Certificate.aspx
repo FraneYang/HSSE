@@ -9,27 +9,43 @@
 <body>
     <form id="form1" runat="server">
     <f:PageManager ID="PageManager1" AutoSizePanelID="Panel1" runat="server" />
-    <f:Panel ID="Panel1" runat="server" Margin="5px" BodyPadding="5px" Title="特岗证书" Layout="HBox"  ShowHeader="false">
+    <f:Panel ID="Panel1" runat="server" Margin="5px" BodyPadding="5px" ShowBorder="false"
+        ShowHeader="false" Layout="VBox" BoxConfigAlign="Stretch">
         <Items>
-            <f:Grid ID="Grid1" Title="特岗证书" ShowHeader="false" EnableCollapse="true" PageSize="10"  EnableColumnLines="true"
-                ShowBorder="true" AllowPaging="true" IsDatabasePaging="true" runat="server" Width="760px"
-                DataKeyNames="CertificateId" DataIDField="CertificateId" OnPageIndexChange="Grid1_PageIndexChange"
-                AllowFilters="true" OnFilterChange="Grid1_FilterChange" EnableTextSelection="True">
+            <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="特岗证书" EnableCollapse="true"
+                runat="server" BoxFlex="1" DataKeyNames="CertificateId" AllowCellEditing="true" EnableColumnLines="true"
+                ClicksToEdit="2" DataIDField="CertificateId" AllowSorting="true" SortField="CertificateCode"
+                SortDirection="ASC" OnSort="Grid1_Sort" AllowPaging="true" IsDatabasePaging="true"
+                PageSize="15" OnPageIndexChange="Grid1_PageIndexChange" EnableRowDoubleClickEvent="true"
+                OnRowDoubleClick="Grid1_RowDoubleClick" Width="980px" EnableTextSelection="True">
+                <Toolbars>
+                    <f:Toolbar ID="Toolbar1" Position="Top" runat="server">
+                         <Items>
+                              <f:TextBox runat="server" Label="查询" ID="txtName" EmptyText="输入查询条件" AutoPostBack="true"
+                                OnTextChanged="TextBox_TextChanged" Width="250px" LabelWidth="80px" LabelAlign="Right">
+                            </f:TextBox>         
+                             <f:ToolbarFill ID="ToolbarFill1" runat="server">
+                            </f:ToolbarFill>
+                            <f:Button ID="btnNew" ToolTip="新增" Icon="Add" EnablePostBack="false" runat="server"
+                                Hidden="true">
+                            </f:Button>
+                        </Items>
+                    </f:Toolbar>
+                </Toolbars>
                 <Columns>
                     <f:RowNumberField EnablePagingNumber="true" HeaderText="序号" Width="50px" HeaderTextAlign="Center"
                         TextAlign="Center" />
-                    <f:RenderField Width="150px" ColumnID="CertificateCode" DataField="CertificateCode"
-                        FieldType="String" HeaderText="证书编号" HeaderTextAlign="Center" TextAlign="Center">
+                   <f:RenderField Width="150px" ColumnID="CertificateCode" DataField="CertificateCode" FieldType="String"
+                        HeaderText="编码" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                    <f:RenderField Width="200px" ColumnID="CertificateName" DataField="CertificateName"
-                        FieldType="String" HeaderText="证书名称" HeaderTextAlign="Center" TextAlign="Center">
+                    <f:RenderField Width="500px" ColumnID="CertificateName" DataField="CertificateName" FieldType="String"
+                        HeaderText="名称" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
                     <f:RenderField Width="350px" ColumnID="Remark" DataField="Remark" FieldType="String"
-                        HeaderText="备注" HeaderTextAlign="Center" TextAlign="Center">
-                    </f:RenderField>
+                        HeaderText="备注" HeaderTextAlign="Center" TextAlign="Left" ExpandUnusedSpace="true">
+                    </f:RenderField>             
                 </Columns>
                 <Listeners>
-                    <f:Listener Event="rowselect" Handler="onGridRowSelect" />
                     <f:Listener Event="beforerowcontextmenu" Handler="onRowContextMenu" />
                 </Listeners>
                 <PageItems>
@@ -46,52 +62,23 @@
                     </f:DropDownList>
                 </PageItems>
             </f:Grid>
-            <f:SimpleForm ID="SimpleForm1" runat="server" ShowBorder="true" ShowHeader="false"
-                LabelWidth="80px" BodyPadding="5px" Width="350px">
-                <Items>
-                    <f:HiddenField ID="hfFormID" runat="server">
-                    </f:HiddenField>
-                    <f:TextBox ID="txtCertificateCode" Label="证书编号" ShowRedStar="true" Required="true"
-                        runat="server" LabelAlign="right" AutoPostBack="true" OnTextChanged="TextBox_TextChanged">
-                    </f:TextBox>
-                    <f:TextBox ID="txtCertificateName" Label="证书名称" ShowRedStar="true" Required="true"
-                        runat="server" LabelAlign="right" AutoPostBack="true" OnTextChanged="TextBox_TextChanged">
-                    </f:TextBox>
-                    <f:TextArea ID="txtRemark" runat="server" Label="备注" LabelAlign="right">
-                    </f:TextArea>
-                </Items>
-                <Toolbars>
-                    <f:Toolbar ID="Toolbar1" Position="Bottom" runat="server">
-                        <Items>
-                            <f:Button ID="btnNew"  Icon="Add" ToolTip="新增" EnablePostBack="false" runat="server">
-                                <Listeners>
-                                    <f:Listener Event="click" Handler="onNewButtonClick" />
-                                </Listeners>
-                            </f:Button>
-                            <f:Button ID="btnDelete" Enabled="false" ToolTip="删除" Icon="Delete" ConfirmText="确定删除当前数据？"
-                                OnClick="btnDelete_Click" runat="server">
-                            </f:Button>
-                            <f:ToolbarFill ID="ToolbarFill1" runat="server">
-                            </f:ToolbarFill>
-                            <f:Button ID="btnSave" Icon="SystemSave" runat="server"  ValidateForms="SimpleForm1"
-                                OnClick="btnSave_Click">
-                            </f:Button>
-                        </Items>
-                    </f:Toolbar>
-                </Toolbars>
-            </f:SimpleForm>
         </Items>
     </f:Panel>
+    <f:Window ID="Window1" Title="特岗证书" Hidden="true" EnableIFrame="true" EnableMaximize="true"
+        Target="Top" EnableResize="true" runat="server" IsModal="true" Width="600px"
+        Height="340px">
+    </f:Window>
     <f:Menu ID="Menu1" runat="server">
         <f:MenuButton ID="btnMenuEdit" OnClick="btnMenuEdit_Click" EnablePostBack="true"
-             Icon="BulletEdit" runat="server" Text="编辑">
+            Hidden="true" runat="server" Text="编辑" Icon="TableEdit">
         </f:MenuButton>
         <f:MenuButton ID="btnMenuDelete" OnClick="btnMenuDelete_Click" EnablePostBack="true"
-            Icon="Delete" ConfirmText="删除选中行？" ConfirmTarget="Top" runat="server" Text="删除">
+            Hidden="true" ConfirmText="删除选中行？" ConfirmTarget="Top" runat="server" Text="删除"
+            Icon="Delete">
         </f:MenuButton>
     </f:Menu>
     </form>
-    <script type="text/javascript">
+    <script type="text/jscript">
         var menuID = '<%= Menu1.ClientID %>';
         // 返回false，来阻止浏览器右键菜单
         function onRowContextMenu(event, rowId) {
@@ -101,48 +88,6 @@
 
         function reloadGrid() {
             __doPostBack(null, 'reloadGrid');
-        }
-
-
-        var gridClientID = '<%= Grid1.ClientID %>';
-        var btnDeleteClientID = '<%= btnDelete.ClientID %>';
-        var btnSaveClientID = '<%= btnSave.ClientID %>';
-
-        var formClientID = '<%= SimpleForm1.ClientID %>';
-        var hfFormIDClientID = '<%= hfFormID.ClientID %>';
-        var txtCodeClientID = '<%= txtCertificateCode.ClientID %>';
-        var txtNameClientID = '<%= txtCertificateName.ClientID %>';
-        var txtRemarkClientID = '<%=txtRemark.ClientID %>';
-
-        function onGridRowSelect(event, rowId) {
-            var grid = F(gridClientID);
-
-            // 启用删除按钮
-            F(btnDeleteClientID).enable();
-
-            // 当前行数据
-            var rowValue = grid.getRowValue(rowId);
-
-            // 使用当前行数据填充表单字段
-            F(hfFormIDClientID).setValue(rowId);
-            F(txtCodeClientID).setValue(rowValue['CertificateCode']);
-            F(txtNameClientID).setValue(rowValue['CertificateName']);
-            F(txtRemarkClientID).setValue(rowValue['Remark']);
-
-            // 更新保存按钮文本
-//            F(btnSaveClientID).setText('保存数据（编辑）');
-        }
-
-        function onNewButtonClick() {
-            // 重置表单字段
-            F(formClientID).reset();
-            // 清空表格选中行
-            F(gridClientID).clearSelections();
-            // 禁用删除按钮
-            F(btnDeleteClientID).disable();
-
-            // 更新保存按钮文本
-//            F(btnSaveClientID).setText('保存数据（新增）');
         }
     </script>
 </body>

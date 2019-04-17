@@ -21,7 +21,8 @@
             <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="高处安全作业证" EnableCollapse="true"
                 runat="server" BoxFlex="1" DataKeyNames="HeightWorkId" AllowCellEditing="true" EnableColumnLines="true"
                 ClicksToEdit="2" DataIDField="HeightWorkId" AllowSorting="true" SortField="LicenseCode"
-                SortDirection="DESC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="10" OnPageIndexChange="Grid1_PageIndexChange"
+                SortDirection="DESC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="15" 
+                OnPageIndexChange="Grid1_PageIndexChange" EnableRowDoubleClickEvent="true" OnRowDoubleClick="Grid1_RowDoubleClick"
                 EnableTextSelection="True">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar2" Position="Top" runat="server">
@@ -35,11 +36,11 @@
                 </Toolbars>
                 <Columns>
                     <f:RowNumberField EnablePagingNumber="true" HeaderText="序号" Width="50px" HeaderTextAlign="Center" TextAlign="Center"/>                   
-                    <f:RenderField Width="100px" ColumnID="LicenseCode" DataField="LicenseCode" EnableFilter="true"
+                    <f:RenderField Width="110px" ColumnID="LicenseCode" DataField="LicenseCode" EnableFilter="true"
                         SortField="LicenseCode" FieldType="String" HeaderText="编号" HeaderTextAlign="Center"
                         TextAlign="Left">                      
                     </f:RenderField>                                                       
-                    <f:RenderField Width="220px" ColumnID="ApplyUintName" DataField="ApplyUintName" 
+                    <f:RenderField Width="150px" ColumnID="ApplyUintName" DataField="ApplyUintName" 
                         SortField="ApplyUintName" FieldType="String" HeaderText="申请单位" HeaderTextAlign="Center"
                         TextAlign="Left">                       
                     </f:RenderField> 
@@ -48,9 +49,9 @@
                         TextAlign="Left">                       
                     </f:RenderField>                    
                     <f:RenderField  ColumnID="JobPalce" DataField="JobPalce" SortField="JobPalce" FieldType="String"
-                         Width="250px" HeaderText="作业地点" HeaderTextAlign="Center" TextAlign="Left">
+                         Width="300px" HeaderText="作业地点" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                     <f:RenderField  ColumnID="HeightWorkMode" DataField="HeightWorkMode" SortField="HeightWorkMode" FieldType="String" Width="100px"
+                     <f:RenderField  ColumnID="JobContent" DataField="JobContent" SortField="JobContent" FieldType="String" Width="150px"
                         HeaderText="作业内容" HeaderTextAlign="Center" TextAlign="Left" >
                     </f:RenderField>
                     <f:RenderField  ColumnID="JobStartTime" DataField="JobStartTime" SortField="JobStartTime" Width="145px"
@@ -59,7 +60,7 @@
                      <f:RenderField  ColumnID="JobEndTime" DataField="JobEndTime" SortField="JobEndTime" Width="145px"
                         HeaderText="作业结束时间" HeaderTextAlign="Center" TextAlign="Left" >
                     </f:RenderField>
-                     <f:RenderField  ColumnID="StatesName" DataField="StatesName" SortField="StatesName" FieldType="String" Width="100px"
+                     <f:RenderField  ColumnID="StatesName" DataField="StatesName" SortField="StatesName" FieldType="String" Width="80px"
                         HeaderText="状态" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
                 </Columns>
@@ -82,8 +83,17 @@
             </f:Grid>
         </Items>
     </f:Panel>
+    <f:Window ID="Window1" Title="高处安全作业证" Hidden="true" EnableIFrame="true" EnableMaximize="true"
+        Target="Top" EnableResize="true" runat="server" IsModal="true"
+        Width="1024px" Height="630px">
+    </f:Window>
     <f:Menu ID="Menu1" runat="server">
-       
+        <f:MenuButton ID="btnMenuView" OnClick="btnMenuView_Click" EnablePostBack="true"
+            runat="server" Text="查看"  Icon="TableGo">
+        </f:MenuButton>  
+        <f:MenuButton ID="btnMenuPrint" OnClick="btnPrint_Click" EnablePostBack="true"
+            runat="server" Text="打印"  Icon="Printer">
+        </f:MenuButton>  
         <f:MenuButton ID="btnMenuDelete" OnClick="btnMenuDelete_Click" EnablePostBack="true"  Icon="Delete"
             ConfirmText="删除选中行？" ConfirmTarget="Top" runat="server" Text="删除" Hidden ="true">
         </f:MenuButton>        

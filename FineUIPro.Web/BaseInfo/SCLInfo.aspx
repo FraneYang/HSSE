@@ -21,15 +21,18 @@
         <Items>
             <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="SCL评价" EnableCollapse="true"
                 runat="server" BoxFlex="1" DataKeyNames="SCLId" AllowCellEditing="true" EnableColumnLines="true"
-                ClicksToEdit="2" DataIDField="SCLId" AllowSorting="true" SortField="SortIndex"
+                ClicksToEdit="2" DataIDField="SCLId" AllowSorting="true" SortField="EuipmentTypeCode,SortIndex"
                 SortDirection="ASC" OnSort="Grid1_Sort" AllowPaging="true" IsDatabasePaging="true"
-                PageSize="10" OnPageIndexChange="Grid1_PageIndexChange" EnableRowDoubleClickEvent="true"
+                PageSize="15" OnPageIndexChange="Grid1_PageIndexChange" EnableRowDoubleClickEvent="true"
                 OnRowDoubleClick="Grid1_RowDoubleClick" Width="980px" EnableTextSelection="True">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar1" Position="Top" runat="server">
                          <Items>
-                              <f:TextBox runat="server" Label="检查项目" ID="txtCheckItem" EmptyText="输入查询条件" AutoPostBack="true"
-                                OnTextChanged="TextBox_TextChanged" Width="250px" LabelWidth="80px" LabelAlign="Right">
+                             <f:DropDownList ID="drpEuipmentTypeId" runat="server" Label="类型" LabelWidth="60px"
+                                    EnableEdit="true" ForceSelection="false" AutoPostBack="true" OnSelectedIndexChanged="TextBox_TextChanged">
+                              </f:DropDownList>
+                            <f:TextBox runat="server" Label="查询" ID="txtName" EmptyText="输入查询条件" AutoPostBack="true"
+                                OnTextChanged="TextBox_TextChanged" Width="250px" LabelWidth="60px" LabelAlign="Right">
                             </f:TextBox>         
                              <f:ToolbarFill ID="ToolbarFill1" runat="server">
                             </f:ToolbarFill>
@@ -43,16 +46,19 @@
                    <f:RenderField Width="50px" ColumnID="SortIndex" DataField="SortIndex" FieldType="String"
                         HeaderText="序号" HeaderTextAlign="Center" TextAlign="Center">
                     </f:RenderField>
-                    <f:RenderField Width="150px" ColumnID="CheckItem" DataField="CheckItem" FieldType="String"
+                     <f:RenderField Width="100px" ColumnID="EuipmentTypeName" DataField="EuipmentTypeName" FieldType="String"
+                        HeaderText="类型" HeaderTextAlign="Center" TextAlign="Left">
+                    </f:RenderField>
+                    <f:RenderField Width="120px" ColumnID="CheckItem" DataField="CheckItem" FieldType="String"
                         HeaderText="检查项目" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                     <f:RenderField Width="220px" ColumnID="Standard" DataField="Standard" 
+                     <f:RenderField Width="160px" ColumnID="Standard" DataField="Standard" 
                         FieldType="String" HeaderText="标准" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                    <f:RenderField Width="180px" ColumnID="Consequence" DataField="Consequence" FieldType="String"
+                    <f:RenderField Width="160px" ColumnID="Consequence" DataField="Consequence" FieldType="String"
                         HeaderText="未达标准的主要后果" HeaderTextAlign="Center" TextAlign="Left" >
                     </f:RenderField>
-                    <f:RenderField Width="180px" ColumnID="NowControlMeasures" DataField="NowControlMeasures" FieldType="String"
+                    <f:RenderField Width="150px" ColumnID="NowControlMeasures" DataField="NowControlMeasures" FieldType="String"
                         HeaderText="现有控制措施" HeaderTextAlign="Center" TextAlign="Left" >
                     </f:RenderField>
                     <f:RenderField Width="50px" ColumnID="HazardJudge_L" DataField="HazardJudge_L" FieldType="Float"
@@ -92,7 +98,7 @@
     </f:Panel>
     <f:Window ID="Window1" Title="SCL评价" Hidden="true" EnableIFrame="true" EnableMaximize="true"
         Target="Top" EnableResize="true" runat="server" IsModal="true" Width="800px"
-        Height="540px">
+        Height="450px">
     </f:Window>
     <f:Menu ID="Menu1" runat="server">
         <f:MenuButton ID="btnMenuEdit" OnClick="btnMenuEdit_Click" EnablePostBack="true"

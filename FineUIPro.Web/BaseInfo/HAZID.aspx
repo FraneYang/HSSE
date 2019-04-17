@@ -16,7 +16,7 @@
                 runat="server" BoxFlex="1" DataKeyNames="HAZIDId" AllowCellEditing="true" EnableColumnLines="true"
                 ClicksToEdit="2" DataIDField="HAZIDId" AllowSorting="true" SortField="HAZIDCode"
                 SortDirection="ASC" OnSort="Grid1_Sort" AllowPaging="true" IsDatabasePaging="true"
-                PageSize="10" OnPageIndexChange="Grid1_PageIndexChange" EnableRowDoubleClickEvent="true"
+                PageSize="15" OnPageIndexChange="Grid1_PageIndexChange" EnableRowDoubleClickEvent="true"
                 OnRowDoubleClick="Grid1_RowDoubleClick" Width="980px" EnableTextSelection="True">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar1" Position="Top" runat="server">

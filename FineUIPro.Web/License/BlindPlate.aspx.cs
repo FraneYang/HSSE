@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Linq;
     using BLL;
 
     public partial class BlindPlate : PageBase
@@ -49,7 +48,7 @@
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();
@@ -149,5 +148,53 @@
             this.BindGrid();
         }
         #endregion 
+
+        #region 打印
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Grid1.SelectedRowID))
+            {
+                PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("../ReportPrint/ExReportPrint.aspx?reportId={0}&&replaceParameter={1}&&varValue={2}", Const.BlindPlateMenuId, Grid1.SelectedRowID, "", "打印 - ")));
+            }
+        }
+        #endregion
+
+        #region 查看详细信息
+        /// <summary>
+        /// Grid行双击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Grid1_RowDoubleClick(object sender, GridRowClickEventArgs e)
+        {
+            this.ViewData();
+        }
+
+        /// <summary>
+        /// 右键编辑事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnMenuView_Click(object sender, EventArgs e)
+        {
+            this.ViewData();
+        }
+
+        private void ViewData()
+        {
+            if (Grid1.SelectedRowIndexArray.Length == 0)
+            {
+                Alert.ShowInParent("请至少选择一条记录！", MessageBoxIcon.Warning);
+                return;
+            }
+
+            PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("BlindPlateView.aspx?BlindPlateId={0}", Grid1.SelectedRowID, "查看 - ")));
+        }
+        #endregion
     }
 }

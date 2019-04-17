@@ -102,34 +102,45 @@ namespace BLL
         public static void AddUser(Model.Sys_User user)
         {
             Model.HSSEDB_ENN db = Funs.DB;
-            string newKeyID = SQLHelper.GetNewID(typeof(Model.Sys_User));
-            Model.Sys_User newUser = new Model.Sys_User();
-            newUser.UserId = newKeyID;
-            newUser.InstallationId = user.InstallationId;
-            newUser.UnitId = user.UnitId;
-            newUser.DepartId = user.DepartId;
-            newUser.Account = user.Account;
-            newUser.UserCode = user.UserCode;
-            newUser.Password = user.Password;
-            newUser.UserName = user.UserName;
-            newUser.RoleId = user.RoleId;
-            newUser.WorkPostId = user.WorkPostId;
-            newUser.IsPost = user.IsPost;
-            newUser.Sex = user.Sex;
-            newUser.BirthDay = user.BirthDay;
-            newUser.Marriage = user.Marriage;
-            newUser.Nation = user.Nation;
-            newUser.IdentityCard = user.IdentityCard;
-            newUser.Email = user.Email;
-            newUser.Telephone = user.Telephone;
-            newUser.Education = user.Education;
-            newUser.Hometown = user.Hometown;
-            newUser.PositionId = user.PositionId;
-            newUser.PhotoUrl = user.PhotoUrl;
-            newUser.Performance = user.Performance;
-            newUser.PageSize = user.PageSize;          
+            Model.Sys_User newUser = new Model.Sys_User
+            {
+                UserId = SQLHelper.GetNewID(typeof(Model.Sys_User)),
+                InstallationId = user.InstallationId,
+                InstallationName = user.InstallationName,
+                UnitId = user.UnitId,
+                DepartId = user.DepartId,
+                Account = user.Account,
+                UserCode = user.UserCode,
+                Password = user.Password,
+                UserName = user.UserName,
+                RoleId = user.RoleId,
+                WorkPostId = user.WorkPostId,
+                WorkPostName = user.WorkPostName,
+                IsPost = user.IsPost,
+                Sex = user.Sex,
+                BirthDay = user.BirthDay,
+                Marriage = user.Marriage,
+                Nation = user.Nation,
+                IdentityCard = user.IdentityCard,
+                Email = user.Email,
+                Telephone = user.Telephone,
+                Education = user.Education,
+                Hometown = user.Hometown,
+                PositionId = user.PositionId,
+                PhotoUrl = user.PhotoUrl,
+                Performance = user.Performance,
+                PageSize = user.PageSize,
+                SortIndex = user.SortIndex,
+                IsEmergency = user.IsEmergency,
+                EntryTime = user.EntryTime,
+                IsTemp = user.IsTemp,
+            };
+            
             db.Sys_User.InsertOnSubmit(newUser);
             db.SubmitChanges();
+
+            ////新增用户时 将岗位巡检人写入明细表
+            RiskListItemService.getRiskListItemByUser(newUser);
         }
 
         /// <summary>
@@ -139,36 +150,54 @@ namespace BLL
         public static void UpdateUser(Model.Sys_User user)
         {
             Model.HSSEDB_ENN db = Funs.DB;
-            Model.Sys_User newUser = db.Sys_User.FirstOrDefault(e => e.UserId == user.UserId);
-            if (newUser != null)
+            string oldWorkPost = string.Empty;
+            string newWorkPost = user.WorkPostId;
+            Model.Sys_User updateUser = db.Sys_User.FirstOrDefault(e => e.UserId == user.UserId);
+            if (updateUser != null)
             {
-                newUser.InstallationId = user.InstallationId;
-                newUser.UnitId = user.UnitId;
-                newUser.DepartId = user.DepartId;
-                newUser.Account = user.Account;
-                newUser.UserCode = user.UserCode;
+                oldWorkPost = updateUser.WorkPostId;
+                updateUser.InstallationId = user.InstallationId;
+                updateUser.InstallationName = user.InstallationName;
+                updateUser.UnitId = user.UnitId;
+                updateUser.DepartId = user.DepartId;
+                updateUser.Account = user.Account;
+                updateUser.UserCode = user.UserCode;
                 if (!string.IsNullOrEmpty(user.Password))
                 {
-                    newUser.Password = user.Password;
+                    updateUser.Password = user.Password;
                 }
-                newUser.UserName = user.UserName;
-                newUser.RoleId = user.RoleId;
-                newUser.WorkPostId = user.WorkPostId;
-                newUser.IsPost = user.IsPost;
-                newUser.Sex = user.Sex;
-                newUser.BirthDay = user.BirthDay;
-                newUser.Marriage = user.Marriage;
-                newUser.Nation = user.Nation;
-                newUser.IdentityCard = user.IdentityCard;
-                newUser.Email = user.Email;
-                newUser.Telephone = user.Telephone;
-                newUser.Education = user.Education;
-                newUser.Hometown = user.Hometown;
-                newUser.PositionId = user.PositionId;
-                newUser.PhotoUrl = user.PhotoUrl;
-                newUser.Performance = user.Performance;
-                newUser.PageSize = user.PageSize;
+                updateUser.UserName = user.UserName;
+                updateUser.RoleId = user.RoleId;
+                updateUser.WorkPostId = user.WorkPostId;
+                updateUser.WorkPostName = user.WorkPostName;
+                updateUser.IsPost = user.IsPost;
+                updateUser.Sex = user.Sex;
+                updateUser.BirthDay = user.BirthDay;
+                updateUser.Marriage = user.Marriage;
+                updateUser.Nation = user.Nation;
+                updateUser.IdentityCard = user.IdentityCard;
+                updateUser.Email = user.Email;
+                if (!string.IsNullOrEmpty(user.Telephone))
+                {
+                    updateUser.Telephone = user.Telephone;
+                }
+                updateUser.Education = user.Education;
+                updateUser.Hometown = user.Hometown;
+                updateUser.PositionId = user.PositionId;
+                updateUser.PhotoUrl = user.PhotoUrl;
+                updateUser.Performance = user.Performance;
+                updateUser.PageSize = user.PageSize;
+                updateUser.SortIndex = user.SortIndex;
+                updateUser.IsEmergency = user.IsEmergency;
+                updateUser.EntryTime = user.EntryTime;
+                updateUser.IsTemp = user.IsTemp;
                 db.SubmitChanges();
+            }
+
+            if (oldWorkPost != newWorkPost)
+            {
+                ////用户岗位变化时 将岗位巡检人写入明细表
+                RiskListItemService.getRiskListItemByUser(updateUser);
             }
         }
         
@@ -182,11 +211,25 @@ namespace BLL
             Model.Sys_User user = db.Sys_User.FirstOrDefault(e => e.UserId == userId);
             if (user != null)
             {
+                ////删除人员 巡检明细
+                BLL.RiskListItemService.DeleteRiskListItemByUserId(userId);
+                ///删除风险巡检计划表
+                BLL.PatrolPlanService.DeletePatrolPlanByUserId(userId);
+                ///删除日志
                 var logs = from x in db.Sys_Log where x.UserId == userId select x;
                 if (logs.Count() > 0)
                 {
                     db.Sys_Log.DeleteAllOnSubmit(logs);
                 }
+                ///删除推送信息
+                var pushRecord = from x in db.Sys_PushRecord
+                                 where x.ReceiveManId == userId && (!x.IsResponse.HasValue || x.IsAgree.HasValue)
+                                 select x;
+                if (pushRecord.Count() > 0)
+                {
+                    db.Sys_PushRecord.DeleteAllOnSubmit(pushRecord);
+                }
+
                 db.Sys_User.DeleteOnSubmit(user);
                 db.SubmitChanges();
             }
@@ -198,7 +241,7 @@ namespace BLL
         /// <returns></returns>
         public static List<Model.Sys_User> GetUserList()
         {
-            var list = (from x in Funs.DB.Sys_User orderby x.UserName select x).ToList();
+            var list = (from x in Funs.DB.Sys_User where x.IsPost == true orderby x.UserName select x).ToList();
             return list;
         }
 
@@ -229,7 +272,7 @@ namespace BLL
             }
             if (!string.IsNullOrEmpty(installationId))
             {
-                users = users.Where(x => x.InstallationId == installationId);
+                users = users.Where(x => x.InstallationId.Contains(installationId));
             }
 
             return users.ToList();
@@ -277,7 +320,7 @@ namespace BLL
         /// <param name="dropName">下拉框名字</param>
         /// <param name="projectId">项目id</param>
         /// <param name="isShowPlease">是否显示请选择</param>
-        public static void InitFlowOperateControlUserDropDownList(FineUIPro.DropDownList dropName, string unitId,string departId, string installationId, bool isShowPlease)
+        public static void InitFlowOperateControlUserDropDownList(FineUIPro.DropDownList dropName, string unitId, string departId, string installationId, bool isShowPlease)
         {
             dropName.DataValueField = "UserId";
             dropName.DataTextField = "UserName";

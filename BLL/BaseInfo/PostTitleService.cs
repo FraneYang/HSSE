@@ -36,13 +36,15 @@ namespace BLL
        public static void AddPostTitle(Model.Base_PostTitle postTitle)
        {
            Model.HSSEDB_ENN db = Funs.DB;
-           Model.Base_PostTitle newPostTitle = new Model.Base_PostTitle();
-           newPostTitle.PostTitleId = postTitle.PostTitleId;
-           newPostTitle.PostTitleCode = postTitle.PostTitleCode;
-           newPostTitle.PostTitleName = postTitle.PostTitleName;
-           newPostTitle.Remark = postTitle.Remark;
+            Model.Base_PostTitle newPostTitle = new Model.Base_PostTitle
+            {
+                PostTitleId = postTitle.PostTitleId,
+                PostTitleCode = postTitle.PostTitleCode,
+                PostTitleName = postTitle.PostTitleName,
+                Remark = postTitle.Remark
+            };
 
-           db.Base_PostTitle.InsertOnSubmit(newPostTitle);
+            db.Base_PostTitle.InsertOnSubmit(newPostTitle);
            db.SubmitChanges();
        }
 

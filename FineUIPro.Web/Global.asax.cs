@@ -1,15 +1,11 @@
 ﻿namespace FineUIPro.Web
 {
+    using BLL;
     using System;
     using System.Configuration;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.IO;
-    using System.Net;
     using System.Text;
-    using System.Threading;
-    using System.Web;
-    using BLL;
+    using System.Linq;
 
     public class Global : System.Web.HttpApplication
     {
@@ -23,13 +19,13 @@
             Application["OnlineUserCount"] = 0;
             try
             {
-                Funs.RootPath = Server.MapPath("~/");
-               
+                Funs.RootPath = Server.MapPath("~/");               
                 // 日志文件所在目录
                 ErrLogInfo.DefaultErrLogFullPath = Server.MapPath("~/ErrLog.txt");
                 Funs.ConnString = ConfigurationManager.AppSettings["ConnectionString"];
                 Funs.SystemName = ConfigurationManager.AppSettings["SystemName"];
                 Funs.SystemVersion = ConfigurationManager.AppSettings["SystemVersion"];
+                Funs.APPUrl = ConfigurationManager.AppSettings["APPUrl"];
             }
             catch (Exception ex)
             {
@@ -61,8 +57,10 @@
         {
             StringBuilder errLog = null;
             Exception ex = null;
-            Model.Sys_ErrLogInfo newErr = new Model.Sys_ErrLogInfo();
-            newErr.ErrLogId = SQLHelper.GetNewID(typeof(Model.Sys_ErrLogInfo));
+            Model.Sys_ErrLogInfo newErr = new Model.Sys_ErrLogInfo
+            {
+                ErrLogId = SQLHelper.GetNewID(typeof(Model.Sys_ErrLogInfo))
+            };
             try
             {
                 // 获取错误类

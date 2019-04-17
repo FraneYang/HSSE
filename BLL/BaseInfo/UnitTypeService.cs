@@ -37,11 +37,13 @@ namespace BLL
         public static void AddUnitType(Model.Base_UnitType unitType)
         {
             Model.HSSEDB_ENN db = Funs.DB;
-            Model.Base_UnitType newUnitType = new Model.Base_UnitType();
-            newUnitType.UnitTypeId = unitType.UnitTypeId;
-            newUnitType.UnitTypeCode = unitType.UnitTypeCode;
-            newUnitType.UnitTypeName = unitType.UnitTypeName;
-            newUnitType.Remark = unitType.Remark;
+            Model.Base_UnitType newUnitType = new Model.Base_UnitType
+            {
+                UnitTypeId = unitType.UnitTypeId,
+                UnitTypeCode = unitType.UnitTypeCode,
+                UnitTypeName = unitType.UnitTypeName,
+                Remark = unitType.Remark
+            };
 
             db.Base_UnitType.InsertOnSubmit(newUnitType);
             db.SubmitChanges();

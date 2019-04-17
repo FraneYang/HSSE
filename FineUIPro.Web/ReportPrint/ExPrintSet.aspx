@@ -62,6 +62,7 @@
                 ChinaExcel.SetOnlyShowTipMessage(true);
 
                 InitFontname();
+               
                 init();              
             }
 
@@ -264,7 +265,7 @@
         <tr>
             <td style="width: 100%;">
                 <object id="ChinaExcel"  name="ChinaExcel" style="left: 0px; top: 0px; width: 100%; height:500px; text-align:center;" 
-                        classid="CLSID:15261F9B-22CC-4692-9089-0C40ACBDFDD8" codebase="../Downloads/chinaexcelweb.cab#version=4,0,4,0">
+                        classid="CLSID:15261F9B-22CC-4692-9089-0C40ACBDFDD8" codebase="../Downloads/chinaexcelweb.cab#version=3,8,9,2">
                     <param name="_Version" value="131072" />
                     <param name="_ExtentX" value="28205" />
                     <param name="_ExtentY" value="13229" />
@@ -275,7 +276,7 @@
     </table>       
     <script type="text/javascript" language="javascript">
          function init() {
-             setInit('ReadExReportFile.aspx?reportId='+<%=reportId %>);
+             setInit('ReadExReportFile.aspx?reportId=<%=reportId %>');
              ChinaExcel.SetOnlyShowTipMessage(false);
          }
     </script>

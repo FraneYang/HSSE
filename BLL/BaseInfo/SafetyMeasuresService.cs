@@ -45,11 +45,13 @@ namespace BLL
         /// <param name="SafetyMeasures"></param>
         public static void AddSafetyMeasures(Model.Base_SafetyMeasures SafetyMeasures)
         {
-            Model.Base_SafetyMeasures newSafetyMeasures = new Model.Base_SafetyMeasures();
-            newSafetyMeasures.SafetyMeasuresId = SafetyMeasures.SafetyMeasuresId;
-            newSafetyMeasures.SortIndex = SafetyMeasures.SortIndex;
-            newSafetyMeasures.SafetyMeasures = SafetyMeasures.SafetyMeasures;
-            newSafetyMeasures.LicenseType = SafetyMeasures.LicenseType;
+            Model.Base_SafetyMeasures newSafetyMeasures = new Model.Base_SafetyMeasures
+            {
+                SafetyMeasuresId = SafetyMeasures.SafetyMeasuresId,
+                SortIndex = SafetyMeasures.SortIndex,
+                SafetyMeasures = SafetyMeasures.SafetyMeasures,
+                LicenseType = SafetyMeasures.LicenseType
+            };
             db.Base_SafetyMeasures.InsertOnSubmit(newSafetyMeasures);
             db.SubmitChanges();
         }

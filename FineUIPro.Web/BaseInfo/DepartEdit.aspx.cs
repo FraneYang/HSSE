@@ -68,13 +68,15 @@ namespace FineUIPro.Web.BaseInfo
         /// <param name="e"></param>
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            Model.Base_Depart newDepart = new Model.Base_Depart();
-            newDepart.DepartCode = this.txtDepartCode.Text.Trim();
-            newDepart.DepartName = this.txtDepartName.Text.Trim();
-            newDepart.Remark = this.txtRemark.Text.Trim();
-           
-            newDepart.IsUsed = Convert.ToBoolean(this.drpIsUsed.SelectedValue);
-           
+            Model.Base_Depart newDepart = new Model.Base_Depart
+            {
+                DepartCode = this.txtDepartCode.Text.Trim(),
+                DepartName = this.txtDepartName.Text.Trim(),
+                Remark = this.txtRemark.Text.Trim(),
+
+                IsUsed = Convert.ToBoolean(this.drpIsUsed.SelectedValue)
+            };
+
             ///装置负责人
             string managerIds = string.Empty;
             string managerNames = string.Empty;

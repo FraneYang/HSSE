@@ -16,7 +16,7 @@
                 runat="server" BoxFlex="1" DataKeyNames="DepartId" AllowCellEditing="true" EnableColumnLines="true"
                 ClicksToEdit="2" DataIDField="DepartId" AllowSorting="true" SortField="DepartCode"
                 SortDirection="ASC" OnSort="Grid1_Sort" AllowPaging="true" IsDatabasePaging="true"
-                PageSize="10" OnPageIndexChange="Grid1_PageIndexChange" EnableRowDoubleClickEvent="true"
+                PageSize="15" OnPageIndexChange="Grid1_PageIndexChange" EnableRowDoubleClickEvent="true"
                 OnRowDoubleClick="Grid1_RowDoubleClick" Width="980px" EnableTextSelection="True">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar1" Position="Top" runat="server">
@@ -36,10 +36,10 @@
                     <f:RowNumberField EnablePagingNumber="true" HeaderText="序号" Width="50px" HeaderTextAlign="Center"
                         TextAlign="Center" />
                    <f:RenderField Width="150px" ColumnID="DepartCode" DataField="DepartCode" FieldType="String"
-                        HeaderText="部门编号" HeaderTextAlign="Center" TextAlign="Center">
+                        HeaderText="部门编号" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                    <f:RenderField Width="200px" ColumnID="DepartName" DataField="DepartName" FieldType="String"
-                        HeaderText="部门名称" HeaderTextAlign="Center" TextAlign="Center">
+                    <f:RenderField Width="250px" ColumnID="DepartName" DataField="DepartName" FieldType="String"
+                        HeaderText="部门名称" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
                      <f:RenderField Width="200px" ColumnID="ManagerNames" DataField="ManagerNames" 
                         FieldType="String" HeaderText="负责人" HeaderTextAlign="Center" TextAlign="Left">

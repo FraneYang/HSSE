@@ -14,7 +14,7 @@ namespace BLL
 
         private static string connectionString = Funs.ConnString;        
         //private static SqlConnection Connection = new SqlConnection(connectionString);
-        
+
         //public static SqlConnection GetConn()
         //{           
         //    return Connection;
@@ -58,9 +58,11 @@ namespace BLL
                 try
                 {
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(storedProcName, Connection);
-                    command.CommandTimeout = 0;
-                    command.CommandType = CommandType.StoredProcedure;//执行存储过程          
+                    SqlCommand command = new SqlCommand(storedProcName, Connection)
+                    {
+                        CommandTimeout = 0,
+                        CommandType = CommandType.StoredProcedure//执行存储过程          
+                    };
                     foreach (SqlParameter parameter in parameters)
                     {
                         command.Parameters.Add(parameter);
@@ -108,9 +110,11 @@ namespace BLL
                 try
                 {                    
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(storedProcName, Connection);
-                    command.CommandTimeout = 0;
-                    command.CommandType = CommandType.StoredProcedure;
+                    SqlCommand command = new SqlCommand(storedProcName, Connection)
+                    {
+                        CommandTimeout = 0,
+                        CommandType = CommandType.StoredProcedure
+                    };
                     command.Parameters.Add(new SqlParameter("@returnVal", SqlDbType.VarChar, 50));
                     command.Parameters["@returnVal"].Direction = ParameterDirection.Output;
                     command.ExecuteNonQuery();
@@ -139,9 +143,11 @@ namespace BLL
                 try
                 {
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(storedProcName, Connection);
-                    command.CommandTimeout = 0;
-                    command.CommandType = CommandType.StoredProcedure;
+                    SqlCommand command = new SqlCommand(storedProcName, Connection)
+                    {
+                        CommandTimeout = 0,
+                        CommandType = CommandType.StoredProcedure
+                    };
                     SqlParameter[] values = new SqlParameter[]
                                             {
                                                 new SqlParameter("@tableName", tableName),
@@ -177,9 +183,11 @@ namespace BLL
                 try
                 {
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(storedProcName, Connection);
-                    command.CommandTimeout = 0;
-                    command.CommandType = CommandType.StoredProcedure;
+                    SqlCommand command = new SqlCommand(storedProcName, Connection)
+                    {
+                        CommandTimeout = 0,
+                        CommandType = CommandType.StoredProcedure
+                    };
                     SqlParameter[] values = new SqlParameter[]
             {
                 new SqlParameter("@tableName", tableName),
@@ -217,9 +225,11 @@ namespace BLL
                 try
                 {                 
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(storedProcName, Connection);
-                    command.CommandTimeout = 0;
-                    command.CommandType = CommandType.StoredProcedure;
+                    SqlCommand command = new SqlCommand(storedProcName, Connection)
+                    {
+                        CommandTimeout = 0,
+                        CommandType = CommandType.StoredProcedure
+                    };
                     SqlParameter[] values = new SqlParameter[]
             {
                 new SqlParameter("@tableName", tableName),
@@ -253,9 +263,11 @@ namespace BLL
                 try
                 {                  
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(storedProcName, Connection);
-                    command.CommandTimeout = 0;
-                    command.CommandType = CommandType.StoredProcedure;
+                    SqlCommand command = new SqlCommand(storedProcName, Connection)
+                    {
+                        CommandTimeout = 0,
+                        CommandType = CommandType.StoredProcedure
+                    };
                     if (parameters != null)
                     {
                         command.Parameters.AddRange(parameters);
@@ -286,9 +298,11 @@ namespace BLL
                 try
                 {                  
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(strSql, Connection);
-                    command.CommandTimeout = 0;
-                    command.CommandType = CommandType.Text;
+                    SqlCommand command = new SqlCommand(strSql, Connection)
+                    {
+                        CommandTimeout = 0,
+                        CommandType = CommandType.Text
+                    };
                     if (parameters != null)
                     {
                         command.Parameters.AddRange(parameters);
@@ -344,9 +358,11 @@ namespace BLL
                 try
                 {                   
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(sql, Connection);
-                    command.CommandTimeout = 0;
-                    command.CommandType = CommandType.Text;
+                    SqlCommand command = new SqlCommand(sql, Connection)
+                    {
+                        CommandTimeout = 0,
+                        CommandType = CommandType.Text
+                    };
                     str = command.ExecuteScalar().ToString();
                 }
                 finally
@@ -366,9 +382,11 @@ namespace BLL
                 try
                 {                   
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(sql, Connection);
-                    command.CommandTimeout = 0;
-                    command.CommandType = CommandType.Text;
+                    SqlCommand command = new SqlCommand(sql, Connection)
+                    {
+                        CommandTimeout = 0,
+                        CommandType = CommandType.Text
+                    };
                     i = Convert.ToInt32(command.ExecuteScalar());
                 }
                 finally
@@ -390,9 +408,11 @@ namespace BLL
                 try
                 {                    
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(sql, Connection);
-                    command.CommandTimeout = 0;
-                    command.CommandType = CommandType.Text;
+                    SqlCommand command = new SqlCommand(sql, Connection)
+                    {
+                        CommandTimeout = 0,
+                        CommandType = CommandType.Text
+                    };
                     command.ExecuteNonQuery();
                 }
                 finally
@@ -419,8 +439,10 @@ namespace BLL
                 try
                 {                    
                     Connection.Open();
-                    SqlDataAdapter sqlDA = new SqlDataAdapter();
-                    sqlDA.SelectCommand = BuildQueryCommand(storedProcName, parameters);
+                    SqlDataAdapter sqlDA = new SqlDataAdapter
+                    {
+                        SelectCommand = BuildQueryCommand(storedProcName, parameters)
+                    };
                     sqlDA.SelectCommand.CommandTimeout = 0;
                     sqlDA.Fill(dataSet, tableName);
                 }
@@ -448,8 +470,10 @@ namespace BLL
                 try
                 {                    
                     Connection.Open();
-                    SqlDataAdapter sqlDA = new SqlDataAdapter();
-                    sqlDA.SelectCommand = BuildIntCommand(storedProcName, parameters);
+                    SqlDataAdapter sqlDA = new SqlDataAdapter
+                    {
+                        SelectCommand = BuildIntCommand(storedProcName, parameters)
+                    };
                     sqlDA.SelectCommand.CommandTimeout = 0;
                     sqlDA.Fill(dataSet, tableName);
                 }
@@ -473,10 +497,14 @@ namespace BLL
                 try
                 {                    
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(strSql, Connection);
-                    command.CommandTimeout = 0;
-                    SqlDataAdapter sqlDA = new SqlDataAdapter();
-                    sqlDA.SelectCommand = command;
+                    SqlCommand command = new SqlCommand(strSql, Connection)
+                    {
+                        CommandTimeout = 0
+                    };
+                    SqlDataAdapter sqlDA = new SqlDataAdapter
+                    {
+                        SelectCommand = command
+                    };
                     sqlDA.Fill(dataSet, tableName);
                 }
                 finally
@@ -500,10 +528,14 @@ namespace BLL
                 try
                 {                    
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(strSql, Connection);
-                    command.CommandTimeout = 0;
-                    SqlDataAdapter sqlDA = new SqlDataAdapter();
-                    sqlDA.SelectCommand = command;
+                    SqlCommand command = new SqlCommand(strSql, Connection)
+                    {
+                        CommandTimeout = 0
+                    };
+                    SqlDataAdapter sqlDA = new SqlDataAdapter
+                    {
+                        SelectCommand = command
+                    };
                     sqlDA.SelectCommand.CommandTimeout = 0;
                     sqlDA.Fill(dataSet, tableName);
                 }
@@ -525,9 +557,11 @@ namespace BLL
                 try
                 {                    
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(strSql, Connection);
-                    command.CommandTimeout = 0;
-                    command.CommandType = CommandType.Text;
+                    SqlCommand command = new SqlCommand(strSql, Connection)
+                    {
+                        CommandTimeout = 0,
+                        CommandType = CommandType.Text
+                    };
 
                     result = command.ExecuteNonQuery();
                 }
@@ -562,11 +596,13 @@ namespace BLL
             DataTable dt = new DataTable();
             DataRow dr;
             using (SqlConnection Connection = new SqlConnection(connectionString))
-            {                
+            {
                 // 调用存储过程pur_name。
-                SqlCommand sqlCmd = new SqlCommand(pur_name, Connection);
-                sqlCmd.CommandTimeout = 0;
-                sqlCmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand sqlCmd = new SqlCommand(pur_name, Connection)
+                {
+                    CommandTimeout = 0,
+                    CommandType = CommandType.StoredProcedure
+                };
                 // 为输入参数赋值。
                 foreach (string parm in parmList.Keys)
                 {
@@ -581,10 +617,12 @@ namespace BLL
                     for (int i = 0; i < dreader.FieldCount; i++)
                     {
                         DataColumn myDataColumn;
-                        myDataColumn = new DataColumn();
-                        myDataColumn.DataType = System.Type.GetType(dreader.GetFieldType(i).ToString());
-                        myDataColumn.ColumnName = dreader.GetName(i);
-                        myDataColumn.Caption = dreader.GetName(i);
+                        myDataColumn = new DataColumn
+                        {
+                            DataType = System.Type.GetType(dreader.GetFieldType(i).ToString()),
+                            ColumnName = dreader.GetName(i),
+                            Caption = dreader.GetName(i)
+                        };
                         dt.Columns.Add(myDataColumn);
                     }
                     while (dreader.Read())
@@ -624,8 +662,10 @@ namespace BLL
             using (SqlConnection Connection = new SqlConnection(connectionString))
             {
                 // 调用存储过程pur_name。
-                SqlCommand sqlCmd = new SqlCommand(strSql, Connection);
-                sqlCmd.CommandTimeout = 0;
+                SqlCommand sqlCmd = new SqlCommand(strSql, Connection)
+                {
+                    CommandTimeout = 0
+                };
                 // 打开连接。              
                 sqlCmd.Connection.Open();
                 SqlDataReader dreader = null;
@@ -635,10 +675,12 @@ namespace BLL
                     for (int i = 0; i < dreader.FieldCount; i++)
                     {
                         DataColumn myDataColumn;
-                        myDataColumn = new DataColumn();
-                        myDataColumn.DataType = System.Type.GetType(dreader.GetFieldType(i).ToString());
-                        myDataColumn.ColumnName = dreader.GetName(i);
-                        myDataColumn.Caption = dreader.GetName(i);
+                        myDataColumn = new DataColumn
+                        {
+                            DataType = System.Type.GetType(dreader.GetFieldType(i).ToString()),
+                            ColumnName = dreader.GetName(i),
+                            Caption = dreader.GetName(i)
+                        };
                         dt.Columns.Add(myDataColumn);
                     }
                     while (dreader.Read())
@@ -677,9 +719,11 @@ namespace BLL
             using (SqlConnection Connection = new SqlConnection(connectionString))
             {
                 // 调用存储过程pur_name。
-                SqlCommand sqlCmd = new SqlCommand(pur_name, Connection);
-                sqlCmd.CommandTimeout = 0;
-                sqlCmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand sqlCmd = new SqlCommand(pur_name, Connection)
+                {
+                    CommandTimeout = 0,
+                    CommandType = CommandType.StoredProcedure
+                };
                 // 为输入参数赋值。
                 foreach (string parm in parmList.Keys)
                 {
@@ -715,9 +759,11 @@ namespace BLL
             using (SqlConnection Connection = new SqlConnection(connectionString))
             {
                 // 调用存储过程pur_name。
-                SqlCommand sqlCmd = new SqlCommand(pur_name, Connection);
-                sqlCmd.CommandTimeout = 0;
-                sqlCmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand sqlCmd = new SqlCommand(pur_name, Connection)
+                {
+                    CommandTimeout = 0,
+                    CommandType = CommandType.StoredProcedure
+                };
                 // 为输入参数赋值。
                 foreach (string parm in parmList.Keys)
                 {
@@ -756,10 +802,12 @@ namespace BLL
         {
             using (SqlConnection Connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandTimeout = 0;
-                cmd.CommandType = commandType;
-                cmd.Connection = Connection;
+                SqlCommand cmd = new SqlCommand
+                {
+                    CommandTimeout = 0,
+                    CommandType = commandType,
+                    Connection = Connection
+                };
                 if (param != null)
                 {
                     AddParameterToCommand(cmd, param);
@@ -819,8 +867,10 @@ namespace BLL
                 try
                 {                  
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(storedProcName, Connection);
-                    command.CommandType = CommandType.StoredProcedure;
+                    SqlCommand command = new SqlCommand(storedProcName, Connection)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
                     SqlParameter[] values = new SqlParameter[]
                 {
                   new SqlParameter("@tableName", tableName),
@@ -857,8 +907,10 @@ namespace BLL
                 try
                 {                    
                     Connection.Open();
-                    SqlCommand command = new SqlCommand(storedProcName, Connection);
-                    command.CommandType = CommandType.StoredProcedure;
+                    SqlCommand command = new SqlCommand(storedProcName, Connection)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
                     SqlParameter[] values = new SqlParameter[]
                  {
                    new SqlParameter("@tableName", tableName),

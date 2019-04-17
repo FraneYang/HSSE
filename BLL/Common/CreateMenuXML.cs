@@ -34,9 +34,11 @@ namespace BLL
                     ///xml文件路径名
                     string fileName = Funs.RootPath + "common\\" + menuType + ".xml";
                     FileStream fileStream = new FileStream(fileName, FileMode.Create);
-                    writer = new XmlTextWriter(fileStream, Encoding.UTF8);
-                    //使用自动缩进便于阅读
-                    writer.Formatting = Formatting.Indented;
+                    writer = new XmlTextWriter(fileStream, Encoding.UTF8)
+                    {
+                        //使用自动缩进便于阅读
+                        Formatting = Formatting.Indented
+                    };
                     writer.WriteStartDocument();
                     writer.WriteStartElement("Tree");    //创建父节点
                     var menuItemList = menusList.Where(x => x.SuperMenu == superMenu).OrderBy(x=>x.SortIndex);    //获取菜单列表

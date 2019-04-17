@@ -21,8 +21,8 @@
             <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="动火安全作业证" EnableCollapse="true"
                 runat="server" BoxFlex="1" DataKeyNames="FireWorkId" AllowCellEditing="true" EnableColumnLines="true"
                 ClicksToEdit="2" DataIDField="FireWorkId" AllowSorting="true" SortField="LicenseCode"
-                SortDirection="DESC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="10" OnPageIndexChange="Grid1_PageIndexChange"
-                EnableTextSelection="True">
+                SortDirection="DESC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="15" OnPageIndexChange="Grid1_PageIndexChange"
+                EnableTextSelection="True"  EnableRowDoubleClickEvent="true" OnRowDoubleClick="Grid1_RowDoubleClick">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar2" Position="Top" runat="server">
                         <Items>
@@ -35,11 +35,11 @@
                 </Toolbars>
                 <Columns>
                     <f:RowNumberField EnablePagingNumber="true" HeaderText="序号" Width="50px" HeaderTextAlign="Center" TextAlign="Center"/>                   
-                    <f:RenderField Width="100px" ColumnID="LicenseCode" DataField="LicenseCode" EnableFilter="true"
+                    <f:RenderField Width="120px" ColumnID="LicenseCode" DataField="LicenseCode" EnableFilter="true"
                         SortField="LicenseCode" FieldType="String" HeaderText="编号" HeaderTextAlign="Center"
                         TextAlign="Left">                      
                     </f:RenderField>                                                       
-                    <f:RenderField Width="220px" ColumnID="ApplyUintName" DataField="ApplyUintName" 
+                    <f:RenderField Width="150px" ColumnID="ApplyUintName" DataField="ApplyUintName" 
                         SortField="ApplyUintName" FieldType="String" HeaderText="申请单位" HeaderTextAlign="Center"
                         TextAlign="Left">                       
                     </f:RenderField> 
@@ -47,15 +47,15 @@
                         SortField="ApplyManName" FieldType="String" HeaderText="申请人" HeaderTextAlign="Center"
                         TextAlign="Left">                       
                     </f:RenderField> 
-                    <f:RenderField Width="110px" ColumnID="FireWorkLevelName" DataField="FireWorkLevelName" 
-                        SortField="FireWorkLevelName" FieldType="String" HeaderText="动火作业级别" HeaderTextAlign="Center"
+                    <f:RenderField Width="120px" ColumnID="FireWorkLevelName" DataField="FireWorkLevelName" 
+                        SortField="FireWorkLevelName" FieldType="String" HeaderText="作业级别" HeaderTextAlign="Center"
                         TextAlign="Left">                       
                     </f:RenderField>
                     <f:RenderField  ColumnID="FireWorkPalce" DataField="FireWorkPalce" SortField="FireWorkPalce" FieldType="String"
-                         Width="250px" HeaderText="动火地点" HeaderTextAlign="Center" TextAlign="Left">
+                         Width="300px" HeaderText="动火地点" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                     <f:RenderField  ColumnID="FireWorkMode" DataField="FireWorkMode" SortField="FireWorkMode" FieldType="String" Width="100px"
-                        HeaderText="动火方式" HeaderTextAlign="Center" TextAlign="Left" >
+                     <f:RenderField  ColumnID="FireWorkModeName" DataField="FireWorkModeName" SortField="FireWorkModeName" FieldType="String" 
+                         Width="160px" HeaderText="动火方式" HeaderTextAlign="Center" TextAlign="Left" >
                     </f:RenderField>
                     <f:RenderField  ColumnID="StartDate" DataField="StartDate" SortField="StartDate" Width="145px"
                         HeaderText="动火开始时间" HeaderTextAlign="Center" TextAlign="Left">
@@ -63,9 +63,14 @@
                      <f:RenderField  ColumnID="EndDate" DataField="EndDate" SortField="EndDate" Width="145px"
                         HeaderText="动火结束时间" HeaderTextAlign="Center" TextAlign="Left" >
                     </f:RenderField>
-                     <f:RenderField  ColumnID="StatesName" DataField="StatesName" SortField="StatesName" FieldType="String" Width="100px"
+                     <f:RenderField  ColumnID="StatesName" DataField="StatesName" SortField="StatesName" FieldType="String" Width="80px"
                         HeaderText="状态" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
+                      <f:TemplateField HeaderText="打印" Width="80px">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btnPrint" runat="server" Text="打印" OnClick="btnPrint_Click"></asp:LinkButton>
+                        </ItemTemplate>
+                    </f:TemplateField>
                 </Columns>
                 <Listeners>
                     <f:Listener Event="beforerowcontextmenu" Handler="onRowContextMenu" />
@@ -86,8 +91,17 @@
             </f:Grid>
         </Items>
     </f:Panel>
+    <f:Window ID="Window1" Title="动火安全作业证" Hidden="true" EnableIFrame="true" EnableMaximize="true"
+        Target="Top" EnableResize="true" runat="server" IsModal="true"
+        Width="1024px" Height="630px">
+    </f:Window>
     <f:Menu ID="Menu1" runat="server">
-       
+        <f:MenuButton ID="btnMenuView" OnClick="btnMenuView_Click" EnablePostBack="true"
+            runat="server" Text="查看"  Icon="TableGo">
+        </f:MenuButton>  
+        <f:MenuButton ID="btnMenuPrint" OnClick="btnPrint_Click" EnablePostBack="true"
+            runat="server" Text="打印"  Icon="Printer">
+        </f:MenuButton>  
         <f:MenuButton ID="btnMenuDelete" OnClick="btnMenuDelete_Click" EnablePostBack="true"  Icon="Delete"
             ConfirmText="删除选中行？" ConfirmTarget="Top" runat="server" Text="删除" Hidden ="true">
         </f:MenuButton>        

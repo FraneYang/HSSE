@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>编辑作业区域</title>
+    <title>编辑单元</title>
     <base target="_self" />
     <link href="../res/css/common.css" rel="stylesheet" type="text/css" />
 </head>
@@ -16,24 +16,21 @@
         <Rows>
             <f:FormRow>
                 <Items>
-                    <f:TextBox ID="txtWorkAreaCode" runat="server" Label="区域编号" Required="true" MaxLength="50"
+                    <f:TextBox ID="txtWorkAreaCode" runat="server" Label="单元编号" Required="true" MaxLength="50"
                         ShowRedStar="true" FocusOnPageLoad="true" AutoPostBack="true" OnTextChanged="TextBox_TextChanged">
                     </f:TextBox>
-                </Items>
-            </f:FormRow>
-            <f:FormRow>
-                <Items>
-                    <f:TextBox ID="txtWorkAreaName" runat="server" Label="区域名称" Required="true" MaxLength="50"
+                     <f:TextBox ID="txtWorkAreaName" runat="server" Label="单元名称" Required="true" MaxLength="50"
                         ShowRedStar="true" AutoPostBack="true" OnTextChanged="TextBox_TextChanged">
                     </f:TextBox>
                 </Items>
-            </f:FormRow>
-          <%--  <f:FormRow>
+            </f:FormRow>          
+            <f:FormRow>
                 <Items>
-                    <f:DropDownList ID="drpUnitId" runat="server" Label="单位名称">
+                    <f:DropDownList ID="drpInstallationId" runat="server" Label="装置" EnableEdit="true">
                     </f:DropDownList>
+                    <f:Label runat="server" ID="txtyemp"></f:Label>
                 </Items>
-            </f:FormRow>--%>
+            </f:FormRow>
             <f:FormRow>
                 <Items>
                     <f:TextArea ID="txtRemark" runat="server" Label="备注" MaxLength="500">

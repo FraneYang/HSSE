@@ -66,10 +66,12 @@ namespace FineUIPro.Web.BaseInfo
                 return;
             }
 
-            Model.Base_HiddenHazardType newHiddenHazardType = new Model.Base_HiddenHazardType();
-            newHiddenHazardType.HiddenHazardTypeCode = this.txtHiddenHazardTypeCode.Text.Trim();
-            newHiddenHazardType.HiddenHazardTypeName = this.txtHiddenHazardTypeName.Text.Trim();
-            newHiddenHazardType.Remark = this.txtRemark.Text.Trim();
+            Model.Base_HiddenHazardType newHiddenHazardType = new Model.Base_HiddenHazardType
+            {
+                HiddenHazardTypeCode = this.txtHiddenHazardTypeCode.Text.Trim(),
+                HiddenHazardTypeName = this.txtHiddenHazardTypeName.Text.Trim(),
+                Remark = this.txtRemark.Text.Trim()
+            };
             if (string.IsNullOrEmpty(this.HiddenHazardTypeId))
             {
                 newHiddenHazardType.HiddenHazardTypeId = SQLHelper.GetNewID(typeof(Model.Base_HiddenHazardType));

@@ -54,6 +54,8 @@ namespace FineUIPro.Web.SysManage
                 this.FlowOperateId = Request.Params["FlowOperateId"];
                 this.BindDropDownBox();
                 BLL.ConstValue.InitConstValueDropDownList(this.drpIsNeed, ConstValue.Group_Y_N, false);
+
+                BLL.DepartService.InitDepartDropDownList(this.drpDepartIds, true);
                 if (!string.IsNullOrEmpty(this.FlowOperateId))
                 {
                     var menuFlowOperate = BLL.MenuFlowOperateService.GetMenuFlowOperateByFlowOperateId(this.FlowOperateId);
@@ -75,14 +77,26 @@ namespace FineUIPro.Web.SysManage
                             this.IsFlowEnd.Checked = Convert.ToBoolean(menuFlowOperate.IsFlowEnd);
                         }
                         drpWorkPosts.Value = menuFlowOperate.WorkPostIds;
+                        //if (!string.IsNullOrEmpty(menuFlowOperate.MatchesValue))
+                        //{
+                        //    this.drpMatchesValue.SelectedValue = menuFlowOperate.MatchesValue;
+                        //}
+                        if (!string.IsNullOrEmpty(menuFlowOperate.DepartIds))
+                        {
+                            this.drpDepartIds.SelectedValueArray = menuFlowOperate.DepartIds.Split(',');
+                            this.drpInstallationIds.Items.Clear();
+                            BLL.InstallationService.InitInstallationByDepartDropDownList(this.drpInstallationIds, this.drpDepartIds.SelectedValue, true);
+                            if (!string.IsNullOrEmpty(menuFlowOperate.InstallationIds))
+                            {
+                                this.drpInstallationIds.SelectedValueArray = menuFlowOperate.InstallationIds.Split(',');
+                            }
+                        }
+                       
                     }
                 }
                 else
                 {
-                    int maxId = 0;
-                    string str = "SELECT (ISNULL(MAX(FlowStep),0)+1) FROM Sys_MenuFlowOperate WHERE MenuId='" + this.MenuId + "'";
-                    maxId = BLL.SQLHelper.getIntValue(str);
-                    this.txtFlowStep.Text = maxId.ToString();
+                    this.txtFlowStep.Text =Funs.GetMaxIndex("Sys_MenuFlowOperate", "FlowStep", "MenuId", this.MenuId ).ToString();
                 }
             }
         }
@@ -104,15 +118,31 @@ namespace FineUIPro.Web.SysManage
                     return;
                 }
 
-                Model.Sys_MenuFlowOperate newMenuFlowOperate = new Model.Sys_MenuFlowOperate();
-                newMenuFlowOperate.MenuId = this.MenuId;
-                newMenuFlowOperate.FlowStep = Funs.GetNewIntOrZero(this.txtFlowStep.Text);
-                newMenuFlowOperate.PushGroup = Funs.GetNewIntOrZero(this.txtPushGroup.Text);
-                newMenuFlowOperate.AuditFlowName = this.txtAuditFlowName.Text.Trim();
+                Model.Sys_MenuFlowOperate newMenuFlowOperate = new Model.Sys_MenuFlowOperate
+                {
+                    MenuId = this.MenuId,
+                    FlowStep = Funs.GetNewIntOrZero(this.txtFlowStep.Text),
+                    PushGroup = Funs.GetNewIntOrZero(this.txtPushGroup.Text),
+                    AuditFlowName = this.txtAuditFlowName.Text.Trim()
+                };
                 string[] WorkPostIds = drpWorkPosts.Values;
-                newMenuFlowOperate.WorkPostIds = this.ConvertWorkPost(WorkPostIds);
+                newMenuFlowOperate.WorkPostIds = Funs.ConvertString(WorkPostIds);
                 newMenuFlowOperate.IsFlowEnd = this.IsFlowEnd.Checked;
                 newMenuFlowOperate.IsNeed = Convert.ToBoolean(this.drpIsNeed.SelectedValue);
+                //newMenuFlowOperate.MatchesValue = this.drpMatchesValue.SelectedValue;
+                ///部门
+                string departIds = Funs.ConvertString(this.drpDepartIds.SelectedValueArray);
+                if(departIds != BLL.Const._Null && !string.IsNullOrEmpty(departIds))
+                {
+                    newMenuFlowOperate.DepartIds = departIds;
+                }
+                string installationIds = Funs.ConvertString(this.drpInstallationIds.SelectedValueArray);
+                if(installationIds != BLL.Const._Null && !string.IsNullOrEmpty(installationIds))
+                {
+                    ///装置/科室
+                    newMenuFlowOperate.InstallationIds = installationIds;
+                }
+                
                 if (string.IsNullOrEmpty(this.FlowOperateId))
                 {
                     BLL.MenuFlowOperateService.AddAuditFlow(newMenuFlowOperate);
@@ -135,60 +165,23 @@ namespace FineUIPro.Web.SysManage
         /// </summary>
         private void BindDropDownBox()
         {
-            string strSql = @"SELECT WorkPostId,WorkPostName FROM Base_WorkPost WHERE IsAuditFlow =1 ORDER BY WorkPostName";
+            string strSql = @"SELECT WorkPostId,WorkPostName,(WorkPostCode+'-'+WorkPostName) AS WorkPostText  FROM Base_WorkPost WHERE IsAuditFlow =1 ORDER BY WorkPostCode";
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, null);
             rbWorkPosts.DataSource = tb;
-            this.rbWorkPosts.DataTextField = "WorkPostName";
+            this.rbWorkPosts.DataTextField = "WorkPostText";
             this.rbWorkPosts.DataValueField = "WorkPostId";
             rbWorkPosts.DataBind();
         }
-       
+
         /// <summary>
-        /// 得到岗位ID字符串
+        /// 部门下拉框事件
         /// </summary>
-        /// <param name="bigType"></param>
-        /// <returns></returns>
-        protected string ConvertWorkPost(string[] WorkPostIds)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void drpDepartIds_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string WorkPosts = null;
-            if (WorkPostIds != null && WorkPostIds.Count() > 0)
-            {
-                foreach (string WorkPostId in WorkPostIds)
-                {
-                    WorkPosts += WorkPostId + ",";
-                }
-                if (WorkPosts != string.Empty)
-                {
-                    WorkPosts = WorkPosts.Substring(0, WorkPosts.Length - 1); ;
-                }
-            }
-
-            return WorkPosts;
+            this.drpInstallationIds.Items.Clear();
+            BLL.InstallationService.InitInstallationByDepartDropDownList(this.drpInstallationIds, Funs.ConvertString(this.drpDepartIds.SelectedValueArray), true);
         }
-
-        #region 是否审核结束
-        ///// <summary>
-        ///// 是否审核结束
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //protected void IsFlowEnd_CheckedChanged(object sender, CheckedEventArgs e)
-        //{
-        //    if (IsFlowEnd.Checked)
-        //    {
-        //        this.drpWorkPosts.Value = null;
-        //        this.drpWorkPosts.Text = string.Empty;
-        //        this.drpWorkPosts.Hidden = true;
-        //        if (string.IsNullOrEmpty(this.txtAuditFlowName.Text))
-        //        {
-        //            this.txtAuditFlowName.Text = "完成";
-        //        }
-        //    }
-        //    else
-        //    {
-        //        this.drpWorkPosts.Hidden = false;
-        //    }
-        //}
-        #endregion
     }
 }

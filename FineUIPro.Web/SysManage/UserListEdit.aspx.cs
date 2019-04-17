@@ -42,10 +42,13 @@ namespace FineUIPro.Web.SysManage
                 this.UserId = Request.Params["userId"];
                
                 BLL.ConstValue.InitConstValueDropDownList(this.drpIsPost, ConstValue.Group_Y_N, false);
+                BLL.ConstValue.InitConstValueDropDownList(this.drpIsEmergency, ConstValue.Group_Y_N, false);
+                BLL.ConstValue.InitConstValueDropDownList(this.drpIsTemp, ConstValue.Group_Y_N, false);
                 BLL.UnitService.InitUnitDropDownList(this.drpUnit,true);
                 BLL.WorkPostService.InitWorkPostDropDownList(this.drpWorkPost, false);
                 BLL.DepartService.InitDepartDropDownList(this.drpDepart, false);
-               
+
+                BLL.InstallationService.InitInstallationByInstallTypeDropDownList(this.drpDealInstallation, "2", true);
                 if (!string.IsNullOrEmpty(this.CurrUser.UnitId))
                 {
                     this.drpUnit.SelectedValue = this.CurrUser.UnitId;
@@ -66,6 +69,7 @@ namespace FineUIPro.Web.SysManage
                         {
                             this.drpUnit.SelectedValue = user.UnitId;
                         }
+                        this.txtSortIndex.Text = user.SortIndex;
                         this.txtUserCode.Text = user.UserCode;
                         this.txtUserName.Text = user.UserName;
                         this.txtAccount.Text = user.Account;
@@ -76,24 +80,52 @@ namespace FineUIPro.Web.SysManage
                         }
                         if (!string.IsNullOrEmpty(user.DepartId))
                         {
-                            this.drpDepart.SelectedValue = user.DepartId;                            
-                            
-                            BLL.InstallationService.InitInstallationDropDownList(this.drpInstallation, this.drpDepart.SelectedValue, true);
+                            this.drpDepart.SelectedValue = user.DepartId;
+
+                            BLL.InstallationService.InitInstallationByDepartDropDownList(this.drpInstallation, this.drpDepart.SelectedValue, true);
                             if (!string.IsNullOrEmpty(user.InstallationId))
                             {
-                                this.drpInstallation.SelectedValue = user.InstallationId;  
+                                this.drpInstallation.SelectedValueArray = user.InstallationId.Split(',');
                             }
                         }
                         if (!string.IsNullOrEmpty(user.WorkPostId))
                         {
-                            this.drpWorkPost.SelectedValue = user.WorkPostId;
-                        } 
+                            this.drpWorkPost.SelectedValueArray = user.WorkPostId.Split(',');
+                        }
                         if (user.IsPost.HasValue)
                         {
                             this.drpIsPost.SelectedValue = Convert.ToString(user.IsPost);
                         }
+                        if (user.IsEmergency.HasValue)
+                        {
+                            this.drpIsEmergency.SelectedValue = Convert.ToString(user.IsEmergency);
+                        }
+                        else
+                        {
+                            this.drpIsEmergency.SelectedValue = "False";
+                        }
+                        if (user.IsTemp.HasValue)
+                        {
+                            this.drpIsTemp.SelectedValue = Convert.ToString(user.IsTemp);
+                        }
+                        else
+                        {
+                            this.drpIsTemp.SelectedValue = "False";
+                        }
                         this.txtIdentityCard.Text = user.IdentityCard;
+                        this.txtEntryTime.Text = string.Format("{0:yyyy-MM-dd}", user.EntryTime);
+
+                        var userDeal = BLL.UserDealInstallationService.GetUserDealInstallationByUserId(this.UserId);
+                        foreach (var item in userDeal)
+                        {
+                            this.drpDealInstallation.SelectedValueArray= userDeal.Select(x=>x.InstallationId).ToArray();
+                        }
                     }
+                }
+                else
+                {
+                    this.txtEntryTime.Text = string.Format("{0:yyyy-MM-dd}", System.DateTime.Now);
+                    this.drpIsTemp.SelectedValue = "False";
                 }
             }
         }
@@ -125,12 +157,16 @@ namespace FineUIPro.Web.SysManage
             //    ShowNotify("身份证号码必须是18位！", MessageBoxIcon.Warning);
             //    return;
             //}
-            Model.Sys_User newUser = new Model.Sys_User();
-            newUser.UserCode = this.txtUserCode.Text.Trim();
-            newUser.UserName = this.txtUserName.Text.Trim();
-            newUser.Account = this.txtAccount.Text.Trim();
-            newUser.Telephone = this.txtTelephone.Text.Trim();
-            newUser.IdentityCard = this.txtIdentityCard.Text.Trim();
+            Model.Sys_User newUser = new Model.Sys_User
+            {
+                SortIndex = this.txtSortIndex.Text.Trim(),
+                UserName = this.txtUserName.Text.Trim(),
+                Account = this.txtAccount.Text.Trim(),
+                UserCode = this.txtUserCode.Text.Trim(),
+                Telephone = this.txtTelephone.Text.Trim(),
+                IdentityCard = this.txtIdentityCard.Text.Trim(),
+                EntryTime = Funs.GetNewDateTime(this.txtEntryTime.Text),
+            };
             if (this.drpUnit.SelectedValue != Const._Null)
             {
                 newUser.UnitId = this.drpUnit.SelectedValue;
@@ -139,24 +175,53 @@ namespace FineUIPro.Web.SysManage
             {
                 newUser.UnitId = this.CurrUser.UnitId;
             }
-            if (this.drpWorkPost.SelectedValue != Const._Null)
+            //岗位
+            string workPostId = string.Empty;
+            string workPostName = string.Empty;
+            foreach (var item in this.drpWorkPost.SelectedValueArray)
             {
-                newUser.WorkPostId = this.drpWorkPost.SelectedValue;
+                var workPost = BLL.WorkPostService.GetWorkPostById(item);
+                if (workPost != null)
+                {
+                    workPostId += workPost.WorkPostId + ",";
+                    workPostName += workPost.WorkPostName + ",";
+                }
             }
+            if (!string.IsNullOrEmpty(workPostId))
+            {
+                newUser.WorkPostId = workPostId.Substring(0, workPostId.LastIndexOf(","));
+                newUser.WorkPostName = workPostName.Substring(0, workPostName.LastIndexOf(","));
+            }
+            
             if (this.drpDepart.SelectedValue != Const._Null)
             {
                 newUser.DepartId = this.drpDepart.SelectedValue;
             }
-            if (this.drpInstallation.SelectedValue != Const._Null)
+            //装置
+            string installationId = string.Empty;
+            string installationName = string.Empty;
+            foreach (var item in this.drpInstallation.SelectedValueArray)
             {
-                newUser.InstallationId = this.drpInstallation.SelectedValue;
+                var Installation = BLL.InstallationService.GetInstallationByInstallationId(item);
+                if (Installation != null)
+                {
+                    installationId += Installation.InstallationId + ",";
+                    installationName += Installation.InstallationName + ",";
+                }
             }
+            if (!string.IsNullOrEmpty(installationId))
+            {
+                newUser.InstallationId = installationId.Substring(0, installationId.LastIndexOf(","));
+                newUser.InstallationName = installationName.Substring(0, installationName.LastIndexOf(","));
+            }
+
             if (this.drpRole.SelectedValue != Const._Null)
             {
                 newUser.RoleId = this.drpRole.SelectedValue;
             }
-
             newUser.IsPost = Convert.ToBoolean(this.drpIsPost.SelectedValue);
+            newUser.IsEmergency = Convert.ToBoolean(this.drpIsEmergency.SelectedValue);
+            newUser.IsTemp = Convert.ToBoolean(this.drpIsTemp.SelectedValue);
             if (string.IsNullOrEmpty(this.UserId))
             {
                 newUser.Password = Funs.EncryptionPassword(Const.Password);
@@ -170,6 +235,47 @@ namespace FineUIPro.Web.SysManage
                 BLL.UserService.UpdateUser(newUser);
                 BLL.LogService.AddLog( this.CurrUser.UserId, "修改用户信息");
             }
+
+            int deleteCount = 0;
+            var deleteDeal = BLL.UserDealInstallationService.GetUserDealInstallationByUserId(UserId);
+            if (deleteDeal.Count() > 0)
+            {
+                foreach (var itemDeal in deleteDeal)
+                {
+                    if (this.drpDealInstallation.SelectedValueArray.FirstOrDefault(x => x == itemDeal.InstallationId) == null)
+                    {
+                        BLL.UserDealInstallationService.DeleteDealInstallationByUserDealInstallationId(itemDeal.UserDealInstallationId);
+                        deleteCount++;
+                    }
+                }
+            }
+            else
+            {
+                if (this.drpDealInstallation.SelectedValueArray.Count() > 0)
+                {
+                    deleteCount++;
+                }
+            }
+            
+            foreach (var item in this.drpDealInstallation.SelectedValueArray)
+            {
+                var installation = BLL.InstallationService.GetInstallationByInstallationId(item);
+                if (installation != null)
+                {
+                    Model.Sys_UserDealInstallation newUserDeal = new Model.Sys_UserDealInstallation
+                    {
+                        InstallationId = installation.InstallationId,
+                        UserId = newUser.UserId,
+                    };
+
+                    BLL.UserDealInstallationService.AddUserDealInstallation(newUserDeal);
+                }
+            }
+            if (deleteCount > 0)
+            {
+                BLL.RiskListItemService.getRiskListItemByUser(newUser); ////用户岗位变化时 将岗位巡检人写入明细表
+            }
+
             PageContext.RegisterStartupScript(ActiveWindow.GetHideRefreshReference());
         }
 
@@ -219,6 +325,7 @@ namespace FineUIPro.Web.SysManage
         }
         #endregion
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -227,7 +334,7 @@ namespace FineUIPro.Web.SysManage
         protected void drpDepart_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.drpInstallation.Items.Clear();
-            BLL.InstallationService.InitInstallationDropDownList(this.drpInstallation, this.drpDepart.SelectedValue, true);
+            BLL.InstallationService.InitInstallationByDepartDropDownList(this.drpInstallation, this.drpDepart.SelectedValue, true);
         }
     }
 }

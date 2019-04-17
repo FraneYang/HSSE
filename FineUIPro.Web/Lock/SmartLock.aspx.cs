@@ -1,11 +1,10 @@
 ﻿namespace FineUIPro.Web.Lock
 {
+    using BLL;
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Linq;
-    using BLL;
 
     public partial class SmartLock : PageBase
     {
@@ -50,12 +49,47 @@
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();
         }
-        
+
+        #region 编辑
+        /// <summary>
+        /// Grid行双击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Grid1_RowDoubleClick(object sender, GridRowClickEventArgs e)
+        {
+            this.EditData();
+        }
+
+        /// <summary>
+        /// 右键编辑事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnMenuView_Click(object sender, EventArgs e)
+        {
+            this.EditData();
+        }
+
+        /// <summary>
+        /// 编辑数据方法
+        /// </summary>
+        private void EditData()
+        {
+            if (Grid1.SelectedRowIndexArray.Length == 0)
+            {
+                Alert.ShowInTop("请选择一条记录！", MessageBoxIcon.Warning);
+                return;
+            }
+            PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("SmartLockView.aspx?SmartLockId={0}", Grid1.SelectedRowID, "编辑 - ")));
+        }
+        #endregion
+
         #region  删除数据
         /// <summary>
         /// 右键删除事件
@@ -77,8 +111,8 @@
                 foreach (int rowIndex in Grid1.SelectedRowIndexArray)
                 {
                     string rowID = Grid1.DataKeys[rowIndex][0].ToString();
-                    BLL.InterlockingService.DeleteInterlockingById(rowID);
-                    BLL.LogService.AddLog(this.CurrUser.UserId, "删除A级联锁变更审批单");
+                    BLL.SmartLockService.DeleteSmartLockById(rowID);
+                    BLL.LogService.AddLog(this.CurrUser.UserId, "删除智能锁信息！");
                     //var Interlockings = BLL.InterlockingService.GetInterlockingById(rowID);
                     //if (Interlockings != null)
                     //{                        

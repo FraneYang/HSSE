@@ -2,8 +2,8 @@
 // <自动生成>
 //     此代码由工具生成。
 //
-//     对此文件的更改可能会导致不正确的行为，并且如果
-//     重新生成代码，这些更改将会丢失。 
+//     对此文件的更改可能导致不正确的行为，如果
+//     重新生成代码，则所做更改将丢失。
 // </自动生成>
 //------------------------------------------------------------------------------
 
@@ -40,6 +40,33 @@ namespace FineUIPro.Web.Hazard {
         protected global::FineUIPro.Panel Panel1;
         
         /// <summary>
+        /// panelLeftRegion 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.Panel panelLeftRegion;
+        
+        /// <summary>
+        /// trInstall 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.Tree trInstall;
+        
+        /// <summary>
+        /// panelCenterRegion 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.Panel panelCenterRegion;
+        
+        /// <summary>
         /// Grid1 控件。
         /// </summary>
         /// <remarks>
@@ -58,6 +85,24 @@ namespace FineUIPro.Web.Hazard {
         protected global::FineUIPro.Toolbar Toolbar1;
         
         /// <summary>
+        /// ckStates 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.RadioButtonList ckStates;
+        
+        /// <summary>
+        /// ckDataType 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::FineUIPro.RadioButtonList ckDataType;
+        
+        /// <summary>
         /// txtName 控件。
         /// </summary>
         /// <remarks>
@@ -67,22 +112,22 @@ namespace FineUIPro.Web.Hazard {
         protected global::FineUIPro.TextBox txtName;
         
         /// <summary>
-        /// ToolbarFill1 控件。
+        /// fill 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::FineUIPro.ToolbarFill ToolbarFill1;
+        protected global::FineUIPro.ToolbarFill fill;
         
         /// <summary>
-        /// btnNew 控件。
+        /// btnHelp 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::FineUIPro.Button btnNew;
+        protected global::FineUIPro.Button btnHelp;
         
         /// <summary>
         /// ToolbarSeparator1 控件。
@@ -137,14 +182,5 @@ namespace FineUIPro.Web.Hazard {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::FineUIPro.MenuButton btnMenuEdit;
-        
-        /// <summary>
-        /// btnMenuDelete 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::FineUIPro.MenuButton btnMenuDelete;
     }
 }

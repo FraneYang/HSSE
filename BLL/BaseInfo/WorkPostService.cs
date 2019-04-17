@@ -19,50 +19,63 @@ namespace BLL
            return Funs.DB.Base_WorkPost.FirstOrDefault(e => e.WorkPostId == workPostId);
        }
 
-       /// <summary>
-       /// 添加
-       /// </summary>
-       /// <param name="?"></param>
-       public static void AddWorkPost(Model.Base_WorkPost workPost)
-       {
-           Model.HSSEDB_ENN db = Funs.DB;
-           Model.Base_WorkPost newWorkPost = new Model.Base_WorkPost();
-           newWorkPost.WorkPostId = workPost.WorkPostId;
-           newWorkPost.WorkPostCode = workPost.WorkPostCode;
-           newWorkPost.WorkPostName = workPost.WorkPostName;
-           newWorkPost.IsHsse = workPost.IsHsse;
-           newWorkPost.Remark = workPost.Remark;
-           newWorkPost.PostType = workPost.PostType;
-           newWorkPost.IsAuditFlow = workPost.IsAuditFlow;
-           newWorkPost.RiskLevelId = workPost.RiskLevelId;
-           newWorkPost.RiskLevelName = workPost.RiskLevelName;
-           newWorkPost.Frequency = workPost.Frequency;
-           db.Base_WorkPost.InsertOnSubmit(newWorkPost);
-           db.SubmitChanges();
-       }
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <param name="?"></param>
+        public static void AddWorkPost(Model.Base_WorkPost workPost)
+        {
+            Model.HSSEDB_ENN db = Funs.DB;
+            Model.Base_WorkPost newWorkPost = new Model.Base_WorkPost
+            {
+                WorkPostId = workPost.WorkPostId,
+                WorkPostCode = workPost.WorkPostCode,
+                WorkPostName = workPost.WorkPostName,
+                IsHsse = workPost.IsHsse,
+                Remark = workPost.Remark,
+                PostType = workPost.PostType,
+                IsAuditFlow = workPost.IsAuditFlow,
+                IsShowChart = workPost.IsShowChart,
+                RiskLevelId = workPost.RiskLevelId,
+                RiskLevelName = workPost.RiskLevelName,
+                Frequency = workPost.Frequency
+            };
 
-       /// <summary>
-       /// 修改
-       /// </summary>
-       /// <param name="teamGroup"></param>
-       public static void UpdateWorkPost(Model.Base_WorkPost workPost)
-       {
-           Model.HSSEDB_ENN db = Funs.DB;
-           Model.Base_WorkPost newWorkPost = db.Base_WorkPost.FirstOrDefault(e => e.WorkPostId == workPost.WorkPostId);
-           if (newWorkPost != null)
-           {
-               newWorkPost.WorkPostCode = workPost.WorkPostCode;
-               newWorkPost.WorkPostName = workPost.WorkPostName;
-               newWorkPost.PostType = workPost.PostType;
-               newWorkPost.IsHsse = workPost.IsHsse;
-               newWorkPost.Remark = workPost.Remark;
-               newWorkPost.IsAuditFlow = workPost.IsAuditFlow;
-               newWorkPost.RiskLevelId = workPost.RiskLevelId;
-               newWorkPost.RiskLevelName = workPost.RiskLevelName;
-               newWorkPost.Frequency = workPost.Frequency;
-               db.SubmitChanges();
-           }
-       }
+            db.Base_WorkPost.InsertOnSubmit(newWorkPost);
+            db.SubmitChanges();
+        }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="teamGroup"></param>
+        public static void UpdateWorkPost(Model.Base_WorkPost workPost)
+        {
+            Model.HSSEDB_ENN db = Funs.DB;
+            string newRiskLevelId = workPost.RiskLevelId;
+            string oldRiskLevelId = string.Empty;
+            Model.Base_WorkPost updateWorkPost = db.Base_WorkPost.FirstOrDefault(e => e.WorkPostId == workPost.WorkPostId);
+            if (updateWorkPost != null)
+            {
+                oldRiskLevelId = workPost.RiskLevelId;
+                updateWorkPost.WorkPostCode = workPost.WorkPostCode;
+                updateWorkPost.WorkPostName = workPost.WorkPostName;
+                updateWorkPost.PostType = workPost.PostType;
+                updateWorkPost.IsHsse = workPost.IsHsse;
+                updateWorkPost.Remark = workPost.Remark;
+                updateWorkPost.IsAuditFlow = workPost.IsAuditFlow;
+                updateWorkPost.IsShowChart = workPost.IsShowChart;
+                updateWorkPost.RiskLevelId = workPost.RiskLevelId;
+                updateWorkPost.RiskLevelName = workPost.RiskLevelName;
+                updateWorkPost.Frequency = workPost.Frequency;
+                db.SubmitChanges();
+            }
+            if (newRiskLevelId != oldRiskLevelId)
+            {
+                ////岗位巡检级别变化时 将岗位巡检人写入明细表
+                RiskListItemService.getRiskListItemByWorkPost(updateWorkPost);
+            }
+        }
 
        /// <summary>
        /// 根据主键删除信息
@@ -108,7 +121,7 @@ namespace BLL
        #endregion
 
        /// <summary>
-       /// 得到角色名称字符串
+       /// 得到岗位名称字符串
        /// </summary>
        /// <param name="bigType"></param>
        /// <returns></returns>

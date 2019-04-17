@@ -1,0 +1,11 @@
+1、注册插件
+(1)管理员运行CMD 
+(2)执行插件的位置 
+>cd D:\开发代码\ENN\HSSE_ENN\HSSE\FineUIPro.Web\Controls\MapControls
+>D:
+>D:\开发代码\ENN\HSSE_ENN\HSSE\FineUIPro.Web\Controls\MapControls
+>RegSvr32 IMGndActiveX.ocx
+ 
+	
+2、注意D:\开发代码\ENN\HSSE_ENN\HSSE\FineUIPro.Web\Controls\MapControls 为插件放置位置，根据实际情况修改后执行。
+

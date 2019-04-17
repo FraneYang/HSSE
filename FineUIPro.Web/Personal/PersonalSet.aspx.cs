@@ -127,7 +127,7 @@ namespace FineUIPro.Web.Personal
                     ShowNotify("无效的文件类型！", MessageBoxIcon.Warning);
                     return;
                 }
-                this.PhotoAttachUrl = BLL.UploadFileService.UploadAttachment(BLL.Funs.RootPath, this.filePhoto, this.PhotoAttachUrl, UploadFileService.ExpertFilePath);
+                this.PhotoAttachUrl = BLL.UploadFileService.UploadAttachment(BLL.Funs.RootPath, this.filePhoto, this.PhotoAttachUrl, UploadFileService.PersonalFilePath);
                 this.Image1.ImageUrl = "~/" + this.PhotoAttachUrl;
             }
         }
@@ -272,7 +272,7 @@ namespace FineUIPro.Web.Personal
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();

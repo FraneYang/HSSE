@@ -37,13 +37,15 @@ namespace BLL
         public static void AddPersonalFolder(Model.Personal_PersonalFolder personalFolder)
         {
             Model.HSSEDB_ENN db = Funs.DB;
-            Model.Personal_PersonalFolder newPersonalFolder = new Model.Personal_PersonalFolder();
-            newPersonalFolder.PersonalFolderId = personalFolder.PersonalFolderId;
-            newPersonalFolder.Code = personalFolder.Code;
-            newPersonalFolder.Title = personalFolder.Title;
-            newPersonalFolder.SupPersonalFolderId = personalFolder.SupPersonalFolderId;
-            newPersonalFolder.CompileMan = personalFolder.CompileMan;
-            newPersonalFolder.IsEndLever = personalFolder.IsEndLever;
+            Model.Personal_PersonalFolder newPersonalFolder = new Model.Personal_PersonalFolder
+            {
+                PersonalFolderId = personalFolder.PersonalFolderId,
+                Code = personalFolder.Code,
+                Title = personalFolder.Title,
+                SupPersonalFolderId = personalFolder.SupPersonalFolderId,
+                CompileMan = personalFolder.CompileMan,
+                IsEndLever = personalFolder.IsEndLever
+            };
             db.Personal_PersonalFolder.InsertOnSubmit(newPersonalFolder);
             db.SubmitChanges();
         }

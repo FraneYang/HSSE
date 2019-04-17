@@ -14,49 +14,71 @@
         <Rows>
             <f:FormRow>
                 <Items>
-                     <f:NumberBox ID="txtSortIndex" runat="server" Label="序号" NoDecimal="true" NoNegative="true">
+                    <f:DropDownList ID="drpEuipmentTypeId" runat="server" Label="设备设施类型" LabelWidth="120px" FocusOnPageLoad="true"
+                        EnableEdit="true" ForceSelection="false" AutoPostBack="true" OnSelectedIndexChanged="drpEuipmentTypeId_OnSelectedIndexChanged">
+                  </f:DropDownList>
+                </Items>
+            </f:FormRow>
+            <f:FormRow>
+                <Items>
+                     <f:NumberBox ID="txtSortIndex" runat="server" Label="序号" NoDecimal="true" NoNegative="true" LabelWidth="120px">
                     </f:NumberBox>
-                    <f:TextBox ID="txtCheckItem" runat="server" Label="检查项目" Required="true" ShowRedStar="true"  MaxLength="50">
+                    <f:TextBox ID="txtCheckItem" runat="server" Label="检查项目" Required="true" ShowRedStar="true"  MaxLength="50" LabelWidth="120px">
                     </f:TextBox>
                 </Items>
             </f:FormRow> 
              <f:FormRow>
                 <Items>
-                    <f:TextBox ID="txtStandard" runat="server" Label="标准" MaxLength="500">
+                    <f:TextBox ID="txtStandard" runat="server" Label="标准" MaxLength="500" LabelWidth="120px">
                    </f:TextBox>
                       </Items>
             </f:FormRow> 
             <f:FormRow>
                 <Items>
-                    <f:TextBox ID="txtConsequence" runat="server" Label="未达标准的</br>主要后果" MaxLength="500">
+                    <f:TextBox ID="txtConsequence" runat="server" Label="未达标准的</br>主要后果" MaxLength="500" LabelWidth="120px">
                    </f:TextBox>
                 </Items>
             </f:FormRow>  
              <f:FormRow>
                 <Items>
-                    <f:TextBox ID="txtNowControlMeasures" runat="server" Label="现有控制措施" MaxLength="800">
+                    <f:TextBox ID="txtNowControlMeasures" runat="server" Label="现有控制措施" MaxLength="800" LabelWidth="120px">
                    </f:TextBox>
                       </Items>
             </f:FormRow> 
              <f:FormRow>
                 <Items>
-                    <f:NumberBox ID="txtHazardJudge_L" runat="server" Label="风险评价L" NoNegative="true" NoDecimal="true">
-                   </f:NumberBox>
-                   <f:NumberBox ID="txtHazardJudge_S" runat="server" Label="风险评价S" NoNegative="true" NoDecimal="true">
-                   </f:NumberBox>
+                    <f:DropDownList ID="drpHazardJudge_L" runat="server" Label="L" ShowRedStar="true" LabelWidth="120px"
+                        AutoPostBack="true" OnSelectedIndexChanged="txtHazardJudge_TextChanged" EnableEdit="true">
+                        <f:ListItem Text="请选择" Value="0" />
+                        <f:ListItem Text="5" Value="5.0" />
+                        <f:ListItem Text="4" Value="4.0" />
+                        <f:ListItem Text="3" Value="3.0" />
+                        <f:ListItem Text="2" Value="2.0" />
+                        <f:ListItem Text="1" Value="1.0" />
+                    </f:DropDownList>   
+                    <f:DropDownList ID="drpHazardJudge_S" runat="server" Label="S" ShowRedStar="true" LabelWidth="120px"
+                        AutoPostBack="true" OnSelectedIndexChanged="txtHazardJudge_TextChanged" EnableEdit="true">
+                        <f:ListItem Text="请选择" Value="0" />
+                        <f:ListItem Text="5" Value="5.0" />
+                        <f:ListItem Text="4" Value="4.0" />
+                        <f:ListItem Text="3" Value="3.0" />
+                        <f:ListItem Text="2" Value="2.0" />
+                        <f:ListItem Text="1" Value="1.0" />
+                    </f:DropDownList>  
                 </Items>
-            </f:FormRow>   
+            </f:FormRow> 
              <f:FormRow>
-                <Items>                   
-                   <f:NumberBox ID="txtHazardJudge_R" runat="server" Label="风险评价R" NoNegative="true" NoDecimal="true">
-                   </f:NumberBox>
-                   <f:DropDownList ID="drpRiskLevel" runat="server" Label="风险等级" EnableEdit="true" >
-                    </f:DropDownList>
+                <Items>                    
+                    <f:NumberBox runat="server" ID="txtHazardJudge_R" Label="R" NoNegative="true" LabelWidth="120px"
+                        DecimalPrecision="1"  Readonly="true" ShowRedStar="true" Required="true"></f:NumberBox>
+                     <f:DropDownList ID="drpRiskLevelId" runat="server" Label="风险等级" LabelWidth="120px"
+                         ShowRedStar="true" Required="true" Readonly="true">
+                    </f:DropDownList>  
                 </Items>
             </f:FormRow>
              <f:FormRow>
                 <Items>
-                     <f:TextBox ID="txtControlMeasures" runat="server" Label="建议改正</br>控制措施" MaxLength="800">
+                     <f:TextBox ID="txtControlMeasures" runat="server" Label="建议改正</br>控制措施" MaxLength="800" LabelWidth="120px">
                    </f:TextBox>
                 </Items>
             </f:FormRow>        

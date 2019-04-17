@@ -26,14 +26,16 @@ namespace BLL
         public static void AddPersonalFolderItem(Model.Personal_PersonalFolderItem personalFolderItem)
         {
             Model.HSSEDB_ENN db = Funs.DB;
-            Model.Personal_PersonalFolderItem newPersonalFolderItem = new Model.Personal_PersonalFolderItem();
-            newPersonalFolderItem.PersonalFolderItemId = personalFolderItem.PersonalFolderItemId;
-            newPersonalFolderItem.PersonalFolderId = personalFolderItem.PersonalFolderId;
-            newPersonalFolderItem.Code = personalFolderItem.Code;
-            newPersonalFolderItem.Title = personalFolderItem.Title;
-            newPersonalFolderItem.FileContent = personalFolderItem.FileContent;
-            newPersonalFolderItem.CompileDate = personalFolderItem.CompileDate;
-            newPersonalFolderItem.AttachUrl = personalFolderItem.AttachUrl;
+            Model.Personal_PersonalFolderItem newPersonalFolderItem = new Model.Personal_PersonalFolderItem
+            {
+                PersonalFolderItemId = personalFolderItem.PersonalFolderItemId,
+                PersonalFolderId = personalFolderItem.PersonalFolderId,
+                Code = personalFolderItem.Code,
+                Title = personalFolderItem.Title,
+                FileContent = personalFolderItem.FileContent,
+                CompileDate = personalFolderItem.CompileDate,
+                AttachUrl = personalFolderItem.AttachUrl
+            };
             db.Personal_PersonalFolderItem.InsertOnSubmit(newPersonalFolderItem);
             db.SubmitChanges();
         }

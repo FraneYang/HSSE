@@ -16,7 +16,7 @@
 
 <script type="text/javascript">
     window.onload = function () {
-        setInit('ReadExReportFile.aspx?reportId='+<%=reportId %>);
+        setInit('ReadExReportFile.aspx?reportId=<%=reportId %>');
         ReplaceParameter('<%=replaceParameter %>');
         CalculateTab('<%=reportId %>');
 //        SetCellValue();
@@ -41,7 +41,7 @@
             <tr>
                 <td style="width: 100%;">
                     <object id="ChinaExcel" style="left: 0px; top: 0px; width: 100%; height:500px;text-align:center;" classid="CLSID:15261F9B-22CC-4692-9089-0C40ACBDFDD8"
-                        name="ChinaExcel" CODEBASE="../downloads/chinaexcelweb.cab#version=4,0,4,0">
+                        name="ChinaExcel" CODEBASE="../downloads/chinaexcelweb.cab#version=3,8,9,2">
                     </object>
                     
                 </td>

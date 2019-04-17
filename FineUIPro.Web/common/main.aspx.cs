@@ -1,8 +1,9 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
-using BLL;
 
 namespace FineUIPro.Web.common
 {
@@ -20,14 +21,14 @@ namespace FineUIPro.Web.common
             {              
                 BindGridToDoMatter("close");
                 BindGridNotice("close");
-                //BindGridNewDynamic("close");
-                //this.ProjectPic();
+                BindGridHSSEStandard("close");
+                this.ShowNewsPic();
             }
             else
             {
-                if (GetRequestEventArgument() == "reloadGridNewDynamic")
+                if (GetRequestEventArgument() == "reloadGridHSSEStandard")
                 {
-                    //BindGridNewDynamic("close");
+                    BindGridHSSEStandard("close");
                 }
                 if (GetRequestEventArgument() == "reloadGridNotice")
                 {
@@ -85,7 +86,7 @@ namespace FineUIPro.Web.common
             //}
             //DataTable tb = this.LINQToDataTable(toDoMatterList);
             //// 2.获取当前分页数据
-            ////var table = this.GetPagedDataTable(GridNewDynamic, tb1);
+            ////var table = this.GetPagedDataTable(GridHSSEStandard, tb1);
             //GridToDoMatter.RecordCount = tb.Rows.Count;
             //tb = GetFilteredTable(GridToDoMatter.FilteredData, tb);
             //var table = this.GetPagedDataTable(GridToDoMatter, tb);
@@ -101,10 +102,10 @@ namespace FineUIPro.Web.common
         /// <param name="e"></param>
         protected void GridToDoMatter_RowDoubleClick(object sender, GridRowClickEventArgs e)
         {
-            if (GridToDoMatter.SelectedRow != null)
-            {
-                PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format(GridToDoMatter.SelectedRow.Values[3].ToString()), "待办事项：" + GridToDoMatter.SelectedRow.Values[0].ToString()));
-            }
+            //if (GridToDoMatter.SelectedRow != null)
+            //{
+            //    PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format(GridToDoMatter.SelectedRow.Values[3].ToString()), "待办事项：" + GridToDoMatter.SelectedRow.Values[0].ToString()));
+            //}
         }
 
         /// <summary>
@@ -134,54 +135,27 @@ namespace FineUIPro.Web.common
         /// </summary>
         private void BindGridNotice(string type)
         {
-        //    List<Model.View_ToDoMatter> toDoMatterList = new List<Model.View_ToDoMatter>();
-        //    ///近三个发布的通知
-        //    var noticeList = from x in Funs.DB.InformationProject_Notice
-        //                     where x.ReleaseDate >= System.DateTime.Now.AddMonths(-3)
-        //                     select x;
-        //    if (noticeList.Count() > 0)
-        //    {
-        //        List<Model.InformationProject_Notice> getNotices = new List<Model.InformationProject_Notice>();
-        //        var projectId = from x in Funs.DB.Project_ProjectUser where x.UserId == this.CurrUser.UserId select x.ProjectId;
-        //        if (projectId.Count() > 0)
-        //        {
-        //            foreach (var item in projectId)
-        //            {
-        //                if (!string.IsNullOrEmpty(item))
-        //                {
-        //                    noticeList = noticeList.Where(x => x.AccessProjectId.Contains(item));
-        //                    if (noticeList.Count() > 0)
-        //                    {
-        //                        getNotices.AddRange(noticeList.ToList());
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            getNotices = noticeList.Where(x => x.AccessProjectId.Contains("#")).ToList();
-        //        }    
-        //        foreach (var item in getNotices.Distinct().OrderByDescending(x => x.ReleaseDate).ToList())
-        //        {
-        //            Model.View_ToDoMatter newTodo = new Model.View_ToDoMatter();
-        //            newTodo.Id = item.NoticeId;
-        //            newTodo.Type = "通知通告";
-        //            newTodo.Name = "[" + item.NoticeCode + "]" + item.NoticeTitle;
-        //            newTodo.Date = item.ReleaseDate;
-        //            newTodo.Url = String.Format("~/InformationProject/NoticeView.aspx?NoticeId={0}", item.NoticeId);
-        //            toDoMatterList.Add(newTodo);
-        //        }
-        //    }
+            ///近三个发布的通知
+            var noticeList = (from x in Funs.DB.Resource_Notices
+                             where x.ReleaseTime >= System.DateTime.Now.AddMonths(-3)
+                             orderby x.ReleaseTime descending
+                             select x).ToList();
+            if (noticeList.Count() == 0)
+            {
+                noticeList= (from x in Funs.DB.Resource_Notices
+                            orderby x.ReleaseTime descending
+                            select x).Take(5).ToList();
+            }
+            
+            DataTable tb = this.LINQToDataTable(noticeList);
+            // 2.获取当前分页数据
+            //var table = this.GetPagedDataTable(GridHSSEStandard, tb1);
+            GridNotice.RecordCount = tb.Rows.Count;
+            //tb = GetFilteredTable(GridNotice.FilteredData, tb);
+            var table = this.GetPagedDataTable(GridNotice, tb);
 
-        //    DataTable tb = this.LINQToDataTable(toDoMatterList);
-        //    // 2.获取当前分页数据
-        //    //var table = this.GetPagedDataTable(GridNewDynamic, tb1);
-        //    GridNotice.RecordCount = tb.Rows.Count;
-        //    tb = GetFilteredTable(GridNotice.FilteredData, tb);
-        //    var table = this.GetPagedDataTable(GridNotice, tb);
-
-        //    GridNotice.DataSource = table;
-        //    GridNotice.DataBind();
+            GridNotice.DataSource = table;
+            GridNotice.DataBind();
         }
 
         /// <summary>
@@ -191,7 +165,14 @@ namespace FineUIPro.Web.common
         /// <param name="e"></param>
         protected void GridNotice_RowDoubleClick(object sender, GridRowClickEventArgs e)
         {
-            PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format(GridNotice.SelectedRow.Values[3].ToString()),  GridNotice.SelectedRow.Values[0].ToString()));
+
+            if (GridNotice.SelectedRowIndexArray.Length == 0)
+            {
+                Alert.ShowInTop("请选择一条记录！", MessageBoxIcon.Warning);
+                return;
+            }
+            
+            PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("../Resources/NewsEdit.aspx?NewsId={0}", GridNotice.SelectedRowID, "编辑 - ")));
         }
 
         /// <summary>
@@ -215,43 +196,66 @@ namespace FineUIPro.Web.common
         }
         #endregion
 
-        #region 资质预警
+        #region 专家辅助
         /// <summary>
-        /// 绑定数据(资质预警)
+        /// 绑定数据(专家辅助)
         /// </summary>
-        private void BindGridNewDynamic(string type)
+        private void BindGridHSSEStandard(string type)
         {
             string strSql = string.Empty;
             if (type == "oper")
             {
-                strSql = "SELECT * FROM View_NewDynamic";
-               
+                strSql = @"SELECT ManagedItemId,ManagedItemCode,ManagedItemName,ManagedObjectId,ManagedObjectCode,ManagedObjectName,StandardId,StandardCode,StandardName,SpecialtyId,SpecialtyCode,SpecialtyName"
+                    + @" FROM dbo.View_Standard_ManagedItem "
+                    + @" WHERE 1=1 ";
+
             }
             else
             {
-                strSql = "SELECT TOP 5 * FROM View_NewDynamic";
+                strSql = @"SELECT TOP 8 ManagedItemId,ManagedItemCode,ManagedItemName,ManagedObjectId,ManagedObjectCode,ManagedObjectName,StandardId,StandardCode,StandardName,SpecialtyId,SpecialtyCode,SpecialtyName"
+                    + @" FROM dbo.View_Standard_ManagedItem "
+                    + @" WHERE 1=1 ";
             }
 
-            DataTable tb = SQLHelper.GetDataTableRunText(strSql, null); 
-            GridNewDynamic.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(GridNewDynamic.FilteredData, tb);
-            var table = this.GetPagedDataTable(GridNewDynamic, tb);
-            GridNewDynamic.DataSource = table;
-            GridNewDynamic.DataBind();
+            List<SqlParameter> listStr = new List<SqlParameter>();
+
+            if (!string.IsNullOrEmpty(this.txtStandard.Text.Trim()))
+            {
+                strSql += " AND (SpecialtyName LIKE @values OR StandardName LIKE @values OR ManagedObjectName LIKE @values OR ManagedItemName LIKE @values)";
+                listStr.Add(new SqlParameter("@values", "%" + this.txtStandard.Text.Trim() + "%"));
+            }
+            SqlParameter[] parameter = listStr.ToArray();
+            DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
+            GridHSSEStandard.RecordCount = tb.Rows.Count;     
+            var table = this.GetPagedDataTable(GridHSSEStandard, tb);
+            GridHSSEStandard.DataSource = table;
+            GridHSSEStandard.DataBind();            
         }
 
+        #region 输入框查询事件
         /// <summary>
-        /// Grid行双击事件(资质预警)
+        /// 查询
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void GridNewDynamic_RowDoubleClick(object sender, GridRowClickEventArgs e)
+        protected void TextBox_TextChanged(object sender, EventArgs e)
         {
-            //var view = Funs.DB.View_NewDynamic.FirstOrDefault(x => x.Id == GridNewDynamic.SelectedRowID);   
-            //if (view != null)
-            //{
-            //    PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format(GridNewDynamic.SelectedRow.Values[3].ToString(), GridNewDynamic.SelectedRowID), "资质预警:" + view.Type));
-            //}
+            this.BindGridHSSEStandard("oper");
+        }
+        #endregion
+
+        /// <summary>
+        /// Grid行双击事件(专家辅助)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void GridHSSEStandard_RowDoubleClick(object sender, GridRowClickEventArgs e)
+        {
+            var view =BLL.ManagedItemService.GetManagedItemById(GridHSSEStandard.SelectedRowID);
+            if (view != null)
+            {
+                PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("../Standard/HSSEStandardView.aspx?ManagedItemId={0}", GridHSSEStandard.SelectedRowID), "专家辅助:"));
+            }
         }
 
         /// <summary>
@@ -261,7 +265,7 @@ namespace FineUIPro.Web.common
         /// <param name="e"></param>
         protected void btnMenuOpen1_Click(object sender, EventArgs e)
         {
-            this.BindGridNewDynamic("oper");
+            this.BindGridHSSEStandard("oper");
         }
 
         /// <summary>
@@ -271,7 +275,7 @@ namespace FineUIPro.Web.common
         /// <param name="e"></param>
         protected void btnMenuClose1_Click(object sender, EventArgs e)
         {
-            this.BindGridNewDynamic("close");
+            this.BindGridHSSEStandard("close");
         }
         #endregion
 
@@ -281,26 +285,18 @@ namespace FineUIPro.Web.common
         /// <summary>
         /// 项目图片显示
         /// </summary>
-        public void ProjectPic()
+        public void ShowNewsPic()
         {
             this.picContent.Visible = false;
-            string strSql = @"SELECT DISTINCT TOP 5 A.PictureId,A.Title,A.ContentDef,A.PictureType,A.UploadDate,A.States,A.AttachUrl,A.CompileMan"
-                + @" FROM dbo.InformationProject_Picture A" ;
-            bool isLeaderManage =BLL.CommonService.IsThisUnitLeaderOrManage(this.CurrUser.UserId);
-            if (!isLeaderManage)
-            {
-                strSql += " LEFT JOIN Project_ProjectUser B ON A.ProjectId =B.ProjectId";
-                strSql += " WHERE B.UserId='" + this.CurrUser.UserId + "'";
-            }
-            strSql += " ORDER BY A.UploadDate DESC";
+            string strSql = @"SELECT TOP 8 NewsId,Title,Url FROM dbo.Resource_News ORDER BY ReleaseTime DESC";
             
-            DataSet ds = BLL.SQLHelper.RunSqlString(strSql, "InformationProject_Picture");
+            DataSet ds = BLL.SQLHelper.RunSqlString(strSql, "Resource_News");
             DataView dv = ds.Tables[0].DefaultView;
             if (dv.Table.Rows.Count != 0)
             {
                 for (int i = 0; i < dv.Table.Rows.Count; i++)
                 {
-                    var q = Funs.DB.AttachFile.FirstOrDefault(e => e.ToKeyId == dv.Table.Rows[i]["PictureId"].ToString());
+                    var q = Funs.DB.AttachFile.FirstOrDefault(e => e.ToKeyId == dv.Table.Rows[i]["NewsId"].ToString());
                     if (q != null && q.AttachUrl != null)
                     {
                         var urls = Funs.GetStrListByStr(q.AttachUrl, ',');
@@ -308,7 +304,7 @@ namespace FineUIPro.Web.common
                         {
                             if (!string.IsNullOrEmpty(item))
                             {
-                                links += "../InformationProject/PictureView.aspx?PictureId=" + dv.Table.Rows[i]["PictureId"].ToString() + "|";
+                                links += "../Resources/NewsEdit.aspx?NewsId=" + dv.Table.Rows[i]["NewsId"].ToString() + "|";
                                 pics += "../" + item + "|";
                                 texts += dv.Table.Rows[i]["Title"].ToString() + "|";
                             }
@@ -337,7 +333,7 @@ namespace FineUIPro.Web.common
         /// <param name="e"></param>
         protected void Window1_Close(object sender, EventArgs e)
         {
-            this.BindGridNewDynamic("close");
+            this.BindGridHSSEStandard("close");
             this.BindGridToDoMatter("close");
         }
     }

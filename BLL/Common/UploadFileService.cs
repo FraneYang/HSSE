@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Web;
 
 namespace BLL
 {
@@ -96,137 +97,25 @@ namespace BLL
 
         #region 上传文件路径
         /// <summary>
-        /// 安全组织体系
-        /// </summary>
-        public const string HSSEOrganizeFilePath = "FileUpload\\HSSEOrganize\\";
-        /// <summary>
-        /// 安全管理机构-附件路径
-        /// </summary>
-        public const string HSSEManageFilePath = "FileUpload\\HSSEManage\\";
-        /// <summary>
-        /// 标准规范-附件路径
-        /// </summary>
-        public static string HSSEStandardsListFilePath = "FileUpload\\HSSEStandardsList\\";
-        /// <summary>
-        ///法律法规-附件路径
-        /// </summary>
-        public static string LawRegulationFilePath = "FileUpload\\LawRegulation\\";
-        /// <summary>
-        /// 管理规定-附件路径
-        /// </summary>
-        public static string ManageRuleFilePath = "FileUpload\\ManageRule\\";
-        /// <summary>
-        /// 生产管理规章制度-附件路径
-        /// </summary>
-        public static string RulesRegulationsFilePath = "FileUpload\\RulesRegulations\\";
-        /// <summary>
         /// 培训教材库-附件路径
+        /// </summary>
+        public static string TrainingEduFilePath = "FileUpload\\TrainingEdu\\";
+        /// <summary>
+        /// 考试试题库-附件路径
         /// </summary>
         public static string TrainingFilePath = "FileUpload\\Training\\";
         /// <summary>
-        /// 事故案例库-附件路径
+        /// 培训任务试题记录图片
         /// </summary>
-        public static string AccidentCaseFilePath = "FileUpload\\AccidentCase\\";
+        public const string TaskRecordFilePath = "FileUpload\\TaskRecord\\";
         /// <summary>
-        /// HAZOP-附件路径
+        /// 个人图片
         /// </summary>
-        public static string HAZOPFilePath = "FileUpload\\HAZOP\\";
+        public const string PersonalFilePath = "FileUpload\\Personal\\";
         /// <summary>
-        /// 安全试题库-附件路径
+        /// 设备设施二维码
         /// </summary>
-        public static string TrainTestDBFilePath = "FileUpload\\TrainTestDB\\";
-        /// <summary>
-        /// 安全专家-附件路径
-        /// </summary>
-        public static string ExpertFilePath = "FileUpload\\Expert\\";
-        /// <summary>
-        /// 应急预案-附件路径
-        /// </summary>
-        public const string EmergencyFilePath = "FileUpload\\Emergency\\";
-        /// <summary>
-        /// 安全评价
-        /// </summary>
-        public const string AppraiseFilePath = "FileUpload\\Appraise\\";
-        /// <summary>
-        /// 专项方案-附件路径
-        /// </summary>
-        public const string SpecialSchemeFilePath = "FileUpload\\SpecialScheme\\";
-        /// <summary>
-        /// 安全监督检查报告-附件路径
-        /// </summary>
-        public static string SuperviseCheckReportFilePath = "FileUpload\\SuperviseCheckReport\\";
-        /// <summary>
-        /// 安全生产快报-附件路径
-        /// </summary>
-        public static string SafeProductionExpressFilePath = "FileUpload\\SafeProductionExpress\\";
-        /// <summary>
-        /// 安全交流-附件路径
-        /// </summary>
-        public static string ExchangeFilePath = "FileUpload\\Exchange\\";
-        /// <summary>
-        /// 安全生产数据季报-附件路径
-        /// </summary>
-        public static string SafetyQuarterlyReportFilePath = "FileUpload\\SafetyQuarterlyReport\\";
-        /// <summary>
-        /// 在线督查
-        /// </summary>
-        public const string OnLineSupervisionFilePath = "FileUpload\\OnLineSupervision\\";
-        /// <summary>
-        /// 项目评价
-        /// </summary>
-        public const string ProjectEvaluationFilePath = "FileUpload\\ProjectEvaluation\\";
-        /// <summary>
-        /// 事故快报
-        /// </summary>
-        public const string ProjectAccidentFilePath = "FileUpload\\ProjectAccident\\";
-        /// <summary>
-        /// 评价报告
-        /// </summary>
-        public const string SubUnitCheckRectifyFilePath = "FileUpload\\SubUnitCheckRectify\\";
-        /// <summary>
-        /// 企业安全文件上报
-        /// </summary>
-        public const string SubUnitReportFilePath = "FileUpload\\SubUnitReport\\";
-        /// <summary>
-        /// 隐患整改通知单附件路径
-        /// </summary>
-        public const string RectifyNoticeFilePath = "FileUpload\\RectifyNotice\\";
-        /// <summary>
-        /// 工程暂停令附件路径
-        /// </summary>
-        public const string PauseNoticeFilePath = "FileUpload\\PauseNotice\\";
-        /// <summary>
-        /// 危险观察登记-附件路径
-        /// </summary>
-        public static string RegistrationFilePath = "FileUpload\\Registration\\";
-        /// <summary>
-        /// 分包方绩效评价-附件路径
-        /// </summary>
-        public static string PerfomanceRecordFilePath = "FileUpload\\PerfomanceRecord\\";
-        /// <summary>
-        /// 个人绩效评价-附件路径
-        /// </summary>
-        public static string PersonPerfomanceFilePath = "FileUpload\\PersonPerfomance\\";
-        /// <summary>
-        /// 奖励通知单-附件路径
-        /// </summary>
-        public const string IncentiveNoticeFilePath = "FileUpload\\IncentiveNotice\\";
-        /// <summary>
-        /// 处罚通知单-附件路径
-        /// </summary>
-        public const string PunishNoticeFilePath = "FileUpload\\PunishNotice\\";
-        /// <summary>
-        /// 获奖证书或奖杯--附件路径
-        /// </summary>
-        public const string HSECertificateFilePath = "FileUpload\\HSECertificate\\";
-        /// <summary>
-        /// 安全专职人员名单附件
-        /// </summary>
-        public const string FullTimeManFilePath = "FileUpload\\FullTimeMan\\";
-        /// <summary>
-        /// 项目经理人员名单附件
-        /// </summary>
-        public const string PMManFilePath = "FileUpload\\PMMan\\";
+        public const string EuipmentFilePath = "FileUpload\\Euipment\\";
 
         #region 分包商资质
         /// <summary>
@@ -255,28 +144,6 @@ namespace BLL
         public const string SL_ScanUrlFilePath = "FileUpload\\SL_ScanUrl\\";
         #endregion
 
-        #region 采购供货厂家管理
-        /// <summary>
-        // 培训记录-附件路径
-        /// </summary>
-        public const string TrainRecordsUrlFilePath = "FileUpload\\TrainRecordsUrl\\";
-        /// <summary>
-        /// 方案及资质审查-附件路径
-        /// </summary>
-        public const string PlanUrlFilePath = "FileUpload\\PlanUrl\\";
-        /// <summary>
-        /// 临时到场人员培训-附件路径
-        /// </summary>
-        public const string TemporaryPersonUrlFilePath = "FileUpload\\TemporaryPersonUrl\\";
-        /// <summary>
-        /// 厂家入场安全人员培训-附件路径
-        /// </summary>
-        public const string InPersonTrainUrlFilePath = "FileUpload\\InPersonTrainUrl\\";
-        /// <summary>
-        /// HSE协议-附件路径
-        /// </summary>
-        public const string HSEAgreementUrlFilePath = "FileUpload\\HSEAgreementUrl\\";
-        #endregion
         #endregion
 
         /// <summary>
@@ -284,7 +151,7 @@ namespace BLL
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string GetSourceByAttachUrl(string attachUrl, int size, string oldSrouce)
+        public static string GetSourceByAttachUrl(string attachUrl, long size, string oldSrouce)
         {
             string attachSource = string.Empty;
             var allUrl = Funs.GetStrListByStr(attachUrl, ',');
@@ -314,6 +181,24 @@ namespace BLL
                 attachSource = "[" + attachSource + "]";
             }
             return attachSource;
+        }
+
+        /// <summary>
+        /// 获取附件大小
+        /// </summary>
+        /// <param name="fileaddress"></param>
+        /// <returns></returns>
+        public static long getFileSize(string fileaddress)
+        {
+            long size =0;
+            string filename = Funs.RootPath + fileaddress;
+            FileInfo file = new FileInfo(filename);
+            if (file.Exists)
+            {
+                size = file.Length;
+            }
+
+            return size;
         }
     }
 }

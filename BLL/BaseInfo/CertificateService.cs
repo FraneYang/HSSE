@@ -29,11 +29,13 @@ namespace BLL
         public static void AddCertificate(Model.Base_Certificate certificate)
         {
             Model.HSSEDB_ENN db = Funs.DB;
-            Model.Base_Certificate newCertificate = new Model.Base_Certificate();
-            newCertificate.CertificateId = certificate.CertificateId;
-            newCertificate.CertificateCode = certificate.CertificateCode;
-            newCertificate.CertificateName = certificate.CertificateName;
-            newCertificate.Remark = certificate.Remark;
+            Model.Base_Certificate newCertificate = new Model.Base_Certificate
+            {
+                CertificateId = certificate.CertificateId,
+                CertificateCode = certificate.CertificateCode,
+                CertificateName = certificate.CertificateName,
+                Remark = certificate.Remark
+            };
             db.Base_Certificate.InsertOnSubmit(newCertificate);
             db.SubmitChanges();
         }

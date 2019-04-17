@@ -8,7 +8,7 @@
     using BLL;
 
     public partial class LEC : PageBase
-    {
+    {       
         /// <summary>
         /// 加载页面
         /// </summary>
@@ -19,40 +19,144 @@
             if (!IsPostBack)
             { 
                 ////权限按钮方法
-                this.GetButtonPower();
-                this.btnNew.OnClientClick = Window1.GetShowReference("LECEdit.aspx") + "return false;";               
+                this.GetButtonPower();                           
                 this.ddlPageSize.SelectedValue = Grid1.PageSize.ToString();
+                this.InitTreeMenu();
                 // 绑定表格
                 this.BindGrid();
             }
         }
 
+        #region 初始化树
+        /// <summary>
+        /// 初始化树
+        /// </summary>
+        private void InitTreeMenu()
+        {
+            trInstall.Nodes.Clear();
+            var dt = BLL.InstallationService.GetInstallationByInstallTypeList("2");
+            if (dt.Count() > 0)
+            {
+                foreach (var dr in dt)
+                {
+                    TreeNode rootNode = new TreeNode
+                    {
+                        Text = dr.InstallationName,
+                        NodeID = dr.InstallationId,
+                        EnableClickEvent = true,
+                        ToolTip = dr.InstallationName
+                    };
+
+                    this.trInstall.Nodes.Add(rootNode);                   
+                }
+            }
+           
+            //BoundTree(rootNode.Nodes, "0");
+        }
+
+        private void BoundTree(TreeNodeCollection nodes, string menuId)
+        {
+            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void trInstall_NodeCommand(object sender, FineUIPro.TreeCommandEventArgs e)
+        {           
+            this.BindGrid();
+        }
+        #endregion
+
+        #region 绑定数据BindGrid
         /// <summary>
         /// 绑定数据
         /// </summary>
         private void BindGrid()
         {
-            string strSql = @"SELECT LECId,Installation.InstallationName,Users.UserName AS EvaluatorName,EvaluationTime,States,(CASE WHEN States ='1' THEN '已提交' ELSE '待提交' END) AS StatesName "
-                          + @" FROM Hazard_LEC AS LEC "
-                          + @" LEFT JOIN Base_Installation AS Installation ON LEC.InstallationId=Installation.InstallationId"
-                          + @" LEFT JOIN Sys_User AS Users ON LEC.EvaluatorId=Users.UserId"                                             
-                          + @" WHERE 1 = 1";
-            List<SqlParameter> listStr = new List<SqlParameter>();
-            if (!string.IsNullOrEmpty(this.txtName.Text.Trim()))
+            string installationId = string.Empty;
+            if (this.trInstall.SelectedNode != null && this.trInstall.SelectedNode.NodeID != "0")
             {
-                strSql += " AND (InstallationName LIKE @Name OR EvaluatorName LIKE @Name OR StatesName LIKE @Name)";
-                listStr.Add(new SqlParameter("@Name", "%" + this.txtName.Text.Trim() + "%"));
-            }        
-           
+                installationId = this.trInstall.SelectedNode.NodeID;
+            }
+            string strSql = string.Empty;
+            List<SqlParameter> listStr = new List<SqlParameter>();
+            if (this.ckDataType.SelectedValue == "1")
+            {
+                strSql = @"SELECT JobEnvironments.JobEnvironmentId AS DataId,JobEnvironments.JobEnvironmentName AS DataName,JobEnvironments.JobEnvironmentCode AS DataCode,JobEnvironments.Remark,WorkAreas.WorkAreaCode,WorkAreas.WorkAreaName,Installation.InstallationCode,Installation.InstallationName,Identification,NULL AS EuipmentNo, NULL AS EuipmentTypeName"
+                        + @" FROM dbo.Base_JobEnvironment AS JobEnvironments"
+                        + @" LEFT JOIN DBO.Base_Installation AS Installation ON JobEnvironments.InstallationId =Installation.InstallationId"
+                        + @" LEFT JOIN DBO.Base_WorkArea AS WorkAreas ON JobEnvironments.WorkAreaId =WorkAreas.WorkAreaId"
+                        + @" WHERE 1 = 1";
+                if (!string.IsNullOrEmpty(installationId))
+                {
+                    strSql += " AND JobEnvironments.InstallationId = @InstallationId";
+                    listStr.Add(new SqlParameter("@InstallationId", installationId));
+                }
+                if (!string.IsNullOrEmpty(this.txtName.Text.Trim()))
+                {
+                    strSql += " AND (JobEnvironments.JobEnvironmentName LIKE @Name OR JobEnvironments.JobEnvironmentCode LIKE @Name OR WorkAreas.WorkAreaName LIKE @Name OR Installation.InstallationName LIKE @Name)";
+                    listStr.Add(new SqlParameter("@Name", "%" + this.txtName.Text.Trim() + "%"));
+                }
+                if (this.ckStates.SelectedValue == "0")
+                {
+                    strSql += " AND (SELECT COUNT(LECItemId) FROM  Hazard_LECItem WHERE DataId=JobEnvironments.JobEnvironmentId) =0";
+                }
+                else
+                {
+                    strSql += " AND (SELECT COUNT(LECItemId) FROM  Hazard_LECItem WHERE DataId=JobEnvironments.JobEnvironmentId) >0";
+                }
+
+            } else
+            {
+                strSql = @"SELECT Euipments.EuipmentId AS DataId,Euipments.EuipmentName AS DataName,Euipments.EuipmentCode AS DataCode,Euipments.Remark,WorkAreas.WorkAreaCode,WorkAreas.WorkAreaName,Installation.InstallationCode,Installation.InstallationName,EuipmentNo,EuipmentType.EuipmentTypeName,Identification"
+                       + @" FROM dbo.Base_Euipment AS Euipments"
+                       + @" LEFT JOIN DBO.Base_Installation AS Installation ON Euipments.InstallationId =Installation.InstallationId"
+                       + @" LEFT JOIN DBO.Base_WorkArea AS WorkAreas ON Euipments.WorkAreaId =WorkAreas.WorkAreaId"
+                       + @" LEFT JOIN DBO.Base_EuipmentType AS EuipmentType ON Euipments.EuipmentTypeId =EuipmentType.EuipmentTypeId"
+                       + @" WHERE 1 = 1";
+                if (!string.IsNullOrEmpty(installationId))
+                {
+                    strSql += " AND Euipments.InstallationId = @InstallationId";
+                    listStr.Add(new SqlParameter("@InstallationId", installationId));
+                }
+                if (!string.IsNullOrEmpty(this.txtName.Text.Trim()))
+                {
+                    strSql += " AND (Euipments.EuipmentName LIKE @Name OR Euipments.EuipmentCode LIKE @Name OR WorkAreas.WorkAreaName LIKE @Name OR Installation.InstallationName LIKE @Name)";
+                    listStr.Add(new SqlParameter("@Name", "%" + this.txtName.Text.Trim() + "%"));
+                }
+                if (this.ckStates.SelectedValue == "0")
+                {
+                    strSql += " AND (SELECT COUNT(LECItemId) FROM  Hazard_LECItem WHERE DataId=Euipments.EuipmentId) =0";
+                }
+                else
+                {
+                    strSql += " AND (SELECT COUNT(LECItemId) FROM  Hazard_LECItem WHERE DataId=Euipments.EuipmentId) >0";
+                }
+            }           
             SqlParameter[] parameter = listStr.ToArray();
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            //
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
-            Grid1.DataBind();           
+            Grid1.DataBind();
+
+            if (this.ckDataType.SelectedValue == "1")
+            {
+                this.Grid1.Columns[6].Hidden = true;
+                this.Grid1.Columns[7].Hidden = true;
+            }
+            else
+            {
+                this.Grid1.Columns[6].Hidden = false;
+                this.Grid1.Columns[7].Hidden = false;
+            }
         }
+        #endregion
 
         #region 查询
         /// <summary>
@@ -63,6 +167,7 @@
         protected void TextBox_TextChanged(object sender, EventArgs e)
         {
             this.BindGrid();
+            this.Grid1.PageIndex = 0;
         }
         #endregion 
 
@@ -76,52 +181,11 @@
         {
             var buttonList = BLL.CommonService.GetAllButtonList(this.CurrUser.UserId, BLL.Const.LECMenuId);
             if (buttonList.Count() > 0)
-            {
-                if (buttonList.Contains(BLL.Const.BtnAdd))
-                {
-                    this.btnNew.Hidden = false;
-                }
+            {              
                 if (buttonList.Contains(BLL.Const.BtnModify))
                 {
                     this.btnMenuEdit.Hidden = false;
-                }
-                if (buttonList.Contains(BLL.Const.BtnDelete))
-                {
-                    this.btnMenuDelete.Hidden = false;
-                }
-            }
-        }
-        #endregion
-        
-        #region  删除数据
-        /// <summary>
-        /// 右键删除事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void btnMenuDelete_Click(object sender, EventArgs e)
-        {
-            this.DeleteData();
-        }
-
-        /// <summary>
-        /// 删除方法
-        /// </summary>
-        private void DeleteData()
-        {
-            if (Grid1.SelectedRowIndexArray.Length > 0)
-            {
-                foreach (int rowIndex in Grid1.SelectedRowIndexArray)
-                {
-                    string rowID = Grid1.DataKeys[rowIndex][0].ToString();
-                    if (judgementDelete(rowID, false))
-                    {
-                        BLL.LECService.DeleteLECById(rowID);
-                        BLL.LogService.AddLog( this.CurrUser.UserId, "删除LEC评价");
-                    }
-                }
-                BindGrid();
-                ShowNotify("删除数据成功!");
+                }             
             }
         }
         #endregion
@@ -190,40 +254,17 @@
                 return;
             }
             string Id = Grid1.SelectedRowID;
-            PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("LECEdit.aspx?LECId={0}", Id, "编辑 - ")));
+            PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("LECEdit.aspx?DataId={0}&DataType={1}", Id, this.ckDataType.SelectedValue, "编辑 - ")));
         }
-
-        #region 判断是否可删除
+        
         /// <summary>
-        /// 判断是否可以删除
+        /// 状态
         /// </summary>
-        /// <returns></returns>
-        private bool judgementDelete(string id, bool isShow)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void ckDataType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string content = string.Empty;
-
-            var riskList = from x in Funs.DB.Hazard_RiskList
-                           join y in Funs.DB.Hazard_LECItem on x.LECId equals y.LECItemId
-                           where y.LECId == id
-                           select x;
-            if (riskList.Count() > 0)
-            {
-                content = "该LEC评价已在【风险信息】中使用，不能删除！";
-            }
-            
-            if (string.IsNullOrEmpty(content))
-            {
-                return true;
-            }
-            else
-            {
-                if (isShow)
-                {
-                    Alert.ShowInTop(content);
-                }
-                return false;
-            }
+            this.BindGrid();
         }
-        #endregion
     }
 }

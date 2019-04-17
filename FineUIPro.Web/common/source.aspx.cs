@@ -42,10 +42,12 @@ namespace FineUIPro.Web
                         string shortFileName = GetShortFileName(fileName);
                         string iframeUrl = "./source_file.aspx?file=" + fileName;
 
-                        Tab tab = new Tab();
-                        tab.Title = shortFileName;
-                        tab.EnableIFrame = true;
-                        tab.IFrameUrl = iframeUrl;
+                        Tab tab = new Tab
+                        {
+                            Title = shortFileName,
+                            EnableIFrame = true,
+                            IFrameUrl = iframeUrl
+                        };
                         tab.IconUrl = GetIconUrl(tab.IFrameUrl);
                         TabStrip1.Tabs.Add(tab);
 
@@ -55,10 +57,12 @@ namespace FineUIPro.Web
                             || fileName.ToLower().EndsWith(".master")
                             || fileName.ToLower().EndsWith(".ashx"))
                         {
-                            tab = new FineUIPro.Tab();
-                            tab.Title = shortFileName + ".cs";
-                            tab.EnableIFrame = true;
-                            tab.IFrameUrl = iframeUrl + ".cs";
+                            tab = new FineUIPro.Tab
+                            {
+                                Title = shortFileName + ".cs",
+                                EnableIFrame = true,
+                                IFrameUrl = iframeUrl + ".cs"
+                            };
                             tab.IconUrl = GetIconUrl(tab.IFrameUrl);
                             TabStrip1.Tabs.Add(tab);
                         }

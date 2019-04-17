@@ -2,12 +2,28 @@
 <Tree>
   <TreeNode id="685F1E0D-987E-491C-9DC7-014098DEE0C3" Text="单位类别" NavigateUrl="BaseInfo/UnitType.aspx" Icon="PageHeaderFooter">
   </TreeNode>
+<TreeNode id="2CF9FBC1-66AF-408A-B38E-F5F4409D65F8" Text="区域单元" NavigateUrl="BaseInfo/WorkArea.aspx" Icon="TableMultiple"></TreeNode>
 <TreeNode id="1E81DF97-809E-479F-1111-508F2043BA69" Text="职务信息" NavigateUrl="BaseInfo/Position.aspx" Icon="GroupEdit"></TreeNode>
 <TreeNode id="2E424093-81B8-421A-963F-D85D17B1E82A" Text="职称信息" NavigateUrl="BaseInfo/PostTitle.aspx" Icon="PagePortrait"></TreeNode>
+<TreeNode id="724E082C-EDDA-40FF-B396-F5441C5F6B15" Text="专业信息" NavigateUrl="BaseInfo/Specialty.aspx" Icon="PageRed"></TreeNode>
+<TreeNode id="5C9F0DA8-B6EE-4A19-954D-E57EBC880F7F" Text="标准名称" NavigateUrl="BaseInfo/Standard.aspx" Icon="ApplicationSideBoxes"></TreeNode>
 <TreeNode id="3A40AF0B-C9B8-4AF9-A683-FEADD8CC3A1C" Text="特岗证书" NavigateUrl="BaseInfo/Certificate.aspx" Icon="BookOpenMark"></TreeNode>
+<TreeNode id="BB7788DF-2201-4AB2-BB98-028D6AC6679C" Text="准操项目" NavigateUrl="BaseInfo/Prospective.aspx" Icon="ApplicationSideBoxes"></TreeNode>
 <TreeNode id="9016BB7D-4306-46E9-B3A7-4902E7B82BF6" Text="危害辨识" NavigateUrl="BaseInfo/HAZID.aspx" Icon="Creditcards"></TreeNode>
 <TreeNode id="D2E5854B-97D0-44EE-A6E3-E15AFF1C951E" Text="隐患类别" NavigateUrl="BaseInfo/HiddenHazardType.aspx" Icon="TextRuler"></TreeNode>
 <TreeNode id="1AC5BEBD-BA17-4EED-8F3B-E260FF3495C1" Text="安全措施" NavigateUrl="BaseInfo/SafetyMeasures.aspx" Icon="VcardEdit"></TreeNode>
 <TreeNode id="732182BD-35CA-4F47-8970-FFBE070445F1" Text="风险等级对应值" NavigateUrl="BaseInfo/RiskLevelValue.aspx" Icon="TableKey"></TreeNode>
+<TreeNode id="11829B4A-933C-448F-AB20-6CF9D939B964" Text="作业风险对应值" NavigateUrl="BaseInfo/OverhaulRiskGrade.aspx" Icon="DatabaseTable"></TreeNode>
 <TreeNode id="22F3B0D5-BFDF-4766-B473-9664B2568229" Text="SCL评价" NavigateUrl="BaseInfo/SCLInfo.aspx" Icon="ChartBar"></TreeNode>
+<TreeNode id="B1F6FDD8-69B7-4EA9-B8CD-F4BBDA49F4DB" Text="动火方式" NavigateUrl="BaseInfo/FireWorkMode.aspx" Icon="ShapeMoveBackwards"></TreeNode>
+<TreeNode id="7E1DC7F8-BB0C-44C8-8473-5EB7F11A3C33" Text="作业活动" NavigateUrl="BaseInfo/JobActivity.aspx" Icon="FlagGreen"></TreeNode>
+<TreeNode id="A3807DF2-FA54-4DA6-A9D6-3CDF5C614BC8" Text="作业环境" NavigateUrl="BaseInfo/JobEnvironment.aspx" Icon="FlagChecked"></TreeNode>
+<TreeNode id="F3642FBF-2941-4940-92A7-C0267CD5C1E7" Text="设备设施类型" NavigateUrl="BaseInfo/EuipmentType.aspx" Icon="FlagYt"></TreeNode>
+<TreeNode id="148B1CA0-0D3E-4783-B383-24ADD17A77A3" Text="设备设施" NavigateUrl="BaseInfo/Euipment.aspx" Icon="FlagNu"></TreeNode>
+<TreeNode id="854843F4-A58D-42F9-AB9E-0E35EB7252E1" Text="动火分析点数据" NavigateUrl="BaseInfo/FireWorkAnalysisData.aspx" Icon="Coins"></TreeNode>
+<TreeNode id="9EFDE353-3EA2-4DA2-B67E-DCACB7649E29" Text="受限分析点数据" NavigateUrl="BaseInfo/LimitedSpaceAnalysisData.aspx" Icon="CoinsAdd"></TreeNode>
+<TreeNode id="DB977CEA-483E-45B5-A6CC-54FC5B1D5965" Text="培训类别" NavigateUrl="BaseInfo/TrainType.aspx" Icon="Book"></TreeNode>
+<TreeNode id="ED77B573-7D87-4C52-ADBD-EFA9B9632F62" Text="测评考核项" NavigateUrl="BaseInfo/AppraisalItem.aspx" Icon="ApplicationSideBoxes"></TreeNode>
+<TreeNode id="999C0568-280B-469D-A0B6-F969515F207C" Text="施工方案类别" NavigateUrl="BaseInfo/SpecialSchemeType.aspx" Icon="Cog"></TreeNode>
+<TreeNode id="33A68820-9B17-4B34-AE43-061AEF3347EE" Text="应急救援类型" NavigateUrl="BaseInfo/EmergencyType.aspx" Icon="PageWhiteError"></TreeNode>
 </Tree>

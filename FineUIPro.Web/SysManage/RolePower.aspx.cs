@@ -68,7 +68,7 @@ namespace FineUIPro.Web.SysManage
                 DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
                 Grid1.RecordCount = tb.Rows.Count;
-                tb = GetFilteredTable(Grid1.FilteredData, tb);
+                
                 var table = this.GetPagedDataTable(Grid1, tb);
                 Grid1.DataSource = table;
                 Grid1.DataBind();
@@ -134,12 +134,15 @@ namespace FineUIPro.Web.SysManage
             var menus = BLL.SysMenuService.GetIsUsedMenuListByMenuType(menuType);
             if (menus.Count() > 0)
             {
-                TreeNode rootNode = new TreeNode();
-                rootNode.Text = "菜单";
-                rootNode.NodeID = "0";
-                rootNode.EnableCheckBox = true;
-                rootNode.EnableCheckEvent = true;
-                rootNode.Expanded = true;
+                TreeNode rootNode = new TreeNode
+                {
+                    Text = "菜单",
+                    NodeID = "0",
+                    EnableCheckBox = true,
+                    EnableCheckEvent = true,
+                    Expanded = true
+                };
+
                 this.tvMenu.Nodes.Add(rootNode);
                 this.BoundTree(rootNode.Nodes, menus, rootNode.NodeID, roleId);
             }
@@ -157,11 +160,13 @@ namespace FineUIPro.Web.SysManage
             {
                 foreach (var item in menus)
                 {
-                    TreeNode chidNode = new TreeNode();
-                    chidNode.Text = item.MenuName;
-                    chidNode.NodeID = item.MenuId;
-                    chidNode.EnableCheckBox = true;
-                    chidNode.EnableCheckEvent = true;
+                    TreeNode chidNode = new TreeNode
+                    {
+                        Text = item.MenuName,
+                        NodeID = item.MenuId,
+                        EnableCheckBox = true,
+                        EnableCheckEvent = true
+                    };
                     if (BLL.RolePowerService.IsHavePowerByRoleIdMenuId(roleId, chidNode.NodeID))
                     {
                         chidNode.Checked = true;
@@ -178,11 +183,13 @@ namespace FineUIPro.Web.SysManage
                             string[] buttonList = BLL.ButtonPowerService.GetButtonPowerList(this.drpRole.Value, item.MenuId);
                             foreach (var itemButton in buttons)
                             {
-                                TreeNode chidButtonNode = new TreeNode();
-                                chidButtonNode.Text = itemButton.ButtonName;
-                                chidButtonNode.NodeID = itemButton.ButtonToMenuId;
-                                chidButtonNode.EnableCheckBox = true;
-                                chidButtonNode.EnableCheckEvent = true;
+                                TreeNode chidButtonNode = new TreeNode
+                                {
+                                    Text = itemButton.ButtonName,
+                                    NodeID = itemButton.ButtonToMenuId,
+                                    EnableCheckBox = true,
+                                    EnableCheckEvent = true
+                                };
 
                                 if (buttonList != null && buttonList.Contains(chidButtonNode.Text))
                                 {
@@ -286,18 +293,22 @@ namespace FineUIPro.Web.SysManage
                         {
                             if (BLL.RolePowerService.IsExistMenu(tn.NodeID))
                             {
-                                Model.Sys_RolePower newPower = new Model.Sys_RolePower();
-                                newPower.RoleId = roleId;
-                                newPower.MenuId = tn.NodeID;
+                                Model.Sys_RolePower newPower = new Model.Sys_RolePower
+                                {
+                                    RoleId = roleId,
+                                    MenuId = tn.NodeID
+                                };
                                 BLL.RolePowerService.SaveRolePower(newPower);
                             }
 
                             if (BLL.ButtonPowerService.isExistButtonToMenu(tn.NodeID))
                             {
-                                Model.Sys_ButtonPower btn = new Model.Sys_ButtonPower();
-                                btn.RoleId = roleId;
-                                btn.MenuId = tn.ParentNode.NodeID;
-                                btn.ButtonToMenuId = tn.NodeID;
+                                Model.Sys_ButtonPower btn = new Model.Sys_ButtonPower
+                                {
+                                    RoleId = roleId,
+                                    MenuId = tn.ParentNode.NodeID,
+                                    ButtonToMenuId = tn.NodeID
+                                };
                                 BLL.ButtonPowerService.SaveButtonPower(btn);
                             }
                         }

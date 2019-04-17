@@ -1,14 +1,9 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using BLL;
 using System.Data;
-using System.Text;
-using AspNet = System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace FineUIPro.Web.ProjectData
 {
@@ -38,18 +33,24 @@ namespace FineUIPro.Web.ProjectData
         /// </summary>
         private void BindGrid()
         {
-            string strSql = "SELECT TeamGroupId,UnitId,TeamGroupCode,TeamGroupName,Remark FROM Base_TeamGroup WHERE 1=1 ";
+            string strSql = @"SELECT TeamGroup.TeamGroupId,TeamGroup.UnitId,Unit.UnitCode,Unit.UnitName,TeamGroup.InstallationId,Installation.InstallationCode,Installation.InstallationName,TeamGroup.WorkAreaId,WorkArea.WorkAreaCode,WorkArea.WorkAreaName "
+                            + @" ,TeamGroup.DepartId,Depart.DepartCode,Depart.DepartName,TeamGroup.TeamGroupCode,TeamGroup.TeamGroupName,TeamGroup.Remark,TeamGroup.LeaderIds,TeamGroup.LeaderNames,TeamGroup.TeamType"
+                            + @" FROM dbo.Base_TeamGroup AS TeamGroup"
+                            + @" LEFT JOIN Base_Unit AS Unit ON TeamGroup.UnitId=Unit.UnitId"
+                            + @" LEFT JOIN Base_Depart AS Depart ON TeamGroup.DepartId=Depart.DepartId"
+                            + @" LEFT JOIN Base_Installation AS Installation ON TeamGroup.InstallationId=Installation.InstallationId"
+                            + @" LEFT JOIN Base_WorkArea AS WorkArea ON TeamGroup.WorkAreaId=WorkArea.WorkAreaId"
+                            + @" WHERE 1=1 ";
             List<SqlParameter> listStr = new List<SqlParameter>();           
-            if (!string.IsNullOrEmpty(this.txtTeamGroupName.Text.Trim()))
+            if (!string.IsNullOrEmpty(this.txtName.Text.Trim()))
             {
-                strSql += " AND TeamGroupName LIKE @TeamGroupName";
-                listStr.Add(new SqlParameter("@TeamGroupName", "%" + this.txtTeamGroupName.Text.Trim() + "%"));
+                strSql += " AND (TeamGroupName LIKE @Name OR UnitName LIKE @Name OR InstallationName LIKE @Name OR DepartName LIKE @Name)";
+                listStr.Add(new SqlParameter("@Name", "%" + this.txtName.Text.Trim() + "%"));
             }
             SqlParameter[] parameter = listStr.ToArray();
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
-            Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            Grid1.RecordCount = tb.Rows.Count;            
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();
@@ -129,14 +130,14 @@ namespace FineUIPro.Web.ProjectData
                 return;
             }
 
-            if (this.btnMenuEdit.Hidden)   ////双击事件 编辑权限有：编辑页面，无：查看页面 或者状态是完成时查看页面
-            {
-                PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("TeamGroupView.aspx?TeamGroupId={0}", Grid1.SelectedRowID, "查看 - ")));
-            }
-            else
-            {
+            //if (this.btnMenuEdit.Hidden)   ////双击事件 编辑权限有：编辑页面，无：查看页面 或者状态是完成时查看页面
+            //{
+            //    PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("TeamGroupView.aspx?TeamGroupId={0}", Grid1.SelectedRowID, "查看 - ")));
+            //}
+            //else
+            //{
                 PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("TeamGroupEdit.aspx?TeamGroupId={0}", Grid1.SelectedRowID, "编辑 - ")));
-            }                        
+            //}                        
         }
         #endregion
 
@@ -208,24 +209,39 @@ namespace FineUIPro.Web.ProjectData
         }
         #endregion
 
-        #region 格式化字符串
+        #region 格式化字符串     
         /// <summary>
         /// 根据单位Id获取单位名称字符串
         /// </summary>
         /// <param name="unitId"></param>
         /// <returns></returns>
-        protected string ConvertUnitName(object unitId)
+        protected string ConvertTeamType(object teamType)
         {
-            string unitName = string.Empty;
-            if (unitId != null)
+            string name = string.Empty;
+            if (teamType != null)
             {
-                var unit = BLL.UnitService.GetUnitByUnitId(unitId.ToString());
-                if (unit != null)
+                if (teamType.ToString() == "1")
                 {
-                    unitName = unit.UnitName;
+                    name = "生产班组";
+                }
+                else if (teamType.ToString() == "2")
+                {
+                    name = "安全督察";
+                }
+                else if (teamType.ToString() == "3")
+                {
+                    name = "检修班";
+                }
+                else if (teamType.ToString() == "4")
+                {
+                    name = "电工";
+                }
+                else
+                {
+                    name = "其他";
                 }
             }
-            return unitName;
+            return name;
         }
         #endregion
 
@@ -276,48 +292,7 @@ namespace FineUIPro.Web.ProjectData
             this.BindGrid();
             Response.Write(GetGridTableHtml(Grid1));
             Response.End();
-        }
-
-        /// <summary>
-        /// 导出方法
-        /// </summary>
-        /// <param name="grid"></param>
-        /// <returns></returns>
-        private string GetGridTableHtml(Grid grid)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("<meta http-equiv=\"content-type\" content=\"application/excel; charset=UTF-8\"/>");
-            sb.Append("<table cellspacing=\"0\" rules=\"all\" border=\"1\" style=\"border-collapse:collapse;\">");
-            sb.Append("<tr>");
-            foreach (GridColumn column in grid.Columns)
-            {
-                sb.AppendFormat("<td>{0}</td>", column.HeaderText);
-            }
-            sb.Append("</tr>");
-            foreach (GridRow row in grid.Rows)
-            {
-                sb.Append("<tr>");
-                foreach (GridColumn column in grid.Columns)
-                {
-                    string html = row.Values[column.ColumnIndex].ToString();
-                    if (column.ColumnID == "tfNumber")
-                    {
-                        html = (row.FindControl("lblNumber") as AspNet.Label).Text;
-                    }
-                    if (column.ColumnID == "tfUnitId")
-                    {
-                        html = (row.FindControl("lblUnitName") as AspNet.Label).Text;
-                    }
-                    sb.AppendFormat("<td>{0}</td>", html);
-                }
-
-                sb.Append("</tr>");
-            }
-
-            sb.Append("</table>");
-
-            return sb.ToString();
-        }
+        }        
         #endregion        
     }
 }

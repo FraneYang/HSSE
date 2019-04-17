@@ -53,28 +53,21 @@ namespace FineUIPro.Web.SysManage
                 this.MenuId = Request.Params["MenuId"];
                 this.AppraisalId = Request.Params["AppraisalId"];
 
-                drpMenuOperation.DataValueField = "ConstValue";
-                drpMenuOperation.DataTextField = "ConstText";
-                var listCont = (from x in Funs.DB.Sys_MenuAppraisal where x.MenuId == this.MenuId && x.AppraisalId != this.AppraisalId select x.MenuOperation.ToString()).ToList();
-                var list = (from x in Funs.DB.Sys_Const
-                            where x.GroupId == BLL.ConstValue.Group_MenuOperation && !listCont.Contains(x.ConstValue.ToString())
-                            orderby x.SortIndex
-                            select x).ToList();
-                drpMenuOperation.DataSource = list;
-                drpMenuOperation.DataBind();
-
                 if (!string.IsNullOrEmpty(this.AppraisalId))
                 {
                     var menuAppraisal = BLL.MenuAppraisalService.GetMenuAppraisalByAppraisalId(this.AppraisalId);
                     if (menuAppraisal != null)
                     {
-                        if (menuAppraisal.MenuOperation.HasValue)
-                        {
-                            this.drpMenuOperation.SelectedValue = menuAppraisal.MenuOperation.ToString();
-                        }
+                        this.MenuId = menuAppraisal.MenuId;
+                        this.txtMenuOperation.Text = menuAppraisal.MenuOperation.ToString();
                         this.txtScore.Text = menuAppraisal.Score.ToString();
-                       
+                        this.txtMenuOperationName.Text = menuAppraisal.MenuOperationName;
+                        this.txtOutTime.Text = menuAppraisal.OutTime.ToString();
                     }
+                }
+                else
+                {
+                    this.txtMenuOperation.Text= Funs.GetMaxIndex("Sys_MenuAppraisal", "MenuOperation", "MenuId", this.MenuId).ToString();
                 }
             }
         }
@@ -89,14 +82,15 @@ namespace FineUIPro.Web.SysManage
         {
             var menu = BLL.SysMenuService.GetSysMenuByMenuId(this.MenuId);
             if (menu != null)
-            {               
-                Model.Sys_MenuAppraisal newMenuAppraisal = new Model.Sys_MenuAppraisal();
-                newMenuAppraisal.MenuId = this.MenuId;
-                newMenuAppraisal.Score = Funs.GetNewIntOrZero(this.txtScore.Text);
-                if (!string.IsNullOrEmpty(this.drpMenuOperation.SelectedValue))
+            {
+                Model.Sys_MenuAppraisal newMenuAppraisal = new Model.Sys_MenuAppraisal
                 {
-                    newMenuAppraisal.MenuOperation =Funs.GetNewInt(this.drpMenuOperation.SelectedValue);
-                }
+                    MenuId = this.MenuId,
+                    Score = Funs.GetNewDecimalOrZero(this.txtScore.Text),
+                    MenuOperation = Funs.GetNewIntOrZero(this.txtMenuOperation.Text),
+                    OutTime = Funs.GetNewInt(this.txtOutTime.Text),
+                    MenuOperationName = this.txtMenuOperationName.Text.Trim(),
+                };
 
                 if (string.IsNullOrEmpty(this.AppraisalId))
                 {

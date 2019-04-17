@@ -197,10 +197,12 @@ namespace FineUIPro.Web.BaseInfo
         protected void btnSave_Click(object sender, EventArgs e)
         {
             string strRowID = hfFormID.Text;
-            Model.Base_PostTitle depart = new Model.Base_PostTitle();
-            depart.PostTitleCode = this.txtPostTitleCode.Text.Trim();
-            depart.PostTitleName = this.txtPostTitleName.Text.Trim();
-            depart.Remark = txtRemark.Text.Trim();
+            Model.Base_PostTitle depart = new Model.Base_PostTitle
+            {
+                PostTitleCode = this.txtPostTitleCode.Text.Trim(),
+                PostTitleName = this.txtPostTitleName.Text.Trim(),
+                Remark = txtRemark.Text.Trim()
+            };
             if (string.IsNullOrEmpty(strRowID))
             {
                 depart.PostTitleId = SQLHelper.GetNewID(typeof(Model.Base_PostTitle));

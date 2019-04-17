@@ -35,19 +35,21 @@ namespace FineUIPro.Web.ProjectData
         /// </summary>
         private void BindGrid()
         {
-            string strSql = "SELECT WorkAreaId,UnitId,WorkAreaCode,WorkAreaName,Remark FROM Base_WorkArea WHERE 1=1 ";
+            string strSql = @"SELECT WorkArea.WorkAreaId,WorkArea.WorkAreaCode,WorkArea.WorkAreaName,WorkArea.Remark,WorkArea.InstallationId,Installation.InstallationCode,Installation.InstallationName"
+                        + @" FROM Base_WorkArea AS WorkArea "
+                        + @" LEFT JOIN Base_Installation AS Installation ON WorkArea.InstallationId=Installation.InstallationId WHERE 1=1 ";
             List<SqlParameter> listStr = new List<SqlParameter>();
            
-            if (!string.IsNullOrEmpty(this.txtWorkAreaName.Text.Trim()))
+            if (!string.IsNullOrEmpty(this.txtName.Text.Trim()))
             {
-                strSql += " AND WorkAreaName LIKE @WorkAreaName";
-                listStr.Add(new SqlParameter("@WorkAreaName", "%" + this.txtWorkAreaName.Text.Trim() + "%"));
+                strSql += " AND (WorkAreaName LIKE @Name OR WorkAreaCode LIKE @Name OR Remark LIKE @Name OR InstallationName LIKE @Name)";
+                listStr.Add(new SqlParameter("@Name", "%" + this.txtName.Text.Trim() + "%"));
             }
             SqlParameter[] parameter = listStr.ToArray();
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();
@@ -161,7 +163,7 @@ namespace FineUIPro.Web.ProjectData
                         if (WorkArea != null)
                         {
                             BLL.WorkAreaService.DeleteWorkAreaById(rowID);
-                            BLL.LogService.AddLog( this.CurrUser.UserId, "删除作业区域");
+                            BLL.LogService.AddLog( this.CurrUser.UserId, "删除单元设置");
                             ShowNotify("删除数据成功!", MessageBoxIcon.Success);
                         }
                     }
@@ -180,7 +182,7 @@ namespace FineUIPro.Web.ProjectData
             //var person = BLL.PersonService.GetPersonListByWorkAreaId(id);
             //if (person.Count()>0)
             //{
-            //    content = "人员信息中已经使用了该区域，不能删除！";
+            //    content = "人员信息中已经使用了该单元，不能删除！";
             //}
             if (string.IsNullOrEmpty(content))
             {
@@ -208,28 +210,7 @@ namespace FineUIPro.Web.ProjectData
             this.BindGrid();
         }
         #endregion
-
-        #region 格式化字符串
-        /// <summary>
-        /// 根据单位Id获取单位名称字符串
-        /// </summary>
-        /// <param name="unitId"></param>
-        /// <returns></returns>
-        protected string ConvertUnitName(object unitId)
-        {
-            string unitName = string.Empty;
-            if (unitId != null)
-            {
-                var unit = BLL.UnitService.GetUnitByUnitId(unitId.ToString());
-                if (unit != null)
-                {
-                    unitName = unit.UnitName;
-                }
-            }
-            return unitName;
-        }
-        #endregion
-
+        
         #region 获取按钮权限
         /// <summary>
         /// 获取按钮权限
@@ -270,51 +251,14 @@ namespace FineUIPro.Web.ProjectData
         {
             Response.ClearContent();
             string filename = Funs.GetNewFileName();
-            Response.AddHeader("content-disposition", "attachment; filename=" + System.Web.HttpUtility.UrlEncode("作业区域" + filename, System.Text.Encoding.UTF8) + ".xls");
+            Response.AddHeader("content-disposition", "attachment; filename=" + System.Web.HttpUtility.UrlEncode("单元" + filename, System.Text.Encoding.UTF8) + ".xls");
             Response.ContentType = "application/excel";
             Response.ContentEncoding = System.Text.Encoding.UTF8;
             this.Grid1.PageSize = 500;
             this.BindGrid();
             Response.Write(GetGridTableHtml(Grid1));
             Response.End();
-        }
-
-        /// <summary>
-        /// 导出方法
-        /// </summary>
-        /// <param name="grid"></param>
-        /// <returns></returns>
-        private string GetGridTableHtml(Grid grid)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("<meta http-equiv=\"content-type\" content=\"application/excel; charset=UTF-8\"/>");
-            sb.Append("<table cellspacing=\"0\" rules=\"all\" border=\"1\" style=\"border-collapse:collapse;\">");
-            sb.Append("<tr>");
-            foreach (GridColumn column in grid.Columns)
-            {
-                sb.AppendFormat("<td>{0}</td>", column.HeaderText);
-            }
-            sb.Append("</tr>");
-            foreach (GridRow row in grid.Rows)
-            {
-                sb.Append("<tr>");
-                foreach (GridColumn column in grid.Columns)
-                {
-                    string html = row.Values[column.ColumnIndex].ToString();
-                    if (column.ColumnID == "tfNumber")
-                    {
-                        html = (row.FindControl("lblNumber") as AspNet.Label).Text;
-                    }
-                    sb.AppendFormat("<td>{0}</td>", html);
-                }
-
-                sb.Append("</tr>");
-            }
-
-            sb.Append("</table>");
-
-            return sb.ToString();
-        }
+        }        
         #endregion        
     }
 }

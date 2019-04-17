@@ -38,11 +38,13 @@ namespace BLL
                 errLog.Append(String.Format(CultureInfo.InvariantCulture, "¥ÌŒÛ¿‡–Õ:{0}\r\n", ex.GetType().Name));                
                 errLog.Append(String.Format(CultureInfo.InvariantCulture, "¥ÌŒÛ–≈œ¢:{0}\r\n", ex.Message));
                 errLog.Append("¥ÌŒÛ∂—’ª:\r\n");
-                errLog.Append(String.Format(CultureInfo.InvariantCulture, "{0}\r\n", ex.StackTrace));               
-                Model.Sys_ErrLogInfo newErr = new Model.Sys_ErrLogInfo();                
-                newErr.ErrType = ex.GetType().Name;
-                newErr.ErrMessage = ex.Message;
-                newErr.ErrStackTrace = ex.StackTrace;
+                errLog.Append(String.Format(CultureInfo.InvariantCulture, "{0}\r\n", ex.StackTrace));
+                Model.Sys_ErrLogInfo newErr = new Model.Sys_ErrLogInfo
+                {
+                    ErrType = ex.GetType().Name,
+                    ErrMessage = ex.Message,
+                    ErrStackTrace = ex.StackTrace
+                };
 
                 int level = 1;
                 while (innerEx != null)

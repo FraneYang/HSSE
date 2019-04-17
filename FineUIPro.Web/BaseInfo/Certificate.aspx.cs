@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using BLL;
-
-namespace FineUIPro.Web.BaseInfo
+﻿namespace FineUIPro.Web.BaseInfo
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Linq;
+    using BLL;
+
     public partial class Certificate : PageBase
     {
-        #region 加载
         /// <summary>
         /// 加载页面
         /// </summary>
@@ -19,12 +17,13 @@ namespace FineUIPro.Web.BaseInfo
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
+            { 
                 ////权限按钮方法
                 this.GetButtonPower();
-                ddlPageSize.SelectedValue = Grid1.PageSize.ToString();
+                this.btnNew.OnClientClick = Window1.GetShowReference("CertificateEdit.aspx") + "return false;";               
+                this.ddlPageSize.SelectedValue = Grid1.PageSize.ToString();
                 // 绑定表格
-                BindGrid();
+                this.BindGrid();
             }
         }
 
@@ -33,88 +32,65 @@ namespace FineUIPro.Web.BaseInfo
         /// </summary>
         private void BindGrid()
         {
-            var q = from x in Funs.DB.Base_Certificate orderby x.CertificateCode select x;
-            Grid1.RecordCount = q.Count();
-            // 2.获取当前分页数据
-            var table = GetPagedDataTable(Grid1.PageIndex, Grid1.PageSize);
+            string strSql = @"SELECT CertificateId,CertificateCode,CertificateName,Remark FROM  Base_Certificate WHERE 1 = 1";
+            List<SqlParameter> listStr = new List<SqlParameter>();
+
+            if (!string.IsNullOrEmpty(this.txtName.Text.Trim()))
+            {
+                strSql += " AND (CertificateName LIKE @CertificateName OR CertificateCode LIKE @CertificateName OR Remark LIKE @CertificateName)";
+                listStr.Add(new SqlParameter("@CertificateName", "%" + this.txtName.Text.Trim() + "%"));
+            }      
+           
+            SqlParameter[] parameter = listStr.ToArray();
+            DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
+
+            Grid1.RecordCount = tb.Rows.Count;
+            //
+            var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
-            Grid1.DataBind();
+            Grid1.DataBind();           
         }
 
+        #region 查询
         /// <summary>
-        /// 过滤表头
+        /// 查询
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void Grid1_FilterChange(object sender, EventArgs e)
+        protected void TextBox_TextChanged(object sender, EventArgs e)
         {
-            BindGrid();
+            this.BindGrid();
         }
+        #endregion 
 
+        #region 获取按钮权限
         /// <summary>
-        /// 分页
+        /// 获取按钮权限
         /// </summary>
+        /// <param name="button"></param>
         /// <returns></returns>
-        private List<Model.Base_Certificate> GetPagedDataTable(int pageIndex, int pageSize)
+        private void GetButtonPower()
         {
-            List<Model.Base_Certificate> source = (from x in BLL.Funs.DB.Base_Certificate orderby x.CertificateCode select x).ToList();
-            List<Model.Base_Certificate> paged = new List<Model.Base_Certificate>();
-
-            int rowbegin = pageIndex * pageSize;
-            int rowend = (pageIndex + 1) * pageSize;
-            if (rowend > source.Count())
+            var buttonList = BLL.CommonService.GetAllButtonList(this.CurrUser.UserId, BLL.Const.CertificateMenuId);
+            if (buttonList.Count() > 0)
             {
-                rowend = source.Count();
+                if (buttonList.Contains(BLL.Const.BtnAdd))
+                {
+                    this.btnNew.Hidden = false;
+                }
+                if (buttonList.Contains(BLL.Const.BtnModify))
+                {
+                    this.btnMenuEdit.Hidden = false;
+                }
+                if (buttonList.Contains(BLL.Const.BtnDelete))
+                {
+                    this.btnMenuDelete.Hidden = false;
+                }
             }
-
-            for (int i = rowbegin; i < rowend; i++)
-            {
-                paged.Add(source[i]);
-            }
-
-            return paged;
-        }
-
-        /// <summary>
-        /// 改变索引事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void Grid1_PageIndexChange(object sender, GridPageEventArgs e)
-        {
-            Grid1.PageIndex = e.NewPageIndex;
-            BindGrid();
         }
         #endregion
-
-        #region 分页下拉选择
-        /// <summary>
-        /// 分页下拉选择
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Grid1.PageSize = Convert.ToInt32(ddlPageSize.SelectedValue);
-            BindGrid();
-        }
-        #endregion
-
-        #region 删除
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void btnDelete_Click(object sender, EventArgs e)
-        {
-            BLL.CertificateService.DeleteCertificateById(hfFormID.Text);
-            BLL.LogService.AddLog( this.CurrUser.UserId, "删除特岗证书");
-            // 重新绑定表格，并模拟点击[新增按钮]
-            BindGrid();
-            PageContext.RegisterStartupScript("onNewButtonClick();");
-
-        }
+        
+        #region  删除数据
         /// <summary>
         /// 右键删除事件
         /// </summary>
@@ -135,18 +111,61 @@ namespace FineUIPro.Web.BaseInfo
                 foreach (int rowIndex in Grid1.SelectedRowIndexArray)
                 {
                     string rowID = Grid1.DataKeys[rowIndex][0].ToString();
-
-                    BLL.CertificateService.DeleteCertificateById(rowID);
-                    BLL.LogService.AddLog( this.CurrUser.UserId, "删除特岗证书");
+                    if (judgementDelete(rowID, false))
+                    {
+                        BLL.CertificateService.DeleteCertificateById(rowID);
+                        BLL.LogService.AddLog( this.CurrUser.UserId, "删除特岗证书");
+                    }
                 }
-
                 BindGrid();
-                PageContext.RegisterStartupScript("onNewButtonClick();");
+                ShowNotify("删除数据成功!");
             }
         }
         #endregion
 
-        #region 编辑
+        #region 分页
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Grid1_PageIndexChange(object sender, GridPageEventArgs e)
+        {           
+            BindGrid();
+        }
+
+        /// <summary>
+        /// 分页显示条数下拉框
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Grid1.PageSize = Convert.ToInt32(ddlPageSize.SelectedValue);
+            BindGrid();
+        }
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Grid1_Sort(object sender, FineUIPro.GridSortEventArgs e)
+        {
+            BindGrid();
+        }
+        #endregion
+
+        /// <summary>
+        /// Grid行双击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Grid1_RowDoubleClick(object sender, GridRowClickEventArgs e)
+        {
+            this.EditData();
+        }
+
         /// <summary>
         /// 右键编辑事件
         /// </summary>
@@ -164,104 +183,36 @@ namespace FineUIPro.Web.BaseInfo
         {
             if (Grid1.SelectedRowIndexArray.Length == 0)
             {
-                Alert.ShowInTop("请至少选择一条记录！", MessageBoxIcon.Warning);
+                Alert.ShowInParent("请至少选择一条记录！", MessageBoxIcon.Warning);
                 return;
             }
             string Id = Grid1.SelectedRowID;
-            var certificate = BLL.CertificateService.GetCertificateById(Id);
-            if (certificate != null)
-            {
-                this.txtCertificateCode.Text = certificate.CertificateCode;
-                this.txtCertificateName.Text = certificate.CertificateName;
-                this.txtRemark.Text = certificate.Remark;
-                hfFormID.Text = Id;
-                this.btnDelete.Enabled = true;
-            }
+            PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("CertificateEdit.aspx?CertificateId={0}", Id, "编辑 - ")));
         }
-        #endregion
 
-        #region 保存
+        #region 判断是否可删除
         /// <summary>
-        /// 保存按钮
+        /// 判断是否可以删除
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void btnSave_Click(object sender, EventArgs e)
+        /// <returns></returns>
+        private bool judgementDelete(string id, bool isShow)
         {
-            string strRowID = hfFormID.Text;
-            Model.Base_Certificate certificate = new Model.Base_Certificate();
-            certificate.CertificateCode = this.txtCertificateCode.Text.Trim();
-            certificate.CertificateName = this.txtCertificateName.Text.Trim();
-            certificate.Remark = txtRemark.Text.Trim();
-            if (string.IsNullOrEmpty(strRowID))
+            string content = string.Empty;
+            if (Funs.DB.QualityAudit_PersonQuality.FirstOrDefault(x => x.CertificateId == id) != null)
             {
-                certificate.CertificateId = SQLHelper.GetNewID(typeof(Model.Base_Certificate));
-                BLL.CertificateService.AddCertificate(certificate);
-                BLL.LogService.AddLog( this.CurrUser.UserId, "添加特岗证书");
+                content = "该特岗证书已在【人员资质】中使用，不能删除！";
+            }
+            if (string.IsNullOrEmpty(content))
+            {
+                return true;
             }
             else
             {
-                certificate.CertificateId = strRowID;
-                BLL.CertificateService.UpdateCertificate(certificate);
-                BLL.LogService.AddLog( this.CurrUser.UserId, "修改特岗证书");
-            }
-            this.SimpleForm1.Reset();
-            // 重新绑定表格，并点击当前编辑或者新增的行
-            BindGrid();
-            PageContext.RegisterStartupScript(String.Format("F('{0}').selectRow('{1}');", Grid1.ClientID, certificate.CertificateId));
-        }
-        #endregion
-
-        #region 验证证书名称、编号是否存在
-        /// <summary>
-        /// 验证证书名称、编号是否存在
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void TextBox_TextChanged(object sender, EventArgs e)
-        {
-            var q = Funs.DB.Base_Certificate.FirstOrDefault(x => x.CertificateCode == this.txtCertificateCode.Text.Trim() && (x.CertificateId != hfFormID.Text || (hfFormID.Text == null && x.CertificateId != null)));
-            if (q != null)
-            {
-                ShowNotify("输入的证书编号已存在！", MessageBoxIcon.Warning);
-            }
-
-            var q2 = Funs.DB.Base_Certificate.FirstOrDefault(x => x.CertificateName == this.txtCertificateName.Text.Trim() && (x.CertificateId != hfFormID.Text || (hfFormID.Text == null && x.CertificateId != null)));
-            if (q2 != null)
-            {
-                ShowNotify("输入的证书名称已存在！", MessageBoxIcon.Warning);
-            }
-        }
-        #endregion
-
-        #region 获取按钮权限
-        /// <summary>
-        /// 获取按钮权限
-        /// </summary>
-        /// <param name="button"></param>
-        /// <returns></returns>
-        private void GetButtonPower()
-        {
-            var buttonList = BLL.CommonService.GetAllButtonList( this.CurrUser.UserId, BLL.Const.CertificateMenuId);
-            if (buttonList.Count() > 0)
-            {
-                if (buttonList.Contains(BLL.Const.BtnAdd))
+                if (isShow)
                 {
-                    this.btnNew.Hidden = false;
+                    Alert.ShowInTop(content);
                 }
-                if (buttonList.Contains(BLL.Const.BtnModify))
-                {
-                    this.btnMenuEdit.Hidden = false;
-                }
-                if (buttonList.Contains(BLL.Const.BtnDelete))
-                {
-                    this.btnDelete.Hidden = false;
-                    this.btnMenuDelete.Hidden = false;
-                }
-                if (buttonList.Contains(BLL.Const.BtnSave))
-                {
-                    this.btnSave.Hidden = false;
-                }
+                return false;
             }
         }
         #endregion

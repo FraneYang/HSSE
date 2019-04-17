@@ -188,10 +188,12 @@ namespace FineUIPro.Web.BaseInfo
         protected void btnSave_Click(object sender, EventArgs e)
         {
             string strRowID = hfFormID.Text;
-            Model.Base_Position position = new Model.Base_Position();
-            position.PositionCode = this.txtPositionCode.Text.Trim();
-            position.PositionName = this.txtPositionName.Text.Trim();
-            position.Remark = txtRemark.Text.Trim();
+            Model.Base_Position position = new Model.Base_Position
+            {
+                PositionCode = this.txtPositionCode.Text.Trim(),
+                PositionName = this.txtPositionName.Text.Trim(),
+                Remark = txtRemark.Text.Trim()
+            };
             if (string.IsNullOrEmpty(strRowID))
             {
                 position.PositionId = SQLHelper.GetNewID(typeof(Model.Base_Position));

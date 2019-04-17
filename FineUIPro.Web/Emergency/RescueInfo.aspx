@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
-    <title>应急信息</title>
+    <title>接警</title>
     <link href="../res/css/common.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .f-grid-row .f-grid-cell-inner {
@@ -18,11 +18,11 @@
     <f:Panel ID="Panel1" runat="server" Margin="5px" BodyPadding="5px" ShowBorder="false"
         ShowHeader="false" Layout="VBox" BoxConfigAlign="Stretch">
         <Items>
-            <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="应急信息" EnableCollapse="true"
+            <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="接警" EnableCollapse="true"
                 runat="server" BoxFlex="1" DataKeyNames="RescueInfoId" AllowCellEditing="true" EnableColumnLines="true"
                 ClicksToEdit="2" DataIDField="RescueInfoId" AllowSorting="true" SortField="ReceiveTime"
-                SortDirection="DESC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="10" OnPageIndexChange="Grid1_PageIndexChange"
-                EnableTextSelection="True">
+                SortDirection="DESC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="15" OnPageIndexChange="Grid1_PageIndexChange"
+                EnableTextSelection="True"  EnableRowDoubleClickEvent="true" OnRowDoubleClick="Grid1_RowDoubleClick">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar2" Position="Top" runat="server" >
                         <Items>                                                  
@@ -35,26 +35,58 @@
                 </Toolbars>
                 <Columns>
                     <f:RowNumberField EnablePagingNumber="true" HeaderText="序号" Width="50px" HeaderTextAlign="Center" TextAlign="Center"/>                   
-                     <f:RenderField  ColumnID="ReceiveTime" DataField="ReceiveTime" SortField="ReceiveTime" Width="150px"
-                        HeaderText="应急接收日期" HeaderTextAlign="Center" TextAlign="Left">
+                     <f:RenderField  ColumnID="ReceiveTime" DataField="ReceiveTime" SortField="ReceiveTime" Width="145px"
+                        HeaderText="接收日期" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>                                                      
-                    <f:RenderField Width="220px" ColumnID="ReceiveMan" DataField="ReceiveMan" 
-                        SortField="ReceiveMan" FieldType="String" HeaderText="接收人" HeaderTextAlign="Center"
+                    <f:RenderField Width="160px" ColumnID="InstallationNames" DataField="InstallationNames" 
+                        SortField="InstallationNames" FieldType="String" HeaderText="装置" HeaderTextAlign="Center"
                         TextAlign="Left">                       
                     </f:RenderField> 
-                     <f:RenderField Width="220px" ColumnID="Telephone" DataField="Telephone" 
-                        SortField="Telephone" FieldType="String" HeaderText="接收手机号码" HeaderTextAlign="Center"
+                     <f:RenderField Width="90px" ColumnID="AccidentType" DataField="AccidentType" 
+                        SortField="AccidentType" FieldType="String" HeaderText="事故类型" HeaderTextAlign="Center"
                         TextAlign="Left">                       
                     </f:RenderField> 
-                     <f:RenderField Width="220px" ColumnID="MessageContent" DataField="MessageContent" ExpandUnusedSpace="true"
-                        SortField="MessageContent" FieldType="String" HeaderText="信息内容" HeaderTextAlign="Center"
+                     <f:RenderField Width="150px" ColumnID="AccidentPlace" DataField="AccidentPlace" 
+                        SortField="AccidentPlace" FieldType="String" HeaderText="事故地点" HeaderTextAlign="Center"
                         TextAlign="Left">                       
-                    </f:RenderField>                  
-                     <f:RenderField  ColumnID="PushDateTime" DataField="PushDateTime" SortField="PushDateTime" Width="150px"
-                        HeaderText="消息推送时间" HeaderTextAlign="Center" TextAlign="Left">
+                    </f:RenderField>  
+                    <f:RenderField Width="150px" ColumnID="AccidentOverview" DataField="AccidentOverview" 
+                        SortField="AccidentOverview" FieldType="String" HeaderText="事故概述" HeaderTextAlign="Center"
+                        TextAlign="Left">                       
+                    </f:RenderField>  
+                     <f:RenderField Width="75px" ColumnID="DeathsNumber" DataField="DeathsNumber" 
+                        SortField="DeathsNumber" FieldType="String" HeaderText="死亡人数" HeaderTextAlign="Center"
+                        TextAlign="Left">                       
+                    </f:RenderField>  
+                    <f:RenderField Width="75px" ColumnID="InjuredNumber" DataField="InjuredNumber" 
+                        SortField="InjuredNumber" FieldType="String" HeaderText="受伤人数" HeaderTextAlign="Center"
+                        TextAlign="Left">                       
+                    </f:RenderField>                     
+                     <f:RenderField Width="80px" ColumnID="AccidentPerson" DataField="AccidentPerson"
+                        SortField="AccidentPerson" FieldType="String" HeaderText="负责人" HeaderTextAlign="Center"
+                        TextAlign="Left">                       
+                    </f:RenderField> 
+                     <f:RenderField Width="80px" ColumnID="PoliceTelephone" DataField="PoliceTelephone"
+                        SortField="PoliceTelephone" FieldType="String" HeaderText="联系电话" HeaderTextAlign="Center"
+                        TextAlign="Left">                       
+                    </f:RenderField>    
+                     <f:RenderField Width="80px" ColumnID="PoliceType" DataField="PoliceType"
+                        SortField="PoliceType" FieldType="String" HeaderText="报警类型" HeaderTextAlign="Center"
+                        TextAlign="Left">                       
+                    </f:RenderField>     
+                      <f:RenderField Width="80px" ColumnID="PoliceLevel" DataField="PoliceLevel"
+                        SortField="PoliceLevel" FieldType="String" HeaderText="报警等级" HeaderTextAlign="Center"
+                        TextAlign="Left">                       
+                    </f:RenderField> 
+                     <f:RenderField Width="75px" ColumnID="PoliceMan" DataField="PoliceMan" 
+                        SortField="PoliceMan" FieldType="String" HeaderText="报警人" HeaderTextAlign="Center"
+                        TextAlign="Left">                       
+                    </f:RenderField>                
+                     <f:RenderField  ColumnID="PoliceTime" DataField="PoliceTime" SortField="PoliceTime" Width="145px"
+                        HeaderText="报警时间" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>              
-                     <f:RenderField  ColumnID="PushStatesName" DataField="PushStatesName" SortField="PushStatesName" FieldType="String" Width="80px"
-                        HeaderText="状态" HeaderTextAlign="Center" TextAlign="Left">
+                     <f:RenderField  ColumnID="PushStatesName" DataField="PushStatesName" SortField="PushStatesName" 
+                        FieldType="String" Width="75px" HeaderText="状态" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
                 </Columns>
                 <Listeners>
@@ -76,7 +108,13 @@
             </f:Grid>
         </Items>
     </f:Panel>
+     <f:Window ID="Window1" Title="推送信息" Hidden="true" EnableIFrame="true" EnableMaximize="true"
+        Target="Top" EnableResize="true" runat="server" IsModal="true" Width="1100px"
+        Height="560px">
+    </f:Window>
     <f:Menu ID="Menu1" runat="server">
+        <f:MenuButton ID="btnMenuEdit" OnClick="btnMenuEdit_Click" EnablePostBack="true" runat="server" Text="查看" Icon="Eye">
+        </f:MenuButton>
         <f:MenuButton ID="btnMenuDelete" OnClick="btnMenuDelete_Click" EnablePostBack="true"  Icon="Delete"
             ConfirmText="删除选中行？" ConfirmTarget="Top" runat="server" Text="删除" Hidden ="true">
         </f:MenuButton>        

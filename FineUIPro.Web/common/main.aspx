@@ -5,7 +5,14 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>首页</title>
-    <link href="../res/css/common.css" rel="stylesheet" type="text/css" />
+  <link href="../res/css/common.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">               
+        .f-grid-row .f-grid-cell-inner {
+            white-space: normal;
+            word-break: break-all;
+        }        
+    </style>
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -14,29 +21,29 @@
         BodyPadding="2">
         <Items>
              <f:Panel ID="Panel1" BoxFlex="1" runat="server" ShowBorder="false" ShowHeader="false"
-                Layout="HBox" BoxConfigChildMargin="0 2 2 0" MarginBottom="3">
+                Layout="HBox" BoxConfigChildMargin="0 2 2 0" MarginBottom="2">
                 <Items >       
-                    <f:Panel runat="server" ID="panelLeftRegion" RegionPosition="Left" RegionSplit="true"
+                    <f:Panel runat="server" ID="panelLeftRegion" RegionPosition="Right" RegionSplit="true"
                         EnableCollapse="false" ShowBorder="true" Title="左侧显示区" Layout="VBox" 
                         ShowHeader="false" AutoScroll="true" BodyPadding="2px" IconFont="ArrowCircleLeft">
-                        <Items>
+                        <Items>                            
                             <f:Form BodyPadding="1px" ID="formNotice" EnableCollapse="false" Layout="VBox" runat="server" TitleToolTip="近三个月通知通告"
-                                Title="待办事项" IconFont="Tag" ShowHeader="true" ShowBorder="false" AutoScroll="true">
+                                Title="通知通告" IconFont="Tag" ShowHeader="true" ShowBorder="false" AutoScroll="true">
                                 <Rows>
                                     <f:FormRow>
                                         <Items>
                                             <f:Grid ID="GridNotice" ShowBorder="false" ShowHeader="false" Title="通知通告" EnableCollapse="true"
-                                                ShowGridHeader="false" runat="server" BoxFlex="1" DataKeyNames="Id" AllowCellEditing="true"
-                                                EnableColumnLines="true" ClicksToEdit="2" DataIDField="Id" EnableRowDoubleClickEvent="true"
-                                                OnRowDoubleClick="GridNotice_RowDoubleClick" SortField="Date" SortDirection="DESC">
+                                                ShowGridHeader="false" runat="server" BoxFlex="1" DataKeyNames="NoticesId" AllowCellEditing="true"
+                                                EnableColumnLines="true" ClicksToEdit="2" DataIDField="NoticesId" EnableRowDoubleClickEvent="true"
+                                                OnRowDoubleClick="GridNotice_RowDoubleClick" SortField="ReleaseTime" SortDirection="DESC">
                                                 <Columns>
-                                                    <f:RenderField MinWidth="95px" ColumnID="Type" DataField="Type" FieldType="String"
+                                                   <%-- <f:RenderField MinWidth="95px" ColumnID="Type" DataField="Type" FieldType="String"
                                                         HeaderText="类别" HeaderTextAlign="Center" TextAlign="Left">
-                                                    </f:RenderField>
-                                                    <f:RenderField MinWidth="350px"  ColumnID="Name" DataField="Name" FieldType="String"
+                                                    </f:RenderField>--%>
+                                                    <f:RenderField MinWidth="300px"  ColumnID="Title" DataField="Title" FieldType="String"
                                                         HeaderText="名称" HeaderTextAlign="Center" TextAlign="Left" ExpandUnusedSpace="true">
                                                     </f:RenderField>
-                                                    <f:RenderField MinWidth="90px"  ColumnID="Date" DataField="Date" FieldType="Date" Renderer="Date"
+                                                    <f:RenderField MinWidth="90px"  ColumnID="ReleaseTime" DataField="ReleaseTime" FieldType="Date" Renderer="Date"
                                                         RendererArgument="yyyy-MM-dd" HeaderText="日期" HeaderTextAlign="Center" TextAlign="Left">
                                                     </f:RenderField>
                                                     <f:RenderField Width="1px" ColumnID="Url" DataField="Url" FieldType="String" HeaderText="路径"
@@ -52,14 +59,14 @@
                                 </Rows>
                             </f:Form>
                             <f:Form BodyPadding="1px" ID="formPicture" EnableCollapse="false" Layout="VBox" runat="server"
-                                Title="风险分布" IconFont="Tag" ShowHeader="true"  ShowBorder="false">
+                                Title="新闻动态" IconFont="Tag" ShowHeader="false"  ShowBorder="false">
                                 <Rows>
-                                    <f:FormRow Margin="0 0 0 0" Height="300px">
+                                    <f:FormRow Margin="5 0 0 0" Height="330px">
                                         <Items>
-                                            <f:ContentPanel ID="picContent" runat="server" ShowHeader="false" Margin="0 0 0 0" AutoScroll="true" Height="300px">
+                                            <f:ContentPanel ID="picContent" runat="server" ShowHeader="false" Margin="5 0 0 0" AutoScroll="true" Height="320px">
                                                <script type="text/javascript">
-                                                   var focus_width = 540
-                                                   var focus_height = 260
+                                                   var focus_width = 500    
+                                                   var focus_height = 285
                                                    var text_height = 15
                                                    var swf_height = focus_height + text_height+10
                                                    var texts = "<%=texts%>"
@@ -76,15 +83,15 @@
                                         </Items>
                                      </f:FormRow>                          
                                    </Rows>
-                               </f:Form> 
-                            </Items>
+                               </f:Form>
+                        </Items>
                       </f:Panel>             
-                    <f:Panel runat="server" ID="panelRightRegion" RegionPosition="Right" RegionSplit="true" Layout="VBox"   
+                    <f:Panel runat="server" ID="panelRightRegion" RegionPosition="Left" RegionSplit="true" Layout="VBox"   
                         EnableCollapse="false" Title="右边显示区" ShowBorder="true" ShowHeader="false"
                         AutoScroll="true" BodyPadding="2px" IconFont="ArrowCircleRight">
                         <Items>
-                         <f:Form BodyPadding="1px" ID="formToDoMatter" EnableCollapse="false" Layout="VBox" runat="server"
-                                Title="资质预警" IconFont="Tag" ShowHeader="true" ShowBorder="false" AutoScroll="true">
+                         <%--<f:Form BodyPadding="1px" ID="formToDoMatter" EnableCollapse="false" Layout="VBox" runat="server"
+                                Title="待办事项" IconFont="Tag" ShowHeader="true" ShowBorder="false" AutoScroll="true">
                                 <Rows>
                                     <f:FormRow Margin="2 2 2 2">
                                         <Items>
@@ -113,31 +120,42 @@
                                        </Items>
                                      </f:FormRow>                          
                                  </Rows>
-                          </f:Form> 
-                         <f:Form BodyPadding="1px" ID="formNewDynamic" EnableCollapse="false" Layout="VBox" runat="server"
-                                Title="核心部位禁动" IconFont="Tag" ShowHeader="true" ShowBorder="false" AutoScroll="true">
+                          </f:Form> --%>
+                         <f:Form BodyPadding="1px" ID="formHSSEStandard"  Layout="VBox" runat="server" 
+                                Title="专家辅助" IconFont="Tag" ShowHeader="true" ShowBorder="false" AutoScroll="true"  EnableTableStyle="true">
                             <Rows>
-                                <f:FormRow>
+                                <f:FormRow>                    
                                     <Items>
-                                        <f:Grid ID="GridNewDynamic" ShowBorder="false" ShowHeader="false" Title="资质预警" EnableCollapse="true"
-                                            ShowGridHeader="false" runat="server" BoxFlex="1" DataKeyNames="Id" AllowCellEditing="true"
-                                            EnableColumnLines="true" ClicksToEdit="2" DataIDField="Id" EnableRowDoubleClickEvent="true"
-                                            OnRowDoubleClick="GridNewDynamic_RowDoubleClick" SortField="Date" SortDirection="DESC">
+                                        <f:Grid ID="GridHSSEStandard" ShowBorder="false" ShowHeader="false" Title="专家辅助" EnableCollapse="true"
+                                            ShowGridHeader="false" runat="server" BoxFlex="1" DataKeyNames="ManagedItemId" AllowCellEditing="false"
+                                            EnableColumnLines="true" ClicksToEdit="2" DataIDField="ManagedItemId" EnableRowDoubleClickEvent="true"
+                                            OnRowDoubleClick="GridHSSEStandard_RowDoubleClick" 
+                                            SortField="SpecialtyCode,StandardCode,ManagedObjectCode,ManagedItemCode" SortDirection="DESC">
+                                            <Toolbars>
+                                            <f:Toolbar ID="Toolbar1" Position="Top" runat="server">
+                                                <Items>
+                                                    <f:TextBox ID="txtStandard" runat="server" EmptyText="输入查询信息"
+                                                        AutoPostBack="true" OnTextChanged="TextBox_TextChanged"  LabelAlign="Right" Width="500">
+                                                    </f:TextBox>   
+                                                </Items>
+                                            </f:Toolbar>
+                                        </Toolbars>
                                             <Columns>
-                                               <f:RenderField MinWidth="130px" ColumnID="Type" DataField="Type" FieldType="String"
-                                                    HeaderText="类别" HeaderTextAlign="Center" TextAlign="Left">
+                                               <f:RenderField MinWidth="110px" ColumnID="SpecialtyName" DataField="SpecialtyName" FieldType="String"
+                                                    HeaderText="专业" HeaderTextAlign="Center" TextAlign="Left">
                                                 </f:RenderField>
-                                                <f:RenderField MinWidth="300px" ColumnID="Name" DataField="Name" FieldType="String"
-                                                    HeaderText="名称" HeaderTextAlign="Center" TextAlign="Left" ExpandUnusedSpace="true">
+                                                <f:RenderField MinWidth="140px" ColumnID="StandardName" DataField="StandardName" FieldType="String"
+                                                    HeaderText="标准" HeaderTextAlign="Center" TextAlign="Left" >
                                                 </f:RenderField>
-                                                <f:RenderField MinWidth="90px" ColumnID="Date" DataField="Date" FieldType="Date" Renderer="Date"
-                                                    RendererArgument="yyyy-MM-dd" HeaderText="日期" HeaderTextAlign="Center" TextAlign="Left">
+                                                 <f:RenderField MinWidth="140px" ColumnID="ManagedObjectName" DataField="ManagedObjectName" FieldType="String"
+                                                    HeaderText="管理对象" HeaderTextAlign="Center" TextAlign="Left">
                                                 </f:RenderField>
-                                                <f:RenderField Width="1px" ColumnID="Url" DataField="Url" FieldType="String" HeaderText="路径"
-                                                    Hidden="true" HeaderTextAlign="Center">                                        
+                                                 <f:RenderField MinWidth="130px" ColumnID="ManagedItemName" DataField="ManagedItemName" FieldType="String"
+                                                    HeaderText="管理项目" HeaderTextAlign="Center" TextAlign="Left" ExpandUnusedSpace="true">
                                                 </f:RenderField>
                                             </Columns>
                                             <Listeners>
+                                                <f:Listener Event="dataload" Handler="onGridDataLoadHSSEStandard" />
                                                 <f:Listener Event="beforerowcontextmenu" Handler="onRowContextMenu1" />
                                             </Listeners>
                                         </f:Grid>                                            
@@ -151,7 +169,7 @@
             </f:Panel>
         </Items>
     </f:Panel>
-    <f:Window ID="Window1" Title="通知页面" Hidden="true" EnableIFrame="true" EnableMaximize="true"
+    <f:Window ID="Window1" Title="详细页面" Hidden="true" EnableIFrame="true" EnableMaximize="true"
         Target="Parent" EnableResize="true" runat="server" OnClose="Window1_Close" IsModal="false"
         Width="1300px" Height="640px"  CloseAction="HidePostBack">
     </f:Window>
@@ -198,14 +216,19 @@
             return false;
         }
 
-        function reloadGridNewDynamic() {
-            __doPostBack(null, 'reloadGridNewDynamic');
+        function reloadGridHSSEStandard() {
+            __doPostBack(null, 'reloadGridHSSEStandard');
         }
         function reloadGridNotice() {
             __doPostBack(null, 'reloadGridNotice');
         }
         function reloadGrid() {
             __doPostBack(null, 'reloadGrid');
+        }
+        function onGridDataLoadHSSEStandard(event) {
+            this.mergeColumns(['SpecialtyName'], { depends: true });
+            this.mergeColumns(['StandardName'], { depends: true });
+            this.mergeColumns(['ManagedObjectName'], { depends: true });
         }
     </script>
     <script type="text/javascript">
@@ -214,8 +237,8 @@
         
         var formNoticeClientID = '<%= formNotice.ClientID %>';
         var formPictureClientID = '<%= formPicture.ClientID %>'; 
-        var formToDoMatterClientID = '<%= formToDoMatter.ClientID %>';
-        var formNewDynamicClientID = '<%= formNewDynamic.ClientID %>';
+      // <%-- var formToDoMatterClientID = '<%= formToDoMatter.ClientID %>';--%>
+        var formHSSEStandardClientID = '<%= formHSSEStandard.ClientID %>';
         F.ready(function () {
 
             var panelLeftRegion = F(panelLeftRegionClientID);
@@ -223,20 +246,20 @@
 
             var formNotice = F(formNoticeClientID);
             var formPicture = F(formPictureClientID);
-            var formToDoMatter = F(formToDoMatterClientID);
-            var formNewDynamic = F(formNewDynamicClientID);
+           // var formToDoMatter = F(formToDoMatterClientID);
+            var formHSSEStandard = F(formHSSEStandardClientID);
 
             function resetpanelLeftRegionHeight() {
                 var bodyWidth = this.form1.clientWidth;
                 // 改变高度
-                panelLeftRegion.setWidth(bodyWidth / 2);
-                panelRightRegion.setWidth(bodyWidth / 2);
+                panelLeftRegion.setWidth(bodyWidth / 2 -50);
+                panelRightRegion.setWidth(bodyWidth / 2 + 50);
 
                 var height = $(window).height();
                 formNotice.setHeight(height - 300 - 60);
                 // formPicture.setHeight(height);
-                formToDoMatter.setHeight((height - 100) / 2);
-                formNewDynamic.setHeight((height - 100) / 2);
+              //  formToDoMatter.setHeight((height - 100) / 2);
+                formHSSEStandard.setHeight((height - 25));
             }
 
             // 页面加载完毕后，首先对窗体进行高度设置

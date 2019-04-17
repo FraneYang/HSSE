@@ -4,8 +4,8 @@
 function setInit(strTab)
 {
     var obChinaExcel = document.getElementById('ChinaExcel');
-    obChinaExcel.SetPath('/SUBHSSE'); //http://website/test/ceuser/ceuser.dat 能否访问到
-    var ret = obChinaExcel.Login("金财软件", "6c048396fdf663df323ad7d1dd6eff17", "合肥诺必达信息技术有限公司");
+    obChinaExcel.SetPath('hsse_enn'); //http://website/test/ceuser/ceuser.dat 能否访问到
+    var ret = obChinaExcel.Login("金财软件", "6c048396fdf663df323ad7d1dd6eff17", "合肥诺必达信息技术有限公司");	
     //alert(ret);
     obChinaExcel.ReadHttpFile(strTab);
 }

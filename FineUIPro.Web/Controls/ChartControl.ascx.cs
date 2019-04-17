@@ -25,44 +25,52 @@ namespace Web.Controls
         /// <param name="dataSourceChart">Chart类</param>
         public void CreateChart(Model.DataSourceChart dataSourceChart)
         {
-            Chart chart1 = new Chart();
-            chart1.ID = "chart1";
-            chart1.BackColor = Color.WhiteSmoke;
-            chart1.ImageLocation = "~/Images/ChartPic_#SEQ(300,3)";
-            chart1.BorderlineDashStyle = ChartDashStyle.Solid;
-            chart1.Palette = ChartColorPalette.BrightPastel;
-            chart1.BackSecondaryColor = Color.White;
-            chart1.BackGradientStyle = GradientStyle.TopBottom;
-            chart1.BorderWidth = 2;
-            chart1.BorderColor = Color.FromArgb(26, 59, 105);
-            chart1.ImageType = ChartImageType.Png;
+            Chart chart1 = new Chart
+            {
+                ID = "chart1",
+                BackColor = Color.WhiteSmoke,
+                ImageLocation = "~/Images/ChartPic_#SEQ(300,3)",
+                BorderlineDashStyle = ChartDashStyle.Solid,
+                Palette = ChartColorPalette.BrightPastel,
+                BackSecondaryColor = Color.White,
+                BackGradientStyle = GradientStyle.TopBottom,
+                BorderWidth = 2,
+                BorderColor = Color.FromArgb(26, 59, 105),
+                ImageType = ChartImageType.Png,
 
-            chart1.Width = dataSourceChart.Width;
-            chart1.Height = dataSourceChart.Height;
+                Width = dataSourceChart.Width,
+                Height = dataSourceChart.Height
+            };
 
-            Title title = new Title();
-            title.Text = dataSourceChart.Title;
-            title.ShadowColor = Color.FromArgb(32, 0, 0, 0);
-            title.Font = new Font("Trebuchet MS", 10F, FontStyle.Bold);
-            title.ShadowOffset = 3;
-            title.ForeColor = Color.FromArgb(26, 59, 105);
+            Title title = new Title
+            {
+                Text = dataSourceChart.Title,
+                ShadowColor = Color.FromArgb(32, 0, 0, 0),
+                Font = new Font("Trebuchet MS", 10F, FontStyle.Bold),
+                ShadowOffset = 3,
+                ForeColor = Color.FromArgb(26, 59, 105)
+            };
             chart1.Titles.Add(title);
 
-            Legend legend = new Legend();
-            legend.Name = dataSourceChart.Title;
-            legend.TextWrapThreshold = 1;
-            legend.Docking = Docking.Top;
-            legend.Alignment = StringAlignment.Center;
-            legend.BackColor = Color.Transparent;
-            legend.Font = new Font(new FontFamily("Trebuchet MS"), 8);
-            legend.LegendStyle = LegendStyle.Row;
-            legend.IsEquallySpacedItems = true;
-            legend.IsTextAutoFit = false;
+            Legend legend = new Legend
+            {
+                Name = dataSourceChart.Title,
+                TextWrapThreshold = 1,
+                Docking = Docking.Top,
+                Alignment = StringAlignment.Center,
+                BackColor = Color.Transparent,
+                Font = new Font(new FontFamily("Trebuchet MS"), 8),
+                LegendStyle = LegendStyle.Row,
+                IsEquallySpacedItems = true,
+                IsTextAutoFit = false
+            };
             chart1.Legends.Add(legend);
 
-            ChartArea chartArea = new ChartArea();
-            chartArea.Name = dataSourceChart.Title;
-            chartArea.BackColor = Color.Transparent;
+            ChartArea chartArea = new ChartArea
+            {
+                Name = dataSourceChart.Title,
+                BackColor = Color.Transparent
+            };
             chartArea.AxisX.IsLabelAutoFit = false;
             chartArea.AxisY.IsLabelAutoFit = false;
             chartArea.AxisX.LabelStyle.Font = new Font("Verdana,Arial,Helvetica,sans-serif", 8F, FontStyle.Regular);

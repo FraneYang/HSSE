@@ -28,10 +28,8 @@ namespace BLL
             Model.HSSEDB_ENN db = Funs.DB;
             Model.License_Interlocking Interlocking = db.License_Interlocking.FirstOrDefault(e => e.InterlockingId == interlockingId);
             if (Interlocking != null)
-            {
-                CommonService.DeleteLicenseItemByDataId(interlockingId);
+            {              
                 CommonService.DeleteSysPushRecordByDataId(interlockingId);
-
                 db.License_Interlocking.DeleteOnSubmit(Interlocking);
                 db.SubmitChanges();
             }

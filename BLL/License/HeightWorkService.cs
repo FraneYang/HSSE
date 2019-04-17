@@ -19,6 +19,16 @@ namespace BLL
             return Funs.DB.License_HeightWork.FirstOrDefault(e => e.HeightWorkId == HeightWorkId);
         }
 
+       /// <summary>
+       /// 根据主键获取视图信息
+       /// </summary>
+       /// <param name="heightWorkId"></param>
+       /// <returns></returns>
+        public static Model.View_License_HeightWork GetViewHeightWorkById(string heightWorkId)
+        {
+            return Funs.DB.View_License_HeightWork.FirstOrDefault(e => e.HeightWorkId == heightWorkId);
+        }
+
         /// <summary>
         /// 根据主键删除信息
         /// </summary>

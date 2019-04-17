@@ -45,10 +45,12 @@ namespace BLL
         /// <param name="HiddenHazardType"></param>
         public static void AddHiddenHazardType(Model.Base_HiddenHazardType HiddenHazardType)
         {
-            Model.Base_HiddenHazardType newHiddenHazardType = new Model.Base_HiddenHazardType();
-            newHiddenHazardType.HiddenHazardTypeId = HiddenHazardType.HiddenHazardTypeId;
-            newHiddenHazardType.HiddenHazardTypeCode = HiddenHazardType.HiddenHazardTypeCode;
-            newHiddenHazardType.HiddenHazardTypeName = HiddenHazardType.HiddenHazardTypeName;
+            Model.Base_HiddenHazardType newHiddenHazardType = new Model.Base_HiddenHazardType
+            {
+                HiddenHazardTypeId = HiddenHazardType.HiddenHazardTypeId,
+                HiddenHazardTypeCode = HiddenHazardType.HiddenHazardTypeCode,
+                HiddenHazardTypeName = HiddenHazardType.HiddenHazardTypeName
+            };
             db.Base_HiddenHazardType.InsertOnSubmit(newHiddenHazardType);
             db.SubmitChanges();
         }
@@ -112,6 +114,28 @@ namespace BLL
             {
                 Funs.FineUIPleaseSelect(dropName);
             }
+        }
+
+        /// <summary>
+        /// 常量表下拉框
+        /// </summary>
+        /// <param name="dropName">下拉框名字</param>
+        /// <param name="isShowPlease">是否显示请选择</param>
+        public static void InitHiddenHazardTypeRadioButtonList(FineUIPro.RadioButtonList rblName)
+        {
+            rblName.DataValueField = "HiddenHazardTypeId";
+            rblName.DataTextField = "HiddenHazardTypeName";     
+            var list = BLL.HiddenHazardTypeService.GetHiddenHazardTypeList();
+            Model.Base_HiddenHazardType newHiddenHazardType = new Model.Base_HiddenHazardType
+            {
+                HiddenHazardTypeId = BLL.Const._Null,
+                HiddenHazardTypeCode = "0",
+                HiddenHazardTypeName = "全部"
+            };
+            list.Add(newHiddenHazardType);
+            rblName.DataSource = list; 
+            rblName.DataBind();
+            rblName.SelectedIndex = 0;            
         }
         #endregion
     }

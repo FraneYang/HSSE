@@ -185,10 +185,12 @@ namespace FineUIPro.Web.BaseInfo
         protected void btnSave_Click(object sender, EventArgs e)
         {
             string strRowID = hfFormID.Text;
-            Model.Base_UnitType depart = new Model.Base_UnitType();
-            depart.UnitTypeCode = this.txtUnitTypeCode.Text.Trim();
-            depart.UnitTypeName = this.txtUnitTypeName.Text.Trim();
-            depart.Remark = txtRemark.Text.Trim();
+            Model.Base_UnitType depart = new Model.Base_UnitType
+            {
+                UnitTypeCode = this.txtUnitTypeCode.Text.Trim(),
+                UnitTypeName = this.txtUnitTypeName.Text.Trim(),
+                Remark = txtRemark.Text.Trim()
+            };
             if (string.IsNullOrEmpty(strRowID))
             {
                 depart.UnitTypeId = SQLHelper.GetNewID(typeof(Model.Base_UnitType));

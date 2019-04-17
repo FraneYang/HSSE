@@ -28,11 +28,14 @@ namespace BLL
         /// <param name="workArea"></param>
         public static void AddWorkArea(Model.Base_WorkArea workArea)
         {
-            Model.Base_WorkArea newWorkArea = new Model.Base_WorkArea();
-            newWorkArea.WorkAreaId = workArea.WorkAreaId;
-            newWorkArea.WorkAreaCode = workArea.WorkAreaCode;
-            newWorkArea.WorkAreaName = workArea.WorkAreaName;
-            newWorkArea.Remark = workArea.Remark;
+            Model.Base_WorkArea newWorkArea = new Model.Base_WorkArea
+            {
+                InstallationId = workArea.InstallationId,
+                WorkAreaId = workArea.WorkAreaId,
+                WorkAreaCode = workArea.WorkAreaCode,
+                WorkAreaName = workArea.WorkAreaName,
+                Remark = workArea.Remark
+            };
             db.Base_WorkArea.InsertOnSubmit(newWorkArea);
             db.SubmitChanges();
         }
@@ -47,6 +50,7 @@ namespace BLL
             Model.Base_WorkArea newWorkArea = db.Base_WorkArea.FirstOrDefault(e => e.WorkAreaId == workArea.WorkAreaId);
             if (newWorkArea != null)
             {
+                newWorkArea.InstallationId = workArea.InstallationId;
                 newWorkArea.WorkAreaCode = workArea.WorkAreaCode;
                 newWorkArea.WorkAreaName = workArea.WorkAreaName;
                 newWorkArea.Remark = workArea.Remark;

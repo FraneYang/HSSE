@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Linq;
     using BLL;
 
     public partial class Overhaul : PageBase
     {
+        #region 加载
         /// <summary>
         /// 加载页面
         /// </summary>
@@ -31,14 +31,14 @@
         /// </summary>
         private void BindGrid()
         {
-            string strSql = @"SELECT OverhaulId,LicenseCode,SendTicketTime,(ISNULL(RiskGrade,'') +'级') AS RiskGrade,DevicePositionNum,DeviceName"
+            string strSql = @"SELECT OverhaulId,LicenseCode,SendTicketTime,(ISNULL(RiskGrade,'') +'级') AS RiskGrade,DevicePositionNum,DeviceName,OverhaulUnit"
                             + @" ,Installation.InstallationName,Unit.UnitName,OverhaulCategory,Users.UserName AS CompileManName"
                             + @" ,(CASE WHEN States =1 THEN '待审核' WHEN  States =2 THEN '待验收' WHEN  States =3 THEN '已验收' WHEN  States =-1 THEN '已作废' ELSE '待提交' END )  AS StatesName "
                             + @" FROM License_Overhaul AS Overhaul "
                             + @" LEFT JOIN Base_Installation AS Installation ON Overhaul.InstallationId=Installation.InstallationId"
                             + @" LEFT JOIN Base_Unit AS Unit ON Overhaul.UnitId=Unit.UnitId"
                             + @" LEFT JOIN Sys_User AS Users ON Overhaul.CompileManId=Users.UserId"
-                            + @" WHERE 1=1 ";
+                            + @" WHERE OverhaulType='1' ";
             List<SqlParameter> listStr = new List<SqlParameter>();
             if (!string.IsNullOrEmpty(this.txtLicenseCode.Text.Trim()))
             {
@@ -49,12 +49,13 @@
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();
         }
-        
+        #endregion
+
         #region  删除数据
         /// <summary>
         /// 右键删除事件
@@ -149,5 +150,53 @@
             this.BindGrid();
         }
         #endregion 
+
+        #region 打印
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Grid1.SelectedRowID))
+            {
+                PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("../ReportPrint/ExReportPrint.aspx?reportId={0}&&replaceParameter={1}&&varValue={2}", Const.OverhaulMenuId, Grid1.SelectedRowID, "", "打印 - ")));
+            }
+        }
+        #endregion
+
+        #region 查看详细信息
+        /// <summary>
+        /// Grid行双击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Grid1_RowDoubleClick(object sender, GridRowClickEventArgs e)
+        {
+            this.ViewData();
+        }
+
+        /// <summary>
+        /// 右键编辑事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnMenuView_Click(object sender, EventArgs e)
+        {
+            this.ViewData();
+        }
+
+        private void ViewData()
+        {
+            if (Grid1.SelectedRowIndexArray.Length == 0)
+            {
+                Alert.ShowInParent("请至少选择一条记录！", MessageBoxIcon.Warning);
+                return;
+            }
+            
+            PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("OverhaulView.aspx?OverhaulId={0}", Grid1.SelectedRowID, "查看 - ")));
+        }
+        #endregion
     }
 }

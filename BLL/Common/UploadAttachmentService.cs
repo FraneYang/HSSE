@@ -43,6 +43,10 @@ namespace BLL
                         string[] subUrl = url.Split('/');
                         string fileName = subUrl[subUrl.Count() - 1];
                         string newFileName = fileName.Substring(fileName.IndexOf("~") + 1);
+                        if (newFileName.Contains('_'))
+                        {
+                            newFileName = fileName.Substring(fileName.IndexOf("_") + 1);
+                        }
                         htmlStr += "<tr><td style=\"width: 60%\" align=\"left\"><span style='cursor:pointer;cursor:pointer;cursor:pointer;TEXT-DECORATION: underline;color:blue' onclick=\"window.open('" + url + "')\">" + newFileName + "</span></td>";
                     }
                 }
@@ -387,7 +391,48 @@ namespace BLL
                         string fileName = subUrl[subUrl.Count() - 1];
                         string newFileName = fileName.Substring(fileName.IndexOf("~") + 1);
 
-                        htmlStr += "<tr><td style=\"width: 60%\" align=\"left\"><img width='150' height='150' src='" + url + "'></img></td>";
+                        htmlStr += "<tr><td style=\"width: 60%\" align=\"left\"><img width='120' height='80' src='" + url + "'></img></td>";
+                    }
+                }
+
+                htmlStr += "</table>";
+            }
+
+            return htmlStr;
+        }
+        #endregion
+
+        #region 附件在Image中显示
+        /// <summary>
+        /// 附件在Image中显示
+        /// </summary>
+        /// <param name="rootValue">文件夹路径</param>
+        /// <param name="path">附件路径</param>
+        /// <returns>附件显示HTML</returns>
+        public static string ShowImage(string rootValue, string path,decimal width,decimal height)
+        {
+            string htmlStr = string.Empty;
+            if (!string.IsNullOrEmpty(path))
+            {
+                htmlStr = "<table runat='server' cellpadding='5' cellspacing='5' style=\"width: 100%\">";
+                string[] arrStr = path.Split(new string[] { "," }, System.StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < arrStr.Length; i++)
+                {
+                    if (!string.IsNullOrEmpty(arrStr[i]))
+                    {
+                        string[] urlArray = arrStr[i].Split('\\');
+                        string scanUrl = string.Empty;
+                        for (int j = 0; j < urlArray.Length; j++)
+                        {
+                            scanUrl += urlArray[j] + "|";
+                        }
+
+                        string url = rootValue + arrStr[i].Replace('\\', '/');
+                        string[] subUrl = url.Split('/');
+                        string fileName = subUrl[subUrl.Count() - 1];
+                        string newFileName = fileName.Substring(fileName.IndexOf("~") + 1);
+
+                        htmlStr += "<tr><td style=\"width: 100%\" align=\"center\"><img width='" + width + "' height='" + height + "' src='" + url + "'></img></td>";
                     }
                 }
 

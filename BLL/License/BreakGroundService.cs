@@ -19,6 +19,16 @@ namespace BLL
             return Funs.DB.License_BreakGround.FirstOrDefault(e => e.BreakGroundId == BreakGroundId);
         }
 
+       /// <summary>
+       /// 根据主键获取动土安全作业证视图信息
+       /// </summary>
+       /// <param name="breakGroundId"></param>
+       /// <returns></returns>
+        public static Model.View_License_BreakGround GetViewBreakGroundById(string breakGroundId)
+        {
+            return db.View_License_BreakGround.FirstOrDefault(e => e.BreakGroundId == breakGroundId);
+        }
+
         /// <summary>
         /// 根据主键删除信息
         /// </summary>

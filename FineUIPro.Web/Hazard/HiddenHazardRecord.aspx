@@ -21,7 +21,7 @@
             <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="隐患记录" EnableCollapse="true"
                 runat="server" BoxFlex="1" DataKeyNames="ID" AllowCellEditing="true" EnableColumnLines="true"
                 ClicksToEdit="2" DataIDField="ID" AllowSorting="true" SortField="FindTime,UnitName,UserName"
-                SortDirection="DESC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="10" OnPageIndexChange="Grid1_PageIndexChange"
+                SortDirection="DESC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="15" OnPageIndexChange="Grid1_PageIndexChange"
                 EnableTextSelection="True">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar2" Position="Top" runat="server">

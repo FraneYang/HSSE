@@ -109,11 +109,13 @@ namespace BLL
         {
             Model.HSSEDB_ENN db = Funs.DB;
             string newKeyID = SQLHelper.GetNewID(typeof(Model.Sys_ButtonPower));
-            Model.Sys_ButtonPower button = new Model.Sys_ButtonPower();
-            button.ButtonPowerID = newKeyID;
-            button.RoleId = btn.RoleId;
-            button.MenuId = btn.MenuId;
-            button.ButtonToMenuId = btn.ButtonToMenuId;
+            Model.Sys_ButtonPower button = new Model.Sys_ButtonPower
+            {
+                ButtonPowerID = newKeyID,
+                RoleId = btn.RoleId,
+                MenuId = btn.MenuId,
+                ButtonToMenuId = btn.ButtonToMenuId
+            };
 
             db.Sys_ButtonPower.InsertOnSubmit(button);
             db.SubmitChanges();

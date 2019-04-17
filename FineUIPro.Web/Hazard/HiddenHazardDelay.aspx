@@ -21,13 +21,13 @@
             <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="延期申请" EnableCollapse="true"
                 runat="server" BoxFlex="1" DataKeyNames="DelayId" AllowCellEditing="true" EnableColumnLines="true"
                 ClicksToEdit="2" DataIDField="DelayId" AllowSorting="true" SortField="HiddenHazardCode"
-                SortDirection="DESC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="10" OnPageIndexChange="Grid1_PageIndexChange"
+                SortDirection="DESC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="15" OnPageIndexChange="Grid1_PageIndexChange"
                 EnableTextSelection="True">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar2" Position="Top" runat="server">
                         <Items>
                             <f:TextBox runat="server" Label="编号" ID="txtHiddenHazardCode" EmptyText="输入查询条件" 
-                                AutoPostBack="true" OnTextChanged="TextBox_TextChanged" Width="250px" LabelWidth="80px">
+                                AutoPostBack="true" OnTextChanged="TextBox_TextChanged" Width="250px" LabelWidth="60px">
                              </f:TextBox>                            
                             <f:ToolbarFill ID="ToolbarFill1" runat="server"></f:ToolbarFill>
                         </Items>

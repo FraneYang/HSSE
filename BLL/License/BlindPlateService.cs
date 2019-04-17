@@ -7,7 +7,7 @@ namespace BLL
 {
    public static class BlindPlateService
     {
-        public static Model.HSSEDB_ENN db = Funs.DB;
+       public static Model.HSSEDB_ENN db = Funs.DB;
 
         /// <summary>
         /// 根据主键获取信息
@@ -35,6 +35,16 @@ namespace BLL
                 db.License_BlindPlate.DeleteOnSubmit(BlindPlate);
                 db.SubmitChanges();
             }
+        }
+
+       /// <summary>
+        ///根据主键获取盲板抽堵安全作业票视图
+       /// </summary>
+       /// <param name="blindPlateId"></param>
+       /// <returns></returns>
+        public static Model.View_License_BlindPlate GetViewBlindPlateById(string blindPlateId)
+        {
+            return db.View_License_BlindPlate.FirstOrDefault(e => e.BlindPlateId == blindPlateId);
         }
     }
 }

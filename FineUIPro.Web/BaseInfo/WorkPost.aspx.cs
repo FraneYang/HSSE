@@ -33,7 +33,7 @@ namespace FineUIPro.Web.BaseInfo
         /// </summary>
         private void BindGrid()
         {
-            string strSql = @"SELECT  WorkPostId, WorkPostName, WorkPostCode, Remark, PostType, IsHsse, Const.ConstText AS PostTypeName, (CASE WHEN IsHsse=1 THEN '是' ELSE '否' END) AS IsHsseStr,IsAuditFlow,RiskLevelId,Frequency,RiskLevelName"
+            string strSql = @"SELECT  WorkPostId, WorkPostName, WorkPostCode, Remark, PostType, IsHsse, Const.ConstText AS PostTypeName, (CASE WHEN IsHsse=1 THEN '是' ELSE '否' END) AS IsHsseStr,IsAuditFlow,RiskLevelId,Frequency,RiskLevelName,IsShowChart"
                    + @" FROM Base_WorkPost AS WorkPost"
                    + @" LEFT JOIN Sys_Const AS Const ON Const.GroupId='" + BLL.ConstValue.Group_PostType + "'  AND  WorkPost.PostType= Const.ConstValue"
                    + @" WHERE 1=1 ";
@@ -48,7 +48,7 @@ namespace FineUIPro.Web.BaseInfo
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();
@@ -65,33 +65,8 @@ namespace FineUIPro.Web.BaseInfo
             //Grid1.DataBind();
         }
 
-        /// <summary>
-        /// 分页
-        /// </summary>
-        /// <returns></returns>
-        private List<Model.Base_WorkPost> GetPagedDataTable(int pageIndex, int pageSize)
-        {
-            List<Model.Base_WorkPost> source = (from x in BLL.Funs.DB.Base_WorkPost orderby x.PostType, x.WorkPostCode select x).ToList();
-            List<Model.Base_WorkPost> paged = new List<Model.Base_WorkPost>();
-
-            int rowbegin = pageIndex * pageSize;
-            int rowend = (pageIndex + 1) * pageSize;
-            if (rowend > source.Count())
-            {
-                rowend = source.Count();
-            }
-
-            for (int i = rowbegin; i < rowend; i++)
-            {
-                paged.Add(source[i]);
-            }
-
-            return paged;
-        }
-
         protected void Grid1_PageIndexChange(object sender, GridPageEventArgs e)
         {
-            Grid1.PageIndex = e.NewPageIndex;
             BindGrid();
         }
 
@@ -102,7 +77,6 @@ namespace FineUIPro.Web.BaseInfo
         /// <param name="e"></param>
         protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Grid1.PageSize = Convert.ToInt32(ddlPageSize.SelectedValue);
             BindGrid();
         }
 
@@ -171,6 +145,14 @@ namespace FineUIPro.Web.BaseInfo
                 {
                     this.chkIsAuditFlow.Checked = false;
                 }
+                if (workPost.IsShowChart == true)
+                {
+                    this.chkIsAuditFlow.Checked = true;
+                }
+                else
+                {
+                    this.chkIsAuditFlow.Checked = false;
+                }
                 if (!string.IsNullOrEmpty(workPost.RiskLevelId))
                 {
                     this.drpRiskLevel.SelectedValueArray = workPost.RiskLevelId.Split(',');
@@ -182,7 +164,7 @@ namespace FineUIPro.Web.BaseInfo
                 //}
                 this.txtRemark.Text = workPost.Remark;
                 hfFormID.Text = Id;
-                this.btnDelete.Enabled = true;
+                this.btnDelete.Enabled = true;                
             }
         }
 
@@ -204,13 +186,16 @@ namespace FineUIPro.Web.BaseInfo
                 return;
             }
             string strRowID = hfFormID.Text;
-            Model.Base_WorkPost workPost = new Model.Base_WorkPost();
-            workPost.WorkPostCode = this.txtWorkPostCode.Text.Trim();
-            workPost.WorkPostName = this.txtWorkPostName.Text.Trim();
-            workPost.PostType = this.drpPostType.SelectedValue;
-            workPost.IsAuditFlow = Convert.ToBoolean(this.chkIsAuditFlow.Checked);
-            workPost.Remark = txtRemark.Text.Trim();
-            workPost.Frequency = Funs.GetNewInt(this.txtFrequency.Text);
+            Model.Base_WorkPost workPost = new Model.Base_WorkPost
+            {
+                WorkPostCode = this.txtWorkPostCode.Text.Trim(),
+                WorkPostName = this.txtWorkPostName.Text.Trim(),
+                PostType = this.drpPostType.SelectedValue,
+                IsAuditFlow = this.chkIsAuditFlow.Checked,
+                IsShowChart = this.chkIsShowChart.Checked,
+                Remark = txtRemark.Text.Trim(),
+                Frequency = Funs.GetNewInt(this.txtFrequency.Text)
+            };
 
             ///巡检级别
             string riskLevelIds = string.Empty;

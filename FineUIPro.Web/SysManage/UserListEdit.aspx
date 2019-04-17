@@ -14,7 +14,7 @@
         <Rows>
             <f:FormRow>
                 <Items>
-                     <f:TextBox ID="txtUserCode" runat="server" Label="编号"  MaxLength="20" AutoPostBack="true" OnTextChanged="TextBox_TextChanged">
+                     <f:TextBox ID="txtSortIndex" runat="server" Label="排列序号"  MaxLength="50">
                     </f:TextBox>
                     <f:TextBox ID="txtUserName" runat="server" Label="姓名" Required="true" ShowRedStar="true"  MaxLength="20"
                         FocusOnPageLoad="true">
@@ -23,10 +23,10 @@
             </f:FormRow>            
             <f:FormRow>
                 <Items>
+                   <f:TextBox ID="txtUserCode" runat="server" Label="用户编号"  MaxLength="20" AutoPostBack="true" OnTextChanged="TextBox_TextChanged">
+                    </f:TextBox>
                     <f:TextBox ID="txtAccount" runat="server" Label="登录账号" Required="true" ShowRedStar="true"  MaxLength="50" AutoPostBack="true" OnTextChanged="TextBox_TextChanged">
-                    </f:TextBox><f:TextBox ID="txtTelephone" runat="server" Label="手机号码" MaxLength="50">
-                   </f:TextBox>
-                  
+                    </f:TextBox>
                 </Items>
             </f:FormRow>  
             <f:FormRow>
@@ -34,6 +34,8 @@
                     <f:DropDownList ID="drpUnit" runat="server" Label="单位" EnableEdit="true" ForceSelection="false"
                         Required="true" ShowRedStar="true">
                     </f:DropDownList>
+                    <f:TextBox ID="txtTelephone" runat="server" Label="手机号码" MaxLength="50">
+                   </f:TextBox>
                 </Items>
             </f:FormRow> 
              <f:FormRow>
@@ -41,13 +43,15 @@
                     <f:DropDownList ID="drpDepart" runat="server" Label="部门(中心)" EnableEdit="true" 
                         AutoPostBack="true" OnSelectedIndexChanged="drpDepart_SelectedIndexChanged" >
                     </f:DropDownList>
-                    <f:DropDownList ID="drpInstallation" runat="server" Label="装置/科室" EnableEdit="true">
+                    <f:DropDownList ID="drpInstallation" runat="server" Label="装置/科室" EnableEdit="true" EnableMultiSelect="true"
+                        ForceSelection="false" MaxLength="500" EnableCheckBoxSelect="true">
                     </f:DropDownList>
                 </Items>
             </f:FormRow>           
             <f:FormRow>
                 <Items>
-                    <f:DropDownList ID="drpWorkPost" runat="server" Label="所属岗位" EnableEdit="true" >
+                    <f:DropDownList ID="drpWorkPost" runat="server" Label="所属岗位" EnableEdit="true" EnableMultiSelect="true"
+                        ForceSelection="false" MaxLength="500" EnableCheckBoxSelect="true">
                     </f:DropDownList>
                     <f:DropDownList ID="drpRole" runat="server" Label="所属角色" EnableEdit="true">
                     </f:DropDownList>
@@ -57,15 +61,39 @@
                 <Items>
                    <f:TextBox ID="txtIdentityCard" runat="server" Label="身份证号" MaxLength="50"  AutoPostBack="true" OnTextChanged="TextBox_TextChanged"> <%--RegexPattern="IDENTITY_CARD"--%>
                    </f:TextBox>
+                   <f:DatePicker ID="txtEntryTime" runat="server" Label="登记时间" LabelAlign="Right" EnableEdit="false">
+                    </f:DatePicker>
+                </Items>
+            </f:FormRow>          
+             <f:FormRow>
+                <Items>
                    <f:DropDownList ID="drpIsPost" runat="server" Label="在岗" EnableEdit="false" 
                         Required="true" ShowRedStar="true">
                     </f:DropDownList>
+                     <f:DropDownList ID="drpIsEmergency" runat="server" Label="应急" EnableEdit="false" 
+                        Required="true" ShowRedStar="true">
+                    </f:DropDownList>
                 </Items>
-            </f:FormRow>          
+            </f:FormRow>  
+            <f:FormRow>
+                <Items>
+                    <f:DropDownList ID="drpIsTemp" runat="server" Label="临时" EnableEdit="false" 
+                        Required="true" ShowRedStar="true">
+                    </f:DropDownList>
+                    <f:Label runat="server"></f:Label>
+                </Items>
+            </f:FormRow>   
+            <f:FormRow>
+                <Items>
+                    <f:DropDownList ID="drpDealInstallation" runat="server" Label="分管装置" EnableEdit="true" EnableMultiSelect="true"
+                        ForceSelection="false" EnableCheckBoxSelect="true">
+                    </f:DropDownList>
+                </Items>
+            </f:FormRow>
         </Rows>
         <Toolbars>
             <f:Toolbar ID="Toolbar1" Position="Bottom" ToolbarAlign="Right" runat="server">
-                <Items>
+                <Items>                 
                     <f:Button ID="btnSave" Icon="SystemSave" runat="server"  ValidateForms="SimpleForm1" Hidden="true"
                         OnClick="btnSave_Click">
                     </f:Button>

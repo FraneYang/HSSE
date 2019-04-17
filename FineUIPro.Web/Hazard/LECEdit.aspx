@@ -5,143 +5,139 @@
 <head runat="server">
     <title>编辑LEC评价</title>
     <link href="../res/css/common.css" rel="stylesheet" type="text/css" />
+     <style type="text/css">
+         .f-grid-row.Blue {
+             background-color: blue;
+         }
+         .f-grid-row.Yellow {
+             background-color: yellow;
+         }
+         .f-grid-row.Orange {
+             background-color: orange;
+         }
+         .f-grid-row.Red {
+             background-color: red;
+         } 
+            .f-grid-row .f-grid-cell-inner {
+            white-space: normal;
+            word-break: break-all;
+        }  
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
     <f:PageManager ID="PageManager1" AutoSizePanelID="SimpleForm1" runat="server" />
-    <f:Form ID="SimpleForm1" ShowBorder="false" ShowHeader="false" AutoScroll="true"
-        BodyPadding="10px" runat="server" RedStarPosition="BeforeText" LabelAlign="Right">
-        <Rows>
-            <f:FormRow>
-                <Items>
-                    <f:DropDownList ID="drpInstallationId" runat="server" Label="装置" EnableEdit="true" >
-                    </f:DropDownList>
-                    <f:TextBox ID="txtEvaluatorName" runat="server" Label="评价人" Readonly="true">
-                    </f:TextBox>
-                    <f:TextBox ID="txtEvaluationTime" runat="server" Label="评价时间" Readonly="true">
-                    </f:TextBox>
+    <f:Form ID="SimpleForm1" ShowBorder="false" ShowHeader="false" AutoScroll="true" Layout="VBox" 
+        BodyPadding="10px" runat="server" RedStarPosition="BeforeText" LabelAlign="Right" EnableTableStyle="true">
+        <Rows>           
+            <f:FormRow runat="server" ID="fRow0">
+                <Items>                   
+                     <f:TextBox Label="设备设施" runat="server" ID="txtDataName" Readonly="true" LabelWidth="120px">
+                     </f:TextBox>
+                     <f:TextBox Label="设备设施类型" runat="server" ID="txtEuipmentType" Readonly="true" LabelWidth="120px">
+                     </f:TextBox>
                 </Items>
-            </f:FormRow>           
+            </f:FormRow>
             <f:FormRow>
                 <Items>
-                  <f:Grid ID="Grid1" ShowBorder="false" ShowHeader="false" Title="LEC评价" EnableCollapse="true"
-                    runat="server" BoxFlex="1" DataKeyNames="LECItemId" AllowCellEditing="true"
-                    EnableColumnLines="true" DataIDField="LECItemId" AllowSorting="true" SortField="SortIndex" ClicksToEdit="1">
-                    <Toolbars>
-                        <f:Toolbar ID="Toolbar2" Position="Top" runat="server">
-                            <Items>                               
-                                <f:Button ID="btnAdd" Text="新增" Icon="Add" runat="server" OnClick="btnAdd_Click" Hidden="true">
-                                </f:Button>
-                                <f:Button ID="btnDelete" Text="删除" Icon="Delete" ConfirmText="确定删除当前数据？" OnClick="btnDelete_Click" Hidden="true"
-                                    runat="server" AjaxLoadingType="Mask" ShowAjaxLoadingMaskText="true" AjaxLoadingMaskText="正在删除数据，请稍候">
-                                </f:Button>                                
-                            </Items>
-                        </f:Toolbar>
-                    </Toolbars>
-                    <Columns>
-                        <f:RowNumberField />
-                        <f:RenderField Width="120px" ColumnID="RiskPlace" DataField="RiskPlace"
-                            FieldType="String" HeaderText="区域位置" HeaderTextAlign="Center" TextAlign="Left">
-                            <Editor>
-                                <f:TextBox ID="txtRiskPlace" Required="true" runat="server">
-                                </f:TextBox>
-                            </Editor>
+                    <f:TextBox Label="装置" runat="server" ID="txtInstallation" Readonly="true" LabelWidth="120px">
+                    </f:TextBox>
+                    <f:TextBox Label="区域单元" runat="server" ID="txtWorkArea" Readonly="true" LabelWidth="120px">
+                    </f:TextBox>                         
+                </Items>
+            </f:FormRow>    
+            <f:FormRow>
+                <Items>
+                      <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="LEC评价" EnableCollapse="true"
+                        runat="server" BoxFlex="1" DataKeyNames="LECItemId" AllowCellEditing="true" EnableColumnLines="true"
+                        ClicksToEdit="2" DataIDField="LECItemId" AllowSorting="true" SortField="SortIndex"
+                        SortDirection="ASC" OnSort="Grid1_Sort" AllowPaging="false" IsDatabasePaging="true"
+                        PageSize="1000" EnableRowDoubleClickEvent="true" Height="420px"
+                        OnRowDoubleClick="Grid1_RowDoubleClick" Width="900px" EnableTextSelection="True">
+                        <Toolbars>
+                            <f:Toolbar ID="Toolbar2" Position="Top" runat="server" ToolbarAlign="Right">
+                                <Items>   
+                                    <f:TextBox runat="server" ID="txtName" Label="查询" EmptyText="输入查询条件" AutoPostBack="true"
+                                        OnTextChanged="TextBox_TextChanged" Width="250px" LabelAlign="Right">
+                                    </f:TextBox>      
+                                    <f:ToolbarFill ID="ToolbarFill1" runat="server">
+                                    </f:ToolbarFill>
+                                    <f:Button ID="btnAdd" ToolTip="新增" Icon="Add" ValidateForms="SimpleForm1" runat="server" OnClick="btnAdd_Click" Hidden="true">
+                                    </f:Button>
+                                </Items>
+                            </f:Toolbar>
+                        </Toolbars>
+                        <Columns>      
+                        <f:RenderField Width="50px" ColumnID="SortIndex" DataField="SortIndex" FieldType="Int"
+                            HeaderText="序号" HeaderTextAlign="Center" TextAlign="Center">
                         </f:RenderField>
-                        <f:RenderField Width="80px" ColumnID="SortIndex" DataField="SortIndex"
-                            FieldType="String" HeaderText="序号NO." HeaderTextAlign="Center" TextAlign="Left">
-                            <Editor>
-                                 <f:NumberBox ID="nbSortIndex" NoDecimal="true" NoNegative="true" runat="server">
-                                </f:NumberBox>
-                            </Editor>
+                        <f:RenderField Width="180px" ColumnID="HazardDescription" DataField="HazardDescription" FieldType="String"
+                            HeaderText="危险源描述" HeaderTextAlign="Center" TextAlign="Left" ExpandUnusedSpace="true">
                         </f:RenderField>
-                        <f:RenderField Width="120px" ColumnID="HazardDescription" DataField="HazardDescription" FieldType="String"
-                             HeaderText="危险源描述" HeaderTextAlign="Center" TextAlign="Left">
-                            <Editor>
-                                <f:TextBox ID="txtHazardDescription" runat="server">
-                                </f:TextBox>
-                            </Editor>
+                        <f:RenderField Width="120px" ColumnID="PossibleAccidents" DataField="PossibleAccidents" FieldType="String"
+                            HeaderText="危害或潜在事件" HeaderTextAlign="Center" TextAlign="Left" >
                         </f:RenderField>
-                         <f:RenderField Width="120px" ColumnID="PossibleAccidents" DataField="PossibleAccidents" FieldType="String"
-                             HeaderText="可能导致的事故" HeaderTextAlign="Center" TextAlign="Left">
-                            <Editor>
-                                <f:TextBox ID="txtPossibleAccidents" runat="server">
-                                </f:TextBox>
-                            </Editor>
+                        <f:RenderField Width="60px" ColumnID="HazardJudge_L" DataField="HazardJudge_L" FieldType="String"
+                            HeaderText="L" HeaderTextAlign="Center" TextAlign="Left">
                         </f:RenderField>
-                        <f:RenderField Width="80px" ColumnID="HazardJudge_L" DataField="HazardJudge_L"
-                            FieldType="String" HeaderText="L" HeaderTextAlign="Center" TextAlign="Left">
-                            <Editor>
-                                 <f:NumberBox ID="nbHazardJudge_L" NoDecimal="true" NoNegative="true" runat="server">
-                                </f:NumberBox>
-                            </Editor>
+                        <f:RenderField Width="60px" ColumnID="HazardJudge_E" DataField="HazardJudge_E" FieldType="String"
+                            HeaderText="E" HeaderTextAlign="Center" TextAlign="Left">
                         </f:RenderField>
-                        <f:RenderField Width="80px" ColumnID="HazardJudge_E" DataField="HazardJudge_E"
-                            FieldType="String" HeaderText="E" HeaderTextAlign="Center" TextAlign="Left">
-                            <Editor>
-                                <f:NumberBox ID="nbHazardJudge_E" NoDecimal="true" NoNegative="true" runat="server">
-                                </f:NumberBox>
-                            </Editor>
+                        <f:RenderField Width="60px" ColumnID="HazardJudge_C" DataField="HazardJudge_C" FieldType="String"
+                            HeaderText="C" HeaderTextAlign="Center" TextAlign="Left">
                         </f:RenderField>
-                        <f:RenderField Width="80px" ColumnID="HazardJudge_C" DataField="HazardJudge_C"
-                            FieldType="String" HeaderText="C" HeaderTextAlign="Center" TextAlign="Left">
-                            <Editor>
-                                <f:NumberBox ID="nbHazardJudge_C" NoDecimal="true" NoNegative="true" runat="server">
-                                </f:NumberBox>
-                            </Editor>
+                        <f:RenderField Width="60px" ColumnID="HazardJudge_D" DataField="HazardJudge_D" FieldType="String"
+                            HeaderText="D" HeaderTextAlign="Center" TextAlign="Left">
                         </f:RenderField>
-                        <f:RenderField Width="80px" ColumnID="HazardJudge_D" DataField="HazardJudge_D"
-                            FieldType="String" HeaderText="D" HeaderTextAlign="Center" TextAlign="Left">
-                            <Editor>
-                                <f:NumberBox ID="nbHazardJudge_D" NoDecimal="true" NoNegative="true" runat="server">
-                                </f:NumberBox>
-                            </Editor>
+                        <f:RenderField Width="80px" ColumnID="RiskLevelName" DataField="RiskLevelName" FieldType="String"
+                            HeaderText="风险等级" HeaderTextAlign="Center" TextAlign="Left">
                         </f:RenderField>
-                        <f:RenderField Width="120px" ColumnID="RiskLevel" DataField="RiskLevel" FieldType="String"
-                             HeaderText="风险评价级别" HeaderTextAlign="Center" TextAlign="Left">
-                            <Editor>
-                                <f:DropDownList ID="drpRiskLevel" runat="server">
-                                    <f:ListItem Value="1" Text="一级"/>
-                                    <f:ListItem Value="2" Text="二级"/>
-                                    <f:ListItem Value="3" Text="三级"/>
-                                    <f:ListItem Value="4" Text="四级"/>
-                                </f:DropDownList>
-                            </Editor>
+                        <f:RenderField Width="120px" ColumnID="ControlMeasures" DataField="ControlMeasures" FieldType="String"
+                            HeaderText="工程技术措施" HeaderTextAlign="Center" TextAlign="Left">
                         </f:RenderField>
-                         <f:RenderField Width="120px" ColumnID="ControlMeasures" DataField="ControlMeasures" FieldType="String"
-                             HeaderText="控制措施" HeaderTextAlign="Center" TextAlign="Left">
-                            <Editor>
-                                <f:TextBox ID="txtControlMeasures" runat="server">
-                                </f:TextBox>
-                            </Editor>
+                       <f:RenderField Width="110px" ColumnID="ManagementMeasures" DataField="ManagementMeasures" FieldType="String"
+                            HeaderText="管理措施" HeaderTextAlign="Center" TextAlign="Left">
                         </f:RenderField>
-                         <f:RenderField Width="120px" ColumnID="Remark" DataField="Remark" FieldType="String"
-                             HeaderText="备注" HeaderTextAlign="Center" TextAlign="Left">
-                            <Editor>
-                                <f:TextBox ID="txtRemark" runat="server">
-                                </f:TextBox>
-                            </Editor>
+                            <f:RenderField Width="110px" ColumnID="ProtectiveMeasures" DataField="ProtectiveMeasures" FieldType="String"
+                            HeaderText="防护措施" HeaderTextAlign="Center" TextAlign="Left">
                         </f:RenderField>
-                    </Columns>                    
+                            <f:RenderField Width="90px" ColumnID="OtherMeasures" DataField="OtherMeasures" FieldType="String"
+                            HeaderText="其他措施" HeaderTextAlign="Center" TextAlign="Left">
+                        </f:RenderField>
+                    </Columns> 
+                    <Listeners>
+                        <f:Listener Event="beforerowcontextmenu" Handler="onRowContextMenu" />
+                    </Listeners>
                   </f:Grid>
                 </Items>
             </f:FormRow>          
-        </Rows>
-        <Toolbars>
-            <f:Toolbar ID="Toolbar1" Position="Bottom" ToolbarAlign="Right" runat="server">
-                <Items>
-                    <f:Button ID="btnSave" Icon="SystemSave" runat="server" ValidateForms="SimpleForm1" Hidden="true"
-                        OnClick="btnSave_Click">
-                    </f:Button>
-                    <f:Button ID="btnClose" EnablePostBack="false" ToolTip="关闭" runat="server" Icon="SystemClose">
-                    </f:Button>
-                </Items>
-            </f:Toolbar>
-        </Toolbars>
+        </Rows>       
     </f:Form>
     <f:Window ID="Window1" Title="信息维护页面" Hidden="true" EnableIFrame="true" EnableMaximize="true"
-        Target="Parent" EnableResize="true" runat="server" OnClose="Window1_Close" IsModal="true"
-        CloseAction="HidePostBack" Width="1000px" Height="550px">
+        Target="Top" EnableResize="true" runat="server" OnClose="Window1_Close" IsModal="true"
+        CloseAction="HidePostBack" Width="900px" Height="540px">
     </f:Window>
+    <f:Menu ID="Menu1" runat="server">
+        <f:MenuButton ID="btnMenuEdit" OnClick="btnMenuEdit_Click" EnablePostBack="true"
+            Hidden="true" runat="server" Text="编辑" Icon="TableEdit">
+        </f:MenuButton>
+        <f:MenuButton ID="btnMenuDelete" OnClick="btnMenuDelete_Click" EnablePostBack="true"
+            Hidden="true" ConfirmText="删除选中行？" ConfirmTarget="Top" runat="server" Text="删除"
+            Icon="Delete">
+        </f:MenuButton>
+    </f:Menu>
     </form>
+    <script type="text/jscript">
+        var menuID = '<%= Menu1.ClientID %>';
+        // 返回false，来阻止浏览器右键菜单
+        function onRowContextMenu(event, rowId) {
+            F(menuID).show();  //showAt(event.pageX, event.pageY);
+            return false;
+        }
+
+        function reloadGrid() {
+            __doPostBack(null, 'reloadGrid');
+        }
+    </script>
 </body>
 </html>

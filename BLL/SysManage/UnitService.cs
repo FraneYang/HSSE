@@ -29,21 +29,23 @@ namespace BLL
         public static void AddUnit(Model.Base_Unit unit)
         {
             Model.HSSEDB_ENN db = Funs.DB;
-            Model.Base_Unit newUnit = new Model.Base_Unit();
-            newUnit.UnitId = unit.UnitId;
-            newUnit.UnitCode = unit.UnitCode;
-            newUnit.UnitName = unit.UnitName;
-            newUnit.UnitTypeId = unit.UnitTypeId;
-            newUnit.Corporate = unit.Corporate;
-            newUnit.Address = unit.Address;
-            newUnit.Telephone = unit.Telephone;
-            newUnit.Fax = unit.Fax;
-            newUnit.EMail = unit.EMail;
-            newUnit.ProjectRange = unit.ProjectRange;
-            newUnit.IsThisUnit = unit.IsThisUnit;
-            newUnit.IsHide = false;
-            newUnit.ManagerIds = unit.ManagerIds;
-            newUnit.ManagerNames = unit.ManagerNames;
+            Model.Base_Unit newUnit = new Model.Base_Unit
+            {
+                UnitId = unit.UnitId,
+                UnitCode = unit.UnitCode,
+                UnitName = unit.UnitName,
+                UnitTypeId = unit.UnitTypeId,
+                Corporate = unit.Corporate,
+                Address = unit.Address,
+                Telephone = unit.Telephone,
+                Fax = unit.Fax,
+                EMail = unit.EMail,
+                ProjectRange = unit.ProjectRange,
+                IsThisUnit = unit.IsThisUnit,
+                IsHide = false,
+                ManagerIds = unit.ManagerIds,
+                ManagerNames = unit.ManagerNames
+            };
             db.Base_Unit.InsertOnSubmit(newUnit);
             db.SubmitChanges();
         }
@@ -144,5 +146,14 @@ namespace BLL
             }
         }
         #endregion
+
+        /// <summary>
+        /// 获取本单位
+        /// </summary>
+        /// <returns></returns>
+        public static string GetThisUnit()
+        {
+            return (from x in Funs.DB.Base_Unit where x.IsThisUnit == true select x.UnitId).FirstOrDefault();           
+        }
     }
 }

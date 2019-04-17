@@ -35,7 +35,7 @@ namespace Web.ReportPrint
         {
             if (this.drpPrintReport.SelectedValue != "0")
             {
-                //BLL.LogService.AddLog(this.CurrUser.UserId, this.drpPrintReport.SelectedItem.Text);
+                //BLL.LogService.AddLog(this.CurrUser.LoginProjectId,this.CurrUser.UserId, this.drpPrintReport.SelectedItem.Text);
                 Response.Redirect("ExPrintSet.aspx?reportId=" + this.drpPrintReport.SelectedValue + "&reportName=" + this.drpPrintReport.SelectedItem.Text);
             }
         }

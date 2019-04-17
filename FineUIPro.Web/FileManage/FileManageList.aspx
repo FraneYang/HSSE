@@ -21,7 +21,7 @@
                 DataKeyNames="WED_ID" AllowCellEditing="true"  DataIDField="FileId"
                 AllowSorting="true" SortField="FileName" SortDirection="ASC"  OnSort="Grid1_Sort"
                 OnRowCommand="Grid1_RowCommand" EnableRowDoubleClickEvent="true" OnRowDoubleClick="Grid1_RowDoubleClick"
-                AllowPaging="true" IsDatabasePaging="true"  PageSize="10" OnPageIndexChange="Grid1_PageIndexChange" 
+                AllowPaging="true" IsDatabasePaging="true"  PageSize="15" OnPageIndexChange="Grid1_PageIndexChange" 
 
                 AllowFilters="true"  OnFilterChange="Grid1_FilterChange" EnableTextSelection="True">
                 <Toolbars>

@@ -15,10 +15,12 @@ namespace BLL
         {
             Model.HSSEDB_ENN db = Funs.DB;
             string newRolePower = BLL.SQLHelper.GetNewID(typeof(Model.Sys_RolePower));
-            Model.Sys_RolePower newPower = new Model.Sys_RolePower();
-            newPower.RolePowerId = newRolePower;
-            newPower.RoleId = power.RoleId;
-            newPower.MenuId = power.MenuId;
+            Model.Sys_RolePower newPower = new Model.Sys_RolePower
+            {
+                RolePowerId = newRolePower,
+                RoleId = power.RoleId,
+                MenuId = power.MenuId
+            };
 
             db.Sys_RolePower.InsertOnSubmit(newPower);
             db.SubmitChanges();

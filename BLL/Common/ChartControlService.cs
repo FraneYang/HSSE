@@ -22,23 +22,29 @@
         /// <returns>返回图</returns>
         public static Model.DataSourceChart GetDataSourceChart(DataTable dt, string title, string type, int width, int height, bool isNotEnable3D)
         {
-            Model.DataSourceChart dataSourceChart = new Model.DataSourceChart();
-            dataSourceChart.Width = width;
-            dataSourceChart.Height = height;
-            dataSourceChart.Title = title;             
-            dataSourceChart.IsNotEnable3D = isNotEnable3D;
-            dataSourceChart.ChartType = GetChartType(type);
+            Model.DataSourceChart dataSourceChart = new Model.DataSourceChart
+            {
+                Width = width,
+                Height = height,
+                Title = title,
+                IsNotEnable3D = isNotEnable3D,
+                ChartType = GetChartType(type)
+            };
             List<Model.DataSourceTeam> dataSourceTeams = new List<Model.DataSourceTeam>();
             for (int i = 1; i < dt.Columns.Count; i++)
             {
-                Model.DataSourceTeam dataSourceTeam = new Model.DataSourceTeam();
-                dataSourceTeam.DataPointName = dt.Columns[i].ToString();
+                Model.DataSourceTeam dataSourceTeam = new Model.DataSourceTeam
+                {
+                    DataPointName = dt.Columns[i].ToString()
+                };
                 List<Model.DataSourcePoint> dataSourcePoints = new List<Model.DataSourcePoint>();
                 for (int j = 0; j < dt.Rows.Count; j++)
                 {
-                    Model.DataSourcePoint dataSourcePoint = new Model.DataSourcePoint();
-                    dataSourcePoint.PointText = dt.Rows[j][0].ToString();
-                    dataSourcePoint.PointValue = dt.Rows[j][i].ToString();
+                    Model.DataSourcePoint dataSourcePoint = new Model.DataSourcePoint
+                    {
+                        PointText = dt.Rows[j][0].ToString(),
+                        PointValue = dt.Rows[j][i].ToString()
+                    };
                     dataSourcePoints.Add(dataSourcePoint);
                 }
                 dataSourceTeam.DataSourcePoints = dataSourcePoints;

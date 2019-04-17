@@ -91,9 +91,11 @@ namespace FineUIPro.Web.SysManage
         /// <param name="e"></param>
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            Model.Base_Unit unit = new Model.Base_Unit();
-            unit.UnitCode = this.txtUnitCode.Text.Trim();
-            unit.UnitName = this.txtUnitName.Text.Trim(); 
+            Model.Base_Unit unit = new Model.Base_Unit
+            {
+                UnitCode = this.txtUnitCode.Text.Trim(),
+                UnitName = this.txtUnitName.Text.Trim()
+            };
             ////单位类型下拉框
             if (this.ddlUnitTypeId.SelectedValue != BLL.Const._Null)
             {
@@ -106,9 +108,11 @@ namespace FineUIPro.Web.SysManage
                     }
                     else
                     {
-                        Model.Base_UnitType newUitType = new Model.Base_UnitType();
-                        newUitType.UnitTypeId = SQLHelper.GetNewID(typeof(Model.Base_UnitType));
-                        newUitType.UnitTypeName = this.ddlUnitTypeId.Text;
+                        Model.Base_UnitType newUitType = new Model.Base_UnitType
+                        {
+                            UnitTypeId = SQLHelper.GetNewID(typeof(Model.Base_UnitType)),
+                            UnitTypeName = this.ddlUnitTypeId.Text
+                        };
                         BLL.UnitTypeService.AddUnitType(newUitType);
                         unit.UnitTypeId = newUitType.UnitTypeId;
                     }

@@ -23,6 +23,11 @@
             { 
                 ////权限按钮方法
                 this.GetButtonPower();
+                if (this.CurrUser.UserId == BLL.Const.sysglyId)
+                {
+                    this.btnArrowRefresh.Hidden = false;
+                }
+
                 this.ddlPageSize.SelectedValue = Grid1.PageSize.ToString();
                 // 绑定表格
                 this.BindGrid();
@@ -34,7 +39,7 @@
         /// </summary>
         private void BindGrid()
         {
-            string strSql = @"SELECT Value.RiskLevelValueId,Value.MinValue,Value.MaxValue,Const.ConstText AS RiskLevelName,Const.SortIndex"
+            string strSql = @"SELECT Value.RiskLevelValueId,Value.MinValue,Value.MaxValue,Const.ConstText AS RiskLevelName,Const.SortIndex,ControlMeasures,LimitTime,Identification"
                             + @" FROM Base_RiskLevelValue AS Value"
                             + @" LEFT JOIN Sys_Const AS Const ON Const.GroupId='" + BLL.ConstValue.Group_RiskLevel + "' AND Const.ConstValue=Value.RiskLevelId"
                             + @" WHERE 1 = 1";
@@ -42,7 +47,7 @@
 
             if (!string.IsNullOrEmpty(this.txtRiskLevelName.Text.Trim()))
             {
-                strSql += " AND RiskLevelName LIKE @RiskLevelName";
+                strSql += " AND (Const.ConstText LIKE @RiskLevelName OR Identification LIKE @RiskLevelName OR ControlMeasures LIKE @RiskLevelName)";
                 listStr.Add(new SqlParameter("@RiskLevelName", "%" + this.txtRiskLevelName.Text.Trim() + "%"));
             }      
            
@@ -50,7 +55,7 @@
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();           
@@ -152,6 +157,17 @@
             }
             string Id = Grid1.SelectedRowID;
             PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("RiskLevelValueEdit.aspx?RiskLevelValueId={0}", Id, "编辑 - ")));
+        }
+        
+        /// <summary>
+        ///  根据最新设置的风险等级值更新风险库的值
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnArrowRefresh_Click(object sender, EventArgs e)
+        {
+            BLL.RiskLevelValueService.RefreshRiskLevelByValue();
+            ShowNotify("更新成功！", MessageBoxIcon.Success);
         }
     }
 }

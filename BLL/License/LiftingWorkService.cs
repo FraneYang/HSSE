@@ -7,7 +7,7 @@ namespace BLL
 {
    public static class LiftingWorkService
     {
-        public static Model.HSSEDB_ENN db = Funs.DB;
+       public static Model.HSSEDB_ENN db = Funs.DB;
 
         /// <summary>
         /// 根据主键获取信息
@@ -17,6 +17,16 @@ namespace BLL
         public static Model.License_LiftingWork GetLiftingWorkById(string LiftingWorkId)
         {
             return Funs.DB.License_LiftingWork.FirstOrDefault(e => e.LiftingWorkId == LiftingWorkId);
+        }
+
+       /// <summary>
+       /// 根据主键获取视图信息
+       /// </summary>
+       /// <param name="liftingWorkId"></param>
+       /// <returns></returns>
+        public static Model.View_License_LiftingWork GetViewLiftingWorkById(string liftingWorkId)
+        {
+            return db.View_License_LiftingWork.FirstOrDefault(e => e.LiftingWorkId == liftingWorkId);
         }
 
         /// <summary>

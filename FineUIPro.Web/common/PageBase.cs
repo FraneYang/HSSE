@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 using Newtonsoft.Json.Linq;
+using AspNet = System.Web.UI.WebControls;
 
 namespace FineUIPro.Web
 {
@@ -18,7 +19,7 @@ namespace FineUIPro.Web
         {
             get
             {
-                if (Session["CurrUser"] == null) return null;
+                if (Session["CurrUser"] == null) return null;                   
                 return (Model.Sys_User)Session["CurrUser"];
             }
         }
@@ -94,9 +95,9 @@ namespace FineUIPro.Web
             {
                 if (this.Page.Request.AppRelativeCurrentExecutionFilePath != "~/Login.aspx")
                     Response.Redirect("~/Login.aspx");
-            }
+            }         
         }
-
+        
         /// <summary>
         /// UNLOAD事件，发生在页面装载顺序的最后。
         /// 在这里处理的是DBLIST，数据库连接字典。
@@ -272,30 +273,30 @@ namespace FineUIPro.Web
 
         #region 表格过滤
         // 表格过滤
-        protected DataTable GetFilteredTable(JArray filteredData, DataTable source)
-        {
-            DataTable result = source.Clone();
+        //protected DataTable GetFilteredTable(JArray filteredData, DataTable source)
+        //{
+        //    DataTable result = source.Clone();
 
-            foreach (DataRow row in source.Rows)
-            {
-                bool filtered = true;
-                foreach (JObject filteredObj in filteredData)
-                {
-                    if (!CheckDataRow(row, filteredObj))
-                    {
-                        filtered = false;
-                        break;
-                    }
-                }
+        //    foreach (DataRow row in source.Rows)
+        //    {
+        //        bool filtered = true;
+        //        foreach (JObject filteredObj in filteredData)
+        //        {
+        //            if (!CheckDataRow(row, filteredObj))
+        //            {
+        //                filtered = false;
+        //                break;
+        //            }
+        //        }
 
-                if (filtered)
-                {
-                    result.Rows.Add(row.ItemArray);
-                }
-            }
+        //        if (filtered)
+        //        {
+        //            result.Rows.Add(row.ItemArray);
+        //        }
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
 
         private bool CheckDataRow(DataRow row, JObject filteredObj)
@@ -582,17 +583,74 @@ namespace FineUIPro.Web
         /// <param name="messageIcon"></param>
         public void ShowNotify(string message, MessageBoxIcon messageIcon)
         {
-            Notify n = new Notify();
-            n.Target = Target.Top;
-            n.Message = message;
-            n.MessageBoxIcon = messageIcon;
-            n.PositionX = Position.Center;
-            n.PositionY = Position.Top;
-            n.DisplayMilliseconds = 3000;
-            n.ShowHeader = false;
+            Notify n = new Notify
+            {
+                Target = Target.Top,
+                Message = message,
+                MessageBoxIcon = messageIcon,
+                PositionX = Position.Center,
+                PositionY = Position.Top,
+                DisplayMilliseconds = 3000,
+                ShowHeader = false
+            };
             n.Show();
         }
 
-        #endregion        
+        #endregion
+
+        #region 导出方法
+        /// <summary>
+        /// 导出方法
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <returns></returns>
+        public static string GetGridTableHtml(Grid grid)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<meta http-equiv=\"content-type\" content=\"application/excel; charset=UTF-8\"/>");
+            sb.Append("<table cellspacing=\"0\" rules=\"all\" border=\"1\" style=\"border-collapse:collapse;\">");
+            sb.Append("<tr>");
+            foreach (GridColumn column in grid.Columns)
+            {
+                sb.AppendFormat("<td>{0}</td>", column.HeaderText);
+            }
+            sb.Append("</tr>");
+            foreach (GridRow row in grid.Rows)
+            {
+                sb.Append("<tr>");
+                foreach (GridColumn column in grid.Columns)
+                {
+                    string html = row.Values[column.ColumnIndex].ToString();
+                    if (column.ColumnID == "tfNumber" && (row.FindControl("labNumber") as AspNet.Label) != null)
+                    {
+                        html = (row.FindControl("labNumber") as AspNet.Label).Text;
+                    }
+                    if (column.ColumnID == "tfTeamType" && (row.FindControl("lbTeamType") as AspNet.Label) != null)
+                    {
+                        html = (row.FindControl("lbTeamType") as AspNet.Label).Text;
+                    }
+                    // 处理CheckBox
+                    if (html.Contains("f-grid-static-checkbox"))
+                    {
+                        if (!html.Contains("f-checked"))
+                        {
+                            html = "×";
+                        }
+                        else
+                        {
+                            html = "√";
+                        }
+                    }
+                    sb.AppendFormat("<td>{0}</td>", html);
+                }
+
+                sb.Append("</tr>");
+            }
+
+            sb.Append("</table>");
+
+            return sb.ToString();
+        }        
+        #endregion
     }
 }

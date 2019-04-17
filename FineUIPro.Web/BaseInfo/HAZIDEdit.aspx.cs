@@ -66,10 +66,12 @@ namespace FineUIPro.Web.BaseInfo
                 return;
             }
 
-            Model.Base_HAZID newHAZID = new Model.Base_HAZID();
-            newHAZID.HAZIDCode = this.txtHAZIDCode.Text.Trim();
-            newHAZID.HAZIDName = this.txtHAZIDName.Text.Trim();
-            newHAZID.Remark = this.txtRemark.Text.Trim();
+            Model.Base_HAZID newHAZID = new Model.Base_HAZID
+            {
+                HAZIDCode = this.txtHAZIDCode.Text.Trim(),
+                HAZIDName = this.txtHAZIDName.Text.Trim(),
+                Remark = this.txtRemark.Text.Trim()
+            };
             if (string.IsNullOrEmpty(this.HAZIDId))
             {
                 newHAZID.HAZIDId = SQLHelper.GetNewID(typeof(Model.Base_HAZID));

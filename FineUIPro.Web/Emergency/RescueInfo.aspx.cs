@@ -31,13 +31,13 @@
         /// </summary>
         private void BindGrid()
         {
-            string strSql = @"SELECT RescueInfoId,ReceiveMan,ReceiveTime,Telephone,MessageContent,PushDateTime,PushStates,(CASE WHEN PushStates='1' THEN '发送成功'  WHEN PushStates='2' THEN '发送失败' ELSE '未发送' END) AS PushStatesName"
+            string strSql = @"SELECT *,(CASE WHEN PushStates='1' THEN '发送成功'  WHEN PushStates='2' THEN '发送失败' ELSE '未发送' END) AS PushStatesName"
                           + @" FROM dbo.Emergency_RescueInfo"
                           + @" WHERE 1=1 ";
             List<SqlParameter> listStr = new List<SqlParameter>();
             if (!string.IsNullOrEmpty(this.txtContent.Text.Trim()))
             {
-                strSql += " AND (ReceiveMan LIKE @Content OR Telephone LIKE @Content OR MessageContent LIKE @Content OR PushStatesName LIKE @Content)";
+                strSql += " AND (InstallationNames LIKE @Content OR AccidentType LIKE @Content OR AccidentPlace LIKE @Content OR AccidentOverview LIKE @Content OR AccidentPerson LIKE @Content OR PoliceType LIKE @Content OR PoliceLevel LIKE @Content)";
                 listStr.Add(new SqlParameter("@Content", "%" + this.txtContent.Text.Trim() + "%"));
             }
 
@@ -45,7 +45,7 @@
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();
@@ -73,11 +73,7 @@
                 {
                     string rowID = Grid1.DataKeys[rowIndex][0].ToString();
                     BLL.RescueInfoService.DeleteRescueInfoById(rowID);
-                    BLL.LogService.AddLog(this.CurrUser.UserId, "删除应急信息");
-                    //var InterEmergencyings = BLL.InterEmergencyingService.GetInterEmergencyingById(rowID);
-                    //if (InterEmergencyings != null)
-                    //{                        
-                    //}
+                    BLL.LogService.AddLog(this.CurrUser.UserId, "删除接警信息");
                 }
 
                 BindGrid();
@@ -145,5 +141,39 @@
             this.BindGrid();
         }
         #endregion 
+
+        /// <summary>
+        /// Grid行双击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Grid1_RowDoubleClick(object sender, GridRowClickEventArgs e)
+        {
+            this.EditData();
+        }
+
+        /// <summary>
+        /// 右键编辑事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnMenuEdit_Click(object sender, EventArgs e)
+        {
+            this.EditData();
+        }
+
+        /// <summary>
+        /// 编辑数据方法
+        /// </summary>
+        private void EditData()
+        {
+            if (Grid1.SelectedRowIndexArray.Length == 0)
+            {
+                Alert.ShowInParent("请至少选择一条记录！", MessageBoxIcon.Warning);
+                return;
+            }
+            string Id = Grid1.SelectedRowID;
+            PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("../ShowDialog/PushRecordMessage.aspx?DataId={0}", Id, "推送信息查看 - ")));
+        }
     }
 }

@@ -85,12 +85,14 @@ namespace FineUIPro.Web.Personal
         {
             if (!string.IsNullOrEmpty(this.txtTitle.Text))
             {
-                Model.Personal_PersonalFolderItem newPersonalFolderItem = new Model.Personal_PersonalFolderItem();
-                newPersonalFolderItem.PersonalFolderId = this.PersonalFolderId;
-                newPersonalFolderItem.Title = this.txtTitle.Text.Trim();
-                newPersonalFolderItem.Code = this.txtCode.Text.Trim();
-                newPersonalFolderItem.FileContent = HttpUtility.HtmlEncode(this.txtFileContent.Text);
-                newPersonalFolderItem.CompileDate = System.DateTime.Now;
+                Model.Personal_PersonalFolderItem newPersonalFolderItem = new Model.Personal_PersonalFolderItem
+                {
+                    PersonalFolderId = this.PersonalFolderId,
+                    Title = this.txtTitle.Text.Trim(),
+                    Code = this.txtCode.Text.Trim(),
+                    FileContent = HttpUtility.HtmlEncode(this.txtFileContent.Text),
+                    CompileDate = System.DateTime.Now
+                };
                 if (string.IsNullOrEmpty(this.PersonalFolderItemId))
                 {
                     this.PersonalFolderItemId =  SQLHelper.GetNewID(typeof(Model.Personal_PersonalFolderItem));

@@ -43,15 +43,17 @@
         public static void AddRole(Model.Sys_Role role)
         {
             Model.HSSEDB_ENN db = Funs.DB;
-            Model.Sys_Role newRole = new Model.Sys_Role();
-            newRole.RoleId = role.RoleId;
-            newRole.RoleCode = role.RoleCode;
-            newRole.RoleName = role.RoleName;
-            newRole.Def = role.Def;
-            newRole.IsAuditFlow = role.IsAuditFlow;
-            newRole.IsSystemBuilt = role.IsSystemBuilt;
-            newRole.AuthorizedRoleIds = role.AuthorizedRoleIds;
-            newRole.AuthorizedRoleNames = role.AuthorizedRoleNames;
+            Model.Sys_Role newRole = new Model.Sys_Role
+            {
+                RoleId = role.RoleId,
+                RoleCode = role.RoleCode,
+                RoleName = role.RoleName,
+                Def = role.Def,
+                IsAuditFlow = role.IsAuditFlow,
+                IsSystemBuilt = role.IsSystemBuilt,
+                AuthorizedRoleIds = role.AuthorizedRoleIds,
+                AuthorizedRoleNames = role.AuthorizedRoleNames
+            };
             db.Sys_Role.InsertOnSubmit(newRole);
             db.SubmitChanges();
         }

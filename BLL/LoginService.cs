@@ -4,6 +4,7 @@ namespace BLL
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Security;
+    using System.Web;
 
     public static class LoginService
     {
@@ -24,15 +25,16 @@ namespace BLL
                     select y).ToList();
             if (x.Any())
             {
-                FormsAuthentication.SetAuthCookie(account, false);
-                page.Session[SessionName.CurrUser] = x.First();
+                string accValue = HttpUtility.UrlEncode(account);
+                FormsAuthentication.SetAuthCookie(accValue, false);                
+                page.Session[SessionName.CurrUser] = x.First(); 
                 if (rememberMe)
                 {
-                    System.Web.HttpCookie u = new System.Web.HttpCookie("UserInfo");
-                    u["username"] = account;
+                    HttpCookie u = new HttpCookie("UserInfo");
+                    u["username"] = accValue;
                     u["password"] = password;                   
-                    // Cookies过期时间设置为一年.
-                    u.Expires = DateTime.Now.AddYears(1);
+                    // Cookies过期时间设置为一月.
+                    u.Expires = DateTime.Now.AddMonths(1);
                     page.Response.Cookies.Add(u);
                 }
                 else

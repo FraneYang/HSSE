@@ -152,9 +152,11 @@ namespace CaptchaImage
             } while (size.Width > rect.Width);
 
             // Set up the text format.
-            StringFormat format = new StringFormat();
-            format.Alignment = StringAlignment.Center;
-            format.LineAlignment = StringAlignment.Center;
+            StringFormat format = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
 
             // Create a path using the text and warp it randomly.
             GraphicsPath path = new GraphicsPath();

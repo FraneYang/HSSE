@@ -83,12 +83,14 @@ namespace FineUIPro.Web.SysManage
             var menus = BLL.SysMenuService.GetMenuListByMenuType(menuType);
             if (menus.Count() > 0)
             {
-                TreeNode rootNode = new TreeNode();
-                rootNode.Text = "菜单";
-                rootNode.NodeID = "0";
-                rootNode.EnableCheckBox = true;
-                rootNode.EnableCheckEvent = true;
-                rootNode.Expanded = true;
+                TreeNode rootNode = new TreeNode
+                {
+                    Text = "菜单",
+                    NodeID = "0",
+                    EnableCheckBox = true,
+                    EnableCheckEvent = true,
+                    Expanded = true
+                };
                 this.tvMenu.Nodes.Add(rootNode);
                 this.BoundTree(rootNode.Nodes, menus, rootNode.NodeID);
             }
@@ -106,11 +108,13 @@ namespace FineUIPro.Web.SysManage
             {
                 foreach (var item in menus)
                 {
-                    TreeNode chidNode = new TreeNode();
-                    chidNode.Text = item.MenuName;
-                    chidNode.NodeID = item.MenuId;
-                    chidNode.EnableCheckBox = true;
-                    chidNode.EnableCheckEvent = true;
+                    TreeNode chidNode = new TreeNode
+                    {
+                        Text = item.MenuName,
+                        NodeID = item.MenuId,
+                        EnableCheckBox = true,
+                        EnableCheckEvent = true
+                    };
 
                     if (item.IsUsed == true || !item.IsUsed.HasValue)
                     {

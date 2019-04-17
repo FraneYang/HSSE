@@ -28,6 +28,12 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -89,19 +95,45 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.2774.19990, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Appraisal\AppraisalScore.aspx" />
+    <Content Include="Appraisal\PersonAppraisal.aspx" />
     <Content Include="AttachFile\res\webuploader\Uploader.swf" />
     <Content Include="AttachFile\res\webuploader\webuploader.nolog.js" />
     <Content Include="AttachFile\res\webuploader\webuploader.nolog.min.js" />
     <Content Include="AttachFile\webuploader.aspx" />
-    <Content Include="BaseInfo\Certificate.aspx" />
+    <Content Include="BaseInfo\JobEnvironment.aspx" />
+    <Content Include="BaseInfo\JobEnvironmentEdit.aspx" />
+    <Content Include="BaseInfo\LimitedSpaceAnalysisData.aspx" />
+    <Content Include="BaseInfo\FireWorkAnalysisData.aspx" />
+    <Content Include="BaseInfo\EuipmentType.aspx" />
+    <Content Include="BaseInfo\LimitedSpaceAnalysisDataEdit.aspx" />
+    <Content Include="BaseInfo\FireWorkAnalysisDataEdit.aspx" />
+    <Content Include="BaseInfo\EuipmentTypeEdit.aspx" />
+    <Content Include="BaseInfo\Euipment.aspx" />
+    <Content Include="BaseInfo\JobActivity.aspx" />
+    <Content Include="BaseInfo\EuipmentEdit.aspx" />
+    <Content Include="BaseInfo\JobActivityEdit.aspx" />
+    <Content Include="BaseInfo\SpecialSchemeType.aspx" />
+    <Content Include="BaseInfo\Standard.aspx" />
+    <Content Include="BaseInfo\Specialty.aspx" />
+    <Content Include="BaseInfo\StandardEdit.aspx" />
+    <Content Include="BaseInfo\SpecialtyEdit.aspx" />
     <Content Include="BaseInfo\Position.aspx" />
     <Content Include="BaseInfo\PostTitle.aspx" />
     <Content Include="BaseInfo\HAZID.aspx" />
     <Content Include="BaseInfo\HAZIDEdit.aspx" />
     <Content Include="BaseInfo\HiddenHazardType.aspx" />
     <Content Include="BaseInfo\HiddenHazardTypeEdit.aspx" />
+    <Content Include="BaseInfo\FireWorkMode.aspx" />
+    <Content Include="BaseInfo\FireWorkModeEdit.aspx" />
+    <Content Include="BaseInfo\OverhaulRiskGrade.aspx" />
+    <Content Include="BaseInfo\OverhaulRiskGradeEdit.aspx" />
     <Content Include="BaseInfo\SafetyMeasures.aspx" />
     <Content Include="BaseInfo\SafetyMeasuresEdit.aspx" />
     <Content Include="BaseInfo\Depart.aspx" />
@@ -110,14 +142,98 @@
     <Content Include="BaseInfo\RiskLevelValueEdit.aspx" />
     <Content Include="BaseInfo\SCLInfo.aspx" />
     <Content Include="BaseInfo\SCLInfoEdit.aspx" />
+    <Content Include="BaseInfo\AppraisalItemIn.aspx" />
+    <Content Include="BaseInfo\TrainType.aspx" />
+    <Content Include="BaseInfo\EmergencyType.aspx" />
+    <Content Include="BaseInfo\EmergencyTypeEdit.aspx" />
+    <Content Include="BaseInfo\Prospective.aspx" />
+    <Content Include="BaseInfo\ProspectiveEdit.aspx" />
+    <Content Include="BaseInfo\Certificate.aspx" />
+    <Content Include="BaseInfo\CertificateEdit.aspx" />
+    <Content Include="BaseInfo\AppraisalItem.aspx" />
+    <Content Include="BaseInfo\AppraisalItemEdit.aspx" />
     <Content Include="Controls\FlowOperateControl.ascx" />
+    <Content Include="Controls\MapControls\IMGndActiveX.ocx" />
+    <Content Include="Controls\MapControls\mfc100.dll" />
+    <Content Include="Controls\MapControls\msvcp100.dll" />
+    <Content Include="Controls\MapControls\msvcr100.dll" />
+    <Content Include="Controls\MapControls\zlib1.dll" />
+    <Content Include="Controls\MapControls\控件注册文档.txt" />
+    <Content Include="Controls\SeeQRImage.aspx" />
+    <Content Include="Controls\ShowQRImage.aspx" />
+    <Content Include="EduTrain\AccidentCase.aspx" />
+    <Content Include="EduTrain\AccidentCaseEdit.aspx" />
+    <Content Include="EduTrain\AccidentCaseItemEdit.aspx" />
+    <Content Include="EduTrain\TrainingEdu.aspx" />
+    <Content Include="EduTrain\TrainDBOut.aspx" />
+    <Content Include="EduTrain\TrainingEduItemIn.aspx" />
+    <Content Include="EduTrain\TrainingItemIn.aspx" />
+    <Content Include="EduTrain\TrainDB.aspx" />
+    <Content Include="EduTrain\TrainingEduItemSave.aspx" />
+    <Content Include="EduTrain\TrainingItemSave.aspx" />
+    <Content Include="EduTrain\TrainingEduSave.aspx" />
+    <Content Include="EduTrain\TrainingSave.aspx" />
     <Content Include="Emergency\RescueInfo.aspx" />
+    <Content Include="Emergency\RescueInfoPlan.aspx" />
+    <Content Include="Hazard\RoutingInspectionView.aspx" />
+    <Content Include="Hazard\RiskListView.aspx" />
+    <Content Include="Hazard\Classification.aspx" />
+    <Content Include="InformationProject\FileCabinetA.aspx" />
+    <Content Include="InformationProject\FileCabinetAChange.aspx" />
+    <Content Include="InformationProject\FileCabinetAEdit.aspx" />
+    <Content Include="License\Overhaul3.aspx" />
+    <Content Include="License\Overhaul2.aspx" />
+    <Content Include="QualityAudit\PersonQualityIn.aspx" />
+    <Content Include="ShowDialog\PushRecordMessage.aspx" />
+    <Content Include="Emergency\Warning.aspx" />
+    <Content Include="Hazard\RoutingInspection.aspx" />
+    <Content Include="Hazard\JHA.aspx" />
+    <Content Include="Hazard\SCL.aspx" />
+    <Content Include="Hazard\RiskList.aspx" />
+    <Content Include="Hazard\LECSave.aspx" />
+    <Content Include="Hazard\RiskMap.aspx" />
     <Content Include="Hazard\HiddenHazard.aspx" />
     <Content Include="Hazard\HiddenHazardRecord.aspx" />
     <Content Include="Hazard\HiddenHazardDelay.aspx" />
     <Content Include="Hazard\LEC.aspx" />
     <Content Include="Hazard\LECEdit.aspx" />
+    <Content Include="Hazard\HiddenHazardView.aspx" />
+    <Content Include="Hazard\JHAEdit.aspx" />
+    <Content Include="Hazard\SCLEdit.aspx" />
+    <Content Include="Hazard\JHASave.aspx" />
+    <Content Include="Hazard\SCLSave.aspx" />
+    <Content Include="Hazard\JHAAdd.aspx" />
     <Content Include="Images\SUBimages\TCC-.gif" />
+    <Content Include="License\AInterlockingView.aspx" />
+    <Content Include="License\BInterlockingView.aspx" />
+    <Content Include="License\BlindPlateView.aspx" />
+    <Content Include="License\BreakGroundView.aspx" />
+    <Content Include="License\ElectricityView.aspx" />
+    <Content Include="License\HeightWorkView.aspx" />
+    <Content Include="License\LiftingWorkView.aspx" />
+    <Content Include="License\LimitedSpaceView.aspx" />
+    <Content Include="License\OpenCircuitView.aspx" />
+    <Content Include="License\OverhaulView.aspx" />
+    <Content Include="Lock\SmartLockView.aspx" />
+    <Content Include="mapdata\lastversion.imgnd" />
+    <Content Include="Controls\MapControls\mapdata\default.imgnd" />
+    <Content Include="Hazard\devstatus.ashx" />
+    <Content Include="mapdata\default.imgnd" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="ReportPrint\ReportTabFile\A级联锁变更审批单.tab" />
+    <None Include="ReportPrint\ReportTabFile\B级联锁变更审批单.tab" />
+    <None Include="ReportPrint\ReportTabFile\临时用电安全作业证.tab" />
+    <None Include="ReportPrint\ReportTabFile\动土安全作业证.tab" />
+    <None Include="ReportPrint\ReportTabFile\动火安全作业证.tab" />
+    <Content Include="QualityAudit\PersonQualityEdit.aspx" />
+    <Content Include="QualityAudit\PersonQualitySave.aspx" />
+    <Content Include="QualityAudit\PersonQualityItem.aspx" />
+    <Content Include="ReportPrint\ReportTabFile\检修工作票.tab" />
+    <None Include="ReportPrint\ReportTabFile\受限空间安全作业证.tab" />
+    <None Include="ReportPrint\ReportTabFile\吊装安全作业证.tab" />
+    <None Include="ReportPrint\ReportTabFile\断路安全作业证.tab" />
+    <None Include="ReportPrint\ReportTabFile\盲板抽堵安全作业票.tab" />
+    <None Include="ReportPrint\ReportTabFile\高处安全作业证.tab" />
     <None Include="Service References\HSSEService\FineUIPro.Web.HSSEService.Base_Unit.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -215,6 +331,7 @@
     <Content Include="Images\focus.swf" />
     <Content Include="License\FireWork.aspx" />
     <Content Include="License\HeightWork.aspx" />
+    <Content Include="License\FireWorkView.aspx" />
     <Content Include="License\Overhaul.aspx" />
     <Content Include="License\Electricity.aspx" />
     <Content Include="License\BlindPlate.aspx" />
@@ -225,6 +342,26 @@
     <Content Include="License\AInterlocking.aspx" />
     <Content Include="License\BInterlocking.aspx" />
     <Content Include="Lock\SmartLock.aspx" />
+    <Content Include="QualityAudit\EquipmentQuality.aspx" />
+    <Content Include="QualityAudit\EquipmentQualityEdit.aspx" />
+    <Content Include="QualityAudit\InformationCollection.aspx" />
+    <Content Include="QualityAudit\InformationCollectionEdit.aspx" />
+    <Content Include="QualityAudit\PersonnelDocument.aspx" />
+    <Content Include="QualityAudit\PersonnelDocumentEdit.aspx" />
+    <Content Include="QualityAudit\PersonQuality.aspx" />
+    <Content Include="QualityAudit\ReadIdentityCard.aspx" />
+    <Content Include="QualityAudit\ShowPerson.aspx" />
+    <Content Include="QualityAudit\SubUnitQuality.aspx" />
+    <Content Include="QualityAudit\SubUnitQualityEdit.aspx" />
+    <Content Include="QualityAudit\TrainRecord.aspx" />
+    <Content Include="QualityAudit\TrainRecordEdit.aspx" />
+    <Content Include="QualityAudit\UserEntryRecord.aspx" />
+    <Content Include="Resources\Notices.aspx" />
+    <Content Include="Resources\NoticesEdit.aspx" />
+    <Content Include="Resources\SignManage.aspx" />
+    <Content Include="Resources\SignManageEdit.aspx" />
+    <Content Include="SafeAnalysis\LicenseAnalysis.aspx" />
+    <Content Include="SafeAnalysis\HazardAnalyse.aspx" />
     <Content Include="Personal\PersonalFolderItemEdit.aspx" />
     <Content Include="Personal\PersonalFolderEdit.aspx" />
     <Content Include="Personal\PersonalFolder.aspx" />
@@ -950,7 +1087,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Captcha\captcha.ashx" />
     <Content Include="AttachFile\fileupload.ashx" />
-    <None Include="ceuser\ceuser.dat" />
+    <Content Include="ceuser\ceuser.dat" />
     <None Include="Controls\ClientJs\vssver.scc" />
     <None Include="Controls\My97DatePicker\lang\vssver.scc" />
     <None Include="Controls\My97DatePicker\skin\default\vssver.scc" />
@@ -964,12 +1101,6 @@
     <None Include="Controls\My97DatePicker\开发包\vssver.scc" />
     <None Include="File\Excel\Person\人员信息模版.xls" />
     <None Include="OfficeControl\OfficeControl.rar" />
-    <None Include="ReportPrint\ReportTabFile\培训记录.tab" />
-    <None Include="ReportPrint\ReportTabFile\安全生产数据季报.tab" />
-    <None Include="ReportPrint\ReportTabFile\应急演练工作计划半年报.tab" />
-    <None Include="ReportPrint\ReportTabFile\应急演练开展情况季报.tab" />
-    <None Include="ReportPrint\ReportTabFile\百万工时安全统计月报表.tab" />
-    <None Include="ReportPrint\ReportTabFile\职工伤亡事故原因分析报.tab" />
     <None Include="res\icon\Thumbs.db" />
     <None Include="res\images\16\Thumbs.db" />
     <None Include="res\images\fa_png\Thumbs.db" />
@@ -994,7 +1125,6 @@
     <Content Include="BaseInfo\TeamGroupEdit.aspx" />
     <Content Include="BaseInfo\WorkArea.aspx" />
     <Content Include="BaseInfo\WorkAreaEdit.aspx" />
-    <Content Include="BaseInfo\TeamGroupView.aspx" />
     <Content Include="BaseInfo\WorkAreaView.aspx" />
     <Content Include="ReportPrint\CalculateChinaEx.aspx" />
     <Content Include="ReportPrint\css\chinaexcel.css" />
@@ -1077,6 +1207,8 @@
     <Content Include="ReportPrint\PrintDesigner.aspx" />
     <Content Include="ReportPrint\ReadExReportFile.aspx" />
     <Content Include="ReportPrint\SaveTabFile.aspx" />
+    <Content Include="Resources\News.aspx" />
+    <Content Include="Resources\NewsEdit.aspx" />
     <Content Include="res\css\common.css" />
     <Content Include="res\css\default.css" />
     <Content Include="res\google-code-prettify\lang-apollo.js" />
@@ -3135,16 +3267,49 @@
     <Content Include="res\umeditor\umeditor.min.js" />
     <None Include="Scripts\jquery-3.1.0.min.map" />
     <None Include="Scripts\jquery-3.1.0.slim.min.map" />
+    <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="SafeAnalysis\HazardTypeAnalyse.aspx" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-3.1.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
     <Content Include="Scripts\jquery-3.1.0.slim.js" />
     <Content Include="Scripts\jquery-3.1.0.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.9.2.custom.js" />
+    <Content Include="Scripts\jquery-ui-1.9.2.custom.min.js" />
+    <Content Include="Standard\HSSEStandardView.aspx" />
+    <Content Include="Standard\ManagedItem.aspx" />
+    <Content Include="Standard\ManagedObject.aspx" />
+    <Content Include="Standard\ManagedItemEdit.aspx" />
+    <Content Include="Standard\ManagedObjectEdit.aspx" />
+    <Content Include="Standard\HSSEStandard.aspx" />
+    <Content Include="Standard\HSSEStandardEdit.aspx" />
+    <Content Include="Standard\HSSEStandardIn.aspx" />
     <Content Include="Styles\jquery.autocomplete.css" />
+    <Content Include="Styles\Site.css" />
     <Content Include="Styles\Style.css" />
     <Content Include="Styles\Stylesafe.css" />
     <Content Include="Styles\StyleSheet.css" />
+    <Content Include="Styles\sunny\images\ui-bg_diagonals-medium_20_d34d17_40x40.png" />
+    <Content Include="Styles\sunny\images\ui-bg_gloss-wave_45_817865_500x100.png" />
+    <Content Include="Styles\sunny\images\ui-bg_gloss-wave_60_fece2f_500x100.png" />
+    <Content Include="Styles\sunny\images\ui-bg_gloss-wave_70_ffdd57_500x100.png" />
+    <Content Include="Styles\sunny\images\ui-bg_gloss-wave_90_fff9e5_500x100.png" />
+    <Content Include="Styles\sunny\images\ui-bg_highlight-soft_100_feeebd_1x100.png" />
+    <Content Include="Styles\sunny\images\ui-bg_inset-soft_30_ffffff_1x100.png" />
+    <Content Include="Styles\sunny\images\ui-icons_3d3d3d_256x240.png" />
+    <Content Include="Styles\sunny\images\ui-icons_bd7b00_256x240.png" />
+    <Content Include="Styles\sunny\images\ui-icons_d19405_256x240.png" />
+    <Content Include="Styles\sunny\images\ui-icons_eb990f_256x240.png" />
+    <Content Include="Styles\sunny\images\ui-icons_ed9f26_256x240.png" />
+    <Content Include="Styles\sunny\images\ui-icons_fadc7a_256x240.png" />
+    <Content Include="Styles\sunny\images\ui-icons_ffe180_256x240.png" />
+    <Content Include="Styles\sunny\jquery-ui-1.9.2.custom.css" />
+    <Content Include="Styles\sunny\jquery-ui-1.9.2.custom.min.css" />
     <Content Include="SysManage\MenuFlowOperateEdit.aspx" />
+    <Content Include="SysManage\UserIn.aspx" />
     <Content Include="SysManage\RolePower.aspx" />
     <Content Include="SysManage\Unit.aspx" />
     <Content Include="SysManage\UnitEdit.aspx" />
@@ -3159,6 +3324,34 @@
     <Content Include="BaseInfo\Installation.aspx" />
     <Content Include="BaseInfo\InstallationEdit.aspx" />
     <Content Include="SysManage\MenuAppraisalEdit.aspx" />
+    <Content Include="Technique\Appraise.aspx" />
+    <Content Include="Technique\AppraiseEdit.aspx" />
+    <Content Include="Technique\CheckItemDetailEdit.aspx" />
+    <Content Include="Technique\CheckItemEdit.aspx" />
+    <Content Include="Technique\CheckItemSet.aspx" />
+    <Content Include="Technique\Emergency.aspx" />
+    <Content Include="Technique\EmergencyEdit.aspx" />
+    <Content Include="Technique\HAZOP.aspx" />
+    <Content Include="Technique\HAZOPEdit.aspx" />
+    <Content Include="Technique\SpecialScheme.aspx" />
+    <Content Include="Technique\SpecialSchemeEdit.aspx" />
+    <Content Include="Training\TestPlanStatisticsItem.aspx" />
+    <Content Include="Training\TestPlanStatistics.aspx" />
+    <Content Include="Training\TestStatistics.aspx" />
+    <Content Include="Training\Plan.aspx" />
+    <Content Include="Training\TestPlanView.aspx" />
+    <Content Include="Training\PlanView.aspx" />
+    <Content Include="Training\TestPlan.aspx" />
+    <Content Include="Training\Task.aspx" />
+    <Content Include="Training\TestRecordItem.aspx" />
+    <Content Include="Training\TestRecord.aspx" />
+    <Content Include="Training\TestRecordView.aspx" />
+    <Content Include="Training\TrainRecord.aspx" />
+    <Content Include="Training\TaskView.aspx" />
+    <Content Include="Training\TaskRecordView.aspx" />
+    <Content Include="Training\ModelTestRecord.aspx" />
+    <Content Include="Training\ModelTestRecordItem.aspx" />
+    <Content Include="Training\ModelTestRecordView.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -3184,6 +3377,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appraisal\AppraisalScore.aspx.cs">
+      <DependentUpon>AppraisalScore.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appraisal\AppraisalScore.aspx.designer.cs">
+      <DependentUpon>AppraisalScore.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Appraisal\PersonAppraisal.aspx.cs">
+      <DependentUpon>PersonAppraisal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appraisal\PersonAppraisal.aspx.designer.cs">
+      <DependentUpon>PersonAppraisal.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AttachFile\fileupload.ashx.cs">
       <DependentUpon>fileupload.ashx</DependentUpon>
     </Compile>
@@ -3194,12 +3401,124 @@
     <Compile Include="AttachFile\webuploader.aspx.designer.cs">
       <DependentUpon>webuploader.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BaseInfo\Certificate.aspx.cs">
-      <DependentUpon>Certificate.aspx</DependentUpon>
+    <Compile Include="BaseInfo\JobEnvironment.aspx.cs">
+      <DependentUpon>JobEnvironment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BaseInfo\Certificate.aspx.designer.cs">
-      <DependentUpon>Certificate.aspx</DependentUpon>
+    <Compile Include="BaseInfo\JobEnvironment.aspx.designer.cs">
+      <DependentUpon>JobEnvironment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\JobEnvironmentEdit.aspx.cs">
+      <DependentUpon>JobEnvironmentEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\JobEnvironmentEdit.aspx.designer.cs">
+      <DependentUpon>JobEnvironmentEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\LimitedSpaceAnalysisData.aspx.cs">
+      <DependentUpon>LimitedSpaceAnalysisData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\LimitedSpaceAnalysisData.aspx.designer.cs">
+      <DependentUpon>LimitedSpaceAnalysisData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\FireWorkAnalysisData.aspx.cs">
+      <DependentUpon>FireWorkAnalysisData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\FireWorkAnalysisData.aspx.designer.cs">
+      <DependentUpon>FireWorkAnalysisData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\EuipmentType.aspx.cs">
+      <DependentUpon>EuipmentType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\EuipmentType.aspx.designer.cs">
+      <DependentUpon>EuipmentType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\LimitedSpaceAnalysisDataEdit.aspx.cs">
+      <DependentUpon>LimitedSpaceAnalysisDataEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\LimitedSpaceAnalysisDataEdit.aspx.designer.cs">
+      <DependentUpon>LimitedSpaceAnalysisDataEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\FireWorkAnalysisDataEdit.aspx.cs">
+      <DependentUpon>FireWorkAnalysisDataEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\FireWorkAnalysisDataEdit.aspx.designer.cs">
+      <DependentUpon>FireWorkAnalysisDataEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\EuipmentTypeEdit.aspx.cs">
+      <DependentUpon>EuipmentTypeEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\EuipmentTypeEdit.aspx.designer.cs">
+      <DependentUpon>EuipmentTypeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\Euipment.aspx.cs">
+      <DependentUpon>Euipment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\Euipment.aspx.designer.cs">
+      <DependentUpon>Euipment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\JobActivity.aspx.cs">
+      <DependentUpon>JobActivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\JobActivity.aspx.designer.cs">
+      <DependentUpon>JobActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\EuipmentEdit.aspx.cs">
+      <DependentUpon>EuipmentEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\EuipmentEdit.aspx.designer.cs">
+      <DependentUpon>EuipmentEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\JobActivityEdit.aspx.cs">
+      <DependentUpon>JobActivityEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\JobActivityEdit.aspx.designer.cs">
+      <DependentUpon>JobActivityEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\SpecialSchemeType.aspx.cs">
+      <DependentUpon>SpecialSchemeType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\SpecialSchemeType.aspx.designer.cs">
+      <DependentUpon>SpecialSchemeType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\Standard.aspx.cs">
+      <DependentUpon>Standard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\Standard.aspx.designer.cs">
+      <DependentUpon>Standard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\Specialty.aspx.cs">
+      <DependentUpon>Specialty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\Specialty.aspx.designer.cs">
+      <DependentUpon>Specialty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\StandardEdit.aspx.cs">
+      <DependentUpon>StandardEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\StandardEdit.aspx.designer.cs">
+      <DependentUpon>StandardEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\SpecialtyEdit.aspx.cs">
+      <DependentUpon>SpecialtyEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\SpecialtyEdit.aspx.designer.cs">
+      <DependentUpon>SpecialtyEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="BaseInfo\Position.aspx.cs">
       <DependentUpon>Position.aspx</DependentUpon>
@@ -3242,6 +3561,34 @@
     </Compile>
     <Compile Include="BaseInfo\HiddenHazardTypeEdit.aspx.designer.cs">
       <DependentUpon>HiddenHazardTypeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\FireWorkMode.aspx.cs">
+      <DependentUpon>FireWorkMode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\FireWorkMode.aspx.designer.cs">
+      <DependentUpon>FireWorkMode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\FireWorkModeEdit.aspx.cs">
+      <DependentUpon>FireWorkModeEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\FireWorkModeEdit.aspx.designer.cs">
+      <DependentUpon>FireWorkModeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\OverhaulRiskGrade.aspx.cs">
+      <DependentUpon>OverhaulRiskGrade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\OverhaulRiskGrade.aspx.designer.cs">
+      <DependentUpon>OverhaulRiskGrade.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\OverhaulRiskGradeEdit.aspx.cs">
+      <DependentUpon>OverhaulRiskGradeEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\OverhaulRiskGradeEdit.aspx.designer.cs">
+      <DependentUpon>OverhaulRiskGradeEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="BaseInfo\SafetyMeasures.aspx.cs">
       <DependentUpon>SafetyMeasures.aspx</DependentUpon>
@@ -3299,6 +3646,76 @@
     <Compile Include="BaseInfo\SCLInfoEdit.aspx.designer.cs">
       <DependentUpon>SCLInfoEdit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BaseInfo\AppraisalItemIn.aspx.cs">
+      <DependentUpon>AppraisalItemIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\AppraisalItemIn.aspx.designer.cs">
+      <DependentUpon>AppraisalItemIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\TrainType.aspx.cs">
+      <DependentUpon>TrainType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\TrainType.aspx.designer.cs">
+      <DependentUpon>TrainType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\EmergencyType.aspx.cs">
+      <DependentUpon>EmergencyType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\EmergencyType.aspx.designer.cs">
+      <DependentUpon>EmergencyType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\EmergencyTypeEdit.aspx.cs">
+      <DependentUpon>EmergencyTypeEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\EmergencyTypeEdit.aspx.designer.cs">
+      <DependentUpon>EmergencyTypeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\Prospective.aspx.cs">
+      <DependentUpon>Prospective.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\Prospective.aspx.designer.cs">
+      <DependentUpon>Prospective.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\ProspectiveEdit.aspx.cs">
+      <DependentUpon>ProspectiveEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\ProspectiveEdit.aspx.designer.cs">
+      <DependentUpon>ProspectiveEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\Certificate.aspx.cs">
+      <DependentUpon>Certificate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\Certificate.aspx.designer.cs">
+      <DependentUpon>Certificate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\CertificateEdit.aspx.cs">
+      <DependentUpon>CertificateEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\CertificateEdit.aspx.designer.cs">
+      <DependentUpon>CertificateEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\AppraisalItem.aspx.cs">
+      <DependentUpon>AppraisalItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\AppraisalItem.aspx.designer.cs">
+      <DependentUpon>AppraisalItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaseInfo\AppraisalItemEdit.aspx.cs">
+      <DependentUpon>AppraisalItemEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseInfo\AppraisalItemEdit.aspx.designer.cs">
+      <DependentUpon>AppraisalItemEdit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FlowOperateControl.ascx.cs">
       <DependentUpon>FlowOperateControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3306,12 +3723,239 @@
     <Compile Include="Controls\FlowOperateControl.ascx.designer.cs">
       <DependentUpon>FlowOperateControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SeeQRImage.aspx.cs">
+      <DependentUpon>SeeQRImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\SeeQRImage.aspx.designer.cs">
+      <DependentUpon>SeeQRImage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ShowQRImage.aspx.cs">
+      <DependentUpon>ShowQRImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ShowQRImage.aspx.designer.cs">
+      <DependentUpon>ShowQRImage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduTrain\AccidentCase.aspx.cs">
+      <DependentUpon>AccidentCase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EduTrain\AccidentCase.aspx.designer.cs">
+      <DependentUpon>AccidentCase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduTrain\AccidentCaseEdit.aspx.cs">
+      <DependentUpon>AccidentCaseEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EduTrain\AccidentCaseEdit.aspx.designer.cs">
+      <DependentUpon>AccidentCaseEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduTrain\AccidentCaseItemEdit.aspx.cs">
+      <DependentUpon>AccidentCaseItemEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EduTrain\AccidentCaseItemEdit.aspx.designer.cs">
+      <DependentUpon>AccidentCaseItemEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduTrain\TrainingEdu.aspx.cs">
+      <DependentUpon>TrainingEdu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EduTrain\TrainingEdu.aspx.designer.cs">
+      <DependentUpon>TrainingEdu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduTrain\TrainDBOut.aspx.cs">
+      <DependentUpon>TrainDBOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EduTrain\TrainDBOut.aspx.designer.cs">
+      <DependentUpon>TrainDBOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduTrain\TrainingEduItemIn.aspx.cs">
+      <DependentUpon>TrainingEduItemIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EduTrain\TrainingEduItemIn.aspx.designer.cs">
+      <DependentUpon>TrainingEduItemIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduTrain\TrainingItemIn.aspx.cs">
+      <DependentUpon>TrainingItemIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EduTrain\TrainingItemIn.aspx.designer.cs">
+      <DependentUpon>TrainingItemIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduTrain\TrainDB.aspx.cs">
+      <DependentUpon>TrainDB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EduTrain\TrainDB.aspx.designer.cs">
+      <DependentUpon>TrainDB.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduTrain\TrainingEduItemSave.aspx.cs">
+      <DependentUpon>TrainingEduItemSave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EduTrain\TrainingEduItemSave.aspx.designer.cs">
+      <DependentUpon>TrainingEduItemSave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduTrain\TrainingItemSave.aspx.cs">
+      <DependentUpon>TrainingItemSave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EduTrain\TrainingItemSave.aspx.designer.cs">
+      <DependentUpon>TrainingItemSave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduTrain\TrainingEduSave.aspx.cs">
+      <DependentUpon>TrainingEduSave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EduTrain\TrainingEduSave.aspx.designer.cs">
+      <DependentUpon>TrainingEduSave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduTrain\TrainingSave.aspx.cs">
+      <DependentUpon>TrainingSave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EduTrain\TrainingSave.aspx.designer.cs">
+      <DependentUpon>TrainingSave.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emergency\RescueInfo.aspx.cs">
       <DependentUpon>RescueInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Emergency\RescueInfo.aspx.designer.cs">
       <DependentUpon>RescueInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emergency\RescueInfoPlan.aspx.cs">
+      <DependentUpon>RescueInfoPlan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emergency\RescueInfoPlan.aspx.designer.cs">
+      <DependentUpon>RescueInfoPlan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\RoutingInspectionView.aspx.cs">
+      <DependentUpon>RoutingInspectionView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\RoutingInspectionView.aspx.designer.cs">
+      <DependentUpon>RoutingInspectionView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\RiskListView.aspx.cs">
+      <DependentUpon>RiskListView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\RiskListView.aspx.designer.cs">
+      <DependentUpon>RiskListView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\Classification.aspx.cs">
+      <DependentUpon>Classification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\Classification.aspx.designer.cs">
+      <DependentUpon>Classification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InformationProject\FileCabinetA.aspx.cs">
+      <DependentUpon>FileCabinetA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InformationProject\FileCabinetA.aspx.designer.cs">
+      <DependentUpon>FileCabinetA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InformationProject\FileCabinetAChange.aspx.cs">
+      <DependentUpon>FileCabinetAChange.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InformationProject\FileCabinetAChange.aspx.designer.cs">
+      <DependentUpon>FileCabinetAChange.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InformationProject\FileCabinetAEdit.aspx.cs">
+      <DependentUpon>FileCabinetAEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InformationProject\FileCabinetAEdit.aspx.designer.cs">
+      <DependentUpon>FileCabinetAEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="License\Overhaul3.aspx.cs">
+      <DependentUpon>Overhaul3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\Overhaul3.aspx.designer.cs">
+      <DependentUpon>Overhaul3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="License\Overhaul2.aspx.cs">
+      <DependentUpon>Overhaul2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\Overhaul2.aspx.designer.cs">
+      <DependentUpon>Overhaul2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\PersonQualityIn.aspx.cs">
+      <DependentUpon>PersonQualityIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\PersonQualityIn.aspx.designer.cs">
+      <DependentUpon>PersonQualityIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowDialog\PushRecordMessage.aspx.cs">
+      <DependentUpon>PushRecordMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowDialog\PushRecordMessage.aspx.designer.cs">
+      <DependentUpon>PushRecordMessage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emergency\Warning.aspx.cs">
+      <DependentUpon>Warning.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emergency\Warning.aspx.designer.cs">
+      <DependentUpon>Warning.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\devstatus.ashx.cs">
+      <DependentUpon>devstatus.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\RoutingInspection.aspx.cs">
+      <DependentUpon>RoutingInspection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\RoutingInspection.aspx.designer.cs">
+      <DependentUpon>RoutingInspection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\JHA.aspx.cs">
+      <DependentUpon>JHA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\JHA.aspx.designer.cs">
+      <DependentUpon>JHA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\SCL.aspx.cs">
+      <DependentUpon>SCL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\SCL.aspx.designer.cs">
+      <DependentUpon>SCL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\RiskList.aspx.cs">
+      <DependentUpon>RiskList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\RiskList.aspx.designer.cs">
+      <DependentUpon>RiskList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\LECSave.aspx.cs">
+      <DependentUpon>LECSave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\LECSave.aspx.designer.cs">
+      <DependentUpon>LECSave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\RiskMap.aspx.cs">
+      <DependentUpon>RiskMap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\RiskMap.aspx.designer.cs">
+      <DependentUpon>RiskMap.aspx</DependentUpon>
     </Compile>
     <Compile Include="Hazard\HiddenHazard.aspx.cs">
       <DependentUpon>HiddenHazard.aspx</DependentUpon>
@@ -3348,6 +3992,76 @@
     <Compile Include="Hazard\LECEdit.aspx.designer.cs">
       <DependentUpon>LECEdit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Hazard\HiddenHazardView.aspx.cs">
+      <DependentUpon>HiddenHazardView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\HiddenHazardView.aspx.designer.cs">
+      <DependentUpon>HiddenHazardView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\JHAEdit.aspx.cs">
+      <DependentUpon>JHAEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\JHAEdit.aspx.designer.cs">
+      <DependentUpon>JHAEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\SCLEdit.aspx.cs">
+      <DependentUpon>SCLEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\SCLEdit.aspx.designer.cs">
+      <DependentUpon>SCLEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\JHASave.aspx.cs">
+      <DependentUpon>JHASave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\JHASave.aspx.designer.cs">
+      <DependentUpon>JHASave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\SCLSave.aspx.cs">
+      <DependentUpon>SCLSave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\SCLSave.aspx.designer.cs">
+      <DependentUpon>SCLSave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hazard\JHAAdd.aspx.cs">
+      <DependentUpon>JHAAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hazard\JHAAdd.aspx.designer.cs">
+      <DependentUpon>JHAAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="License\AInterlockingView.aspx.cs">
+      <DependentUpon>AInterlockingView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\AInterlockingView.aspx.designer.cs">
+      <DependentUpon>AInterlockingView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="License\BInterlockingView.aspx.cs">
+      <DependentUpon>BInterlockingView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\BInterlockingView.aspx.designer.cs">
+      <DependentUpon>BInterlockingView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="License\BlindPlateView.aspx.cs">
+      <DependentUpon>BlindPlateView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\BlindPlateView.aspx.designer.cs">
+      <DependentUpon>BlindPlateView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="License\BreakGroundView.aspx.cs">
+      <DependentUpon>BreakGroundView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\BreakGroundView.aspx.designer.cs">
+      <DependentUpon>BreakGroundView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="License\FireWork.aspx.cs">
       <DependentUpon>FireWork.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3355,12 +4069,54 @@
     <Compile Include="License\FireWork.aspx.designer.cs">
       <DependentUpon>FireWork.aspx</DependentUpon>
     </Compile>
+    <Compile Include="License\ElectricityView.aspx.cs">
+      <DependentUpon>ElectricityView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\ElectricityView.aspx.designer.cs">
+      <DependentUpon>ElectricityView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="License\HeightWork.aspx.cs">
       <DependentUpon>HeightWork.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="License\HeightWork.aspx.designer.cs">
       <DependentUpon>HeightWork.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="License\FireWorkView.aspx.cs">
+      <DependentUpon>FireWorkView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\FireWorkView.aspx.designer.cs">
+      <DependentUpon>FireWorkView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="License\HeightWorkView.aspx.cs">
+      <DependentUpon>HeightWorkView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\HeightWorkView.aspx.designer.cs">
+      <DependentUpon>HeightWorkView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="License\LiftingWorkView.aspx.cs">
+      <DependentUpon>LiftingWorkView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\LiftingWorkView.aspx.designer.cs">
+      <DependentUpon>LiftingWorkView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="License\LimitedSpaceView.aspx.cs">
+      <DependentUpon>LimitedSpaceView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\LimitedSpaceView.aspx.designer.cs">
+      <DependentUpon>LimitedSpaceView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="License\OpenCircuitView.aspx.cs">
+      <DependentUpon>OpenCircuitView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\OpenCircuitView.aspx.designer.cs">
+      <DependentUpon>OpenCircuitView.aspx</DependentUpon>
     </Compile>
     <Compile Include="License\Overhaul.aspx.cs">
       <DependentUpon>Overhaul.aspx</DependentUpon>
@@ -3425,12 +4181,208 @@
     <Compile Include="License\BInterlocking.aspx.designer.cs">
       <DependentUpon>BInterlocking.aspx</DependentUpon>
     </Compile>
+    <Compile Include="License\OverhaulView.aspx.cs">
+      <DependentUpon>OverhaulView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="License\OverhaulView.aspx.designer.cs">
+      <DependentUpon>OverhaulView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Lock\SmartLock.aspx.cs">
       <DependentUpon>SmartLock.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Lock\SmartLock.aspx.designer.cs">
       <DependentUpon>SmartLock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Lock\SmartLockView.aspx.cs">
+      <DependentUpon>SmartLockView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Lock\SmartLockView.aspx.designer.cs">
+      <DependentUpon>SmartLockView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\EquipmentQuality.aspx.cs">
+      <DependentUpon>EquipmentQuality.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\EquipmentQuality.aspx.designer.cs">
+      <DependentUpon>EquipmentQuality.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\EquipmentQualityEdit.aspx.cs">
+      <DependentUpon>EquipmentQualityEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\EquipmentQualityEdit.aspx.designer.cs">
+      <DependentUpon>EquipmentQualityEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\InformationCollection.aspx.cs">
+      <DependentUpon>InformationCollection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\InformationCollection.aspx.designer.cs">
+      <DependentUpon>InformationCollection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\InformationCollectionEdit.aspx.cs">
+      <DependentUpon>InformationCollectionEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\InformationCollectionEdit.aspx.designer.cs">
+      <DependentUpon>InformationCollectionEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\PersonQualityEdit.aspx.cs">
+      <DependentUpon>PersonQualityEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\PersonQualityEdit.aspx.designer.cs">
+      <DependentUpon>PersonQualityEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\PersonnelDocument.aspx.cs">
+      <DependentUpon>PersonnelDocument.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\PersonnelDocument.aspx.designer.cs">
+      <DependentUpon>PersonnelDocument.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\PersonnelDocumentEdit.aspx.cs">
+      <DependentUpon>PersonnelDocumentEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\PersonnelDocumentEdit.aspx.designer.cs">
+      <DependentUpon>PersonnelDocumentEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\PersonQuality.aspx.cs">
+      <DependentUpon>PersonQuality.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\PersonQuality.aspx.designer.cs">
+      <DependentUpon>PersonQuality.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\PersonQualitySave.aspx.cs">
+      <DependentUpon>PersonQualitySave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\PersonQualitySave.aspx.designer.cs">
+      <DependentUpon>PersonQualitySave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\ReadIdentityCard.aspx.cs">
+      <DependentUpon>ReadIdentityCard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\ReadIdentityCard.aspx.designer.cs">
+      <DependentUpon>ReadIdentityCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\ShowPerson.aspx.cs">
+      <DependentUpon>ShowPerson.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\ShowPerson.aspx.designer.cs">
+      <DependentUpon>ShowPerson.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\SubUnitQuality.aspx.cs">
+      <DependentUpon>SubUnitQuality.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\SubUnitQuality.aspx.designer.cs">
+      <DependentUpon>SubUnitQuality.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\SubUnitQualityEdit.aspx.cs">
+      <DependentUpon>SubUnitQualityEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\SubUnitQualityEdit.aspx.designer.cs">
+      <DependentUpon>SubUnitQualityEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\TrainRecord.aspx.cs">
+      <DependentUpon>TrainRecord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\TrainRecord.aspx.designer.cs">
+      <DependentUpon>TrainRecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\TrainRecordEdit.aspx.cs">
+      <DependentUpon>TrainRecordEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\TrainRecordEdit.aspx.designer.cs">
+      <DependentUpon>TrainRecordEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\UserEntryRecord.aspx.cs">
+      <DependentUpon>UserEntryRecord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\UserEntryRecord.aspx.designer.cs">
+      <DependentUpon>UserEntryRecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QualityAudit\PersonQualityItem.aspx.cs">
+      <DependentUpon>PersonQualityItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\PersonQualityItem.aspx.designer.cs">
+      <DependentUpon>PersonQualityItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Notices.aspx.cs">
+      <DependentUpon>Notices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Resources\Notices.aspx.designer.cs">
+      <DependentUpon>Notices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\NoticesEdit.aspx.cs">
+      <DependentUpon>NoticesEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Resources\NoticesEdit.aspx.designer.cs">
+      <DependentUpon>NoticesEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\SignManage.aspx.cs">
+      <DependentUpon>SignManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Resources\SignManage.aspx.designer.cs">
+      <DependentUpon>SignManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\SignManageEdit.aspx.cs">
+      <DependentUpon>SignManageEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Resources\SignManageEdit.aspx.designer.cs">
+      <DependentUpon>SignManageEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SafeAnalysis\LicenseAnalysis.aspx.cs">
+      <DependentUpon>LicenseAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SafeAnalysis\LicenseAnalysis.aspx.designer.cs">
+      <DependentUpon>LicenseAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SafeAnalysis\HazardAnalyse.aspx.cs">
+      <DependentUpon>HazardAnalyse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SafeAnalysis\HazardAnalyse.aspx.designer.cs">
+      <DependentUpon>HazardAnalyse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\News.aspx.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Resources\News.aspx.designer.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\NewsEdit.aspx.cs">
+      <DependentUpon>NewsEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Resources\NewsEdit.aspx.designer.cs">
+      <DependentUpon>NewsEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SafeAnalysis\HazardTypeAnalyse.aspx.cs">
+      <DependentUpon>HazardTypeAnalyse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SafeAnalysis\HazardTypeAnalyse.aspx.designer.cs">
+      <DependentUpon>HazardTypeAnalyse.aspx</DependentUpon>
     </Compile>
     <Compile Include="Service References\HSSEService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -3678,13 +4630,6 @@
     <Compile Include="BaseInfo\WorkAreaEdit.aspx.designer.cs">
       <DependentUpon>WorkAreaEdit.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BaseInfo\TeamGroupView.aspx.cs">
-      <DependentUpon>TeamGroupView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="BaseInfo\TeamGroupView.aspx.designer.cs">
-      <DependentUpon>TeamGroupView.aspx</DependentUpon>
-    </Compile>
     <Compile Include="BaseInfo\WorkAreaView.aspx.cs">
       <DependentUpon>WorkAreaView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3740,12 +4685,75 @@
     </Compile>
     <Compile Include="res\umeditor\net\Uploader.cs" />
     <Compile Include="ServiceProxy.cs" />
+    <Compile Include="Standard\HSSEStandardView.aspx.cs">
+      <DependentUpon>HSSEStandardView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Standard\HSSEStandardView.aspx.designer.cs">
+      <DependentUpon>HSSEStandardView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Standard\ManagedItem.aspx.cs">
+      <DependentUpon>ManagedItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Standard\ManagedItem.aspx.designer.cs">
+      <DependentUpon>ManagedItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Standard\ManagedObject.aspx.cs">
+      <DependentUpon>ManagedObject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Standard\ManagedObject.aspx.designer.cs">
+      <DependentUpon>ManagedObject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Standard\ManagedItemEdit.aspx.cs">
+      <DependentUpon>ManagedItemEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Standard\ManagedItemEdit.aspx.designer.cs">
+      <DependentUpon>ManagedItemEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Standard\ManagedObjectEdit.aspx.cs">
+      <DependentUpon>ManagedObjectEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Standard\ManagedObjectEdit.aspx.designer.cs">
+      <DependentUpon>ManagedObjectEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Standard\HSSEStandard.aspx.cs">
+      <DependentUpon>HSSEStandard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Standard\HSSEStandard.aspx.designer.cs">
+      <DependentUpon>HSSEStandard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Standard\HSSEStandardEdit.aspx.cs">
+      <DependentUpon>HSSEStandardEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Standard\HSSEStandardEdit.aspx.designer.cs">
+      <DependentUpon>HSSEStandardEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Standard\HSSEStandardIn.aspx.cs">
+      <DependentUpon>HSSEStandardIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Standard\HSSEStandardIn.aspx.designer.cs">
+      <DependentUpon>HSSEStandardIn.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SysManage\MenuFlowOperateEdit.aspx.cs">
       <DependentUpon>MenuFlowOperateEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SysManage\MenuFlowOperateEdit.aspx.designer.cs">
       <DependentUpon>MenuFlowOperateEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysManage\UserIn.aspx.cs">
+      <DependentUpon>UserIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysManage\UserIn.aspx.designer.cs">
+      <DependentUpon>UserIn.aspx</DependentUpon>
     </Compile>
     <Compile Include="SysManage\RolePower.aspx.cs">
       <DependentUpon>RolePower.aspx</DependentUpon>
@@ -3845,6 +4853,202 @@
     <Compile Include="SysManage\MenuAppraisalEdit.aspx.designer.cs">
       <DependentUpon>MenuAppraisalEdit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Technique\Appraise.aspx.cs">
+      <DependentUpon>Appraise.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Technique\Appraise.aspx.designer.cs">
+      <DependentUpon>Appraise.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Technique\AppraiseEdit.aspx.cs">
+      <DependentUpon>AppraiseEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Technique\AppraiseEdit.aspx.designer.cs">
+      <DependentUpon>AppraiseEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Technique\CheckItemDetailEdit.aspx.cs">
+      <DependentUpon>CheckItemDetailEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Technique\CheckItemDetailEdit.aspx.designer.cs">
+      <DependentUpon>CheckItemDetailEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Technique\CheckItemEdit.aspx.cs">
+      <DependentUpon>CheckItemEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Technique\CheckItemEdit.aspx.designer.cs">
+      <DependentUpon>CheckItemEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Technique\CheckItemSet.aspx.cs">
+      <DependentUpon>CheckItemSet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Technique\CheckItemSet.aspx.designer.cs">
+      <DependentUpon>CheckItemSet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Technique\Emergency.aspx.cs">
+      <DependentUpon>Emergency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Technique\Emergency.aspx.designer.cs">
+      <DependentUpon>Emergency.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Technique\EmergencyEdit.aspx.cs">
+      <DependentUpon>EmergencyEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Technique\EmergencyEdit.aspx.designer.cs">
+      <DependentUpon>EmergencyEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Technique\HAZOP.aspx.cs">
+      <DependentUpon>HAZOP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Technique\HAZOP.aspx.designer.cs">
+      <DependentUpon>HAZOP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Technique\HAZOPEdit.aspx.cs">
+      <DependentUpon>HAZOPEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Technique\HAZOPEdit.aspx.designer.cs">
+      <DependentUpon>HAZOPEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Technique\SpecialScheme.aspx.cs">
+      <DependentUpon>SpecialScheme.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Technique\SpecialScheme.aspx.designer.cs">
+      <DependentUpon>SpecialScheme.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Technique\SpecialSchemeEdit.aspx.cs">
+      <DependentUpon>SpecialSchemeEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Technique\SpecialSchemeEdit.aspx.designer.cs">
+      <DependentUpon>SpecialSchemeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\TestPlanStatisticsItem.aspx.cs">
+      <DependentUpon>TestPlanStatisticsItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\TestPlanStatisticsItem.aspx.designer.cs">
+      <DependentUpon>TestPlanStatisticsItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\TestPlanStatistics.aspx.cs">
+      <DependentUpon>TestPlanStatistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\TestPlanStatistics.aspx.designer.cs">
+      <DependentUpon>TestPlanStatistics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\TestStatistics.aspx.cs">
+      <DependentUpon>TestStatistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\TestStatistics.aspx.designer.cs">
+      <DependentUpon>TestStatistics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\Plan.aspx.cs">
+      <DependentUpon>Plan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\Plan.aspx.designer.cs">
+      <DependentUpon>Plan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\TestPlanView.aspx.cs">
+      <DependentUpon>TestPlanView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\TestPlanView.aspx.designer.cs">
+      <DependentUpon>TestPlanView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\PlanView.aspx.cs">
+      <DependentUpon>PlanView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\PlanView.aspx.designer.cs">
+      <DependentUpon>PlanView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\TestPlan.aspx.cs">
+      <DependentUpon>TestPlan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\TestPlan.aspx.designer.cs">
+      <DependentUpon>TestPlan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\Task.aspx.cs">
+      <DependentUpon>Task.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\Task.aspx.designer.cs">
+      <DependentUpon>Task.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\TestRecordItem.aspx.cs">
+      <DependentUpon>TestRecordItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\TestRecordItem.aspx.designer.cs">
+      <DependentUpon>TestRecordItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\TestRecord.aspx.cs">
+      <DependentUpon>TestRecord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\TestRecord.aspx.designer.cs">
+      <DependentUpon>TestRecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\TestRecordView.aspx.cs">
+      <DependentUpon>TestRecordView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\TestRecordView.aspx.designer.cs">
+      <DependentUpon>TestRecordView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\TrainRecord.aspx.cs">
+      <DependentUpon>TrainRecord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\TrainRecord.aspx.designer.cs">
+      <DependentUpon>TrainRecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\TaskView.aspx.cs">
+      <DependentUpon>TaskView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\TaskView.aspx.designer.cs">
+      <DependentUpon>TaskView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\TaskRecordView.aspx.cs">
+      <DependentUpon>TaskRecordView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\TaskRecordView.aspx.designer.cs">
+      <DependentUpon>TaskRecordView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\ModelTestRecord.aspx.cs">
+      <DependentUpon>ModelTestRecord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\ModelTestRecord.aspx.designer.cs">
+      <DependentUpon>ModelTestRecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\ModelTestRecordItem.aspx.cs">
+      <DependentUpon>ModelTestRecordItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\ModelTestRecordItem.aspx.designer.cs">
+      <DependentUpon>ModelTestRecordItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\ModelTestRecordView.aspx.cs">
+      <DependentUpon>ModelTestRecordView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\ModelTestRecordView.aspx.designer.cs">
+      <DependentUpon>ModelTestRecordView.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\Web.config" />
@@ -3853,7 +5057,6 @@
     <Folder Include="App_Themes\Default\Images\" />
     <Folder Include="File\Word\" />
     <Folder Include="res\js\" />
-    <Folder Include="ShowDialog\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

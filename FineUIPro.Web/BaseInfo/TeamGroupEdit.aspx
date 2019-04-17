@@ -19,10 +19,6 @@
                     <f:TextBox ID="txtTeamGroupCode" runat="server" Label="班组编号" Required="true" MaxLength="50"
                         ShowRedStar="true" FocusOnPageLoad="true" AutoPostBack="true" OnTextChanged="TextBox_TextChanged">
                     </f:TextBox>
-                </Items>
-            </f:FormRow>
-            <f:FormRow>
-                <Items>
                     <f:TextBox ID="txtTeamGroupName" runat="server" Label="班组名称" Required="true" MaxLength="50"
                         ShowRedStar="true" AutoPostBack="true" OnTextChanged="TextBox_TextChanged">
                     </f:TextBox>
@@ -30,14 +26,31 @@
             </f:FormRow>
             <f:FormRow>
                 <Items>
-                    <f:DropDownList ID="drpUnitId" runat="server" Label="单位名称">
+                    <f:DropDownList ID="drpUnitId" runat="server" Label="单位名称" EnableEdit="true">
+                    </f:DropDownList>
+                    <f:DropDownList ID="drpDepart" runat="server" Label="部门" EnableEdit="true" AutoPostBack="true" OnSelectedIndexChanged="drpDepart_SelectedIndexChanged">
+                    </f:DropDownList>
+                </Items>
+            </f:FormRow>
+              <f:FormRow>
+                <Items>
+                    <f:DropDownList ID="drpInstallation" runat="server" Label="装置" EnableEdit="true">
+                    </f:DropDownList>
+                    <f:DropDownList ID="drpTeamType" runat="server" Label="班组类型" EnableEdit="true">
+                        <f:ListItem Value="1" Text="生产班组" Selected="true"/>
+                        <f:ListItem Value="2" Text="安全督察" />
+                        <f:ListItem Value="3" Text="检修班" />
+                        <f:ListItem Value="4" Text="电工班" />
+                        <f:ListItem Value="5" Text="其他" />
                     </f:DropDownList>
                 </Items>
             </f:FormRow>
             <f:FormRow>
                 <Items>
-                    <f:TextArea ID="txtRemark" runat="server" Label="备注" MaxLength="500">
-                    </f:TextArea>
+                    <f:DropDownList ID="drpLeaders" runat="server" Label="班长" EnableEdit="true">
+                    </f:DropDownList>
+                    <f:TextBox ID="txtRemark" runat="server" Label="备注" MaxLength="500">
+                    </f:TextBox>
                 </Items>
             </f:FormRow>
         </Rows>

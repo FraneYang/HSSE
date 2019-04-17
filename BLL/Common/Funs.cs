@@ -3,7 +3,7 @@ namespace BLL
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.Data.Linq;
+    using System.Linq;
 
     /// <summary>
     /// 通用方法类。
@@ -53,7 +53,7 @@ namespace BLL
                 {
                     throw new NotSupportedException("连接已设置！");
                 }
-
+                
                 connString = value;
             }
         }
@@ -84,7 +84,14 @@ namespace BLL
             get;
             set;
         }
-
+        /// <summary>
+        /// APP下载地址
+        /// </summary>
+        public static string APPUrl
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// 数据库上下文。
         /// </summary>
@@ -432,7 +439,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                ErrLogInfo.WriteLog(string.Empty, ex);
+                //ErrLogInfo.WriteLog(string.Empty, ex);
                 return null;
             }
         }
@@ -456,7 +463,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                ErrLogInfo.WriteLog(string.Empty, ex);
+               // ErrLogInfo.WriteLog(string.Empty, ex);
                 return System.DateTime.Now;
             }
         }
@@ -661,27 +668,51 @@ namespace BLL
             return month;
         }
 
-
-        public static DateTime GetQuarterlyMonths(string year, string quarterly)
+        /// <summary>
+        /// 得到ID字符串
+        /// </summary>
+        /// <param name="bigType"></param>
+        /// <returns></returns>
+        public static string ConvertString(string[] StringIds)
         {
-            string startMonth = string.Empty;
-            if (quarterly == "1")
+            string stringValues = null;
+            if (StringIds != null && StringIds.Count() > 0)
             {
-                startMonth = "1";
+                foreach (string id in StringIds)
+                {
+                    if (id != BLL.Const._Null)
+                    {
+                        stringValues += id + ",";
+                    }
+                }
+                if (!string.IsNullOrEmpty(stringValues))
+                {
+                    stringValues = stringValues.Substring(0, stringValues.Length - 1); ;
+                }
             }
-            else if (quarterly == "2")
+
+            return stringValues;
+        }
+
+        /// <summary>
+        /// 得到最大排序值+1
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="columnName">序号列名</param>
+        /// <param name="sortName">条件列名</param>
+        /// <param name="sortValue">条件值</param>
+        /// <returns></returns>
+        public static int GetMaxIndex(string tableName, string columnName, string sortName,string sortValue)
+        {
+            int maxSortIndex = 0;
+            string str = "SELECT (ISNULL(MAX(" + columnName + "),0)+1) FROM " + tableName;
+            if (!string.IsNullOrEmpty(sortName))
             {
-                startMonth = "4";
+                str += " WHERE "+ sortName + "='" + sortValue + "'";
             }
-            else if (quarterly == "3")
-            {
-                startMonth = "7";
-            }
-            else if (quarterly == "4")
-            {
-                startMonth = "10";
-            }
-            return Funs.GetNewDateTimeOrNow(year + "-" + startMonth + "-01");
+
+            maxSortIndex = BLL.SQLHelper.getIntValue(str);
+            return maxSortIndex;
         }
     }
 }

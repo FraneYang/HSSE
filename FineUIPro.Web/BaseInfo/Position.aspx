@@ -11,7 +11,7 @@
     <f:PageManager ID="PageManager1" AutoSizePanelID="Panel1" runat="server" />
     <f:Panel ID="Panel1" runat="server" Margin="5px" BodyPadding="5px" Title="职务信息" Layout="HBox"  ShowHeader="false">
         <Items>
-            <f:Grid ID="Grid1" Title="职务信息" ShowHeader="false" EnableCollapse="true" PageSize="10"
+            <f:Grid ID="Grid1" Title="职务信息" ShowHeader="false" EnableCollapse="true" PageSize="15"
                 ShowBorder="true" AllowPaging="true" IsDatabasePaging="true" runat="server" Width="760px"
                 DataKeyNames="PositionId" DataIDField="PositionId" OnPageIndexChange="Grid1_PageIndexChange"
                 AllowFilters="true" OnFilterChange="Grid1_FilterChange" EnableTextSelection="True"  EnableColumnLines="true">

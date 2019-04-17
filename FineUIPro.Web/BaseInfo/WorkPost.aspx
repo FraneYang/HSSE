@@ -26,10 +26,10 @@
                 OnPageIndexChange="Grid1_PageIndexChange" AllowFilters="true" OnFilterChange="Grid1_FilterChange"
                 EnableTextSelection="True">
                 <Columns>
-                    <f:RowNumberField EnablePagingNumber="true" HeaderText="序号" Width="50px" HeaderTextAlign="Center"
+                    <f:RowNumberField EnablePagingNumber="true" HeaderText="序号" Width="45px" HeaderTextAlign="Center"
                         TextAlign="Center" />
-                    <f:RenderField Width="100px" ColumnID="WorkPostCode" DataField="WorkPostCode" FieldType="String"
-                        HeaderText="岗位编号" HeaderTextAlign="Center" TextAlign="Center">
+                    <f:RenderField Width="80px" ColumnID="WorkPostCode" DataField="WorkPostCode" FieldType="String"
+                        HeaderText="编号" HeaderTextAlign="Center" TextAlign="Center">
                     </f:RenderField>
                     <f:RenderField Width="150px" ColumnID="WorkPostName" DataField="WorkPostName" FieldType="String"
                         HeaderText="岗位名称" HeaderTextAlign="Center" TextAlign="Left">
@@ -39,24 +39,29 @@
                             <asp:Label ID="Label1" runat="server" Text='<%# ConvertPostType(Eval("PostType")) %>'></asp:Label>
                         </ItemTemplate>
                     </f:TemplateField>  
-                    <f:CheckBoxField Width="75px" RenderAsStaticField="true" TextAlign="Center"  
-                        DataField="IsAuditFlow" HeaderText="参与审批" /> 
+                    <f:CheckBoxField Width="70px" RenderAsStaticField="true" TextAlign="Center"  
+                        DataField="IsAuditFlow" HeaderText="审批" /> 
+                    <f:CheckBoxField Width="80px" RenderAsStaticField="true" TextAlign="Center"  
+                        DataField="IsShowChart" HeaderText="隐患图表" />
                      <f:RenderField Width="120px" ColumnID="RiskLevelName" DataField="RiskLevelName" FieldType="String"
                         HeaderText="巡检级别" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
                      <f:RenderField Width="80px" ColumnID="Frequency" DataField="Frequency" FieldType="Int"
-                        HeaderText="巡检频率</br>(小时/次)" HeaderTextAlign="Center" TextAlign="Left">
+                        HeaderText="巡检频率</br>(天/次)" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>               
-                    <f:RenderField Width="100px" ColumnID="Remark" DataField="Remark" FieldType="String"
+                    <f:RenderField Width="100px" ColumnID="Remark" DataField="Remark" FieldType="String" Hidden="true"
                         ExpandUnusedSpace="true" HeaderText="备注" HeaderTextAlign="Center" TextAlign="Center">
                     </f:RenderField>
-                    <f:RenderField Width="10px" ColumnID="PostType" DataField="PostType" FieldType="String"
+                    <f:RenderField Width="1px" ColumnID="PostType" DataField="PostType" FieldType="String"
                         HeaderText="类型" Hidden="true" HeaderTextAlign="Center" TextAlign="Center">
                     </f:RenderField>
-                    <f:RenderField Width="10px" ColumnID="IsAuditFlow" DataField="IsAuditFlow" FieldType="Boolean"
-                        HeaderText="参与审批" Hidden="true" HeaderTextAlign="Center" TextAlign="Center">
-                    </f:RenderField> 
-                    <f:RenderField Width="10px" ColumnID="RiskLevelId" DataField="RiskLevelId" FieldType="String"
+                    <f:RenderField Width="1px" ColumnID="IsAuditFlow" DataField="IsAuditFlow" FieldType="Boolean"
+                        HeaderText="审批" Hidden="true" HeaderTextAlign="Center" TextAlign="Center">
+                    </f:RenderField>
+                     <f:RenderField Width="1px" ColumnID="IsShowChart" DataField="IsShowChart" FieldType="Boolean"
+                        HeaderText="隐患图表" Hidden="true" HeaderTextAlign="Center" TextAlign="Center">
+                    </f:RenderField>
+                    <f:RenderField Width="1px" ColumnID="RiskLevelId" DataField="RiskLevelId" FieldType="String"
                         HeaderText="巡检级别" Hidden="true" HeaderTextAlign="Center" TextAlign="Center">
                     </f:RenderField>                    
                 </Columns>
@@ -80,15 +85,15 @@
                 </PageItems>
             </f:Grid>
             <f:SimpleForm ID="SimpleForm1" runat="server" ShowBorder="true" ShowHeader="false"
-                LabelWidth="80px" BodyPadding="5px" Width="330px">
+                LabelWidth="80px" BodyPadding="5px" Width="330px" EnableCollapse="true" Collapsed="true">
                 <Items>
                     <f:HiddenField ID="hfFormID" runat="server">
                     </f:HiddenField>
-                    <f:TextBox ID="txtWorkPostCode" Label="岗位编号" ShowRedStar="true" Required="true" runat="server"
+                    <f:TextBox ID="txtWorkPostCode" Label="编号" ShowRedStar="true" Required="true" runat="server"
                         MaxLength="50" LabelAlign="right" AutoPostBack="true" OnTextChanged="TextBox_TextChanged"
                         LabelWidth="80px">
                     </f:TextBox>
-                    <f:TextBox ID="txtWorkPostName" Label="岗位名称" ShowRedStar="true" Required="true" runat="server"
+                    <f:TextBox ID="txtWorkPostName" Label="名称" ShowRedStar="true" Required="true" runat="server"
                         MaxLength="100" LabelAlign="right" AutoPostBack="true" OnTextChanged="TextBox_TextChanged"
                         LabelWidth="80px">
                     </f:TextBox>
@@ -96,14 +101,16 @@
                         ShowRedStar="true" LabelWidth="80px">
                     </f:DropDownList>
                     <f:CheckBox ID="chkIsAuditFlow" MarginLeft="40px" runat="server" Text="参与审批" Checked="false">
+                    </f:CheckBox>
+                    <f:CheckBox ID="chkIsShowChart" MarginLeft="40px" runat="server" Text="隐患图表" Checked="false">
                     </f:CheckBox>  
                      <f:DropDownList ID="drpRiskLevel" runat="server" Label="巡检级别" EnableMultiSelect="true" 
                         EnableCheckBoxSelect="true" LabelAlign="Right" LabelWidth="80px">
                     </f:DropDownList>    
-                     <f:NumberBox ID="txtFrequency" runat="server" Label="巡检频率</br>(小时/次)" NoDecimal="true" NoNegative="true" 
-                        LabelWidth="80px" LabelAlign="Right" ></f:NumberBox>           
+                     <f:NumberBox ID="txtFrequency" runat="server" Label="巡检频率</br>(天/次)" NoDecimal="true" NoNegative="true" 
+                        LabelWidth="80px" LabelAlign="Right" MinValue="1"></f:NumberBox>           
                     <f:TextArea ID="txtRemark" runat="server" Label="备注" LabelAlign="right" MaxLength="200"
-                        LabelWidth="80px">
+                        LabelWidth="80px" Hidden="true">
                     </f:TextArea>
                     <f:Label ID="lb1" runat="server" Text="岗位类型说明：" LabelWidth="120px">
                     </f:Label>
@@ -115,7 +122,7 @@
                     </f:Label>
                 </Items>
                 <Toolbars>
-                    <f:Toolbar ID="Toolbar1" Position="Bottom" runat="server">
+                    <f:Toolbar ID="Toolbar1" Position="Bottom" ToolbarAlign="Center" runat="server">
                         <Items>
                         <f:Button ID="btnNew" Icon="Add" ToolTip="新增" EnablePostBack="false" Hidden="true"
                             runat="server">
@@ -125,9 +132,7 @@
                         </f:Button>
                         <f:Button ID="btnDelete" Enabled="false" ToolTip="删除" Icon="Delete" ConfirmText="确定删除当前数据？"
                             Hidden="true" OnClick="btnDelete_Click" runat="server">
-                        </f:Button>
-                        <f:ToolbarFill ID="ToolbarFill1" runat="server">
-                        </f:ToolbarFill>
+                        </f:Button>                       
                         <f:Button ID="btnSave" Icon="SystemSave" runat="server"  ValidateForms="SimpleForm1"
                             Hidden="true" OnClick="btnSave_Click">
                         </f:Button>
@@ -170,6 +175,7 @@
         var txtNameClientID = '<%= txtWorkPostName.ClientID %>';
         var drpPostTypeClientID = '<%= drpPostType.ClientID %>';
         var chkIsAuditFlowClientID = '<%= chkIsAuditFlow.ClientID %>';
+        var chkIsShowChartClientID = '<%= chkIsShowChart.ClientID %>';
         var drpRiskLevelClientID = '<%= drpRiskLevel.ClientID %>';
         var txtRemarkClientID = '<%=txtRemark.ClientID %>';
         var txtFrequencyClientID = '<%=txtFrequency.ClientID %>';
@@ -188,6 +194,7 @@
             F(txtNameClientID).setValue(rowValue['WorkPostName']);
             F(drpPostTypeClientID).setValue(rowValue['PostType']);
             F(chkIsAuditFlowClientID).setValue(rowValue['IsAuditFlow']);
+            F(chkIsShowChartClientID).setValue(rowValue['IsShowChart']);
             F(drpRiskLevelClientID).setValue(rowValue['RiskLevelId']);
             F(txtRemarkClientID).setValue(rowValue['Remark']);
             F(txtFrequencyClientID).setValue(rowValue['Frequency']);

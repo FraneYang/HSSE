@@ -13,17 +13,30 @@
     <f:Form ID="SimpleForm1" ShowBorder="false" ShowHeader="false" AutoScroll="true"
         BodyPadding="20px" runat="server" RedStarPosition="BeforeText" LabelAlign="Right">
         <Rows>
+            <f:FormRow>
+                <Items>
+                    <f:NumberBox ID="txtMenuOperation" runat="server" Label="动作序号" FocusOnPageLoad="true"
+                        LabelWidth="120px" LabelAlign="Right" ShowRedStar="true" Required="true" NoDecimal="true" NoNegative="true">
+                    </f:NumberBox>
+                </Items>
+            </f:FormRow>
              <f:FormRow>
                <Items>
-                   <f:DropDownList ID="drpMenuOperation" runat="server" Label="页面操作" EnableEdit="true" 
-                        Required="true" ShowRedStar="true" LabelWidth="120px" LabelAlign="Right">
-                    </f:DropDownList>
+                    <f:TextArea ID="txtMenuOperationName" runat="server" Label="动作名称" 
+                        LabelWidth="120px" LabelAlign="Right" ShowRedStar="true" Required="true" >
+                    </f:TextArea>
                 </Items>  
             </f:FormRow>
             <f:FormRow>
                 <Items>
-                    <f:NumberBox ID="txtScore" runat="server" Label="分值" NoDecimal="true" 
+                    <f:NumberBox ID="txtScore" runat="server" Label="分值" 
                         LabelWidth="120px" LabelAlign="Right" ShowRedStar="true" Required="true" ></f:NumberBox>
+                </Items>
+            </f:FormRow>
+            <f:FormRow>
+                <Items>
+                    <f:NumberBox ID="txtOutTime" runat="server" Label="超时时长(分钟)" 
+                        LabelWidth="120px" LabelAlign="Right" NoDecimal="true" NoNegative="true"></f:NumberBox>
                 </Items>
             </f:FormRow>
         </Rows>

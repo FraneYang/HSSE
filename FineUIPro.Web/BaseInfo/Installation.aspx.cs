@@ -1,14 +1,11 @@
 ﻿namespace FineUIPro.Web.BaseInfo
 {
+    using BLL;
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
-    using System.IO;
     using System.Linq;
-    using System.Text;
-    using System.Web.UI;
-    using BLL;
 
     public partial class Installation : PageBase
     {
@@ -36,26 +33,22 @@
         private void BindGrid()
         {
             string strSql = @"SELECT Installation.InstallationId,Installation.DepartId,Installation.InstallationCode,Installation.InstallationName,Installation.IsUsed,Installation.Def,Depart.DepartCode,Depart.DepartName,Installation.ManagerNames"
+                          + @",(CASE WHEN InstallType='1' THEN '科室' WHEN InstallType='3' THEN '检修装置' ELSE '装置' END ) AS InstallTypeName"
                           + @" FROM  Base_Installation AS Installation"
                           + @" LEFT JOIN Base_Depart AS Depart ON Installation.DepartId =Depart.DepartId"                                                                          
                           + @" WHERE 1 = 1";
             List<SqlParameter> listStr = new List<SqlParameter>();         
-            if (!string.IsNullOrEmpty(this.txtInstallationName.Text.Trim()))
+            if (!string.IsNullOrEmpty(this.txtName.Text.Trim()))
             {
-                strSql += " AND Installation.InstallationName LIKE @InstallationName";
-                listStr.Add(new SqlParameter("@InstallationName", "%" + this.txtInstallationName.Text.Trim() + "%"));
+                strSql += " AND (Installation.InstallationName LIKE @Name OR Installation.InstallationCode LIKE @Name OR Installation.Def LIKE @Name OR Depart.DepartName LIKE @Name)";
+                listStr.Add(new SqlParameter("@Name", "%" + this.txtName.Text.Trim() + "%"));
             }          
-            if (!string.IsNullOrEmpty(this.txtDepartName.Text.Trim()))
-            {
-                strSql += " AND Depart.DepartName LIKE @DepartName";
-                listStr.Add(new SqlParameter("@DepartName", "%" + this.txtDepartName.Text.Trim() + "%"));
-            }      
            
             SqlParameter[] parameter = listStr.ToArray();
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
 
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();           
@@ -117,18 +110,36 @@
         private void DeleteData()
         {
             if (Grid1.SelectedRowIndexArray.Length > 0)
-            {
+            {                
+                string strShowNotify = string.Empty;
                 foreach (int rowIndex in Grid1.SelectedRowIndexArray)
                 {
                     string rowID = Grid1.DataKeys[rowIndex][0].ToString();
-                    if (judgementDelete(rowID, false))
+                    var installation = BLL.InstallationService.GetInstallationByInstallationId(rowID);
+                    if (installation != null)
                     {
-                        BLL.InstallationService.DeleteInstallationById(rowID);
-                        BLL.LogService.AddLog( this.CurrUser.UserId, "删除装置/科室");
+                        string delMess = judgementDelete(rowID);
+                        if (string.IsNullOrEmpty(delMess))
+                        {
+                            BLL.InstallationService.DeleteInstallationById(rowID);
+                            BLL.LogService.AddLog(this.CurrUser.UserId, "删除装置/科室");
+                        }
+                        else
+                        {
+                            strShowNotify += "装置：" + installation.InstallationName + delMess;
+                        }
                     }
                 }
+
                 BindGrid();
-                ShowNotify("删除数据成功!");
+                if (!string.IsNullOrEmpty(strShowNotify))
+                {
+                    Alert.ShowInTop(strShowNotify, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    ShowNotify("删除数据成功!", MessageBoxIcon.Success);
+                }
             }
         }
         #endregion
@@ -205,26 +216,51 @@
         /// 判断是否可以删除
         /// </summary>
         /// <returns></returns>
-        private bool judgementDelete(string id, bool isShow)
+        private string judgementDelete(string id)
         {
             string content = string.Empty;
-            //if (Funs.DB.Project_ProjectInstallation.FirstOrDefault(x => x.InstallationId == id) != null)
-            //{
-            //    content = "该用户已在【项目用户】中使用，不能删除！";
-            //}
-            
-            if (string.IsNullOrEmpty(content))
+            if (Funs.DB.Hazard_RiskList.FirstOrDefault(x => x.InstallationId == id) != null)
             {
-                return true;
+                content += "已在【风险信息库】中使用，不能删除！";
             }
-            else
+            if (Funs.DB.Base_WorkArea.FirstOrDefault(x => x.InstallationId == id) != null)
             {
-                if (isShow)
-                {
-                    Alert.ShowInTop(content);
-                }
-                return false;
+                content += "已在【区域信息】中使用，不能删除！";
             }
+            if (Funs.DB.Sys_User.FirstOrDefault(x => x.InstallationId.Contains(id)) != null)
+            {
+                content += "已在【人员信息】中使用，不能删除！";
+            }
+            if (Funs.DB.Base_Euipment.FirstOrDefault(x => x.InstallationId == id) != null)
+            {
+                content += "已在【设备设施】中使用，不能删除！";
+            }
+            if (Funs.DB.Training_Plan.FirstOrDefault(x => x.InstallationIds.Contains(id)) != null)
+            {
+                content += "已在【培训计划】中使用，不能删除！";
+            }           
+            if (Funs.DB.Training_TestPlan.FirstOrDefault(x => x.InstallationIds.Contains(id)) != null)
+            {
+                content += "已在【考试计划】中使用，不能删除！";
+            }
+            if (Funs.DB.Training_TrainingEduItem.FirstOrDefault(x => x.InstallationIds.Contains(id)) != null)
+            {
+                content += "已在【考试试题库】中使用，不能删除！";
+            }        
+            if (Funs.DB.Training_TrainingItem.FirstOrDefault(x => x.InstallationIds.Contains(id)) != null)
+            {
+                content += "已在【培训教材库】中使用，不能删除！";
+            }
+            if (Funs.DB.Emergency_RescueInfo.FirstOrDefault(x => x.InstallationIds.Contains(id)) != null)
+            {
+                content += "已在【应急预警】中使用，不能删除！";
+            }
+            if (Funs.DB.Emergency_Warning.FirstOrDefault(x => x.InstallationIds.Contains(id)) != null)
+            {
+                content += "已在【应急信息】中使用，不能删除！";
+            }
+
+            return content;
         }
         #endregion
     }

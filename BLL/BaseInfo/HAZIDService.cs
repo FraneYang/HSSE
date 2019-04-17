@@ -45,10 +45,12 @@ namespace BLL
         /// <param name="HAZID"></param>
         public static void AddHAZID(Model.Base_HAZID HAZID)
         {
-            Model.Base_HAZID newHAZID = new Model.Base_HAZID();
-            newHAZID.HAZIDId = HAZID.HAZIDId;
-            newHAZID.HAZIDCode = HAZID.HAZIDCode;
-            newHAZID.HAZIDName = HAZID.HAZIDName;
+            Model.Base_HAZID newHAZID = new Model.Base_HAZID
+            {
+                HAZIDId = HAZID.HAZIDId,
+                HAZIDCode = HAZID.HAZIDCode,
+                HAZIDName = HAZID.HAZIDName
+            };
             db.Base_HAZID.InsertOnSubmit(newHAZID);
             db.SubmitChanges();
         }

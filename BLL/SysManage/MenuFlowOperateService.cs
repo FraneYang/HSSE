@@ -16,26 +16,31 @@ namespace BLL
        {
            return  Funs.DB.Sys_MenuFlowOperate.FirstOrDefault(x=> x.FlowOperateId == flowOperateId);
        }
-        
-       /// <summary>
-       /// 添加工作流信息
-       /// </summary>
-       /// <param name="flow"></param>
-       public static void AddAuditFlow(Model.Sys_MenuFlowOperate flow)
-      {           
-           Model.Sys_MenuFlowOperate newMenuFlowOperate = new Model.Sys_MenuFlowOperate();
-           newMenuFlowOperate.FlowOperateId = SQLHelper.GetNewID(typeof(Model.Sys_MenuFlowOperate));
-           newMenuFlowOperate.MenuId = flow.MenuId;
-           newMenuFlowOperate.FlowStep = flow.FlowStep;
-           newMenuFlowOperate.PushGroup = flow.PushGroup;
-           newMenuFlowOperate.AuditFlowName = flow.AuditFlowName;
-           newMenuFlowOperate.WorkPostIds = flow.WorkPostIds;
-           newMenuFlowOperate.UserIds = flow.UserIds;
-           newMenuFlowOperate.IsNeed = flow.IsNeed;
-           newMenuFlowOperate.IsFlowEnd = flow.IsFlowEnd;
-           Funs.DB.Sys_MenuFlowOperate.InsertOnSubmit(newMenuFlowOperate);
-           Funs.DB.SubmitChanges();
-       }
+
+        /// <summary>
+        /// 添加工作流信息
+        /// </summary>
+        /// <param name="flow"></param>
+        public static void AddAuditFlow(Model.Sys_MenuFlowOperate flow)
+        {
+            Model.Sys_MenuFlowOperate newMenuFlowOperate = new Model.Sys_MenuFlowOperate
+            {
+                FlowOperateId = SQLHelper.GetNewID(typeof(Model.Sys_MenuFlowOperate)),
+                MenuId = flow.MenuId,
+                FlowStep = flow.FlowStep,
+                PushGroup = flow.PushGroup,
+                AuditFlowName = flow.AuditFlowName,
+                WorkPostIds = flow.WorkPostIds,
+                DepartIds = flow.DepartIds,
+                InstallationIds = flow.InstallationIds,
+                UserIds = flow.UserIds,
+                IsNeed = flow.IsNeed,
+                IsFlowEnd = flow.IsFlowEnd,
+                MatchesValue = flow.MatchesValue
+            };
+            Funs.DB.Sys_MenuFlowOperate.InsertOnSubmit(newMenuFlowOperate);
+            Funs.DB.SubmitChanges();
+        }
 
        /// <summary>
        /// 修改工作流信息
@@ -44,18 +49,21 @@ namespace BLL
        public static void UpdateAuditFlow(Model.Sys_MenuFlowOperate flow)
        {           
            Model.Sys_MenuFlowOperate newMenuFlowOperate = Funs.DB.Sys_MenuFlowOperate.FirstOrDefault(e => e.FlowOperateId == flow.FlowOperateId);
-           if (newMenuFlowOperate != null)
-           {
-               newMenuFlowOperate.MenuId = flow.MenuId;
-               newMenuFlowOperate.FlowStep = flow.FlowStep;
-               newMenuFlowOperate.PushGroup = flow.PushGroup;
-               newMenuFlowOperate.AuditFlowName = flow.AuditFlowName;
-               newMenuFlowOperate.WorkPostIds = flow.WorkPostIds;
-               newMenuFlowOperate.UserIds = flow.UserIds;
-               newMenuFlowOperate.IsNeed = flow.IsNeed;
-               newMenuFlowOperate.IsFlowEnd = flow.IsFlowEnd;
-               Funs.DB.SubmitChanges();
-           }
+            if (newMenuFlowOperate != null)
+            {
+                newMenuFlowOperate.MenuId = flow.MenuId;
+                newMenuFlowOperate.FlowStep = flow.FlowStep;
+                newMenuFlowOperate.PushGroup = flow.PushGroup;
+                newMenuFlowOperate.AuditFlowName = flow.AuditFlowName;
+                newMenuFlowOperate.WorkPostIds = flow.WorkPostIds;
+                newMenuFlowOperate.DepartIds = flow.DepartIds;
+                newMenuFlowOperate.InstallationIds = flow.InstallationIds;
+                newMenuFlowOperate.UserIds = flow.UserIds;
+                newMenuFlowOperate.IsNeed = flow.IsNeed;
+                newMenuFlowOperate.IsFlowEnd = flow.IsFlowEnd;
+                newMenuFlowOperate.MatchesValue = flow.MatchesValue;
+                Funs.DB.SubmitChanges();
+            }
        }
 
        /// <summary>

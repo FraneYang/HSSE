@@ -1,10 +1,9 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
-using BLL;
 
 namespace FineUIPro.Web.SysManage
 {
@@ -19,11 +18,16 @@ namespace FineUIPro.Web.SysManage
         {
             if (!IsPostBack)
             {
-                /// 流程设置加载页面方法
-                this.LoadTab2Data();     
+                /// 菜单设置
+                this.LoadTab2Data();
+                this.drpMenu.Value = BLL.Const.HiddenHazardMenuId;
+                this.drpMenu_TextChanged(null, null);
+                /// 环境设置
+                this.LoadTTab4Data();
             }
         }
-        
+
+        #region 菜单设置
         #region 流程设置
         /// <summary>
         /// TAB2加载页面方法
@@ -35,7 +39,7 @@ namespace FineUIPro.Web.SysManage
             if (sysMenu.Count() > 0)
             {
                 this.InitTreeMenu(sysMenu, null);
-            }            
+            }
         }
 
         #region 加载菜单下拉框树
@@ -46,7 +50,7 @@ namespace FineUIPro.Web.SysManage
         {
             string supMenu = "0";
             if (node != null)
-            { 
+            {
                 supMenu = node.NodeID;
             }
             var menuItemList = menusList.Where(x => x.SuperMenu == supMenu).OrderBy(x => x.SortIndex);    //获取菜单列表
@@ -54,32 +58,22 @@ namespace FineUIPro.Web.SysManage
             {
                 foreach (var item in menuItemList)
                 {
-                    var noMenu = BLL.Const.noSysSetMenusList.FirstOrDefault(x => x == item.MenuId);
-                    if (noMenu == null)
+                    TreeNode newNode = new TreeNode
                     {
-                        TreeNode newNode = new TreeNode();
-                        newNode.Text = item.MenuName;
-                        newNode.NodeID = item.MenuId;
-                        if (item.IsEnd == true)
-                        {
-                            newNode.Selectable = true;
-                        }
-                        else
-                        {
-                            newNode.Selectable = false;
-                        }
-                        if (node == null)
-                        {
-                            this.treeMenu.Nodes.Add(newNode);
-                        }
-                        else
-                        {
-                            node.Nodes.Add(newNode);
-                        }
-                        if (!item.IsEnd.HasValue || item.IsEnd == false)
-                        {
-                            InitTreeMenu(menusList, newNode);
-                        }
+                        Text = item.MenuName,
+                        NodeID = item.MenuId
+                    };
+                    if (node == null)
+                    {
+                        this.treeMenu.Nodes.Add(newNode);
+                    }
+                    else
+                    {
+                        node.Nodes.Add(newNode);
+                    }
+                    if (!item.IsEnd.HasValue || item.IsEnd == false)
+                    {
+                        InitTreeMenu(menusList, newNode);
                     }
                 }
             }
@@ -99,10 +93,7 @@ namespace FineUIPro.Web.SysManage
             this.BindGrid();
             this.BindGrid2();
             var sysMenu = BLL.SysMenuService.GetSysMenuByMenuId(menuId);
-            if (sysMenu != null && sysMenu.IsEnd == true)
-            {
-            }
-            else
+            if (sysMenu == null || !sysMenu.IsEnd.HasValue || sysMenu.IsEnd == false)
             {
                 this.drpMenu.Text = string.Empty;
                 this.drpMenu.Value = string.Empty;
@@ -110,7 +101,7 @@ namespace FineUIPro.Web.SysManage
             }
         }
         #endregion
-                
+
         #endregion
 
         #region 流程列表绑定数据
@@ -119,9 +110,10 @@ namespace FineUIPro.Web.SysManage
         /// </summary>
         private void BindGrid()
         {
-            string strSql = @"SELECT FlowOperateId,MenuId,FlowStep,AuditFlowName,WorkPostIds,IsNeed,IsFlowEnd,PushGroup "
-                + @" FROM dbo.Sys_MenuFlowOperate "
-                + @" WHERE MenuId=@MenuId";
+            string strSql = @"SELECT FlowOperateId,MenuId,FlowStep,AuditFlowName,WorkPostIds,IsNeed,IsFlowEnd,PushGroup,DepartIds,InstallationIds "
+                            + @",(CASE WHEN MatchesValue='1' THEN '单位' WHEN MatchesValue='2' THEN '部门' WHEN MatchesValue='3' THEN '装置' ELSE '无' END) AS MatchesValueName "
+                            + @" FROM dbo.Sys_MenuFlowOperate "
+                            + @" WHERE MenuId=@MenuId";
             List<SqlParameter> listStr = new List<SqlParameter>();
             string menuId = string.Empty;
             if (!string.IsNullOrEmpty(this.drpMenu.Value))
@@ -134,20 +126,38 @@ namespace FineUIPro.Web.SysManage
             // 2.获取当前分页数据
             //var table = this.GetPagedDataTable(Grid1, tb1);
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid1.FilteredData, tb);
+            //
             var table = this.GetPagedDataTable(Grid1, tb);
             Grid1.DataSource = table;
             Grid1.DataBind();
         }
 
         /// <summary>
-        /// 得到角色名称字符串
+        /// 得到岗位名称字符串
         /// </summary>
         /// <param name="bigType"></param>
         /// <returns></returns>
         protected string ConvertWorkPost(object WorkPostIds)
         {
             return BLL.WorkPostService.getWorkPostNamesWorkPostIds(WorkPostIds);
+        }
+        /// <summary>
+        /// 得到部门名称字符串
+        /// </summary>
+        /// <param name="bigType"></param>
+        /// <returns></returns>
+        protected string ConvertDepart(object DepartIdIds)
+        {
+            return BLL.DepartService.getDepartNamesDepartIds(DepartIdIds);
+        }
+        /// <summary>
+        /// 得到装置名称字符串
+        /// </summary>
+        /// <param name="bigType"></param>
+        /// <returns></returns>
+        protected string ConvertInstallation(object InstallationIds)
+        {
+            return BLL.InstallationService.getInstallationNamesInstallationIds(InstallationIds);
         }
 
         #region 排序
@@ -190,11 +200,8 @@ namespace FineUIPro.Web.SysManage
                 PageContext.RegisterStartupScript(Window1.GetShowReference(String.Format("MenuFlowOperateEdit.aspx?MenuId={0}&FlowOperateId={1}", sysMenu.MenuId, Grid1.SelectedRowID, "编辑 - ")));
             }
         }
-        #endregion
-
-        #region  删除数据
         /// <summary>
-        /// 批量删除数据
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -211,12 +218,22 @@ namespace FineUIPro.Web.SysManage
                 BLL.MenuFlowOperateService.SetSortIndex(this.drpMenu.Value);
                 BindGrid();
                 BLL.LogService.AddLog(this.CurrUser.UserId, "删除审批流程信息");
-                ShowNotify("删除数据成功!");
+                ShowNotify("删除数据成功!", MessageBoxIcon.Success);
             }
         }
-        #endregion
+        protected void Grid1_RowCommand(object sender, GridCommandEventArgs e)
+        {
+            if (e.CommandName == "Action2")
+            {
+                BLL.MenuFlowOperateService.DeleteAuditFlow(Grid1.SelectedRowID);
+                BLL.MenuFlowOperateService.SetSortIndex(this.drpMenu.Value);
+                BindGrid();
+                BLL.LogService.AddLog(this.CurrUser.UserId, "删除审批流程信息");
+                ShowNotify("删除数据成功!", MessageBoxIcon.Success);
+            }
+        }
 
-        #region 关闭弹出窗口
+
         /// <summary>
         /// 关闭弹出窗口
         /// </summary>
@@ -235,9 +252,8 @@ namespace FineUIPro.Web.SysManage
         /// </summary>
         private void BindGrid2()
         {
-            string strSql = @"SELECT MenuAppraisal.AppraisalId,MenuAppraisal.MenuId,MenuAppraisal.Score,Const.SortIndex,Const.ConstText AS MenuOperation"
-                        + @" FROM Sys_MenuAppraisal AS MenuAppraisal"
-                        + @" LEFT JOIN Sys_Const AS Const ON MenuAppraisal.MenuOperation=Const.ConstValue AND Const.GroupId='" + BLL.ConstValue.Group_MenuOperation + "'"
+            string strSql = @"SELECT AppraisalId,MenuId,Score,MenuOperation,MenuOperationName,OutTime"
+                        + @" FROM Sys_MenuAppraisal"
                         + @" WHERE MenuId=@MenuId";
             List<SqlParameter> listStr = new List<SqlParameter>();
             string menuId = string.Empty;
@@ -245,13 +261,13 @@ namespace FineUIPro.Web.SysManage
             {
                 menuId = this.drpMenu.Value;
             }
+
             listStr.Add(new SqlParameter("@MenuId", menuId));
             SqlParameter[] parameter = listStr.ToArray();
             DataTable tb = SQLHelper.GetDataTableRunText(strSql, parameter);
             // 2.获取当前分页数据
             //var table = this.GetPagedDataTable(Grid1, tb1);
             Grid1.RecordCount = tb.Rows.Count;
-            tb = GetFilteredTable(Grid2.FilteredData, tb);
             var table = this.GetPagedDataTable(Grid2, tb);
             Grid2.DataSource = table;
             Grid2.DataBind();
@@ -307,13 +323,24 @@ namespace FineUIPro.Web.SysManage
         /// <param name="e"></param>
         protected void btnAppraisalDelete_Click(object sender, EventArgs e)
         {
-            if (Grid2.SelectedRowIndexArray.Length > 0)
+            if (Grid2.SelectedRowIndexArray.Count() > 0)
             {
                 foreach (int rowIndex in Grid2.SelectedRowIndexArray)
                 {
                     string rowID = Grid2.DataKeys[rowIndex][0].ToString();
                     BLL.MenuAppraisalService.DeleteMenuAppraisal(rowID);
                 }
+                BindGrid2();
+                BLL.LogService.AddLog(this.CurrUser.UserId, "删除测评分值信息");
+                ShowNotify("删除数据成功!", MessageBoxIcon.Success);
+            }
+        }
+
+        protected void Grid2_RowCommand(object sender, GridCommandEventArgs e)
+        {
+            if (e.CommandName == "Action1")
+            {
+                BLL.MenuAppraisalService.DeleteMenuAppraisal(Grid2.SelectedRowID);
                 BindGrid2();
                 BLL.LogService.AddLog(this.CurrUser.UserId, "删除测评分值信息");
                 ShowNotify("删除数据成功!", MessageBoxIcon.Success);
@@ -332,6 +359,54 @@ namespace FineUIPro.Web.SysManage
             BindGrid2();
         }
         #endregion
+
+        #endregion
+        #endregion
+
+        #region 环境设置
+        /// <summary>
+        /// 加载
+        /// </summary>
+        private void LoadTTab4Data()
+        {
+            this.ckbGPS.Checked = false;
+            var sysCongs = from x in Funs.DB.Sys_Set select x;
+            if (sysCongs.Count() > 0)
+            {
+                var sysSet1 = sysCongs.FirstOrDefault(x => x.SetId == 1);
+                if (sysSet1 != null && sysSet1.IsAuto.HasValue)
+                {
+                    this.ckbGPS.Checked = sysSet1.IsAuto.Value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnSetSave_Click(object sender, EventArgs e)
+        {
+            var sysSet1 = Funs.DB.Sys_Set.FirstOrDefault(x => x.SetId == 1);
+            if (sysSet1 != null)
+            {
+                sysSet1.IsAuto = this.ckbGPS.Checked;
+            }
+            else
+            {
+                Model.Sys_Set newSys_Set = new Model.Sys_Set
+                {
+                    SetId = 1,
+                    SetName = this.ckbGPS.Label,
+                    IsAuto = this.ckbGPS.Checked
+                };
+                Funs.DB.Sys_Set.InsertOnSubmit(newSys_Set);
+            }
+
+            Funs.DB.SubmitChanges();
+            ShowNotify("保存成功", MessageBoxIcon.Success);
+        }
         #endregion        
     }
 }

@@ -80,7 +80,12 @@ namespace FineUIPro.Web.AttachFile
                 this.AttachPath = Request.QueryString["path"];
                 this.ParamStr = sessionName + "|" + AttachPath;
                 this.MenuId = Request.QueryString["menuId"];
-                this.Type = Request.Params["type"]; 
+                this.Type = Request.Params["type"];
+                var sour = BLL.Funs.DB.AttachFile.FirstOrDefault(x => x.ToKeyId == ToKeyId);
+                if(sour != null)
+                {
+                    this.MenuId = sour.MenuId;
+                }
                 //Request.QueryString["type"]; ////类型：0时是上传资源页面，附件权限不需要判断 -1时只查看权限 -2查看集团公司
                 this.GetButtonPower();
                 this.BindGrid();
@@ -188,7 +193,7 @@ namespace FineUIPro.Web.AttachFile
                 Session[sessionName] = new JArray();
                 var sour = BLL.Funs.DB.AttachFile.FirstOrDefault(x=> x.ToKeyId == ToKeyId);
                 if (sour != null)
-                {
+                {                   
                     string url = sour.AttachUrl.Replace('\\', '/');
                     List<string> list = Funs.GetStrListByStr(url, ',');
                     if (list.Count() > 0)
@@ -259,6 +264,7 @@ namespace FineUIPro.Web.AttachFile
                     JObject item = source[i] as JObject;
                     attachUrl += AttachPath + "\\" + item.Value<string>("savedName") + ",";
                 }
+                
                 ///保存方法
                 this.SaveData(source.ToString(), attachUrl);
                 ShowNotify("保存成功!", MessageBoxIcon.Success);
@@ -278,12 +284,14 @@ namespace FineUIPro.Web.AttachFile
             var sour = from x in db.AttachFile where x.ToKeyId == ToKeyId select x;
             if (sour.Count() == 0)
             {
-                Model.AttachFile att = new Model.AttachFile();
-                att.AttachFileId = BLL.SQLHelper.GetNewID(typeof(Model.AttachFile));
-                att.ToKeyId = ToKeyId;
-                att.AttachSource = source.ToString();
-                att.AttachUrl = attachUrl;
-                att.MenuId = MenuId;
+                Model.AttachFile att = new Model.AttachFile
+                {
+                    AttachFileId = BLL.SQLHelper.GetNewID(typeof(Model.AttachFile)),
+                    ToKeyId = ToKeyId,
+                    AttachSource = source.ToString(),
+                    AttachUrl = attachUrl,
+                    MenuId = MenuId
+                };
                 db.AttachFile.InsertOnSubmit(att);
                 db.SubmitChanges();
             }

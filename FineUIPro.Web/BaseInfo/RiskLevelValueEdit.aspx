@@ -18,21 +18,33 @@
                     <f:DropDownList ID="drpRiskLevelId" runat="server" Label="风险等级" EnableEdit="true"
                         ForceSelection="false" Readonly="true">
                     </f:DropDownList>
+                    <f:TextBox runat="server" ID="txtIdentification" Label="评估方法" Readonly="true"></f:TextBox>
                 </Items>
             </f:FormRow>
              <f:FormRow>
                 <Items>
                     <f:NumberBox ID="txtMinValue" runat="server" Label="最小值" NoDecimal="true" NoNegative="true" 
-                        LabelWidth="120px" LabelAlign="Right" ></f:NumberBox>
+                         LabelAlign="Right" ></f:NumberBox>
                     <f:NumberBox ID="txtMaxValue" runat="server" Label="最大值" NoDecimal="true" NoNegative="true" 
-                        LabelWidth="120px" LabelAlign="Right"></f:NumberBox>
-
+                         LabelAlign="Right"></f:NumberBox>
                 </Items>
-            </f:FormRow>      
+            </f:FormRow>   
              <f:FormRow>
                 <Items>                   
-                    <f:TextBox ID="txtRemark" runat="server" Label="备注" MaxLength="200">
+                    <f:TextArea ID="txtControlMeasures" runat="server" Label="控制措施" MaxLength="500">
+                   </f:TextArea>
+                </Items>
+            </f:FormRow>    
+             <f:FormRow>
+                <Items>                   
+                    <f:TextBox ID="txtLimitTime" runat="server" Label="实施期限" MaxLength="100">
                    </f:TextBox>
+                </Items>
+            </f:FormRow>    
+             <f:FormRow>
+                <Items>                   
+                    <f:TextArea ID="txtRemark" runat="server" Label="备注" MaxLength="200">
+                   </f:TextArea>
                 </Items>
             </f:FormRow>          
         </Rows>

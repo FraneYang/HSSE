@@ -147,6 +147,14 @@ namespace BLL
         /// -风险评价方法：组id
         /// </summary>
         public const string Group_EvaluationMethod = "EvaluationMethod";
+        /// <summary>
+        /// -标牌类型：组id
+        /// </summary>
+        public const string Group_SignType = "SignType";
+        /// <summary>
+        /// 正确答案项
+        /// </summary>
+        public const string Group_AnswerItems = "AnswerItems";
         #endregion
     }
 }

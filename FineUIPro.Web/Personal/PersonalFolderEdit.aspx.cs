@@ -91,12 +91,14 @@ namespace FineUIPro.Web.Personal
             {
                 if (!BLL.PersonalFolderService.IsExistTitle(this.PersonalFolderId, this.SupPersonalFolderId, staName))
                 {
-                    Model.Personal_PersonalFolder newPersonalFolder = new Model.Personal_PersonalFolder();
-                    newPersonalFolder.Title = staName;
-                    newPersonalFolder.SupPersonalFolderId = this.SupPersonalFolderId;
-                    newPersonalFolder.Code = this.txtCode.Text.Trim();
-                    newPersonalFolder.CompileMan = this.CurrUser.UserId;
-                    newPersonalFolder.IsEndLever = Convert.ToBoolean(this.chkIsEndLevel.Checked);                    
+                    Model.Personal_PersonalFolder newPersonalFolder = new Model.Personal_PersonalFolder
+                    {
+                        Title = staName,
+                        SupPersonalFolderId = this.SupPersonalFolderId,
+                        Code = this.txtCode.Text.Trim(),
+                        CompileMan = this.CurrUser.UserId,
+                        IsEndLever = Convert.ToBoolean(this.chkIsEndLevel.Checked)
+                    };
                     if (string.IsNullOrEmpty(this.PersonalFolderId))
                     {
                         newPersonalFolder.PersonalFolderId = SQLHelper.GetNewID(typeof(Model.Personal_PersonalFolder));

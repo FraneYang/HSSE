@@ -13,7 +13,7 @@
     <f:Panel ID="Panel1" runat="server" Margin="5px" BodyPadding="5px" Title="单位类型"  ShowHeader="false"
         Layout="HBox">
         <Items>
-            <f:Grid ID="Grid1" Title="单位类型" ShowHeader="false" EnableCollapse="true" PageSize="10" EnableColumnLines="true"
+            <f:Grid ID="Grid1" Title="单位类型" ShowHeader="false" EnableCollapse="true" PageSize="15" EnableColumnLines="true"
                 ShowBorder="true" AllowPaging="true" IsDatabasePaging="true" runat="server" Width="760px"
                 DataKeyNames="UnitTypeId" DataIDField="UnitTypeId" OnPageIndexChange="Grid1_PageIndexChange" AllowFilters="true" OnFilterChange="Grid1_FilterChange" EnableTextSelection="True">
                 <Columns>
@@ -61,7 +61,7 @@
                     </f:TextArea>
                 </Items>
                 <Toolbars>
-                    <f:Toolbar ID="Toolbar1" Position="Bottom" runat="server">
+                    <f:Toolbar ID="Toolbar1" Position="Bottom" ToolbarAlign="Center" runat="server">
                         <Items>
                             <f:Button ID="btnNew"  Icon="Add" ToolTip="新增" EnablePostBack="false" runat="server" Hidden="true">
                                 <Listeners>
@@ -71,8 +71,6 @@
                             <f:Button ID="btnDelete" Enabled="false" ToolTip="删除" Icon="Delete" ConfirmText="确定删除当前数据？" Hidden="true"
                                 OnClick="btnDelete_Click" runat="server">
                             </f:Button>
-                            <f:ToolbarFill ID="ToolbarFill1" runat="server">
-                            </f:ToolbarFill>
                             <f:Button ID="btnSave" Icon="SystemSave" runat="server"  ValidateForms="SimpleForm1" Hidden="true"
                                 OnClick="btnSave_Click">
                             </f:Button>

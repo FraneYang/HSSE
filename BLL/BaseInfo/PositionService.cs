@@ -29,11 +29,13 @@ namespace BLL
         public static void AddPosition(Model.Base_Position position)
         {
             Model.HSSEDB_ENN db = Funs.DB;
-            Model.Base_Position newPosition = new Model.Base_Position();
-            newPosition.PositionId = position.PositionId;
-            newPosition.PositionCode = position.PositionCode;
-            newPosition.PositionName = position.PositionName;
-            newPosition.Remark = position.Remark;
+            Model.Base_Position newPosition = new Model.Base_Position
+            {
+                PositionId = position.PositionId,
+                PositionCode = position.PositionCode,
+                PositionName = position.PositionName,
+                Remark = position.Remark
+            };
             db.Base_Position.InsertOnSubmit(newPosition);
             db.SubmitChanges();
         }

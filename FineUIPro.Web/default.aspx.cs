@@ -35,15 +35,19 @@ namespace FineUIPro.Web
                     {
                         themeStr = "bootstrap_pure";
                     }
-                    HttpCookie cookie = new HttpCookie("Theme_Pro", themeStr);
-                    cookie.Expires = DateTime.Now.AddYears(1);
+                    HttpCookie cookie = new HttpCookie("Theme_Pro", themeStr)
+                    {
+                        Expires = DateTime.Now.AddYears(1)
+                    };
                     Response.Cookies.Add(cookie);
                 }
 
                 if (!String.IsNullOrEmpty(menuStr))
                 {
-                    HttpCookie cookie = new HttpCookie("MenuStyle_Pro", menuStr);
-                    cookie.Expires = DateTime.Now.AddYears(1);
+                    HttpCookie cookie = new HttpCookie("MenuStyle_Pro", menuStr)
+                    {
+                        Expires = DateTime.Now.AddYears(1)
+                    };
                     Response.Cookies.Add(cookie);
                 }
 
@@ -101,11 +105,13 @@ namespace FineUIPro.Web
 
         private Accordion InitAccordionMenu()
         {
-            Accordion accordionMenu = new Accordion();
-            accordionMenu.ID = "accordionMenu";
-            accordionMenu.EnableFill = false;
-            accordionMenu.ShowBorder = false;
-            accordionMenu.ShowHeader = false;
+            Accordion accordionMenu = new Accordion
+            {
+                ID = "accordionMenu",
+                EnableFill = false,
+                ShowBorder = false,
+                ShowHeader = false
+            };
             leftPanel.Items.Add(accordionMenu);
             XmlDocument xmlDoc = XmlDataSource1.GetXmlDocument();
             XmlNodeList xmlNodes = xmlDoc.SelectNodes("/Tree/TreeNode");
@@ -123,24 +129,28 @@ namespace FineUIPro.Web
                         }
                     }
 
-                    AccordionPane accordionPane = new AccordionPane();
-                    accordionPane.Title = accordionPaneTitle;
-                    accordionPane.Layout = Layout.Fit;
-                    accordionPane.ShowBorder = false;
-                    var accordionPaneIconAttr = xmlNode.Attributes["Icon"];
+                AccordionPane accordionPane = new AccordionPane
+                {
+                    Title = accordionPaneTitle,
+                    //Layout = Layout.Fit,
+                    ShowBorder = false
+                };
+                var accordionPaneIconAttr = xmlNode.Attributes["Icon"];
                     if (accordionPaneIconAttr != null)
                     {
                         accordionPane.Icon = (Icon)Enum.Parse(typeof(Icon), accordionPaneIconAttr.Value, true);
                     }
 
                     accordionMenu.Items.Add(accordionPane);
-                    Tree innerTree = new Tree();
-                    innerTree.ShowBorder = false;
-                    innerTree.ShowHeader = false;
-                    innerTree.EnableIcons = false;
-                    innerTree.AutoScroll = true;
-                    innerTree.EnableSingleClickExpand = true;
-                    accordionPane.Items.Add(innerTree);
+                Tree innerTree = new Tree
+                {
+                    ShowBorder = false,
+                    ShowHeader = false,
+                    EnableIcons = false,
+                    AutoScroll = true,
+                    EnableSingleClickExpand = true
+                };
+                accordionPane.Items.Add(innerTree);
                     XmlDocument doc = new XmlDocument();
                     doc.LoadXml(String.Format("<?xml version=\"1.0\" encoding=\"utf-8\" ?><Tree>{0}</Tree>", xmlNode.InnerXml));
                     ResolveXmlDocument(doc);
@@ -164,13 +174,15 @@ namespace FineUIPro.Web
         /// <returns></returns>
         private Tree InitTreeMenu()
         {
-            Tree treeMenu = new Tree();
-            treeMenu.ID = "treeMenu";
-            treeMenu.ShowBorder = false;
-            treeMenu.ShowHeader = false;
-            treeMenu.EnableIcons = true;
-            treeMenu.AutoScroll = true;
-            treeMenu.EnableSingleClickExpand = true;
+            Tree treeMenu = new Tree
+            {
+                ID = "treeMenu",
+                ShowBorder = false,
+                ShowHeader = false,
+                EnableIcons = true,
+                AutoScroll = true,
+                EnableSingleClickExpand = true
+            };
             if (_menuType == "tree" || _menuType == "tree_minimode")
             {
                 treeMenu.HideHScrollbar = true;

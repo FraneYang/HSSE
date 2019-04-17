@@ -36,6 +36,11 @@
                     <f:DropDownList ID="drpManagerIds" runat="server" Label="负责人" EnableEdit="true" EnableMultiSelect="true"
                         ForceSelection="false" MaxLength="500" EnableCheckBoxSelect="true">
                     </f:DropDownList>
+                     <f:DropDownList ID="drpInstallType" runat="server" Label="类型" EnableEdit="true" >
+                         <f:ListItem Value="1" Text="科室"/>
+                         <f:ListItem Value="2" Text="装置" Selected="true"/>
+                         <f:ListItem Value="3" Text="检修装置"/>
+                    </f:DropDownList>
                 </Items>
             </f:FormRow>
              <f:FormRow>

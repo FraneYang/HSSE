@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>作业区域</title>
+    <title>单元设置</title>
     <link href="../res/css/common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -12,16 +12,16 @@
     <f:Panel ID="Panel1" runat="server" Margin="5px" BodyPadding="5px" ShowBorder="false"
         ShowHeader="false" Layout="VBox" BoxConfigAlign="Stretch">
         <Items>
-            <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="作业区域" EnableCollapse="true"
+            <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="单元设置" EnableCollapse="true"
                 runat="server" BoxFlex="1" EnableColumnLines="true" DataKeyNames="WorkAreaId"
                 AllowCellEditing="true" ClicksToEdit="2" DataIDField="WorkAreaId" AllowSorting="true"
-                SortField="WorkAreaCode" SortDirection="DESC" OnSort="Grid1_Sort" AllowPaging="true"
-                IsDatabasePaging="true" PageSize="10" OnPageIndexChange="Grid1_PageIndexChange"
+                SortField="InstallationCode,WorkAreaCode" SortDirection="DESC" OnSort="Grid1_Sort" AllowPaging="true"
+                IsDatabasePaging="true" PageSize="15" OnPageIndexChange="Grid1_PageIndexChange"
                 EnableRowDoubleClickEvent="true" OnRowDoubleClick="Grid1_RowDoubleClick" EnableTextSelection="True">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar2" Position="Top" runat="server" ToolbarAlign="Left">
                         <Items>
-                            <f:TextBox runat="server" Label="区域名称" ID="txtWorkAreaName" EmptyText="输入查询条件" AutoPostBack="true"
+                            <f:TextBox runat="server" Label="查询" ID="txtName" EmptyText="输入查询条件" AutoPostBack="true"
                                 OnTextChanged="TextBox_TextChanged" Width="250px" LabelWidth="80px" LabelAlign="right">
                             </f:TextBox>
                             <f:ToolbarFill ID="ToolbarFill1" runat="server">
@@ -36,23 +36,17 @@
                     </f:Toolbar>
                 </Toolbars>
                 <Columns>                                        
-                    <f:TemplateField ColumnID="tfNumber" Width="50px" HeaderText="序号" HeaderTextAlign="Center"
-                        TextAlign="Center">
-                        <ItemTemplate>
-                            <asp:Label ID="lblNumber" runat="server" Text='<%# Grid1.PageIndex * Grid1.PageSize + Container.DataItemIndex + 1 %>'></asp:Label>
-                        </ItemTemplate>
-                    </f:TemplateField>
+                     <f:RowNumberField EnablePagingNumber="true" HeaderText="序号" Width="50px" HeaderTextAlign="Center"
+                        TextAlign="Center" />
+                    <f:RenderField Width="150px" ColumnID="InstallationName" DataField="InstallationName" SortField="InstallationName"
+                        FieldType="String" HeaderText="装置" HeaderTextAlign="Center" TextAlign="Left">
+                    </f:RenderField>
                     <f:RenderField Width="120px" ColumnID="WorkAreaCode" DataField="WorkAreaCode" SortField="WorkAreaCode"
-                        FieldType="String" HeaderText="区域编号" HeaderTextAlign="Center" TextAlign="Left">
+                        FieldType="String" HeaderText="单元编号" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                    <f:RenderField Width="250px" ColumnID="WorkAreaName" DataField="WorkAreaName" SortField="WorkAreaName"
-                        FieldType="String" HeaderText="区域名称" HeaderTextAlign="Center" TextAlign="Left">
+                    <f:RenderField Width="350px" ColumnID="WorkAreaName" DataField="WorkAreaName" SortField="WorkAreaName"
+                        FieldType="String" HeaderText="单元名称" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                   <%-- <f:TemplateField Width="300px" HeaderText="单位名称" HeaderTextAlign="Center" TextAlign="Left">
-                        <ItemTemplate>
-                            <asp:Label ID="lblUnitName" runat="server" Text='<%# ConvertUnitName(Eval("UnitId")) %>'></asp:Label>
-                        </ItemTemplate>
-                    </f:TemplateField>--%>
                     <f:RenderField Width="250px" ColumnID="Remark" DataField="Remark" SortField="Remark"
                         FieldType="String" HeaderText="备注" ExpandUnusedSpace="true" HeaderTextAlign="Center"
                         TextAlign="Left">
@@ -78,7 +72,7 @@
         </Items>
     </f:Panel>
     <f:Window ID="Window1" Title="弹出窗体" Hidden="true" EnableIFrame="true" EnableMaximize="true"
-        Target="Self" EnableResize="true" runat="server" OnClose="Window1_Close" IsModal="true"
+        Target="Top" EnableResize="true" runat="server" OnClose="Window1_Close" IsModal="true"
         Width="700px" Height="330px">
     </f:Window>
     <f:Menu ID="Menu1" runat="server">

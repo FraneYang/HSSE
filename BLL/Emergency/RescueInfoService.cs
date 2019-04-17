@@ -20,6 +20,21 @@ namespace BLL
         }
 
         /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="plan"></param>
+        public static void UpdateRescueInfo(Model.Emergency_RescueInfo rescueInfo)
+        {
+            Model.Emergency_RescueInfo newRescueInfo = db.Emergency_RescueInfo.FirstOrDefault(e => e.RescueInfoId == rescueInfo.RescueInfoId);
+            if (newRescueInfo != null)
+            {
+                newRescueInfo.InstallationNames = rescueInfo.InstallationNames;
+                //newPlan.States = plan.States;
+                db.SubmitChanges();
+            }
+        }
+
+        /// <summary>
         /// 根据主键删除信息
         /// </summary>
         /// <param name="rescueInfoId"></param>
@@ -29,6 +44,7 @@ namespace BLL
             Model.Emergency_RescueInfo rescueInfo = db.Emergency_RescueInfo.FirstOrDefault(e => e.RescueInfoId == rescueInfoId);
             if (rescueInfo != null)
             {
+                BLL.RescueInfoPlanService.DeleteRescueInfoPlanByRescueInfoId(rescueInfo.RescueInfoId);
                 CommonService.DeleteSysPushRecordByDataId(rescueInfo.RescueInfoId);
                 db.Emergency_RescueInfo.DeleteOnSubmit(rescueInfo);
                 db.SubmitChanges();

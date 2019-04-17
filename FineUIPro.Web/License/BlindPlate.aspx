@@ -21,8 +21,8 @@
             <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="盲板抽堵安全作业票" EnableCollapse="true"
                 runat="server" BoxFlex="1" DataKeyNames="BlindPlateId" AllowCellEditing="true" EnableColumnLines="true"
                 ClicksToEdit="2" DataIDField="BlindPlateId" AllowSorting="true" SortField="LicenseCode"
-                SortDirection="DESC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="10" OnPageIndexChange="Grid1_PageIndexChange"
-                EnableTextSelection="True">
+                SortDirection="DESC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="15" OnPageIndexChange="Grid1_PageIndexChange"
+                EnableTextSelection="True" EnableRowDoubleClickEvent="true" OnRowDoubleClick="Grid1_RowDoubleClick">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar2" Position="Top" runat="server">
                         <Items>
@@ -82,8 +82,18 @@
             </f:Grid>
         </Items>
     </f:Panel>
+    <f:Window ID="Window1" Title="盲板抽堵安全作业票" Hidden="true" EnableIFrame="true" EnableMaximize="true"
+        Target="Top" EnableResize="true" runat="server" IsModal="true"
+        Width="1024px" Height="630px">
+    </f:Window>
     <f:Menu ID="Menu1" runat="server">
        
+       <f:MenuButton ID="btnMenuView" OnClick="btnMenuView_Click" EnablePostBack="true"
+            runat="server" Text="查看"  Icon="TableGo">
+        </f:MenuButton>  
+        <f:MenuButton ID="btnMenuPrint" OnClick="btnPrint_Click" EnablePostBack="true"
+            runat="server" Text="打印"  Icon="Printer">
+        </f:MenuButton>  
         <f:MenuButton ID="btnMenuDelete" OnClick="btnMenuDelete_Click" EnablePostBack="true"  Icon="Delete"
             ConfirmText="删除选中行？" ConfirmTarget="Top" runat="server" Text="删除" Hidden ="true">
         </f:MenuButton>        

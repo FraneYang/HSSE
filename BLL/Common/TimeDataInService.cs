@@ -24,8 +24,10 @@ namespace BLL
                 messageTimer = null;
             }
 
-            messageTimer = new Timer();
-            messageTimer.AutoReset = true;
+            messageTimer = new Timer
+            {
+                AutoReset = true
+            };
             messageTimer.Elapsed += new ElapsedEventHandler(AdUserInProcess);
 
             messageTimer.Interval = 60000 * adTimeJ;
@@ -72,8 +74,10 @@ namespace BLL
                 messageTimerEve = null;
             }
 
-            messageTimerEve = new Timer();
-            messageTimerEve.AutoReset = true;
+            messageTimerEve = new Timer
+            {
+                AutoReset = true
+            };
             messageTimerEve.Elapsed += new ElapsedEventHandler(ColligateFormConfirmProcessEve);
             messageTimerEve.Interval = GetMessageTimerEveNextInterval();
             messageTimerEve.Start();

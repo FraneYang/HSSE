@@ -124,13 +124,17 @@ namespace BLL
         /// 发卡
         /// </summary>
         public const string BtnSendCard = "发卡";
+        /// <summary>
+        /// 归档
+        /// </summary>
+        public const string BtnFile = "归档";
         #endregion
 
         #region 定义常量
         /// <summary>
         /// 新奥单位id
         /// </summary>
-        public const string UnitId_XA = "24633275-2a4c-484f-986a-93d6c34857a9";  
+        public const string UnitId_XA = "24633275-2a4c-484f-986a-93d6c34857a9"; 
 
         #region 项目单位类型
         /// <summary>
@@ -246,7 +250,15 @@ namespace BLL
         /// <summary>
         /// 单位类别
         /// </summary>
-        public const string UnitTypeMenuId = "685F1E0D-987E-491C-9DC7-014098DEE0C3";  
+        public const string UnitTypeMenuId = "685F1E0D-987E-491C-9DC7-014098DEE0C3";
+        /// <summary>
+        /// 单元
+        /// </summary>
+        public const string WorkAreaMenuId = "2CF9FBC1-66AF-408A-B38E-F5F4409D65F8";
+        /// <summary>
+        /// 班组信息
+        /// </summary>
+        public const string TeamGroupMenuId = "A1343045-0CDE-4F22-9C77-1C54EEEB2FEB";
         /// <summary>
         /// 职务信息
         /// </summary>
@@ -256,9 +268,21 @@ namespace BLL
         /// </summary>
         public const string PostTitleMenuId = "2E424093-81B8-421A-963F-D85D17B1E82A";
         /// <summary>
+        /// 专业信息
+        /// </summary>
+        public const string SpecialtyMenuId = "724E082C-EDDA-40FF-B396-F5441C5F6B15";
+        /// <summary>
+        /// 标准信息
+        /// </summary>
+        public const string StandardMenuId = "5C9F0DA8-B6EE-4A19-954D-E57EBC880F7F";
+        /// <summary>
         /// 特岗证书
         /// </summary>
         public const string CertificateMenuId = "3A40AF0B-C9B8-4AF9-A683-FEADD8CC3A1C";
+        /// <summary>
+        /// 准操项目
+        /// </summary>
+        public const string ProspectiveMenuId = "BB7788DF-2201-4AB2-BB98-028D6AC6679C";
         /// <summary>
         /// 危害辨识
         /// </summary>
@@ -274,34 +298,71 @@ namespace BLL
         /// <summary>
         /// 风险等级对应值
         /// </summary>
-        public const string RiskLevelValueMenuId = "732182BD-35CA-4F47-8970-FFBE070445F1";        
+        public const string RiskLevelValueMenuId = "732182BD-35CA-4F47-8970-FFBE070445F1";
+        /// <summary>
+        /// 作业风险对应值
+        /// </summary>
+        public const string OverhaulRiskGradeMenuId = "11829B4A-933C-448F-AB20-6CF9D939B964";       
         /// <summary>
         /// SCL菜单id
         /// </summary>
         public const string SCLInfoMenuId = "22F3B0D5-BFDF-4766-B473-9664B2568229";
+        /// <summary>
+        /// 动火方式菜单id
+        /// </summary>
+        public const string FireWorkModeMenuId = "B1F6FDD8-69B7-4EA9-B8CD-F4BBDA49F4DB";
+        /// <summary>
+        /// 作业活动菜单id
+        /// </summary>
+        public const string JobActivityMenuId = "7E1DC7F8-BB0C-44C8-8473-5EB7F11A3C33";
+        /// <summary>
+        /// 作业活动菜单id
+        /// </summary>
+        public const string JobEnvironmentMenuId = "A3807DF2-FA54-4DA6-A9D6-3CDF5C614BC8";
+        /// <summary>
+        /// 设备设施类型菜单id
+        /// </summary>
+        public const string EuipmentTypeMenuId = "F3642FBF-2941-4940-92A7-C0267CD5C1E7";
+        /// <summary>
+        /// 设备设施菜单id
+        /// </summary>
+        public const string EuipmentMenuId = "148B1CA0-0D3E-4783-B383-24ADD17A77A3";
+        /// <summary>
+        /// 动火分析点数据菜单id
+        /// </summary>
+        public const string FireWorkAnalysisDataMenuId = "854843F4-A58D-42F9-AB9E-0E35EB7252E1";
+        /// <summary>
+        /// 受限分析点数据菜单id
+        /// </summary>
+        public const string LimitedSpaceAnalysisDataMenuId = "9EFDE353-3EA2-4DA2-B67E-DCACB7649E29";
+        /// <summary>
+        /// 测评考核项
+        /// </summary>
+        public const string AppraisalItemMenuId = "ED77B573-7D87-4C52-ADBD-EFA9B9632F62";
+        /// <summary>
+        /// 施工方案类别
+        /// </summary>
+        public const string SpecialSchemeTypeMenuId = "999C0568-280B-469D-A0B6-F969515F207C";
+        /// <summary>
+        /// 应急救援类型
+        /// </summary>
+        public const string EmergencyTypeMenuId = "33A68820-9B17-4B34-AE43-061AEF3347EE";
         #endregion
 
         #region 公共资源
-        #region 安全合规
+        #region 专家辅助
         /// <summary>
-        /// 安全法律法规
+        /// 管理对象
         /// </summary>
-        public const string LawRegulationListMenuId = "F4B02718-0616-4623-ABCE-885698DDBEB1";
-
+        public const string ManagedObjectMenuId = "2F339420-ED38-443F-A10A-35328EB024A7";
         /// <summary>
-        /// 安全标准规范
+        /// 管理项目
         /// </summary>
-        public const string HSSEStandardListMenuId = "EFDSFVDE-RTHN-7UMG-4THA-5TGED48F8IOL";
-
+        public const string ManagedItemMenuId = "556BD50D-90C2-4D25-B170-A30EDB43155F";
         /// <summary>
-        /// 政府部门安全规章制度
+        /// 安全标准
         /// </summary>
-        public const string RulesRegulationsMenuId = "DF1413F3-4CE5-40B3-A574-E01CE64FEA25";
-
-        /// <summary>
-        /// 安全管理规定
-        /// </summary>
-        public const string ManageRuleMenuId = "56960940-81A8-43D1-9565-C306EC7AFD12";
+        public const string HSSEStandardMenuId = "F4B02718-0616-4623-ABCE-885698DDBEB1";        
         #endregion
 
         #region 安全体系
@@ -327,51 +388,21 @@ namespace BLL
         /// <summary>
         /// 培训教材库
         /// </summary>
-        public const string TrainDBMenuId = "9D99A981-7380-4085-84FA-8C3B1AFA6202";
-
+        public const string TrainingEduMenuId = "5A02AC0C-5203-4AE9-A354-BFE6D4ED28D5";
         /// <summary>
-        /// 安全试题库
+        /// 考试试题库
         /// </summary>
-        public const string TrainTestDBMenuId = "F58EE8ED-9EB5-47C7-9D7F-D751EFEA44CA";
-
+        public const string TrainDBMenuId = "9D99A981-7380-4085-84FA-8C3B1AFA6202";      
         /// <summary>
         /// 事故案例库
         /// </summary>
         public const string AccidentCaseMenuId = "D86917DB-D00A-4E18-9793-C290B5BBA84C";
-
         /// <summary>
         /// 应知应会库
         /// </summary>
         public const string KnowledgeDBMenuId = "AB7A3D78-2D89-4488-97E3-8F8616BDDE30";
         #endregion
-
-        #region 在线学习考核
-        /// <summary>
-        /// 试题库维护
-        /// </summary>
-        public const string TestDBMenuId = "C7454B8C-017F-4C8A-B9C7-D9D2F46F3CB1";
-
-        /// <summary>
-        /// 生成试卷
-        /// </summary>
-        public const string BuildTestMenuId = "86E75631-BB9B-432E-BE5C-0F8C7C58BDE3";
-
-        /// <summary>
-        /// 查看试卷
-        /// </summary>
-        public const string SeeTestMenuId = "F62D1C56-8FB0-480D-9702-84B168D0A89F";
-
-        /// <summary>
-        /// 考生信息
-        /// </summary>
-        public const string ExamineeMenuId = "8787A0B6-9F9B-40A6-B122-E8A8287A84B9";
-
-        /// <summary>
-        /// 考试系统
-        /// </summary>
-        public const string TestSystemMenuId = "C91CD0C5-6609-40BD-B5E6-C2DF148B198B";
-        #endregion
-
+        
         #region 安全技术
         /// <summary>
         /// 危险源清单
@@ -398,10 +429,6 @@ namespace BLL
         /// </summary>
         public const string AppraiseMenuId = "0ADD01FB-8088-4595-BB40-6A73F332A229";
         /// <summary>
-        /// 安全专家
-        /// </summary>
-        public const string ExpertMenuId = "05495F29-B583-43D9-89D3-3384D6783A3F";
-        /// <summary>
         /// 应急预案
         /// </summary>
         public const string EmergencyMenuId = "575C5154-A135-4737-8682-A129EA717660";
@@ -418,29 +445,20 @@ namespace BLL
         public const string SignManageMenuId = "022CA9C1-70F0-4C07-996C-0736D32B442A";
         #endregion
 
-        #region 参考资料
+        #region 新闻动态
         /// <summary>
-        /// 参考资料
+        /// 新闻动态
         /// </summary>
-        public const string ResourcesDataMenuId = "EC1BED24-CDA6-4041-9B2A-BEB5E354D58F";
-
-        /// <summary>
-        /// 问题及答案管理
-        /// </summary>
-        public const string ProblemAnswerMenuId = "37EB5621-A9D3-405A-854B-4722B045CC1E";
+        public const string NewsMenuId = "8D728939-4A60-48CE-BFB0-984FA33939EE";
         #endregion
 
-        #region 安全交流
+        #region 公文公告
         /// <summary>
-        /// 注册管理
+        /// 公文公告
         /// </summary>
-        public const string RegisterMenuId = "8FA7237E-DB0C-436C-9BC6-8C3A560EE688";
-
-        /// <summary>
-        /// 内容管理
-        /// </summary>
-        public const string ContentMenuId = "7CCD36CB-6BFE-4FD7-8497-4DACB565298E";
+        public const string NoticesMenuId = "5392D9AB-2625-46EF-A960-5839A3C370B4";
         #endregion
+
         #endregion
 
         #region 个人设置菜单
@@ -459,264 +477,8 @@ namespace BLL
         /// </summary>
         public const string PersonalFolderMenuId = "A6994B53-6237-4C2B-BDC5-E7E79A1E7F88";
         #endregion
-
-        #region 本部菜单管理
-        #region 项目管理
-        /// <summary>
-        /// 项目信息
-        /// </summary>
-        public const string SeverProjectSetMenuId = "B830399C-CA36-4C23-A170-21E556D052DD";
-
-        /// <summary>
-        /// 项目单位
-        /// </summary>
-        public const string SeverProjectUnitMenuId = "EB9C4E5E-15DB-426A-9800-6B03E64EC5DE";
-
-        /// <summary>
-        /// 项目用户
-        /// </summary>
-        public const string SeverProjectUserMenuId = "0CF5F6A1-4AEB-4034-9C3B-591838E1290A";
-        #endregion
-
-        #region 安全报表（集团）
-        #region 安全信息上报
-        /// <summary>
-        /// 百万工时安全统计月报表
-        /// </summary>
-        public const string MillionsMonthlyReportMenuId = "3156A9F0-276D-4AD4-BF84-45CF6DFC215C";
-
-        /// <summary>
-        /// 职工伤亡事故原因分析报表
-        /// </summary>
-        public const string AccidentCauseReportMenuId = "4BC71D2E-7D94-48C1-A61A-139637825AA5";
-
-        /// <summary>
-        /// 安全生产数据季报
-        /// </summary>
-        public const string SafetyQuarterlyReportMenuId = "A3894BAD-3F4A-4BB4-98CF-A76C588AE53F";
-
-        /// <summary>
-        /// 应急演练开展情况季报表
-        /// </summary>
-        public const string DrillConductedQuarterlyReportMenuId = "7985C759-8EB9-4B7D-AC65-00541280B46C";
-
-        /// <summary>
-        /// 应急演练工作计划半年报
-        /// </summary>
-        public const string DrillPlanHalfYearReportMenuId = "70DEB27A-D6FF-4D57-879B-0270F2967FA0";
-        #endregion
-
-        #region 安全信息分析
-        /// <summary>
-        /// 人工时费用分析
-        /// </summary>
-        public const string AnalyseWorkTimeCostMenuId = "598568A0-A338-499F-888C-1B73665837F9";
-
-        /// <summary>
-        /// 安全事故分析
-        /// </summary>
-        public const string AnalyseSafeAccidentMenuId = "8396C9E2-3376-4144-978A-CC6041EC6C6A";
-
-        /// <summary>
-        /// 安全隐患分析
-        /// </summary>
-        public const string AnalyseHiddenDangerMenuId = "5B645281-A055-4AA1-9245-DACBD984C76F";
-
-        /// <summary>
-        /// 资源来源统计
-        /// </summary>
-        public const string AnalyseResourceMenuId = "195D508D-E929-4B91-891E-307DC4E4338F";
-        #endregion
-        #endregion
-
-        #region HSSE管理工作报告
-        /// <summary>
-        /// 管理月报
-        /// </summary>
-        public const string ServerMonthReportMenuId = "26CE4208-7DEE-46A2-A1D2-9C182D9C1DFC";
-        /// <summary>
-        /// 总部管理月报B
-        /// </summary>
-        public const string ServerMonthReportBMenuId = "B995396A-B01C-4F03-858A-FFDC853BA4B8";
-        /// <summary>
-        /// HSSE月总结
-        /// </summary>
-        public const string ServerManagerTotalMonthMenuId = "8051C9AA-801D-4001-9CB6-833CB407A169";
-        /// <summary>
-        /// 报表上报情况
-        /// </summary>
-        public const string ServerReportRemindMenuId = "D67D1C85-3798-47A9-A0DB-B4DB47FF2E7D";
-
-        #endregion
-
-        #region 企业安全大检查
-        /// <summary>
-        /// 安全监督检查报告
-        /// </summary>
-        public const string SuperviseCheckReportMenuId = "1C6F9CA9-FDAC-4CE5-A19C-5536538851E1";
-
-        /// <summary>
-        /// 安全监督检查整改
-        /// </summary>
-        public const string SuperviseCheckRectifyMenuId = "55976B16-2C33-406E-B514-2FE42D031071";
-        #endregion
-
-        #region 集团安全监督
-        /// <summary>
-        /// 企业上报监督检查报告
-        /// </summary>
-        public const string UpCheckReportMenuId = "B9950CB5-C47A-4C0A-A6CC-C7DDBBDE7D1E";
-
-        /// <summary>
-        /// 企业安全文件上报
-        /// </summary>
-        public const string SubUnitReportMenuId = "3D1CFA31-96A9-496E-9A94-318670C9D658";
-
-        /// <summary>
-        /// 集团下发监督检查整改
-        /// </summary>
-        public const string CheckRectifyMenuId = "4A87774E-FEA5-479A-97A3-9BBA09E4862E";
-
-        /// <summary>
-        /// 集团下发监督检查报告
-        /// </summary>
-        public const string CheckInfoReportMenuId = "091D7D24-E706-465A-95FD-8EF359CB8667";
-        #endregion
-
-        #region 绩效评价
-        /// <summary>
-        /// 绩效评价
-        /// </summary>
-        public const string ProjectEvaluationMenuId = "DEE90726-E00D-462B-A4BF-7E36180DD5B8";
-        #endregion
-
-        #region 职业健康
-        /// <summary>
-        /// 危害检测
-        /// </summary>
-        public const string ServerHazardDetectionMenuId = "D4802FF6-0AE0-4F9B-9D69-FD895CF9F5C0";
-
-        /// <summary>
-        /// 体检管理
-        /// </summary>
-        public const string ServerPhysicalExaminationMenuId = "DB06084F-742F-49F1-A9B9-1100919E49DB";
-
-        /// <summary>
-        /// 职业病事故
-        /// </summary>
-        public const string ServerOccupationalDiseaseAccidentMenuId = "52DA3277-DCC1-4612-8083-A576BF85953A";
-        #endregion
-
-        #region 环境保护
-        /// <summary>
-        /// 环境监测数据
-        /// </summary>
-        public const string ServerEnvironmentalMonitoringMenuId = "FD4E234C-265F-4B45-A35A-C9659AF9C173";
-
-        /// <summary>
-        /// 突发环境事件
-        /// </summary>
-        public const string ServerUnexpectedEnvironmentalMenuId = "6C36DBFF-E765-4FC9-B978-51ADBE696C10";
-
-        /// <summary>
-        /// 环境事件应急预案
-        /// </summary>
-        public const string ServerEnvironmentalEmergencyPlanMenuId = "6A8EAA9C-08E9-4F1F-B824-67B60D49258A";
-
-        /// <summary>
-        /// 环评报告
-        /// </summary>
-        public const string ServerEIAReportMenuId = "FB943BD9-33A5-4680-82C1-29A4741D8636";
-
-        #endregion
-
-        #region 安全事故
-        /// <summary>
-        /// 事故快报
-        /// </summary>
-        public const string ServerAccidentReportMenuId = "DC871FCA-FBA8-4533-B5D6-DF64BCE40287";
-
-        /// <summary>
-        /// 事故处理
-        /// </summary>
-        public const string ServerAccidentStatisticsMenuId = "BE2F6161-7C17-41FF-A314-8C0AE323D5A4";
-
-        /// <summary>
-        /// 事故统计
-        /// </summary>
-        public const string ServerAccidentAnalysisMenuId = "71A5556F-1590-4D4C-9A31-703DCD5C2910";
-
-        /// <summary>
-        /// 事故台账
-        /// </summary>
-        public const string ServerAccidentDataListMenuId = "6F2C0F0A-3CF6-4B28-AFE2-FB7415ECDB91";
-        #endregion
-
-        #region 信息管理
-        /// <summary>
-        /// 管理通知
-        /// </summary>
-        public const string ServerNoticeMenuId = "E2F56879-5337-4BEF-8113-62845DF616EF";
-
-        /// <summary>
-        /// 项目图片
-        /// </summary>
-        public const string ServerPictureMenuId = "278DF0FE-35E2-470F-9AE4-23C57EDF797F";
-        #endregion
-
-        #region 信息统计
-        #endregion
-
-        #region 企业安全管理资料
-        /// <summary>
-        /// 企业安全管理资料设置
-        /// </summary>
-        public const string ServerSafetyDataMenuId = "60E00925-3357-441E-BD2F-2DF8C91BDDE6";
-
-        /// <summary>
-        /// 企业安全管理资料考核计划
-        /// </summary>
-        public const string ServerSafetyDataPlanMenuId = "039BD08A-9C38-4C28-81EE-A6CA86F580B2";
-
-        /// <summary>
-        /// 项目企业安全管理资料
-        /// </summary>
-        public const string ServerProjectSafetyDataMenuId = "74A51BC9-EE10-4534-A4A7-37889B07753C";
-
-        /// <summary>
-        /// 企业安全管理资料考核
-        /// </summary>
-        public const string ServerSafetyDataCheckMenuId = "2A405839-FD14-4398-8AEE-48B44BFDA1F6";
-
-        /// <summary>
-        /// 公司安全人工时管理
-        /// </summary>
-        public const string ServerAccidentDataMenuId = "A139FF69-8B74-489B-AB5F-526B2207DD89";
-        #endregion
-
-        #region 文件柜
-        /// <summary>
-        /// 文件柜1(集团检查类)
-        /// </summary>
-        public const string ServerFileCabinetMenuId = "6621CF4A-EAD4-40AF-9FFE-51DA4348C10C";
-
-        /// <summary>
-        /// 文件柜1(内业)
-        /// </summary>
-        public const string ServerFileCabinetBMenuId = "DDD1CE30-F8B9-4011-A20F-7AC60B34788C";
-        #endregion
-        #endregion
-
-        #region 项目菜单
-        /// <summary>
-        /// 班组信息
-        /// </summary>
-        public const string TeamGroupMenuId = "2C970C89-8C69-4A6C-B832-8A64B8A701CA";
-        /// <summary>
-        /// 作业区域
-        /// </summary>
-        public const string WorkAreaMenuId = "CBA3833A-C705-4B4E-A4A7-ACC27D0ECDCE";
         
+        #region 业务菜单
         #region 隐患巡检
         /// <summary>
         /// 隐患登记
@@ -733,12 +495,59 @@ namespace BLL
         /// </summary>
         public const string HiddenHazardDelayMenuId = "167E9508-3539-4CE8-827A-A1B35BDC6A0F";
         #endregion
- 
+
+        #region 作业票
         /// <summary>
         /// 特殊作业票父级菜单id
         /// </summary>
         public const string SuperLicenseMenuId = "2EAB7911-5788-4514-B95C-E1134315451D";
+        /// <summary>
+        /// 动火作业票菜单id
+        /// </summary>
+        public const string FireWorkMenuId = "27147897-4091-4EC5-96D3-2914ECDE0384";
+        /// <summary>
+        /// 检修作业票菜单id
+        /// </summary>
+        public const string OverhaulMenuId = "656C760C-27A8-402C-B875-E2B80CC6E577";
+        /// <summary>
+        /// 临时用电安全作业证
+        /// </summary>
+        public const string ElectricityMenuId = "68E502C6-3993-4669-8E4C-64E820AD5100";
+        /// <summary>
+        /// 盲板抽堵安全作业票
+        /// </summary>
+        public const string BlindPlateMenuId = "6A583619-B499-48A1-8BA1-6BC140741C06";
+        /// <summary>
+        /// 高处安全作业证
+        /// </summary>
+        public const string HeightWorkMenuId = "45A92A2E-0AD7-400F-A309-F70BBEF01617";
+        /// <summary>
+        /// 受限空间安全作业证
+        /// </summary>
+        public const string LimitedSpaceMenuId = "E8B4B410-74A3-45D7-8A73-9088FCB56959";
+        /// <summary>
+        /// 断路安全作业证
+        /// </summary>
+        public const string OpenCircuitMenuId = "20DFBC0F-2D53-4A3F-800F-CC4383A0B328";
+        /// <summary>
+        /// 动土安全作业证
+        /// </summary>
+        public const string BreakGroundMenuId = "94D5A962-CB10-4392-84ED-E62DF7D1778D";
+        /// <summary>
+        /// 吊装安全作业证
+        /// </summary>
+        public const string LiftingWorkMenuId = "D04F5626-7646-430F-9DBA-811B78401982";
+        /// <summary>
+        /// A级联锁变更审批单
+        /// </summary>
+        public const string AInterlockingMenuId = "F12FD53C-FE7F-4145-B138-EC641B138D5E";
+        /// <summary>
+        /// B级联锁变更审批单
+        /// </summary>
+        public const string BInterlockingMenuId = "EA045753-CD5C-4E4E-8FB6-80F556341885";
+        #endregion
 
+        #region 风险评价
         /// <summary>
         /// LEC评价
         /// </summary>
@@ -751,15 +560,104 @@ namespace BLL
         /// JHA评价
         /// </summary>
         public const string JHAMenuId = "13C30DD1-740B-4D39-A889-B83E81CB6EDC";
+        /// <summary>
+        /// 风险信息库
+        /// </summary>
+        public const string RiskListMenuId = "5B0C3726-4D02-4576-B1F3-2EC9025DB72F";
+        /// <summary>
+        /// 分级管控预警
+        /// </summary>
+        public const string ClassificationMenuId = "302FF7DB-25AF-4D32-BC00-F6E617F13D76";
+        /// <summary>
+        /// 风险巡检记录
+        /// </summary>
+        public const string RoutingInspectionMenuId = "936B6704-B271-417F-B179-A3C7D0158864";
         #endregion
 
+        #region 人员及资质管理
         /// <summary>
-        /// 不参与规则设置菜单
+        /// 培训类别
         /// </summary>
-        public static List<string> noSysSetMenusList = new List<string>
-       {  
-           HiddenHazardRecordMenuId
-       };
+        public const string TrainTypeMenuId = "DB977CEA-483E-45B5-A6CC-54FC5B1D5965";
+        /// <summary>
+        /// 信息采集
+        /// </summary>
+        public const string InformationCollectionMenuId = "BF4A3C5E-2249-400E-AD6B-949BF32F2BEF";
+        /// <summary>
+        /// 人员培训
+        /// </summary>
+        public const string TrainRecordMenuId = "D217B3D2-9DC6-4EBE-859F-288E78572FA0";
+        /// <summary>
+        /// 人员建档
+        /// </summary>
+        public const string PersonnelDocumentMenuId = "0F699545-F014-4EF0-8AD9-4D70FEA6D4C5";
+        /// <summary>
+        /// 进出场管理
+        /// </summary>
+        public const string UserEntryRecordMenuId = "A87DDA30-3667-4FBC-B3B5-94398299F93C";
+        /// <summary>
+        /// 人员资质
+        /// </summary>
+        public const string PersonQualityMenuId = "19F1A7DD-29DE-42DD-888C-528FF766B89F";
+        /// <summary>
+        /// 特种设备资质
+        /// </summary>
+        public const string EquipmentQualityMenuId = "D31F5ADF-E120-4F91-A823-A3FEB56111D9";
+        /// <summary>
+        /// 外委单位资质
+        /// </summary>
+        public const string SubUnitQualityMenuId = "70642242-A068-490C-B000-B03BA3A20C00";
+        #endregion
+
+        #region 核心部位禁动管理
+        /// <summary>
+        /// 电子锁分布台账
+        /// </summary>
+        public const string SmartLockMenuId = "F4B542CB-F53C-446D-BF8A-D9A3F8E23869";
+        #endregion
+
+        #region 培训与考试管理
+        /// <summary>
+        /// 培训计划
+        /// </summary>
+        public const string PlanMenuId = "B782A26B-D85C-4F84-8B45-F7AA47B3159E";
+        /// <summary>
+        /// 培训任务
+        /// </summary>
+        public const string TaskMenuId = "E108F75D-89D0-4DCA-8356-A156C328805C";
+        /// <summary>
+        /// 培训试题
+        /// </summary>
+        public const string TrainTestRecordMenuId = "6C314522-AF62-4476-893E-5F42C09C3077";
+        /// <summary>
+        /// 考试计划
+        /// </summary>
+        public const string TestPlanMenuId = "FAF7F4A4-A4BC-4D94-9E88-0CF5A380DB34";
+        /// <summary>
+        /// 考试记录
+        /// </summary>
+        public const string TestRecordMenuId = "0EEB138D-84F9-4686-8CBB-CAEAA6CF1B2A";
+        /// <summary>
+        /// 考试统计
+        /// </summary>
+        public const string TestStatisticsMenuId = "6FF941C1-8A00-4A74-8111-C892FC30A8DA";
+        #endregion
+
+        #region 综合测评
+        /// <summary>
+        /// 测评记录
+        /// </summary>
+        public const string PersonAppraisalMenuId = "E0EE52AF-05D9-4790-B265-14EA1E662E8B";
+        #endregion
+
+        #region 文件柜
+        /// <summary>
+        /// 文件柜
+        /// </summary>
+        public const string FileCabinetAMenuId = "C8C08302-17FF-4A50-8B10-5189E71588D9";
+        #endregion
+
+        #endregion
 
         #endregion
 
@@ -771,12 +669,34 @@ namespace BLL
         /// <summary>
         /// 人员模版文件原始的虚拟路径
         /// </summary>
-        public const string PersonTemplateUrl = "File\\Excel\\DataIn\\人员信息模版.xls";
-       
+        public const string UserTemplateUrl = "File\\Excel\\DataIn\\人员信息模版.xls";
+        /// <summary>
+        /// 人员资质模版文件原始的虚拟路径
+        /// </summary>
+        public const string PersonQualityTemplateUrl = "File\\Excel\\DataIn\\人员资质模版.xls";
+        /// <summary>
+        /// 专家辅助模版文件原始的虚拟路径
+        /// </summary>
+        public const string HSSEStandardTemplateUrl = "File\\Excel\\DataIn\\专家辅助模版.xls";
+        /// <summary>
+        /// 考试试题模版文件原始的虚拟路径
+        /// </summary>
+        public const string TrainingTemplateUrl = "File\\Excel\\DataIn\\考试试题模版.xls";
+        /// <summary>
+        /// 培训教材模版文件原始的虚拟路径
+        /// </summary>
+        public const string TrainingEduTemplateUrl = "File\\Excel\\DataIn\\培训教材模版.xls";
+        /// <summary>
+        /// 测评考核项模版文件原始的虚拟路径
+        /// </summary>
+        public const string AppraisalItemTemplateUrl = "File\\Excel\\DataIn\\测评考核项模版.xls";
+        /// <summary>
+        /// APP下载地址
+        /// </summary>
+        public const string APPImageUrl = "File\\Image\\APP下载地址.png";
         #endregion
 
         #region 初始化上传路径
-
         /// <summary>
         /// Excel附件路径
         /// </summary>

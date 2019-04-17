@@ -29,12 +29,20 @@ namespace BLL
         public static void AddTeamGroup(Model.Base_TeamGroup teamGroup)
         {
             Model.HSSEDB_ENN db = Funs.DB;
-            Model.Base_TeamGroup newTeamGroup = new Model.Base_TeamGroup();
-            newTeamGroup.TeamGroupId = teamGroup.TeamGroupId;
-            newTeamGroup.UnitId = teamGroup.UnitId;
-            newTeamGroup.TeamGroupCode = teamGroup.TeamGroupCode;
-            newTeamGroup.TeamGroupName = teamGroup.TeamGroupName;
-            newTeamGroup.Remark = teamGroup.Remark;
+            Model.Base_TeamGroup newTeamGroup = new Model.Base_TeamGroup
+            {
+                TeamGroupId = teamGroup.TeamGroupId,
+                UnitId = teamGroup.UnitId,
+                InstallationId = teamGroup.InstallationId,
+                WorkAreaId = teamGroup.WorkAreaId,
+                DepartId = teamGroup.DepartId,              
+                TeamGroupCode = teamGroup.TeamGroupCode,
+                TeamGroupName = teamGroup.TeamGroupName,
+                LeaderIds = teamGroup.LeaderIds,
+                LeaderNames = teamGroup.LeaderNames,
+                TeamType = teamGroup.TeamType,
+                Remark = teamGroup.Remark
+            };
             db.Base_TeamGroup.InsertOnSubmit(newTeamGroup);
             db.SubmitChanges();
         }
@@ -50,8 +58,14 @@ namespace BLL
             if (newTeamGroup != null)
             {
                 newTeamGroup.UnitId = teamGroup.UnitId;
+                newTeamGroup.InstallationId = teamGroup.InstallationId;
+                newTeamGroup.WorkAreaId = teamGroup.WorkAreaId;
+                newTeamGroup.DepartId = teamGroup.DepartId;         
                 newTeamGroup.TeamGroupCode = teamGroup.TeamGroupCode;
                 newTeamGroup.TeamGroupName = teamGroup.TeamGroupName;
+                newTeamGroup.LeaderIds = teamGroup.LeaderIds;
+                newTeamGroup.LeaderNames = teamGroup.LeaderNames;
+                newTeamGroup.TeamType = teamGroup.TeamType;
                 newTeamGroup.Remark = teamGroup.Remark;
                 db.SubmitChanges();
             }

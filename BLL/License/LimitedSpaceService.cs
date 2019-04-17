@@ -7,7 +7,7 @@ namespace BLL
 {
    public static class LimitedSpaceService
     {
-        public static Model.HSSEDB_ENN db = Funs.DB;
+       public static Model.HSSEDB_ENN db = Funs.DB;
 
         /// <summary>
         /// 根据主键获取信息
@@ -17,6 +17,16 @@ namespace BLL
         public static Model.License_LimitedSpace GetLimitedSpaceById(string LimitedSpaceId)
         {
             return Funs.DB.License_LimitedSpace.FirstOrDefault(e => e.LimitedSpaceId == LimitedSpaceId);
+        }
+
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="LimitedSpaceId"></param>
+       /// <returns></returns>
+        public static Model.View_License_LimitedSpace GetViewLimitedSpaceById(string LimitedSpaceId)
+        {
+            return db.View_License_LimitedSpace.FirstOrDefault(e => e.LimitedSpaceId == LimitedSpaceId);
         }
 
         /// <summary>
@@ -29,6 +39,11 @@ namespace BLL
             Model.License_LimitedSpace LimitedSpace = db.License_LimitedSpace.FirstOrDefault(e => e.LimitedSpaceId == LimitedSpaceId);
             if (LimitedSpace != null)
             {
+                var ans = from x in Funs.DB.License_LimitedSpaceAnalysis where x.LimitedSpaceId == LimitedSpaceId select x;
+                if (ans.Count() > 0)
+                {
+                    db.License_LimitedSpaceAnalysis.DeleteAllOnSubmit(ans);
+                }
                 CommonService.DeleteLicenseItemByDataId(LimitedSpaceId);
                 CommonService.DeleteSysPushRecordByDataId(LimitedSpaceId);
 

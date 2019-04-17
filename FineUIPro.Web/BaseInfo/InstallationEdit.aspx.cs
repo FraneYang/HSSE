@@ -54,6 +54,7 @@ namespace FineUIPro.Web.BaseInfo
                         {
                             this.drpDepart.SelectedValue = Installation.DepartId;
                         }
+                        this.drpInstallType.SelectedValue = Installation.InstallType;
                         this.txtInstallationCode.Text = Installation.InstallationCode;
                         this.txtInstallationName.Text = Installation.InstallationName;
                         this.txtDef.Text = Installation.Def;
@@ -84,10 +85,13 @@ namespace FineUIPro.Web.BaseInfo
                 return;
             }
 
-            Model.Base_Installation newInstallation = new Model.Base_Installation();
-            newInstallation.InstallationCode = this.txtInstallationCode.Text.Trim();
-            newInstallation.InstallationName = this.txtInstallationName.Text.Trim();
-            newInstallation.Def = this.txtDef.Text.Trim();
+            Model.Base_Installation newInstallation = new Model.Base_Installation
+            {
+                InstallationCode = this.txtInstallationCode.Text.Trim(),
+                InstallationName = this.txtInstallationName.Text.Trim(),
+                InstallType = this.drpInstallType.SelectedValue,
+                Def = this.txtDef.Text.Trim()
+            };
             if (this.drpDepart.SelectedValue != Const._Null)
             {
                 newInstallation.DepartId = this.drpDepart.SelectedValue;
@@ -111,7 +115,7 @@ namespace FineUIPro.Web.BaseInfo
                 newInstallation.ManagerIds = managerIds.Substring(0, managerIds.LastIndexOf(","));
                 newInstallation.ManagerNames = managerNames.Substring(0, managerNames.LastIndexOf(","));
             }
-
+            string oldInstallName = string.Empty;
             if (string.IsNullOrEmpty(this.InstallationId))
             {
                 newInstallation.InstallationId = SQLHelper.GetNewID(typeof(Model.Base_Installation));
@@ -120,10 +124,18 @@ namespace FineUIPro.Web.BaseInfo
             }
             else
             {
+                oldInstallName = BLL.InstallationService.GetInstallationNameByInstallationId(this.InstallationId);
                 newInstallation.InstallationId = this.InstallationId;
                 BLL.InstallationService.UpdateInstallation(newInstallation);
                 BLL.LogService.AddLog( this.CurrUser.UserId, "修改装置/科室");
             }
+
+            ///如果装置名称变了 则多装置名称显示的相关表要相应的更新
+            if (oldInstallName != newInstallation.InstallationName)
+            {
+                this.UpdateInstallationName(oldInstallName, newInstallation.InstallationName);
+            }
+
             PageContext.RegisterStartupScript(ActiveWindow.GetHideRefreshReference());
         }
 
@@ -169,5 +181,89 @@ namespace FineUIPro.Web.BaseInfo
         }
         #endregion
 
+        /// <summary>
+        /// 如果装置名称变了 则多装置名称显示的相关表要相应的更新
+        /// </summary>
+        /// <param name="oldInstallName"></param>
+        /// <param name="newInstallName"></param>
+        private void UpdateInstallationName(string oldInstallName, string newInstallName)
+        {
+            ///用户信息
+            var sysUser = from x in Funs.DB.Sys_User where x.InstallationName.Contains(oldInstallName) select x;
+            if (sysUser.Count() > 0)
+            {
+                foreach (var item in sysUser)
+                {
+                    item.InstallationName = item.InstallationName.Replace(oldInstallName, newInstallName);
+                    BLL.UserService.UpdateUser(item);
+                }
+            }
+
+            ///培训计划
+            var trainingPlan = from x in Funs.DB.Training_Plan where x.InstallationNames.Contains(oldInstallName) select x;
+            if (trainingPlan.Count() > 0)
+            {
+                foreach (var item in trainingPlan)
+                {
+                    item.InstallationNames = item.InstallationNames.Replace(oldInstallName, newInstallName);
+                    BLL.PlanService.UpdatePlan(item);
+                }
+            }
+
+            ///考试计划
+            var testPlan = from x in Funs.DB.Training_TestPlan where x.InstallationNames.Contains(oldInstallName) select x;
+            if (testPlan.Count() > 0)
+            {
+                foreach (var item in testPlan)
+                {
+                    item.InstallationNames = item.InstallationNames.Replace(oldInstallName, newInstallName);
+                    BLL.TestPlanService.UpdateTestPlan(item);
+                }
+            }
+
+            ///考试试题库
+            var trainingEduItem = from x in Funs.DB.Training_TrainingEduItem where x.InstallationNames.Contains(oldInstallName) select x;
+            if (trainingEduItem.Count() > 0)
+            {
+                foreach (var item in trainingEduItem)
+                {
+                    item.InstallationNames = item.InstallationNames.Replace(oldInstallName, newInstallName);
+                    BLL.TrainingEduItemService.UpdateTrainingEduItem(item);
+                }
+            }
+
+            ///培训教材库
+            var trainingItem = from x in Funs.DB.Training_TrainingItem where x.InstallationNames.Contains(oldInstallName) select x;
+            if (trainingItem.Count() > 0)
+            {
+                foreach (var item in trainingItem)
+                {
+                    item.InstallationNames = item.InstallationNames.Replace(oldInstallName, newInstallName);
+                    BLL.TrainingItemService.UpdateTrainingItem(item);
+                }
+            }
+
+            ///应急
+            var rescueInfo = from x in Funs.DB.Emergency_RescueInfo where x.InstallationNames.Contains(oldInstallName) select x;
+            if (rescueInfo.Count() > 0)
+            {
+                foreach (var item in rescueInfo)
+                {
+                    item.InstallationNames = item.InstallationNames.Replace(oldInstallName, newInstallName);
+                    BLL.RescueInfoService.UpdateRescueInfo(item);
+                }
+            }
+
+            ///应急
+            var warning = from x in Funs.DB.Emergency_Warning where x.InstallationNames.Contains(oldInstallName) select x;
+            if (warning.Count() > 0)
+            {
+                foreach (var item in warning)
+                {
+                    item.InstallationNames = item.InstallationNames.Replace(oldInstallName, newInstallName);
+                    BLL.WarningService.UpdateWarning(item);
+                }
+            }
+        }
     }
 }

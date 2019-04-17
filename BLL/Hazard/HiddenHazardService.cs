@@ -20,6 +20,16 @@ namespace BLL
         }
 
         /// <summary>
+        /// 根据主键获取隐患视图信息
+        /// </summary>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        public static Model.View_Hazard_HiddenHazard GetHiddenHazardViewById(string HiddenHazardId)
+        {
+            return Funs.DB.View_Hazard_HiddenHazard.FirstOrDefault(e => e.HiddenHazardId == HiddenHazardId);
+        }
+
+        /// <summary>
         /// 修改隐患信息
         /// </summary>
         /// <param name="hiddenHazard"></param>
@@ -56,6 +66,7 @@ namespace BLL
                 newHiddenHazard.AcceptanceManId = hiddenHazard.AcceptanceManId;
                 newHiddenHazard.AcceptanceTime = hiddenHazard.AcceptanceTime;
                 newHiddenHazard.States = hiddenHazard.States;
+                newHiddenHazard.IsFiled = hiddenHazard.IsFiled;
                 db.SubmitChanges();
             }
         }
@@ -72,7 +83,8 @@ namespace BLL
             {
                 CommonService.DeleteSysPushRecordByDataId(hiddenHazardId);
                 BLL.HiddenHazardDelayService.DeleteHiddenHazardDelayByHiddenHazardId(hiddenHazardId);
-
+                BLL.UploadFileService.DeleteFile(Funs.RootPath, HiddenHazard.BePohotoUrl);
+                BLL.UploadFileService.DeleteFile(Funs.RootPath, HiddenHazard.AfPohotoUrl);
                 db.Hazard_HiddenHazard.DeleteOnSubmit(HiddenHazard);
                 db.SubmitChanges();
             }

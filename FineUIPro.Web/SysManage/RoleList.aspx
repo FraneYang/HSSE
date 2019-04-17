@@ -21,7 +21,7 @@
             <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="角色管理" EnableCollapse="true"
                 runat="server" BoxFlex="1" DataKeyNames="RoleId" AllowCellEditing="true" EnableColumnLines="true"
                 ClicksToEdit="2" DataIDField="RoleId" AllowSorting="true" SortField="RoleCode"
-                SortDirection="ASC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="10" OnPageIndexChange="Grid1_PageIndexChange"
+                SortDirection="ASC" OnSort="Grid1_Sort"   AllowPaging="true" IsDatabasePaging="true" PageSize="15" OnPageIndexChange="Grid1_PageIndexChange"
                 EnableRowDoubleClickEvent="true" OnRowDoubleClick="Grid1_RowDoubleClick"  EnableTextSelection="True">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar2" Position="Top" runat="server">
@@ -48,7 +48,7 @@
                     <f:RenderField  ColumnID="Def" DataField="Def" SortField="Def" FieldType="String" Width="200px"
                         HeaderText="备注" HeaderTextAlign="Center" TextAlign="Left" ExpandUnusedSpace="true">
                     </f:RenderField>
-                    <f:CheckBoxField Width="75px" RenderAsStaticField="true" TextAlign="Center"  DataField="IsSystemBuilt" HeaderText="系统内置" />
+                    <f:CheckBoxField Width="75px" RenderAsStaticField="true" TextAlign="Center"  DataField="IsSystemBuilt" HeaderText="内置" />
                 </Columns>
                 <Listeners>
                     <f:Listener Event="beforerowcontextmenu" Handler="onRowContextMenu" />

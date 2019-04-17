@@ -75,9 +75,11 @@ namespace FineUIPro.Web.BaseInfo
                 return;
             }
 
-            Model.Base_SafetyMeasures newSafetyMeasures = new Model.Base_SafetyMeasures();
-            newSafetyMeasures.SortIndex = Funs.GetNewInt(this.txtSortIndex.Text.Trim());
-            newSafetyMeasures.SafetyMeasures = this.txtSafetyMeasures.Text.Trim();
+            Model.Base_SafetyMeasures newSafetyMeasures = new Model.Base_SafetyMeasures
+            {
+                SortIndex = Funs.GetNewInt(this.txtSortIndex.Text.Trim()),
+                SafetyMeasures = this.txtSafetyMeasures.Text.Trim()
+            };
             if (this.drpLicenseType.SelectedValue != Const._Null)
             {
                 newSafetyMeasures.LicenseType = this.drpLicenseType.SelectedValue;

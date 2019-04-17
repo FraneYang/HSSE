@@ -40,7 +40,9 @@ namespace FineUIPro.Web.ProjectData
                 this.txtTeamGroupCode.Focus();
                 btnClose.OnClientClick = ActiveWindow.GetHideReference();
                 BLL.UnitService.InitUnitDropDownList(this.drpUnitId,true);
-
+                BLL.DepartService.InitDepartDropDownList(this.drpDepart, true);
+                
+                BLL.UserService.InitUserDropDownList(this.drpLeaders, true);
                 this.TeamGroupId = Request.Params["TeamGroupId"];
                 if (!string.IsNullOrEmpty(this.TeamGroupId))
                 {
@@ -52,6 +54,24 @@ namespace FineUIPro.Web.ProjectData
                         if (!string.IsNullOrEmpty(teamGroup.UnitId))
                         {
                             this.drpUnitId.SelectedValue = teamGroup.UnitId;
+                        }
+                        if (!string.IsNullOrEmpty(teamGroup.DepartId))
+                        {
+                            this.drpDepart.SelectedValue = teamGroup.DepartId;
+                            BLL.InstallationService.InitInstallationByDepartDropDownList(this.drpInstallation, this.drpDepart.SelectedValue, true);
+                            if (!string.IsNullOrEmpty(teamGroup.InstallationId))
+                            {
+                                this.drpInstallation.SelectedValue = teamGroup.InstallationId;
+                            }
+                        }
+                        
+                        if (!string.IsNullOrEmpty(teamGroup.TeamType))
+                        {
+                            this.drpTeamType.SelectedValue = teamGroup.TeamType;
+                        }
+                        if (!string.IsNullOrEmpty(teamGroup.LeaderIds))
+                        {
+                            this.drpLeaders.SelectedValue = teamGroup.LeaderIds;
                         }
                         this.txtRemark.Text = teamGroup.Remark;
                     }
@@ -68,12 +88,31 @@ namespace FineUIPro.Web.ProjectData
         /// <param name="e"></param>
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            Model.Base_TeamGroup teamGroup = new Model.Base_TeamGroup();
-            teamGroup.TeamGroupCode = this.txtTeamGroupCode.Text.Trim();
-            teamGroup.TeamGroupName = this.txtTeamGroupName.Text.Trim();
-            if (this.drpUnitId.SelectedValue!=BLL.Const._Null)
+            Model.Base_TeamGroup teamGroup = new Model.Base_TeamGroup
+            {
+                TeamGroupCode = this.txtTeamGroupCode.Text.Trim(),
+                TeamGroupName = this.txtTeamGroupName.Text.Trim()
+            };
+            if (this.drpUnitId.SelectedValue!=BLL.Const._Null &&  !string.IsNullOrEmpty(this.drpUnitId.SelectedValue))
             {
                 teamGroup.UnitId = this.drpUnitId.SelectedValue;
+            }
+            if (this.drpDepart.SelectedValue != BLL.Const._Null && !string.IsNullOrEmpty(this.drpDepart.SelectedValue))
+            {
+                teamGroup.DepartId = this.drpDepart.SelectedValue;
+            }
+            if (this.drpInstallation.SelectedValue != BLL.Const._Null && !string.IsNullOrEmpty(this.drpInstallation.SelectedValue))
+            {
+                teamGroup.InstallationId = this.drpInstallation.SelectedValue;
+            }
+            if (this.drpLeaders.SelectedValue != BLL.Const._Null)
+            {
+                teamGroup.LeaderIds = this.drpLeaders.SelectedValue;
+                teamGroup.LeaderNames = this.drpLeaders.SelectedText;
+            }
+            if (this.drpTeamType.SelectedValue != BLL.Const._Null)
+            {
+                teamGroup.TeamType = this.drpTeamType.SelectedValue;
             }
             teamGroup.Remark = this.txtRemark.Text.Trim();
             if (!string.IsNullOrEmpty(this.TeamGroupId))
@@ -114,6 +153,17 @@ namespace FineUIPro.Web.ProjectData
                 ShowNotify("输入的班组名称已存在！", MessageBoxIcon.Warning);
             }
         }
-        #endregion     
+        #endregion
+
+        /// <summary>
+        /// 部门下拉框联动事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void drpDepart_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.drpInstallation.Items.Clear();
+            BLL.InstallationService.InitInstallationByDepartDropDownList(this.drpInstallation, this.drpDepart.SelectedValue, true);
+        }
     }
 }

@@ -51,10 +51,12 @@ namespace FineUIPro.Web.Personal
         {
             this.tvPersonalFolder.Nodes.Clear();
             this.tvPersonalFolder.SelectedNodeID = string.Empty;
-            TreeNode rootNode = new TreeNode();//定义根节点
-            rootNode.Text = "[" + this.CurrUser.UserName + "]文件夹";
-            rootNode.Expanded = true;
-            rootNode.NodeID = "0";
+            TreeNode rootNode = new TreeNode
+            {
+                Text = "[" + this.CurrUser.UserName + "]文件夹",
+                Expanded = true,
+                NodeID = "0"
+            };//定义根节点
             this.tvPersonalFolder.Nodes.Add(rootNode);
             var personalFolderList = BLL.PersonalFolderService.GetPersonalFolderListByUserId(this.CurrUser.UserId);
             if (personalFolderList.Count() > 0)
@@ -74,9 +76,11 @@ namespace FineUIPro.Web.Personal
             var personalFolders = personalFolderList.Where(x => x.SupPersonalFolderId == node.NodeID).OrderByDescending(x=>x.Code);
             foreach (var item in personalFolders)
             {
-                TreeNode newNode = new TreeNode();
-                newNode.Text = "[" + item.Code + "]" + item.Title;
-                newNode.NodeID = item.PersonalFolderId;
+                TreeNode newNode = new TreeNode
+                {
+                    Text = "[" + item.Code + "]" + item.Title,
+                    NodeID = item.PersonalFolderId
+                };
                 if (item.IsEndLever == true)
                 {
                     newNode.EnableClickEvent = true;

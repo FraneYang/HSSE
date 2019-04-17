@@ -15,13 +15,13 @@
             <f:Grid ID="Grid1" ShowBorder="true" ShowHeader="false" Title="班组信息" EnableCollapse="true"
                 runat="server" BoxFlex="1" EnableColumnLines="true" DataKeyNames="TeamGroupId"
                 AllowCellEditing="true" ClicksToEdit="2" DataIDField="TeamGroupId" AllowSorting="true"
-                SortField="TeamGroupCode" SortDirection="DESC" OnSort="Grid1_Sort" AllowPaging="true"
-                IsDatabasePaging="true" PageSize="10" OnPageIndexChange="Grid1_PageIndexChange"
+                SortField="UnitCode,DepartCode,InstallationCode,TeamGroupCode" SortDirection="DESC" OnSort="Grid1_Sort" AllowPaging="true"
+                IsDatabasePaging="true" PageSize="15" OnPageIndexChange="Grid1_PageIndexChange"
                 EnableRowDoubleClickEvent="true" OnRowDoubleClick="Grid1_RowDoubleClick" EnableTextSelection="True">
                 <Toolbars>
                     <f:Toolbar ID="Toolbar2" Position="Top" runat="server" ToolbarAlign="Left">
                         <Items>
-                            <f:TextBox runat="server" Label="班组名称" ID="txtTeamGroupName" EmptyText="输入查询条件" AutoPostBack="true"
+                            <f:TextBox runat="server" Label="查询" ID="txtName" EmptyText="输入查询条件" AutoPostBack="true"
                                 OnTextChanged="TextBox_TextChanged" Width="250px" LabelWidth="80px" LabelAlign="right">
                             </f:TextBox>
                             <f:ToolbarFill ID="ToolbarFill1" runat="server">
@@ -42,17 +42,29 @@
                             <asp:Label ID="lblNumber" runat="server" Text='<%# Grid1.PageIndex * Grid1.PageSize + Container.DataItemIndex + 1 %>'></asp:Label>
                         </ItemTemplate>
                     </f:TemplateField>
-                    <f:RenderField Width="120px" ColumnID="TeamGroupCode" DataField="TeamGroupCode" SortField="TeamGroupCode"
+                    <f:RenderField Width="100px" ColumnID="TeamGroupCode" DataField="TeamGroupCode" SortField="TeamGroupCode"
                         FieldType="String" HeaderText="班组编号" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                    <f:RenderField Width="250px" ColumnID="TeamGroupName" DataField="TeamGroupName" SortField="TeamGroupName"
+                    <f:RenderField Width="150px" ColumnID="TeamGroupName" DataField="TeamGroupName" SortField="TeamGroupName"
                         FieldType="String" HeaderText="班组名称" HeaderTextAlign="Center" TextAlign="Left">
                     </f:RenderField>
-                    <f:TemplateField ColumnID="tfUnitId" Width="300px" HeaderText="单位名称" HeaderTextAlign="Center" TextAlign="Left">
+                     <f:TemplateField ColumnID="tfTeamType" Width="100px" HeaderText="班组类型" HeaderTextAlign="Center" TextAlign="Left">
                         <ItemTemplate>
-                            <asp:Label ID="lblUnitName" runat="server" Text='<%#ConvertUnitName(Eval("UnitId")) %>'></asp:Label>
+                            <asp:Label ID="lbTeamType" runat="server" Text='<%#ConvertTeamType(Eval("TeamType")) %>'></asp:Label>
                         </ItemTemplate>
                     </f:TemplateField>
+                    <f:RenderField Width="200px" ColumnID="UnitName" DataField="UnitName" SortField="UnitName"
+                        FieldType="String" HeaderText="单位名称" HeaderTextAlign="Center" TextAlign="Left">
+                    </f:RenderField>
+                    <f:RenderField Width="120px" ColumnID="DepartName" DataField="DepartName" SortField="DepartName"
+                        FieldType="String" HeaderText="部门/中心" HeaderTextAlign="Center" TextAlign="Left">
+                    </f:RenderField>
+                    <f:RenderField Width="120px" ColumnID="InstallationName" DataField="InstallationName" SortField="InstallationName"
+                        FieldType="String" HeaderText="装置/科室" HeaderTextAlign="Center" TextAlign="Left">
+                    </f:RenderField>
+                     <f:RenderField Width="120px" ColumnID="LeaderNames" DataField="LeaderNames" SortField="LeaderNames"
+                        FieldType="String" HeaderText="班长" HeaderTextAlign="Center" TextAlign="Left">
+                    </f:RenderField>
                     <f:RenderField Width="250px" ColumnID="Remark" DataField="Remark" SortField="Remark"
                         FieldType="String" HeaderText="备注" ExpandUnusedSpace="true" HeaderTextAlign="Center"
                         TextAlign="Left">
@@ -72,14 +84,15 @@
                         <f:ListItem Text="15" Value="15" />
                         <f:ListItem Text="20" Value="20" />
                         <f:ListItem Text="25" Value="25" />
+                        <f:ListItem Text="所有行" Value="10000" />
                     </f:DropDownList>
                 </PageItems>
             </f:Grid>
         </Items>
     </f:Panel>
     <f:Window ID="Window1" Title="弹出窗体" Hidden="true" EnableIFrame="true" EnableMaximize="true"
-        Target="Self" EnableResize="true" runat="server" OnClose="Window1_Close" IsModal="true"
-        Width="700px" Height="330px">
+        Target="Top" EnableResize="true" runat="server" OnClose="Window1_Close" IsModal="true"
+        Width="900px" Height="400px">
     </f:Window>
     <f:Menu ID="Menu1" runat="server">
         <f:MenuButton ID="btnMenuEdit" OnClick="btnMenuEdit_Click" Icon="BulletEdit" EnablePostBack="true"

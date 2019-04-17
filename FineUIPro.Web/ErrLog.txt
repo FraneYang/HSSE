@@ -1,55 +1,7 @@
 ﻿
 错误信息开始=====>
 错误类型:HttpException
-错误信息:文件不存在。
-错误堆栈:
-   在 System.Web.StaticFileHandler.GetFileInfo(String virtualPathWithPathInfo, String physicalPath, HttpResponse response)
-   在 System.Web.StaticFileHandler.ProcessRequestInternal(HttpContext context, String overrideVirtualPath)
-   在 System.Web.DefaultHttpHandler.BeginProcessRequest(HttpContext context, AsyncCallback callback, Object state)
-   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
-   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
-出错时间:12/22/2017 10:29:52
-出错文件:http://localhost:2793/common/
-IP地址:::1
-
-出错时间:12/22/2017 10:29:52
-
-
-错误信息开始=====>
-错误类型:HttpException
-错误信息:文件不存在。
-错误堆栈:
-   在 System.Web.StaticFileHandler.GetFileInfo(String virtualPathWithPathInfo, String physicalPath, HttpResponse response)
-   在 System.Web.StaticFileHandler.ProcessRequestInternal(HttpContext context, String overrideVirtualPath)
-   在 System.Web.DefaultHttpHandler.BeginProcessRequest(HttpContext context, AsyncCallback callback, Object state)
-   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
-   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
-出错时间:12/25/2017 10:05:10
-出错文件:http://localhost:2793/common/
-IP地址:::1
-
-出错时间:12/25/2017 10:05:10
-
-
-错误信息开始=====>
-错误类型:HttpException
-错误信息:文件不存在。
-错误堆栈:
-   在 System.Web.StaticFileHandler.GetFileInfo(String virtualPathWithPathInfo, String physicalPath, HttpResponse response)
-   在 System.Web.StaticFileHandler.ProcessRequestInternal(HttpContext context, String overrideVirtualPath)
-   在 System.Web.DefaultHttpHandler.BeginProcessRequest(HttpContext context, AsyncCallback callback, Object state)
-   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
-   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
-出错时间:12/25/2017 10:19:01
-出错文件:http://localhost:2793/common/
-IP地址:::1
-
-出错时间:12/25/2017 10:19:01
-
-
-错误信息开始=====>
-错误类型:HttpException
-错误信息:文件“/ElectronicLock/ ElectronicLockList.aspx”不存在。
+错误信息:文件“/Hazard/RoutingInspectionView.aspx”不存在。
 错误堆栈:
    在 System.Web.UI.Util.CheckVirtualFileExists(VirtualPath virtualPath)
    在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
@@ -57,109 +9,51 @@ IP地址:::1
    在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
    在 System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
    在 System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
-   在 System.Web.UI.PageHandlerFactory.System.Web.IHttpHandlerFactory2.GetHandler(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
-   在 System.Web.HttpApplication.MapHttpHandler(HttpContext context, String requestType, VirtualPath path, String pathTranslated, Boolean useAppConfig)
-   在 System.Web.HttpApplication.MapHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
    在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
-出错时间:12/25/2017 10:19:09
-出错文件:http://localhost:2793/ElectronicLock/%20ElectronicLockList.aspx
+出错时间:04/03/2019 14:55:56
+出错文件:http://localhost:2793/Hazard/RoutingInspectionView.aspx?RoutingInspectionId=13f66f48-d598-4ae1-879f-8cc9db54860f
 IP地址:::1
 
-出错时间:12/25/2017 10:19:09
+出错时间:04/03/2019 14:55:56
 
 
 错误信息开始=====>
-错误类型:HttpException
-错误信息:文件不存在。
+错误类型:NullReferenceException
+错误信息:未将对象引用设置到对象的实例。
 错误堆栈:
-   在 System.Web.StaticFileHandler.GetFileInfo(String virtualPathWithPathInfo, String physicalPath, HttpResponse response)
-   在 System.Web.StaticFileHandler.ProcessRequestInternal(HttpContext context, String overrideVirtualPath)
-   在 System.Web.DefaultHttpHandler.BeginProcessRequest(HttpContext context, AsyncCallback callback, Object state)
-   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
-   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
-出错时间:12/25/2017 10:19:26
-出错文件:http://localhost:2793/common/
+   在 FineUIPro.Web.Hazard.SCL.GetButtonPower() 位置 D:\开发代码\ENN\HSSE_ENN\HSSE\FineUIPro.Web\Hazard\SCL.aspx.cs:行号 134
+   在 FineUIPro.Web.Hazard.SCL.Page_Load(Object sender, EventArgs e) 位置 D:\开发代码\ENN\HSSE_ENN\HSSE\FineUIPro.Web\Hazard\SCL.aspx.cs:行号 22
+   在 System.EventHandler.Invoke(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+出错时间:04/04/2019 10:26:49
+出错文件:http://localhost:2793/Hazard/SCL.aspx
 IP地址:::1
 
-出错时间:12/25/2017 10:19:26
+出错时间:04/04/2019 10:26:49
 
 
 错误信息开始=====>
-错误类型:HttpException
-错误信息:文件不存在。
+错误类型:HttpParseException
+错误信息:FineUIPro.ControlBaseCollection 必须具有类型为“FineUIPro.ControlBase”的项。“Toolbars”的类型为“System.Web.UI.HtmlControls.HtmlGenericControl”。
 错误堆栈:
-   在 System.Web.StaticFileHandler.GetFileInfo(String virtualPathWithPathInfo, String physicalPath, HttpResponse response)
-   在 System.Web.StaticFileHandler.ProcessRequestInternal(HttpContext context, String overrideVirtualPath)
-   在 System.Web.DefaultHttpHandler.BeginProcessRequest(HttpContext context, AsyncCallback callback, Object state)
-   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
-   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
-出错时间:12/25/2017 10:25:39
-出错文件:http://localhost:2793/common/
+   在 System.Web.UI.TemplateParser.ProcessException(Exception ex)
+   在 System.Web.UI.TemplateParser.ParseStringInternal(String text, Encoding fileEncoding)
+   在 System.Web.UI.TemplateParser.ParseString(String text, VirtualPath virtualPath, Encoding fileEncoding)
+----错误类型:HttpException
+----错误信息:
+----FineUIPro.ControlBaseCollection 必须具有类型为“FineUIPro.ControlBase”的项。“Toolbars”的类型为“System.Web.UI.HtmlControls.HtmlGenericControl”。
+----错误堆栈:
+       在 System.Web.UI.CollectionBuilder.GetChildControlType(String tagName, IDictionary attribs)
+       在 System.Web.UI.ControlBuilder.CreateChildBuilder(String filter, String tagName, IDictionary attribs, TemplateParser parser, ControlBuilder parentBuilder, String id, Int32 line, VirtualPath virtualPath, Type& childType, Boolean defaultProperty)
+       在 System.Web.UI.TemplateParser.ProcessBeginTag(Match match, String inputText)
+       在 System.Web.UI.TemplateParser.ParseStringInternal(String text, Encoding fileEncoding)
+出错时间:04/14/2019 10:25:54
+出错文件:http://localhost:2793/SysManage/SysConstSet.aspx
 IP地址:::1
 
-出错时间:12/25/2017 10:25:39
-
-
-错误信息开始=====>
-错误类型:HttpException
-错误信息:文件不存在。
-错误堆栈:
-   在 System.Web.StaticFileHandler.GetFileInfo(String virtualPathWithPathInfo, String physicalPath, HttpResponse response)
-   在 System.Web.StaticFileHandler.ProcessRequestInternal(HttpContext context, String overrideVirtualPath)
-   在 System.Web.DefaultHttpHandler.BeginProcessRequest(HttpContext context, AsyncCallback callback, Object state)
-   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
-   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
-出错时间:12/25/2017 10:27:44
-出错文件:http://localhost:2793/common/
-IP地址:::1
-
-出错时间:12/25/2017 10:27:44
-
-
-错误信息开始=====>
-错误类型:HttpException
-错误信息:文件不存在。
-错误堆栈:
-   在 System.Web.StaticFileHandler.GetFileInfo(String virtualPathWithPathInfo, String physicalPath, HttpResponse response)
-   在 System.Web.StaticFileHandler.ProcessRequestInternal(HttpContext context, String overrideVirtualPath)
-   在 System.Web.DefaultHttpHandler.BeginProcessRequest(HttpContext context, AsyncCallback callback, Object state)
-   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
-   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
-出错时间:12/25/2017 10:29:59
-出错文件:http://localhost:2793/common/
-IP地址:::1
-
-出错时间:12/25/2017 10:29:59
-
-
-错误信息开始=====>
-错误类型:HttpException
-错误信息:文件不存在。
-错误堆栈:
-   在 System.Web.StaticFileHandler.GetFileInfo(String virtualPathWithPathInfo, String physicalPath, HttpResponse response)
-   在 System.Web.StaticFileHandler.ProcessRequestInternal(HttpContext context, String overrideVirtualPath)
-   在 System.Web.DefaultHttpHandler.BeginProcessRequest(HttpContext context, AsyncCallback callback, Object state)
-   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
-   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
-出错时间:12/25/2017 10:44:19
-出错文件:http://localhost:2793/common/
-IP地址:::1
-
-出错时间:12/25/2017 10:44:19
-
-
-错误信息开始=====>
-错误类型:HttpException
-错误信息:文件不存在。
-错误堆栈:
-   在 System.Web.StaticFileHandler.GetFileInfo(String virtualPathWithPathInfo, String physicalPath, HttpResponse response)
-   在 System.Web.StaticFileHandler.ProcessRequestInternal(HttpContext context, String overrideVirtualPath)
-   在 System.Web.DefaultHttpHandler.BeginProcessRequest(HttpContext context, AsyncCallback callback, Object state)
-   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
-   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
-出错时间:12/28/2017 10:25:56
-出错文件:http://localhost:2793/common/
-IP地址:::1
-
-出错时间:12/28/2017 10:25:56
+出错时间:04/14/2019 10:25:54
 
